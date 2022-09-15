@@ -3,6 +3,10 @@
 # freeze computational output
 freeze: true
 
+author:
+  - name: Essi
+    url: https://ealizadeh.com
+
 # Make a big title block
 title-block-banner: true
 
