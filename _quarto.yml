@@ -7,7 +7,7 @@ website:
   description: "Personal website"
   site-url: https://ealizadeh.com
   repo-url: https://github.com/e-alizadeh/website   
-  favicon: favicon.png
+  favicon: assets/favicon.png
   open-graph: true
   google-analytics: "UA-180647948-1"
   twitter-card: 
@@ -40,7 +40,7 @@ format:
     html-math-method: katex
     highlight-style: tango
     include-in-header:
-      - external_style.html
+      - assets/external_style.html
 
 
 
