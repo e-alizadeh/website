@@ -71,9 +71,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -194,21 +194,18 @@ ga('send', {
 
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="news,code,analysis" data-listing-date-sort="1663128000000" data-listing-file-modified-sort="1663206906639" data-listing-reading-time-sort="0.035">
-<div class="thumbnail">
-<p><a href="./blog/post-with-code/index.html"> <img src="./blog/post-with-code/image.jpg" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./blog/post-with-code/index.html">
-<h3 class="no-anchor listing-title">
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="news,code,analysis" data-listing-date-sort="1663128000000" data-listing-file-modified-sort="1663210798789" data-listing-reading-time-sort="0.1">
+<a href="./blog/post-with-code/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./blog/post-with-code/image.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
 Post With Code
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('news'); return false;">
 news
@@ -220,57 +217,50 @@ code
 analysis
 </div>
 </div>
-<a href="./blog/post-with-code/index.html">
-<div class="listing-description">
+<div class="card-text listing-description">
 This is a post with executable code.
 </div>
-</a>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Essi, Harlow Malloc
 </div>
-<div class="metadata">
-<a href="./blog/post-with-code/index.html">
 <div class="listing-date">
 Sep 14, 2022
 </div>
-<div class="listing-author">
-Harlow Malloc
+</div>
+</div>
 </div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="news" data-listing-date-sort="1662868800000" data-listing-file-modified-sort="1663206906899" data-listing-reading-time-sort="0.16">
-<div class="thumbnail">
-<p><a href="./blog/welcome/index.html"> <img src="./blog/welcome/thumbnail.jpg" class="thumnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./blog/welcome/index.html">
-<h3 class="no-anchor listing-title">
+<div class="g-col-1" data-index="1" data-categories="news" data-listing-date-sort="1662868800000" data-listing-file-modified-sort="1663206906899" data-listing-reading-time-sort="0.16">
+<a href="./blog/welcome/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img src="./blog/welcome/thumbnail.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
 Welcome To My Blog
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('news'); return false;">
 news
 </div>
 </div>
-<a href="./blog/welcome/index.html">
-<div class="listing-description">
+<div class="card-text listing-description">
 This is the first post in a Quarto blog. Welcome!
 </div>
-</a>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Essi, Tristan O’Malley
 </div>
-<div class="metadata">
-<a href="./blog/welcome/index.html">
 <div class="listing-date">
 Sep 11, 2022
 </div>
-<div class="listing-author">
-Tristan O’Malley
+</div>
+</div>
 </div>
 </a>
-</div>
 </div>
 </div>
 <div class="listing-no-matching d-none">

@@ -11,7 +11,7 @@
     "href": "blog/post-with-code/index.html",
     "title": "Post With Code",
     "section": "",
-    "text": "Reusehttps://creativecommons.org/licenses/by/4.0/CitationBibTeX citation:@online{malloc2022,\n  author = {Harlow Malloc},\n  editor = {},\n  title = {Post {With} {Code}},\n  date = {2022-09-14},\n  url = {https://ealizadeh.com/blog/post-with-code},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nHarlow Malloc. 2022. “Post With Code.” September 14, 2022.\nhttps://ealizadeh.com/blog/post-with-code."
+    "text": "Reusehttps://creativecommons.org/licenses/by/4.0/CitationBibTeX citation:@online{essi2022,\n  author = {Essi},\n  editor = {},\n  title = {Post {With} {Code}},\n  date = {2022-09-14},\n  url = {https://ealizadeh.com/blog/post-with-code},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nEssi. 2022. “Post With Code.” September 14, 2022. https://ealizadeh.com/blog/post-with-code."
   },
   {
     "objectID": "blog/welcome/index.html",
@@ -25,13 +25,13 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "news\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nSep 14, 2022\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nSep 11, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "news\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\nEssi, Harlow Malloc\n\n\nSep 14, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\nEssi, Tristan O’Malley\n\n\nSep 11, 2022\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Essi Alizadeh",
     "section": "",
-    "text": "I’m an engineer and a data scientist.\n\nIn Permanent Beta: Learning, Improving, Evolving -"
+    "text": "I’m an engineer and a data scientist.\n~ In Permanent Beta: Learning, Improving, Evolving ~"
   }
 ]

@@ -37,11 +37,9 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+    toc-title: "On this page"
+    toc-depth: 4
     html-math-method: katex
     highlight-style: tango
     include-in-header:
       - assets/external_style.html
-
-
-
-

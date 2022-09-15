@@ -6,7 +6,7 @@ title: "Essi Alizadeh"
 ::: {.column-page-inset-left}
 I'm an engineer and a data scientist.
 
-- In Permanent Beta: Learning, Improving, Evolving -
+\~ In Permanent Beta: Learning, Improving, Evolving \~
 :::
 
 <div class="column-margin column-container">
