@@ -22,6 +22,9 @@ I'm an engineer and a data scientist.
 <a class="btn btn-outline-light", href="https://twitter.com/es_alizadeh" target="_blank" rel="noopener noreferrer">
     <i class="bi bi-twitter" style="color: rgb(29, 161, 242);" role='img' aria-label='Twitter'></i>
 </a>
+<a class="btn btn-outline-light", href="https://medium.ealizadeh.com/" target="_blank" rel="noopener noreferrer">
+    <i class="bi bi-medium" style="color: rgb(51, 3, 0);" role='img' aria-label='Medium'></i>
+</a>
 <a class="btn btn-outline-light", href="https://github.com/e-alizadeh" target="_blank" rel="noopener noreferrer">
     <i class="bi bi-github" style="color: rgb(51, 3, 0);" role='img' aria-label='Github'></i>
 </a>
