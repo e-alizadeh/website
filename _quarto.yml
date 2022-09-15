@@ -1,0 +1,35 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Essi Alizadeh"
+  description: "Personal website"
+  site-url: https://ealizadeh.com/
+  repo-url: https://github.com/e-alizadeh/website   
+  favicon: favicon.png
+  open-graph: true
+  google-analytics: "UA-180647948-1"
+  twitter-card: 
+    creator: "@es_alizadeh"
+    site: "@es_alizadeh"
+    card-style: "summary_large_image"
+  navbar:
+    background: dark
+    foreground: light
+    left:
+      - href: index.qmd
+        text: Home
+      - about.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    html-math-method: katex
+    highlight-style: tango
+
+
+
+
