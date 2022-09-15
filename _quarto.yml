@@ -5,7 +5,7 @@ project:
 website:
   title: "Essi Alizadeh"
   description: "Personal website"
-  site-url: https://ealizadeh.com/
+  site-url: https://ealizadeh.com
   repo-url: https://github.com/e-alizadeh/website   
   favicon: favicon.png
   open-graph: true
@@ -20,7 +20,17 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - blog.qmd
       - about.qmd
+  page-footer: 
+    border: false
+    # background: light
+    center: "©️ 2022 Esmaeil Alizadeh - All Rights Reserved" 
+    right: 
+      - icon: github
+        href: https://github.com/e-alizadeh
+      - icon: twitter 
+        href: https://twitter.com/es_alizadeh
 
 format:
   html:
@@ -29,6 +39,8 @@ format:
     toc: true
     html-math-method: katex
     highlight-style: tango
+    include-in-header:
+      - external_style.html
 
 
 

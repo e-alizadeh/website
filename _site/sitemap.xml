@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://ealizadeh.com/about.html</loc>
+    <lastmod>2022-09-15T02:06:42.465Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/post-with-code/index.html</loc>
+    <lastmod>2022-09-15T02:10:21.885Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/welcome/index.html</loc>
+    <lastmod>2022-09-15T02:08:53.057Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog.html</loc>
+    <lastmod>2022-09-15T02:09:33.415Z</lastmod>
+  </url>
+  <url>
     <loc>https://ealizadeh.com/index.html</loc>
-    <lastmod>2022-09-15T01:28:55.034Z</lastmod>
+    <lastmod>2022-09-15T02:09:25.889Z</lastmod>
   </url>
 </urlset>
