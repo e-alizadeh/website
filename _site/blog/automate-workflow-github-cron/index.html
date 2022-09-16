@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Essi">
+<meta name="dcterms.date" content="2022-01-20">
+
+<title>Essi Alizadeh - Automate Your Workflow with GitHub Actions and Cron</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-180647948-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Essi Alizadeh - Automate Your Workflow with GitHub Actions and Cron">
+<meta property="og:description" content="In this post, we will go over a simple but yet powerful tool to run your script (or a task that you can program) on a time-based schedule.">
+<meta property="og:image" content="https://ealizadeh.com/blog/automate-workflow-github-cron/img/feature_image.png">
+<meta property="og:site-name" content="Essi Alizadeh">
+<meta property="og:image:height" content="720">
+<meta property="og:image:width" content="1014">
+<meta name="twitter:title" content="Essi Alizadeh - Automate Your Workflow with GitHub Actions and Cron">
+<meta name="twitter:description" content="In this post, we will go over a simple but yet powerful tool to run your script (or a task that you can program) on a time-based schedule.">
+<meta name="twitter:image" content="https://ealizadeh.com/blog/automate-workflow-github-cron/img/feature_image.png">
+<meta name="twitter:creator" content="@es_alizadeh">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="720">
+<meta name="twitter:image-width" content="1014">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Essi Alizadeh</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html">Blog</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Automate Your Workflow with GitHub Actions and Cron</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Automation</div>
+                <div class="quarto-category">GitHub Actions</div>
+                <div class="quarto-category">Cron</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Essi </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 20, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#requirement-a-script-you-want-to-run-on-a-time-based-schedule" id="toc-requirement-a-script-you-want-to-run-on-a-time-based-schedule" class="nav-link" data-scroll-target="#requirement-a-script-you-want-to-run-on-a-time-based-schedule">Requirement: A script you want to run on a time-based schedule</a>
+  <ul>
+  <li><a href="#considerations-before-automation" id="toc-considerations-before-automation" class="nav-link" data-scroll-target="#considerations-before-automation">Considerations before automation</a></li>
+  </ul></li>
+  <li><a href="#github-actions-set-up" id="toc-github-actions-set-up" class="nav-link" data-scroll-target="#github-actions-set-up">GitHub Actions Set up</a></li>
+  <li><a href="#cron-cron-job" id="toc-cron-cron-job" class="nav-link" data-scroll-target="#cron-cron-job">Cron (Cron job)</a>
+  <ul>
+  <li><a href="#cron-job-examples" id="toc-cron-job-examples" class="nav-link" data-scroll-target="#cron-job-examples">Cron job examples</a></li>
+  </ul></li>
+  <li><a href="#use-case-1" id="toc-use-case-1" class="nav-link" data-scroll-target="#use-case-1">Use Case 1</a>
+  <ul>
+  <li><a href="#where-should-we-start-from" id="toc-where-should-we-start-from" class="nav-link" data-scroll-target="#where-should-we-start-from">Where should we start from?</a></li>
+  <li><a href="#which-softwarelibraries-we-must-install" id="toc-which-softwarelibraries-we-must-install" class="nav-link" data-scroll-target="#which-softwarelibraries-we-must-install">Which software/libraries we must install?</a></li>
+  <li><a href="#where-can-i-find-the-script-i-want-to-run" id="toc-where-can-i-find-the-script-i-want-to-run" class="nav-link" data-scroll-target="#where-can-i-find-the-script-i-want-to-run">Where can I find the script I want to run?</a></li>
+  <li><a href="#run-the-script" id="toc-run-the-script" class="nav-link" data-scroll-target="#run-the-script">Run the script</a></li>
+  <li><a href="#putting-everything-together" id="toc-putting-everything-together" class="nav-link" data-scroll-target="#putting-everything-together">Putting everything together</a></li>
+  </ul></li>
+  <li><a href="#use-case-2" id="toc-use-case-2" class="nav-link" data-scroll-target="#use-case-2">Use Case 2</a></li>
+  <li><a href="#github-actions-cost" id="toc-github-actions-cost" class="nav-link" data-scroll-target="#github-actions-cost">GitHub Actions Cost</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>👉 This article is also published on&nbsp;<strong><a href="https://towardsdatascience.com/automate-workflow-github-actions-cron-130a8bf68ca6">Towards Data Science blog</a></strong>.</p>
+</div>
+</div>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In this post, we will go over a simple but yet powerful tool to run your script (or a task that you can program) on a time-based schedule.</p>
+<p>If you run a script manually from time to time, then there is a good chance that you may benefit from automating the process and setting up a schedule to run automatically without you worrying about it. Just set it up once, and forget about it.</p>
+<p>Some examples of such automation are:</p>
+<ul>
+<li>Parsing an RSS feed and sending an email automatically,</li>
+<li>Integrating between two services you’re using but have no native integration! (an example of this is covered in this post),</li>
+<li>Pulling data from a source and manipulating the data,</li>
+<li><em>etc</em>.</li>
+</ul>
+<p><em>In this post, I use the word task and script interchangeably. Moreover, the YAML file GitHub Actions uses to create the automation of the task/script is called the workflow file.</em></p>
+</section>
+<section id="requirement-a-script-you-want-to-run-on-a-time-based-schedule" class="level1">
+<h1>Requirement: A script you want to run on a time-based schedule</h1>
+<p>The most important part is to have a script that we want to run. This depends on what your task is. The example I will walk you through is the integration of my <a href="https://www.zotero.org/">Zotero</a> annotations to my <a href="https://readwise.io/">Readwise</a> (a paid service that integrates highlights from almost everywhere, like Twitter, Apple Books, <em>etc</em>) account using the&nbsp;<a href="https://github.com/e-alizadeh/Zotero2Readwise">Zotero2Readwise</a> Python library (<em>Disclaimer: I developed this library!</em>).</p>
+<p>The script I will be running in this post is <a href="https://github.com/e-alizadeh/Zotero2Readwise/blob/master/zotero2readwise/run.py">here</a>. Since the script I have is in Python, so, I will run it like the following <code>python run.py &lt;app1_token&gt; &lt;app2_password&gt; &lt;app2_user&gt;</code>. Running this in my personal laptop works fine since I have everything set up. But how to run above in GitHub Actions on a pre-defined schedule?</p>
+<section id="considerations-before-automation" class="level2">
+<h2 class="anchored" data-anchor-id="considerations-before-automation">Considerations before automation</h2>
+<p>Your script will most likely be different. However, here the following tips may help you get started:</p>
+<p>First, run the script on your system. Once you’re happy with the result and you want to automate the workflow, then use the instructions below to setup a scheduled workflow using GitHub Actions.</p>
+<p>When developing an automation task, it is always good to think about <em>how to run it starting from a fresh OS</em>! It is as if you have a new system and you try to run your script there. A few question to ask yourself:</p>
+<ul>
+<li>Where should I start?</li>
+<li>What are software/libraries I need to install before running the script?</li>
+<li>Where can I find the script I want to run?</li>
+<li>Do I need to pass some environment variables or sensitive information like passwords?
+<ul>
+<li>How should I pass sensitive information like passwords or tokens?</li>
+</ul></li>
+</ul>
+<p>I will answer above questions for my workflow. Hopefully this will give you enough information to automate your task!</p>
+</section>
+</section>
+<section id="github-actions-set-up" class="level1">
+<h1>GitHub Actions Set up</h1>
+<p>First, we need to create the <code>.github/workflows</code> directory in our repository. This is where our <a href="https://github.com/e-alizadeh/Zotero2Readwise-Sync/blob/master/.github/workflows/automation.yml">automation file</a> (should be in <code>YAML</code> format) lives. We will go over each part of the file.</p>
+<p>You can learn the basics of GitHub Actions <a href="https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions">here</a>.</p>
+<p>The first section of any GitHub Actions workflow is to specify when the workflow should be triggered. This can be achieved using the <code>on</code> keyword. Since we want to have a scheduled automation, we can run the workflow on a <code>schedule</code> that uses a <code>cron</code> notation (discussed in next section). In addition to running on a schedule, I also want to run the workflow when any change is pushed to the <code>master</code> branch.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> master</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">schedule</span><span class="kw">:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">cron</span><span class="kw">:</span><span class="at"> </span><span class="st">"0 3 * * 1,3,5"</span><span class="co"> # Runs at 03:00 AM (UTC) every Monday, Wednesday, and Friday (Check https://crontab.guru/)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can also trigger your workflow on a pull request (use the <code>pull_request</code> keyword).</p>
+</section>
+<section id="cron-cron-job" class="level1">
+<h1>Cron (Cron job)</h1>
+<p>The cron tool , also known as <a href="https://en.wikipedia.org/wiki/Cron">cronjob</a>, is basically a job scheduler. It is used for <em>scheduling repetitive tasks</em>. Its syntax consists of 5 fields as follows:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="at">* * * * *</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Above cron job syntax means to run a task <em>every minute</em>. As can be seen, there are 5 parts that are given in bellow table (<em>note the order from left to right</em>)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>minute</th>
+<th>hour</th>
+<th>day of the month</th>
+<th>month</th>
+<th>day of the week</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0 - 59</td>
+<td>0 - 23</td>
+<td>1 - 31</td>
+<td>1 - 12</td>
+<td>0 - 6 (Sun - Sat)</td>
+</tr>
+</tbody>
+</table>
+<section id="cron-job-examples" class="level2">
+<h2 class="anchored" data-anchor-id="cron-job-examples">Cron job examples</h2>
+<p>Below examples covers different aspects of a cron syntax and all valid characters (<code>* , - /</code>).</p>
+<ul>
+<li>You can specify your schedule by choosing a valid number for each part. <code>*</code> means “<em>every”</em> (<code>* * * * *</code> means <em>at every minute on every hour of every day of the month in every month at every day of the week</em> 🙂). Another example is <code>30 13 1 * *</code> meaning <em>at 13:30 on day 1 of the month</em>.</li>
+<li>You can have multiple parameters for a given section by using the value list separator <code>,</code>. For instance, <code>* * * * 0,3</code> means <em>every minute only on Sunday and Wednesday.</em></li>
+<li>You can have step values by using <code>/</code>. For instance, <code>/10 * * * *</code> means <em>every 10 minutes.</em></li>
+<li>You can have a range of values by using dash <code>-</code>. For instance, <code>4-5 1-10 1 *</code> means <em>every minute between 04:00 - 05:59 AM between day 1 and day 10 of January.</em></li>
+</ul>
+<p>And of course, you can have a combination of above options. For example, <code>*/30 1-5 * 1,6 0,1</code> means <em>every 30 minutes between 01:00-05:59 AM only on Sunday and Monday in January and June.</em></p>
+<p><em>Check&nbsp;<a href="https://crontab.tech/">crontab</a> or <a href="https://crontab.guru/">crontab guru</a>&nbsp;to come up with the cron syntax for your schedule.</em></p>
+</section>
+</section>
+<section id="use-case-1" class="level1">
+<h1>Use Case 1</h1>
+<p>As I mentioned earlier, I want to automate my <a href="https://www.zotero.org/">Zotero</a> to <a href="https://readwise.io/">Readwise</a> integration using the <a href="https://github.com/e-alizadeh/Zotero2Readwise">Zotero2Readwise</a>&nbsp;Python library. Let’s answer the questions we asked earlier:</p>
+<section id="where-should-we-start-from" class="level2">
+<h2 class="anchored" data-anchor-id="where-should-we-start-from">Where should we start from?</h2>
+<p>We can start from a fresh Ubuntu system. So, we have the section below the jobs specifying <code>runs-on: ubuntu-latest</code> that will configures the job to run on a fresh virtual machine containing the latest version of an Ubuntu Linux.</p>
+<p>Next step is to clone the current repo. You can achieve this by using <code>uses</code> keyword allowing us to use any action from the <a href="https://github.com/marketplace?type=actions">GitHub Actions Marketplace</a> . We can use the <code>master</code> branch of <code>actions/checkout</code> here (you can also specify the version like <code>actions/checkout@v2</code>).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> 🍽️ Checkout the repo</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@master</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">fetch-depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="which-softwarelibraries-we-must-install" class="level2">
+<h2 class="anchored" data-anchor-id="which-softwarelibraries-we-must-install">Which software/libraries we must install?</h2>
+<p>This step is only necessary if you have to install a library. In my case, I have to first install Python 3.8. This can be achieved by using the <code>actions/setup-python@v2</code> GitHub Action. Afterwards, we want to install the python package. We can install the <a href="https://github.com/e-alizadeh/Zotero2Readwise">Zotero2Readwise</a>&nbsp;package by running <code>pip install zotero2readwise</code>. However, in order to execute a command on the runner, we have to use the <code>run</code> keyword.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> 🐍 Set up Python 3.8</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/setup-python@v2</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">python-version</span><span class="kw">:</span><span class="at"> </span><span class="st">'3.8'</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> 💿 Install Zotero2Readwise Python package</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run</span><span class="kw">:</span><span class="at"> pip install zotero2readwise</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="where-can-i-find-the-script-i-want-to-run" class="level2">
+<h2 class="anchored" data-anchor-id="where-can-i-find-the-script-i-want-to-run">Where can I find the script I want to run?</h2>
+<p>If the script you are trying to run lives in the same repository, you can just skip this step. But here, since the Python script I want to run lives in another GitHub repository, I have to download the script using the <code>curl</code> Linux command.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> 📥 Download the Python script needed for automation</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run</span><span class="kw">:</span><span class="at">  curl https://raw.githubusercontent.com/e-alizadeh/Zotero2Readwise/master/zotero2readwise/run.py -o run.py</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="run-the-script" class="level2">
+<h2 class="anchored" data-anchor-id="run-the-script">Run the script</h2>
+<p>Now that we have set up our environment, we can run the script as mentioned earlier in the Requirements section.</p>
+<p>But one last point is that since we need to pass some sensitive information (like tokens), we can achieve that by passing the secrets to <strong><em>Settings → Secrets → New repository secret</em></strong>.</p>
+<div id="fig-surus" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/github_action_secrets.gif" class="img-fluid figure-img" alt="Pass secrets to the GitHub environment."></p>
+<p></p><figcaption class="figure-caption">How to pass secrets to the environment of a GitHub repository</figcaption><p></p>
+</figure>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+<p>These secrets will then be available using the following syntax: <code>${{ secrets.YOUR_SECRET_NAME }}</code> in your YAML file.</p>
+<p>For more information about handling variables and secrets, you can check the following two pages on the GitHub Docs about <a href="https://docs.github.com/en/actions/learn-github-actions/environment-variables">Environment variables</a> and <a href="https://docs.github.com/en/actions/security-guides/encrypted-secrets">Encrypted secrets</a>.</p>
+<p>Now that we have added our secrets, we can run the script as following:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> 🚀 Run Automation</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">run</span><span class="kw">:</span><span class="at"> python run.py ${{ secrets.READWISE_TOKEN }} ${{ secrets.ZOTERO_KEY }} ${{ secrets.ZOTERO_ID }}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="putting-everything-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-everything-together">Putting everything together</h2>
+<p>The file containing all steps above is shown below. The file lives on <a href="https://github.com/e-alizadeh/Zotero2Readwise-Sync/blob/50ca5d8475dec360538770bbbbaefa3067eaab5a/.github/workflows/automation.yml">GitHub</a>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Zotero to Readwise Automation</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> master</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">schedule</span><span class="kw">:</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">cron</span><span class="kw">:</span><span class="at"> </span><span class="st">"0 3 * * 1,3,5"</span><span class="co"> # Runs at 03:00 AM (UTC) every Monday, Wednesday, and Friday (Check https://crontab.guru/)</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">zotero-to-readwise-automation</span><span class="kw">:</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> 🍽️ Checkout the repo</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@master</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">fetch-depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> 🐍 Set up Python 3.8</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/setup-python@v2</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">python-version</span><span class="kw">:</span><span class="at"> </span><span class="st">'3.8'</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> 💿 Install Zotero2Readwise Python package</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> pip install zotero2readwise</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> 📥 Download the Python script needed for automation</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at">  curl https://raw.githubusercontent.com/e-alizadeh/Zotero2Readwise/master/zotero2readwise/run.py -o run.py</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> 🚀 Run Automation</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> python run.py ${{ secrets.READWISE_TOKEN }} ${{ secrets.ZOTERO_KEY }} ${{ secrets.ZOTERO_ID }}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/scheduled_automation.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">A screenshot of the GitHub Actions showing how the workflow is run on a schedule or via a push to the master branch.</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="use-case-2" class="level1">
+<h1>Use Case 2</h1>
+<p>Following above process, I set up a scheduled update of my GitHub page that runs twice a week. It has been working fine till now (so far, it has been over an year at the time of this post). This automation does the following:</p>
+<ol type="1">
+<li>Parse my <a href="https://ealizadeh.com/blog">personal blog</a> and retrieve the title and the link to my latest posts.</li>
+<li>Add the blog posts to a section of my <a href="https://github.com/e-alizadeh">GitHub README page</a>.</li>
+<li>Add a note about the date and time of the auto-generated README page to the page footer.</li>
+</ol>
+<p>You can find the file that run above tasks on <a href="https://github.com/e-alizadeh/e-alizadeh/blob/main/.github/workflows/medium-blog-posts-update.yml">GitHub</a>. This automation also runs a <a href="https://github.com/e-alizadeh/e-alizadeh/blob/main/src/update_latest_blog_posts.py">python script</a>.</p>
+</section>
+<section id="github-actions-cost" class="level1">
+<h1>GitHub Actions Cost</h1>
+<p><em>GitHub Actions usage is free for public repositories.</em> However, the free plan for private repositories has some limitations (at the time of publishing this post, the GitHub Actions free plan offers 2000 minutes (per month) and 500MB of storage which should be enough for most use cases) [1].</p>
+<hr>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In this post, we saw how GitHub Actions can be used to run a task on a time-based schedule. The sky is the limit here. Think about a workflow or a task you are currently running every so often. If you can put the task in a script that can be run on your computer (it doesn’t matter if it is in Python, Bash or any other script), then you can actually set up the automation.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div quarto-reuse="quarto-reuse" class="quarto-appendix-contents"><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">https://creativecommons.org/licenses/by/4.0/</a></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{essi2022,
+  author = {Essi},
+  editor = {},
+  title = {Automate {Your} {Workflow} with {GitHub} {Actions} and
+    {Cron}},
+  date = {2022-01-20},
+  url = {https://ealizadeh.com/blog/automate-workflow-github-cron},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-essi2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Essi. 2022. <span>“Automate Your Workflow with GitHub Actions and
+Cron.”</span> January 20, 2022. <a href="https://ealizadeh.com/blog/automate-workflow-github-cron">https://ealizadeh.com/blog/automate-workflow-github-cron</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">©️ 2022 Esmaeil Alizadeh - All Rights Reserved</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/e-alizadeh">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/es_alizadeh">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

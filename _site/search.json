@@ -25,7 +25,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "news\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\nEssi\n\n\nSep 14, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\nEssi, Tristan O’Malley\n\n\nSep 11, 2022\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "news\n\n\n\n\n\n\n\nEssi, Tristan O’Malley\n\n\nSep 11, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutomation\n\n\nGitHub Actions\n\n\nCron\n\n\n\n\n\n\n\nEssi\n\n\nJan 20, 2022\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -33,5 +33,75 @@
     "title": "Essi Alizadeh",
     "section": "",
     "text": "I’m an engineer and a data scientist.\n~ In Permanent Beta: Learning, Improving, Evolving ~"
+  },
+  {
+    "objectID": "blog/automate-github-actions-cron/index.html",
+    "href": "blog/automate-github-actions-cron/index.html",
+    "title": "Automate Your Workflow with GitHub Actions and Cron",
+    "section": "",
+    "text": "Reusehttps://creativecommons.org/licenses/by/4.0/CitationBibTeX citation:@online{essi2022,\n  author = {Essi},\n  editor = {},\n  title = {Automate {Your} {Workflow} with {GitHub} {Actions} and\n    {Cron}},\n  date = {2022-01-20},\n  url = {https://ealizadeh.com/blog/automate-github-actions-cron},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nEssi. 2022. “Automate Your Workflow with GitHub Actions and\nCron.” January 20, 2022. https://ealizadeh.com/blog/automate-github-actions-cron."
+  },
+  {
+    "objectID": "blog/automate-github-actions-cron/index.html#header-2",
+    "href": "blog/automate-github-actions-cron/index.html#header-2",
+    "title": "Automate Your Workflow with GitHub Actions and Cron",
+    "section": "Header 2",
+    "text": "Header 2\nThis is a post with executable code.\n\nHeader 3\nThis is a po"
+  },
+  {
+    "objectID": "blog/automate-workflow-github-cron/index.html",
+    "href": "blog/automate-workflow-github-cron/index.html",
+    "title": "Automate Your Workflow with GitHub Actions and Cron",
+    "section": "",
+    "text": "Note\n\n\n\n👉 This article is also published on Towards Data Science blog."
+  },
+  {
+    "objectID": "blog/automate-workflow-github-cron/index.html#considerations-before-automation",
+    "href": "blog/automate-workflow-github-cron/index.html#considerations-before-automation",
+    "title": "Automate Your Workflow with GitHub Actions and Cron",
+    "section": "Considerations before automation",
+    "text": "Considerations before automation\nYour script will most likely be different. However, here the following tips may help you get started:\nFirst, run the script on your system. Once you’re happy with the result and you want to automate the workflow, then use the instructions below to setup a scheduled workflow using GitHub Actions.\nWhen developing an automation task, it is always good to think about how to run it starting from a fresh OS! It is as if you have a new system and you try to run your script there. A few question to ask yourself:\n\nWhere should I start?\nWhat are software/libraries I need to install before running the script?\nWhere can I find the script I want to run?\nDo I need to pass some environment variables or sensitive information like passwords?\n\nHow should I pass sensitive information like passwords or tokens?\n\n\nI will answer above questions for my workflow. Hopefully this will give you enough information to automate your task!"
+  },
+  {
+    "objectID": "blog/automate-workflow-github-cron/index.html#cron-job-examples",
+    "href": "blog/automate-workflow-github-cron/index.html#cron-job-examples",
+    "title": "Automate Your Workflow with GitHub Actions and Cron",
+    "section": "Cron job examples",
+    "text": "Cron job examples\nBelow examples covers different aspects of a cron syntax and all valid characters (* , - /).\n\nYou can specify your schedule by choosing a valid number for each part. * means “every” (* * * * * means at every minute on every hour of every day of the month in every month at every day of the week 🙂). Another example is 30 13 1 * * meaning at 13:30 on day 1 of the month.\nYou can have multiple parameters for a given section by using the value list separator ,. For instance, * * * * 0,3 means every minute only on Sunday and Wednesday.\nYou can have step values by using /. For instance, /10 * * * * means every 10 minutes.\nYou can have a range of values by using dash -. For instance, 4-5 1-10 1 * means every minute between 04:00 - 05:59 AM between day 1 and day 10 of January.\n\nAnd of course, you can have a combination of above options. For example, */30 1-5 * 1,6 0,1 means every 30 minutes between 01:00-05:59 AM only on Sunday and Monday in January and June.\nCheck crontab or crontab guru to come up with the cron syntax for your schedule."
+  },
+  {
+    "objectID": "blog/automate-workflow-github-cron/index.html#where-should-we-start-from",
+    "href": "blog/automate-workflow-github-cron/index.html#where-should-we-start-from",
+    "title": "Automate Your Workflow with GitHub Actions and Cron",
+    "section": "Where should we start from?",
+    "text": "Where should we start from?\nWe can start from a fresh Ubuntu system. So, we have the section below the jobs specifying runs-on: ubuntu-latest that will configures the job to run on a fresh virtual machine containing the latest version of an Ubuntu Linux.\nNext step is to clone the current repo. You can achieve this by using uses keyword allowing us to use any action from the GitHub Actions Marketplace . We can use the master branch of actions/checkout here (you can also specify the version like actions/checkout@v2).\n- name: 🍽️ Checkout the repo\n  uses: actions/checkout@master\n  with:\n    fetch-depth: 1"
+  },
+  {
+    "objectID": "blog/automate-workflow-github-cron/index.html#which-softwarelibraries-we-must-install",
+    "href": "blog/automate-workflow-github-cron/index.html#which-softwarelibraries-we-must-install",
+    "title": "Automate Your Workflow with GitHub Actions and Cron",
+    "section": "Which software/libraries we must install?",
+    "text": "Which software/libraries we must install?\nThis step is only necessary if you have to install a library. In my case, I have to first install Python 3.8. This can be achieved by using the actions/setup-python@v2 GitHub Action. Afterwards, we want to install the python package. We can install the Zotero2Readwise package by running pip install zotero2readwise. However, in order to execute a command on the runner, we have to use the run keyword.\n- name: 🐍 Set up Python 3.8\n  uses: actions/setup-python@v2\n  with:\n    python-version: '3.8'\n\n- name: 💿 Install Zotero2Readwise Python package\n  run: pip install zotero2readwise"
+  },
+  {
+    "objectID": "blog/automate-workflow-github-cron/index.html#where-can-i-find-the-script-i-want-to-run",
+    "href": "blog/automate-workflow-github-cron/index.html#where-can-i-find-the-script-i-want-to-run",
+    "title": "Automate Your Workflow with GitHub Actions and Cron",
+    "section": "Where can I find the script I want to run?",
+    "text": "Where can I find the script I want to run?\nIf the script you are trying to run lives in the same repository, you can just skip this step. But here, since the Python script I want to run lives in another GitHub repository, I have to download the script using the curl Linux command.\n- name: 📥 Download the Python script needed for automation\n  run:  curl https://raw.githubusercontent.com/e-alizadeh/Zotero2Readwise/master/zotero2readwise/run.py -o run.py"
+  },
+  {
+    "objectID": "blog/automate-workflow-github-cron/index.html#run-the-script",
+    "href": "blog/automate-workflow-github-cron/index.html#run-the-script",
+    "title": "Automate Your Workflow with GitHub Actions and Cron",
+    "section": "Run the script",
+    "text": "Run the script\nNow that we have set up our environment, we can run the script as mentioned earlier in the Requirements section.\nBut one last point is that since we need to pass some sensitive information (like tokens), we can achieve that by passing the secrets to Settings → Secrets → New repository secret.\n\n\n\n\n\nHow to pass secrets to the environment of a GitHub repository\n\n\nFigure 1: ?(caption)\n\n\nThese secrets will then be available using the following syntax: ${{ secrets.YOUR_SECRET_NAME }} in your YAML file.\nFor more information about handling variables and secrets, you can check the following two pages on the GitHub Docs about Environment variables and Encrypted secrets.\nNow that we have added our secrets, we can run the script as following:\n- name: 🚀 Run Automation\n  run: python run.py ${{ secrets.READWISE_TOKEN }} ${{ secrets.ZOTERO_KEY }} ${{ secrets.ZOTERO_ID }}"
+  },
+  {
+    "objectID": "blog/automate-workflow-github-cron/index.html#putting-everything-together",
+    "href": "blog/automate-workflow-github-cron/index.html#putting-everything-together",
+    "title": "Automate Your Workflow with GitHub Actions and Cron",
+    "section": "Putting everything together",
+    "text": "Putting everything together\nThe file containing all steps above is shown below. The file lives on GitHub.\nname: Zotero to Readwise Automation\n\non:\n  push:\n    branches:\n      - master\n  schedule:\n    - cron: \"0 3 * * 1,3,5\" # Runs at 03:00 AM (UTC) every Monday, Wednesday, and Friday (Check https://crontab.guru/)\n\njobs:\n  zotero-to-readwise-automation:\n    runs-on: ubuntu-latest\n    steps:\n      - name: 🍽️ Checkout the repo\n        uses: actions/checkout@master\n        with:\n          fetch-depth: 1\n\n      - name: 🐍 Set up Python 3.8\n        uses: actions/setup-python@v2\n        with:\n          python-version: '3.8'\n\n      - name: 💿 Install Zotero2Readwise Python package\n        run: pip install zotero2readwise\n\n      - name: 📥 Download the Python script needed for automation\n        run:  curl https://raw.githubusercontent.com/e-alizadeh/Zotero2Readwise/master/zotero2readwise/run.py -o run.py\n\n      - name: 🚀 Run Automation\n        run: python run.py ${{ secrets.READWISE_TOKEN }} ${{ secrets.ZOTERO_KEY }} ${{ secrets.ZOTERO_ID }}\n\n\n\nA screenshot of the GitHub Actions showing how the workflow is run on a schedule or via a push to the master branch."
   }
 ]
