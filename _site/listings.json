@@ -2,8 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/blog/welcome/index.html",
-      "/blog/automate-workflow-github-cron/index.html"
+      "/blog/automate-workflow-github-cron/index.html",
+      "/blog/pandas-tutor-tool/index.html"
     ]
   }
 ]

@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ealizadeh.com/about.html</loc>
-    <lastmod>2022-09-15T03:38:26.661Z</lastmod>
+    <lastmod>2022-09-24T23:27:22.650Z</lastmod>
   </url>
   <url>
     <loc>https://ealizadeh.com/blog/post-with-code/index.html</loc>
@@ -14,11 +14,11 @@
   </url>
   <url>
     <loc>https://ealizadeh.com/blog.html</loc>
-    <lastmod>2022-09-16T03:01:57.369Z</lastmod>
+    <lastmod>2022-09-24T23:27:32.775Z</lastmod>
   </url>
   <url>
     <loc>https://ealizadeh.com/index.html</loc>
-    <lastmod>2022-09-16T02:51:07.085Z</lastmod>
+    <lastmod>2022-09-24T23:26:48.119Z</lastmod>
   </url>
   <url>
     <loc>https://ealizadeh.com/blog/automate-github-actions-cron/index.html</loc>
@@ -26,6 +26,10 @@
   </url>
   <url>
     <loc>https://ealizadeh.com/blog/automate-workflow-github-cron/index.html</loc>
-    <lastmod>2022-09-16T03:15:21.626Z</lastmod>
+    <lastmod>2022-09-24T23:15:24.530Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/pandas-tutor-tool/index.html</loc>
+    <lastmod>2022-09-24T23:19:30.507Z</lastmod>
   </url>
 </urlset>

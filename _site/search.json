@@ -25,7 +25,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "news\n\n\n\n\n\n\n\nEssi, Tristan O’Malley\n\n\nSep 11, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAutomation\n\n\nGitHub Actions\n\n\nCron\n\n\n\n\n\n\n\nEssi\n\n\nJan 20, 2022\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Automation\n\n\nGitHub Actions\n\n\nCron\n\n\n\n\n\n\n\nEssi\n\n\nJan 20, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPython\n\n\nData Science\n\n\nVisualization\n\n\nPandas\n\n\n\n\n\n\n\nEssi\n\n\nDec 8, 2021\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -103,5 +103,54 @@
     "title": "Automate Your Workflow with GitHub Actions and Cron",
     "section": "Putting everything together",
     "text": "Putting everything together\nThe file containing all steps above is shown below. The file lives on GitHub.\nname: Zotero to Readwise Automation\n\non:\n  push:\n    branches:\n      - master\n  schedule:\n    - cron: \"0 3 * * 1,3,5\" # Runs at 03:00 AM (UTC) every Monday, Wednesday, and Friday (Check https://crontab.guru/)\n\njobs:\n  zotero-to-readwise-automation:\n    runs-on: ubuntu-latest\n    steps:\n      - name: 🍽️ Checkout the repo\n        uses: actions/checkout@master\n        with:\n          fetch-depth: 1\n\n      - name: 🐍 Set up Python 3.8\n        uses: actions/setup-python@v2\n        with:\n          python-version: '3.8'\n\n      - name: 💿 Install Zotero2Readwise Python package\n        run: pip install zotero2readwise\n\n      - name: 📥 Download the Python script needed for automation\n        run:  curl https://raw.githubusercontent.com/e-alizadeh/Zotero2Readwise/master/zotero2readwise/run.py -o run.py\n\n      - name: 🚀 Run Automation\n        run: python run.py ${{ secrets.READWISE_TOKEN }} ${{ secrets.ZOTERO_KEY }} ${{ secrets.ZOTERO_ID }}\n\n\n\nA screenshot of the GitHub Actions showing how the workflow is run on a schedule or via a push to the master branch."
+  },
+  {
+    "objectID": "blog/pandas-tutor-tool/index.html",
+    "href": "blog/pandas-tutor-tool/index.html",
+    "title": "Visualize your Pandas Data Transformation using PandasTutor",
+    "section": "",
+    "text": "Note\n\n\n\n👉 This article is also published on Towards Data Science blog."
+  },
+  {
+    "objectID": "blog/pandas-tutor-tool/index.html#pandastutor-creators",
+    "href": "blog/pandas-tutor-tool/index.html#pandastutor-creators",
+    "title": "Visualize your Pandas Data Transformation using PandasTutor",
+    "section": "PandasTutor Creators",
+    "text": "PandasTutor Creators\nPandas Tutor was created by Sam Lau and Philip Guo at UC San Diego. This tool is mainly developed for teaching purposes as its creator stated here. This explains some of the limitations this tool have (I will cover some of those limitations later in the post).\nA similar tool called Tidy Data Tutor but for R users is created by Sean Kross and Philip Guo."
+  },
+  {
+    "objectID": "blog/pandas-tutor-tool/index.html#dataset",
+    "href": "blog/pandas-tutor-tool/index.html#dataset",
+    "title": "Visualize your Pandas Data Transformation using PandasTutor",
+    "section": "Dataset",
+    "text": "Dataset\nLet’s use the Heart Failure Prediction Dataset Kaggle Dataset (available here). The data is available under Open Database (ODbl) License allowing “users to freely share, modify, and use this Database while maintaining this same freedom for others.” Since Pandas Tutor only works with small data, I will take the first 50 rows of hearts data)."
+  },
+  {
+    "objectID": "blog/pandas-tutor-tool/index.html#code",
+    "href": "blog/pandas-tutor-tool/index.html#code",
+    "title": "Visualize your Pandas Data Transformation using PandasTutor",
+    "section": "Code",
+    "text": "Code\nBelow is the code used for the visualization in this post. You may notice that the CSV data is encoded here which is a current limitation of this tool.\nimport pandas as pd\nimport io\n\ncsv = '''\nAge,Sex,ChestPainType,RestingBP,Cholesterol,FastingBS,RestingECG,MaxHR,ExerciseAngina,Oldpeak,ST_Slope,HeartDisease\n40,M,ATA,140,289,0,Normal,172,N,0,Up,0\n49,F,NAP,160,180,0,Normal,156,N,1,Flat,1\n37,M,ATA,130,283,0,ST,98,N,0,Up,0\n48,F,ASY,138,214,0,Normal,108,Y,1.5,Flat,1\n54,M,NAP,150,195,0,Normal,122,N,0,Up,0\n39,M,NAP,120,339,0,Normal,170,N,0,Up,0\n45,F,ATA,130,237,0,Normal,170,N,0,Up,0\n54,M,ATA,110,208,0,Normal,142,N,0,Up,0\n37,M,ASY,140,207,0,Normal,130,Y,1.5,Flat,1\n48,F,ATA,120,284,0,Normal,120,N,0,Up,0\n37,F,NAP,130,211,0,Normal,142,N,0,Up,0\n58,M,ATA,136,164,0,ST,99,Y,2,Flat,1\n39,M,ATA,120,204,0,Normal,145,N,0,Up,0\n49,M,ASY,140,234,0,Normal,140,Y,1,Flat,1\n42,F,NAP,115,211,0,ST,137,N,0,Up,0\n54,F,ATA,120,273,0,Normal,150,N,1.5,Flat,0\n38,M,ASY,110,196,0,Normal,166,N,0,Flat,1\n43,F,ATA,120,201,0,Normal,165,N,0,Up,0\n60,M,ASY,100,248,0,Normal,125,N,1,Flat,1\n36,M,ATA,120,267,0,Normal,160,N,3,Flat,1\n43,F,TA,100,223,0,Normal,142,N,0,Up,0\n44,M,ATA,120,184,0,Normal,142,N,1,Flat,0\n49,F,ATA,124,201,0,Normal,164,N,0,Up,0\n44,M,ATA,150,288,0,Normal,150,Y,3,Flat,1\n40,M,NAP,130,215,0,Normal,138,N,0,Up,0\n36,M,NAP,130,209,0,Normal,178,N,0,Up,0\n53,M,ASY,124,260,0,ST,112,Y,3,Flat,0\n52,M,ATA,120,284,0,Normal,118,N,0,Up,0\n53,F,ATA,113,468,0,Normal,127,N,0,Up,0\n51,M,ATA,125,188,0,Normal,145,N,0,Up,0\n53,M,NAP,145,518,0,Normal,130,N,0,Flat,1\n56,M,NAP,130,167,0,Normal,114,N,0,Up,0\n54,M,ASY,125,224,0,Normal,122,N,2,Flat,1\n41,M,ASY,130,172,0,ST,130,N,2,Flat,1\n43,F,ATA,150,186,0,Normal,154,N,0,Up,0\n32,M,ATA,125,254,0,Normal,155,N,0,Up,0\n65,M,ASY,140,306,1,Normal,87,Y,1.5,Flat,1\n41,F,ATA,110,250,0,ST,142,N,0,Up,0\n48,F,ATA,120,177,1,ST,148,N,0,Up,0\n48,F,ASY,150,227,0,Normal,130,Y,1,Flat,0\n54,F,ATA,150,230,0,Normal,130,N,0,Up,0\n54,F,NAP,130,294,0,ST,100,Y,0,Flat,1\n35,M,ATA,150,264,0,Normal,168,N,0,Up,0\n52,M,NAP,140,259,0,ST,170,N,0,Up,0\n43,M,ASY,120,175,0,Normal,120,Y,1,Flat,1\n59,M,NAP,130,318,0,Normal,120,Y,1,Flat,0\n37,M,ASY,120,223,0,Normal,168,N,0,Up,0\n50,M,ATA,140,216,0,Normal,170,N,0,Up,0\n36,M,NAP,112,340,0,Normal,184,N,1,Flat,0\n41,M,ASY,110,289,0,Normal,170,N,0,Flat,1\n'''\n\ndf_hearts = pd.read_csv(io.StringIO(csv))\ndf_hearts = df_hearts[\n    [\"Age\", \"Sex\", \"RestingBP\", \"ChestPainType\", \"Cholesterol\", \"HeartDisease\"]\n]\n\n(df_hearts.sort_values(\"Age\")\n.groupby([\"Sex\", \"HeartDisease\"])\n.agg({\"RestingBP\": [\"mean\", \"std\"], \n      \"Cholesterol\": [\"mean\", \"std\"],\n      \"Sex\": [\"count\"]\n      })\n)\nSo our transformations is only the last few lines\n(df_hearts.sort_values(\"Age\")\n.groupby([\"Sex\", \"HeartDisease\"])\n.agg({\"RestingBP\": [\"mean\", \"std\"], \n      \"Cholesterol\": [\"mean\", \"std\"],\n      \"Sex\": [\"count\"]\n      })\n)"
+  },
+  {
+    "objectID": "blog/pandas-tutor-tool/index.html#results",
+    "href": "blog/pandas-tutor-tool/index.html#results",
+    "title": "Visualize your Pandas Data Transformation using PandasTutor",
+    "section": "Results",
+    "text": "Results\n\nStep 1: Sorting the DataFrame\n\n\n\nVisualization of the sort_values() result (steps 1) (generated using PandasTutor)\n\n\nVisualization of the sort_values() result (steps 1) (generated using PandasTutor)\n\n\nStep 2: Visualize Pandas Groupby operation\nAfter sorting the results in Step 1 and visualizing it, we can visualize the groupby() operation\n\n\n\nVisualization of the groupby() result (steps 1 and 2) (generated using PandasTutor)\n\n\n\n\nStep 3: Calculate different aggregations on multiple columns\nHere, I will be calculating the mean and standard deviation of two columns “RestingBP” and “Cholesterol” and also provide a count for each group (here I’m using the “Sex” column to get that information.)\n\n\n\nVisualization of the final result that is the aggregation (steps 1 - 3) (generated using PandasTutor)\n\n\nVisualization of the final result that is the aggregation (steps 1 - 3) (generated using PandasTutor)\n\n\nInteresting sharing feature\nPandas Tutor also provides you with a shareable URL that even includes the CSV data used in the transformation. For instance, you can check my transformation code and results here or via below link!\nhttps://pandastutor.com/vis.html#code=import%20pandas%20as%20pd%0Aimport%20io%0A%0Acsv%20%3D%20'''%0AAge,Sex,ChestPainType,RestingBP,Cholesterol,FastingBS,RestingECG,MaxHR,ExerciseAngina,Oldpeak,ST_Slope,HeartDisease%0A40,M,ATA,140,289,0,Normal,172,N,0,Up,0%0A49,F,NAP,160,180,0,Normal,156,N,1,Flat,1%0A37,M,ATA,130,283,0,ST,98,N,0,Up,0%0A48,F,ASY,138,214,0,Normal,108,Y,1.5,Flat,1%0A54,M,NAP,150,195,0,Normal,122,N,0,Up,0%0A39,M,NAP,120,339,0,Normal,170,N,0,Up,0%0A45,F,ATA,130,237,0,Normal,170,N,0,Up,0%0A54,M,ATA,110,208,0,Normal,142,N,0,Up,0%0A37,M,ASY,140,207,0,Normal,130,Y,1.5,Flat,1%0A48,F,ATA,120,284,0,Normal,120,N,0,Up,0%0A37,F,NAP,130,211,0,Normal,142,N,0,Up,0%0A58,M,ATA,136,164,0,ST,99,Y,2,Flat,1%0A39,M,ATA,120,204,0,Normal,145,N,0,Up,0%0A49,M,ASY,140,234,0,Normal,140,Y,1,Flat,1%0A42,F,NAP,115,211,0,ST,137,N,0,Up,0%0A54,F,ATA,120,273,0,Normal,150,N,1.5,Flat,0%0A38,M,ASY,110,196,0,Normal,166,N,0,Flat,1%0A43,F,ATA,120,201,0,Normal,165,N,0,Up,0%0A60,M,ASY,100,248,0,Normal,125,N,1,Flat,1%0A36,M,ATA,120,267,0,Normal,160,N,3,Flat,1%0A43,F,TA,100,223,0,Normal,142,N,0,Up,0%0A44,M,ATA,120,184,0,Normal,142,N,1,Flat,0%0A49,F,ATA,124,201,0,Normal,164,N,0,Up,0%0A44,M,ATA,150,288,0,Normal,150,Y,3,Flat,1%0A40,M,NAP,130,215,0,Normal,138,N,0,Up,0%0A36,M,NAP,130,209,0,Normal,178,N,0,Up,0%0A53,M,ASY,124,260,0,ST,112,Y,3,Flat,0%0A52,M,ATA,120,284,0,Normal,118,N,0,Up,0%0A53,F,ATA,113,468,0,Normal,127,N,0,Up,0%0A51,M,ATA,125,188,0,Normal,145,N,0,Up,0%0A53,M,NAP,145,518,0,Normal,130,N,0,Flat,1%0A56,M,NAP,130,167,0,Normal,114,N,0,Up,0%0A54,M,ASY,125,224,0,Normal,122,N,2,Flat,1%0A41,M,ASY,130,172,0,ST,130,N,2,Flat,1%0A43,F,ATA,150,186,0,Normal,154,N,0,Up,0%0A32,M,ATA,125,254,0,Normal,155,N,0,Up,0%0A65,M,ASY,140,306,1,Normal,87,Y,1.5,Flat,1%0A41,F,ATA,110,250,0,ST,142,N,0,Up,0%0A48,F,ATA,120,177,1,ST,148,N,0,Up,0%0A48,F,ASY,150,227,0,Normal,130,Y,1,Flat,0%0A54,F,ATA,150,230,0,Normal,130,N,0,Up,0%0A54,F,NAP,130,294,0,ST,100,Y,0,Flat,1%0A35,M,ATA,150,264,0,Normal,168,N,0,Up,0%0A52,M,NAP,140,259,0,ST,170,N,0,Up,0%0A43,M,ASY,120,175,0,Normal,120,Y,1,Flat,1%0A59,M,NAP,130,318,0,Normal,120,Y,1,Flat,0%0A37,M,ASY,120,223,0,Normal,168,N,0,Up,0%0A50,M,ATA,140,216,0,Normal,170,N,0,Up,0%0A36,M,NAP,112,340,0,Normal,184,N,1,Flat,0%0A41,M,ASY,110,289,0,Normal,170,N,0,Flat,1%0A'''%0A%0Adf_hearts%20%3D%20pd.read_csv%28io.StringIO%28csv%29%29%0Adf_hearts%20%3D%20df_hearts%5B%0A%20%20%20%20%5B%22Age%22,%20%22Sex%22,%20%22RestingBP%22,%20%22ChestPainType%22,%20%22Cholesterol%22,%20%22HeartDisease%22%5D%0A%5D%0A%0A%28df_hearts.sort_values%28%22Age%22%29%0A.groupby%28%5B%22Sex%22,%20%22HeartDisease%22%5D%29%0A.agg%28%7B%22RestingBP%22%3A%20%5B%22mean%22,%20%22std%22%5D,%20%0A%20%20%20%20%20%20%22Cholesterol%22%3A%20%5B%22mean%22,%20%22std%22%5D,%0A%20%20%20%20%20%20%22Sex%22%3A%20%5B%22count%22%5D%0A%20%20%20%20%20%20%7D%29%0A%29&d=2021-12-08&lang=py&v=v1"
+  },
+  {
+    "objectID": "blog/pandas-tutor-tool/index.html#pros",
+    "href": "blog/pandas-tutor-tool/index.html#pros",
+    "title": "Visualize your Pandas Data Transformation using PandasTutor",
+    "section": "Pros:",
+    "text": "Pros:\n\nStep-by-step visualization\nInteractive plots (you can track the data rows before and after the transformation)\nShareable URL"
+  },
+  {
+    "objectID": "blog/pandas-tutor-tool/index.html#cons-current-limitations",
+    "href": "blog/pandas-tutor-tool/index.html#cons-current-limitations",
+    "title": "Visualize your Pandas Data Transformation using PandasTutor",
+    "section": "Cons (current limitations):",
+    "text": "Cons (current limitations):\n\nOnly works for small codes (The code should be 5000bytes). Since the data is also encoded and not read from a file, hence, you can only visualize small datasets.\nAs stated in the previous step, you have to encode the data along with the code as reading from external resources (files or links) are not supported.\nLimited Pandas’ methods support.\nYou can visualize the Pandas expression only on the last line. You may have to pipe multiple steps together or run the visualizations separately.\n\nFor a complete list of unsupported features or other FAQ, you can check here."
   }
 ]

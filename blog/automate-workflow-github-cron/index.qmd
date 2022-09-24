@@ -3,6 +3,7 @@ title: "Automate Your Workflow with GitHub Actions and Cron"
 date: "2022-01-20"
 categories: [Automation, GitHub Actions, Cron]
 image: "img/feature_image.png"
+id: 16
 ---
 
 :::{.callout-note}
@@ -205,7 +206,8 @@ jobs:
 
 # Use Case 2
 
-Following above process, I set up a scheduled update of my GitHub page that runs twice a week. It has been working fine till now (so far, it has been over an year at the time of this post). This automation does the following:
+Following above process, I set up a scheduled update of my GitHub page that runs twice a week. It has been working fine till now (so far, it has been over an year at the time of this post). 
+This automation does the following:
 
 1. Parse my [personal blog](https://ealizadeh.com/blog) and retrieve the title and the link to my latest posts.
 2. Add the blog posts to a section of my [GitHub README page](https://github.com/e-alizadeh). 
@@ -221,5 +223,6 @@ You can find the file that run above tasks on [GitHub](https://github.com/e-aliz
 
 # Conclusion
 
-In this post, we saw how GitHub Actions can be used to run a task on a time-based schedule. The sky is the limit here. Think about a workflow or a task you are currently running every so often. If you can put the task in a script that can be run on your computer (it doesn’t matter if it is in Python, Bash or any other script), then you can actually set up the automation.
-
+In this post, we saw how GitHub Actions can be used to run a task on a time-based schedule. The sky is the limit here. 
+Think about a workflow or a task you are currently running every so often. 
+If you can put the task in a script that can be run on your computer (it doesn’t matter if it is in Python, Bash or any other script), then you can actually set up the automation.
