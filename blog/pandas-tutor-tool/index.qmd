@@ -2,7 +2,7 @@
 title: "Visualize your Pandas Data Transformation using PandasTutor"
 date: "2021-12-08"
 categories: [Python, Data Science, Visualization, Pandas]
-image: "img/exp01_step2_groupby.png"
+image: "img/_featured_image.png"
 id: 15
 ---
 

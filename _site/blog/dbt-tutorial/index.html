@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Essi">
+<meta name="dcterms.date" content="2021-06-18">
+
+<title>Essi Alizadeh - dbt for Data Transformation - A Hands-on Tutorial</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-180647948-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Essi Alizadeh - dbt for Data Transformation - A Hands-on Tutorial">
+<meta property="og:description" content="Use dbt for complex data transformations by writing SQL SELECT statements only. Run tests, generate documentation, use macros, and many more features.">
+<meta property="og:image" content="https://ealizadeh.com/blog/dbt-tutorial/img/_featured_image.png">
+<meta property="og:site-name" content="Essi Alizadeh">
+<meta property="og:image:height" content="561">
+<meta property="og:image:width" content="1248">
+<meta name="twitter:title" content="Essi Alizadeh - dbt for Data Transformation - A Hands-on Tutorial">
+<meta name="twitter:description" content="Use dbt for complex data transformations by writing SQL SELECT statements only. Run tests, generate documentation, use macros, and many more features.">
+<meta name="twitter:image" content="https://ealizadeh.com/blog/dbt-tutorial/img/_featured_image.png">
+<meta name="twitter:creator" content="@es_alizadeh">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="561">
+<meta name="twitter:image-width" content="1248">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Essi Alizadeh</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html">Blog</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">dbt for Data Transformation - A Hands-on Tutorial</h1>
+            <p class="subtitle lead">Use dbt for complex data transformations by writing SQL SELECT statements only. Run tests, generate documentation, use macros, and many more features.</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">SQL</div>
+                <div class="quarto-category">Data Science</div>
+                <div class="quarto-category">Database</div>
+                <div class="quarto-category">ETL</div>
+                <div class="quarto-category">Tutorial</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Essi </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 18, 2021</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#pre-requisite" id="toc-pre-requisite" class="nav-link" data-scroll-target="#pre-requisite">Pre-requisite</a>
+  <ul>
+  <li><a href="#signup" id="toc-signup" class="nav-link" data-scroll-target="#signup">Signup</a></li>
+  <li><a href="#database-with-populated-data" id="toc-database-with-populated-data" class="nav-link" data-scroll-target="#database-with-populated-data">Database with populated data</a></li>
+  <li><a href="#dbt-cli-installation" id="toc-dbt-cli-installation" class="nav-link" data-scroll-target="#dbt-cli-installation">dbt CLI Installation</a></li>
+  </ul></li>
+  <li><a href="#basics-of-a-dbt-project" id="toc-basics-of-a-dbt-project" class="nav-link" data-scroll-target="#basics-of-a-dbt-project">Basics of a dbt project</a>
+  <ul>
+  <li><a href="#how-to-use-dbt" id="toc-how-to-use-dbt" class="nav-link" data-scroll-target="#how-to-use-dbt">How to use dbt?</a></li>
+  <li><a href="#dbt-commands" id="toc-dbt-commands" class="nav-link" data-scroll-target="#dbt-commands">dbt Commands</a></li>
+  </ul></li>
+  <li><a href="#dbt-project-setup" id="toc-dbt-project-setup" class="nav-link" data-scroll-target="#dbt-project-setup">dbt Project Setup</a>
+  <ul>
+  <li><a href="#step-1-initialize-a-dbt-project-sample-files-using-dbt-cli" id="toc-step-1-initialize-a-dbt-project-sample-files-using-dbt-cli" class="nav-link" data-scroll-target="#step-1-initialize-a-dbt-project-sample-files-using-dbt-cli">Step 1: Initialize a dbt project (sample files) using dbt CLI</a></li>
+  <li><a href="#step-2-set-up-a-git-repository" id="toc-step-2-set-up-a-git-repository" class="nav-link" data-scroll-target="#step-2-set-up-a-git-repository">Step 2: Set Up a Git Repository</a>
+  <ul class="collapse">
+  <li><a href="#or-if-you-want-to-create-a-new-repo" id="toc-or-if-you-want-to-create-a-new-repo" class="nav-link" data-scroll-target="#or-if-you-want-to-create-a-new-repo"><strong>Or, if you want to create a new repo…</strong></a></li>
+  </ul></li>
+  <li><a href="#step-3-set-up-a-new-project-on-dbt-cloud-dashboard" id="toc-step-3-set-up-a-new-project-on-dbt-cloud-dashboard" class="nav-link" data-scroll-target="#step-3-set-up-a-new-project-on-dbt-cloud-dashboard">Step 3: Set Up a New Project on dbt Cloud Dashboard</a></li>
+  </ul></li>
+  <li><a href="#dbt-models-and-features" id="toc-dbt-models-and-features" class="nav-link" data-scroll-target="#dbt-models-and-features">dbt Models and Features</a>
+  <ul>
+  <li><a href="#dbt-models" id="toc-dbt-models" class="nav-link" data-scroll-target="#dbt-models">dbt models</a>
+  <ul class="collapse">
+  <li><a href="#run-models" id="toc-run-models" class="nav-link" data-scroll-target="#run-models">Run models</a></li>
+  </ul></li>
+  <li><a href="#jinja-macros" id="toc-jinja-macros" class="nav-link" data-scroll-target="#jinja-macros">Jinja &amp; Macros</a></li>
+  <li><a href="#using-variables" id="toc-using-variables" class="nav-link" data-scroll-target="#using-variables">Using Variables</a>
+  <ul class="collapse">
+  <li><a href="#define-a-variable" id="toc-define-a-variable" class="nav-link" data-scroll-target="#define-a-variable">Define a variable</a></li>
+  <li><a href="#use-a-variable" id="toc-use-a-variable" class="nav-link" data-scroll-target="#use-a-variable">Use a Variable</a></li>
+  </ul></li>
+  <li><a href="#macros" id="toc-macros" class="nav-link" data-scroll-target="#macros">Macros</a></li>
+  <li><a href="#complex-dbt-models" id="toc-complex-dbt-models" class="nav-link" data-scroll-target="#complex-dbt-models">Complex dbt models</a>
+  <ul class="collapse">
+  <li><a href="#dbt-model-using-ref-and-global-variables" id="toc-dbt-model-using-ref-and-global-variables" class="nav-link" data-scroll-target="#dbt-model-using-ref-and-global-variables">dbt model using <code>ref()</code> and global variables</a></li>
+  <li><a href="#dbt-model-using-dbt_utils-package-and-macros" id="toc-dbt-model-using-dbt_utils-package-and-macros" class="nav-link" data-scroll-target="#dbt-model-using-dbt_utils-package-and-macros">dbt model using dbt_utils package and macros</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#run-tests-in-dbt" id="toc-run-tests-in-dbt" class="nav-link" data-scroll-target="#run-tests-in-dbt">Run Tests in dbt</a></li>
+  <li><a href="#generate-documentation-in-dbt" id="toc-generate-documentation-in-dbt" class="nav-link" data-scroll-target="#generate-documentation-in-dbt">Generate Documentation in dbt</a></li>
+  <li><a href="#other-features" id="toc-other-features" class="nav-link" data-scroll-target="#other-features">Other Features</a>
+  <ul>
+  <li><a href="#database-administration-using-hooks-operations" id="toc-database-administration-using-hooks-operations" class="nav-link" data-scroll-target="#database-administration-using-hooks-operations">Database administration using Hooks &amp; Operations</a>
+  <ul class="collapse">
+  <li><a href="#hooks" id="toc-hooks" class="nav-link" data-scroll-target="#hooks">Hooks</a></li>
+  <li><a href="#operations" id="toc-operations" class="nav-link" data-scroll-target="#operations">Operations</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>👉 This article is also published on&nbsp;<strong><a href="https://www.kdnuggets.com/2021/07/dbt-data-transformation-tutorial.html">KDnuggets</a></strong>.</p>
+</div>
+</div>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>dbt (data build tool) is a data transformation tool that uses select SQL statements. It allows you to create complex models, use variables and macros (aka functions), run tests, generate documentation, and many more features.</p>
+<p>dbt does not extract or load data, but it’s powerful at transforming data that’s already available in the database —dbt does the <strong>T</strong> in ELT (Extract, Load, Transform) processes.</p>
+<p>In this post, you will learn how to …</p>
+<ul>
+<li>Configuring a dbt project</li>
+<li>Creating dbt models (SELECT statements)</li>
+<li>Build complex dbt models using global variables and macros</li>
+<li>Building complex models by referring to other dbt models</li>
+<li>Running tests</li>
+<li>Generating documentation</li>
+</ul>
+</section>
+<section id="pre-requisite" class="level1">
+<h1>Pre-requisite</h1>
+<section id="signup" class="level2">
+<h2 class="anchored" data-anchor-id="signup">Signup</h2>
+<p>You can sign up at <a href="https://cloud.getdbt.com/">getdbt.com</a>. The free plan is a great plan for small projects and testing.</p>
+</section>
+<section id="database-with-populated-data" class="level2">
+<h2 class="anchored" data-anchor-id="database-with-populated-data">Database with populated data</h2>
+<p>You can check my post on <a href="https://ealizadeh.com/blog/deploy-postgresql-db-heroku">how to deploy a <em>free</em> PostgreSQL database on Heroku</a>. The post provides step-by-step instructions on how to do it.</p>
+<p>You can also check the <a href="https://github.com/e-alizadeh/sample_dbt_project/blob/master/data/data_ingestion.py">data ingestion script</a> in the GitHub repo accompanying this article.</p>
+<p><a href="https://github.com/e-alizadeh/sample_dbt_project">e-alizadeh/sample_dbt_project</a></p>
+<p>Following the above, we have generated two tables in a PostgreSQL database that we are going to use in this post. There are two tables in the database, namely <code>covid_latest</code> and <code>population_prosperity</code>. You can find the ingestion script on the GitHub repo for this post.</p>
+</section>
+<section id="dbt-cli-installation" class="level2">
+<h2 class="anchored" data-anchor-id="dbt-cli-installation">dbt CLI Installation</h2>
+<p>You can install the dbt command-line interface (CLI) by following the instructions on the following <a href="https://docs.getdbt.com/dbt-cli/installation/">dbt documentation page</a>.</p>
+<p><a href="https://docs.getdbt.com/dbt-cli/installation">Installation | dbt Docs</a></p>
+<hr>
+</section>
+</section>
+<section id="basics-of-a-dbt-project" class="level1">
+<h1>Basics of a dbt project</h1>
+<p>There are three main things to know about in order to use the dbt tool.</p>
+<ul>
+<li>dbt project</li>
+<li>database connection</li>
+<li>dbt commands</li>
+</ul>
+<section id="how-to-use-dbt" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-dbt">How to use dbt?</h2>
+<p>A dbt project is a directory containing <code>.sql</code> and <code>.yml</code> files. The minimum required files are:</p>
+<ul>
+<li>A project file named <code>dbt_project.yml</code>: This file contains configurations of a dbt project.</li>
+<li>Model(s) (<code>.sql</code> files): A model in dbt is simply a single <code>.sql</code> file containing a <strong>single <code>select</code> statement</strong>.</li>
+</ul>
+<p><strong>Every dbt project needs a dbt_project.yml file — this is how dbt knows a directory is a dbt project. It also contains important information that tells dbt how to operate on your project.</strong></p>
+<p>You can find more information about dbt projects <a href="https://docs.getdbt.com/docs/introduction#dbt-projects">here</a>.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>💡 A <strong>dbt model</strong> is basically a <code>.sql</code> file with a <strong>SELECT</strong> statement.</p>
+</div>
+</div>
+</section>
+<section id="dbt-commands" class="level2">
+<h2 class="anchored" data-anchor-id="dbt-commands">dbt Commands</h2>
+<p>dbt commands start with <code>dbt</code> and can be executed using one of the following ways:</p>
+<ul>
+<li>dbt Cloud (the command section at the bottom of the dbt Cloud dashboard),</li>
+<li>dbt CLI</li>
+</ul>
+<p>Some commands can only be used in dbt CLI like <code>dbt init</code>. Some dbt commands we will use in this post are</p>
+<ul>
+<li><code>dbt init</code> (only in dbt CLI)</li>
+<li><code>dbt run</code></li>
+<li><code>dbt test</code></li>
+<li><code>dbt docs generate</code></li>
+</ul>
+</section>
+</section>
+<section id="dbt-project-setup" class="level1">
+<h1>dbt Project Setup</h1>
+<section id="step-1-initialize-a-dbt-project-sample-files-using-dbt-cli" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-initialize-a-dbt-project-sample-files-using-dbt-cli">Step 1: Initialize a dbt project (sample files) using dbt CLI</h2>
+<p>You can use <code>[dbt init](https://docs.getdbt.com/reference/commands/init)</code> to generate sample files/folders. In particular, <code>dbt init project_name</code> will create the following:</p>
+<ul>
+<li>a&nbsp;<code>~/.dbt/profiles.yml</code>&nbsp;file if one does not already exist</li>
+<li>a new folder called&nbsp;<code>[project_name]</code></li>
+<li>directories and sample files necessary to get started with dbt</li>
+</ul>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Since <code>dbt init</code> generates a directory named<code>project_name</code>, and in order to avoid any conflict, you should <em>not have any existing folder with an identical name</em>.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/dbt_init.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">dbt init <project_name></project_name></figcaption><p></p>
+</figure>
+</div>
+<p>The result is a directory with the following sample files.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sample_dbt_project</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> README.md</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> analysis</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> data</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dbt_project.yml</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> macros</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> models</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span> └── example</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     ├── my_first_dbt_model.sql</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     ├── my_second_dbt_model.sql</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">│&nbsp;&nbsp;</span>     └── schema.yml</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> snapshots</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> tests</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For this post, we will just consider the minimum files and remove the extra stuff.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sample_dbt_project</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> README.md</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├──</span> dbt_project.yml</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">└──</span> models</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="ex">&nbsp;&nbsp;</span> ├── my_first_dbt_model.sql</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">├──</span> my_second_dbt_model.sql</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">&nbsp;</span>   └── schema.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-2-set-up-a-git-repository" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-set-up-a-git-repository">Step 2: Set Up a Git Repository</h2>
+<p>You can use an existing repo, as specified during the setup. You can configure the repositories by following the dbt documentation <a href="https://docs.getdbt.com/docs/dbt-cloud/cloud-configuring-dbt-cloud/cloud-configuring-repositories">here</a>.</p>
+<section id="or-if-you-want-to-create-a-new-repo" class="level3">
+<h3 class="anchored" data-anchor-id="or-if-you-want-to-create-a-new-repo"><strong>Or, if you want to create a new repo…</strong></h3>
+<p>you can create a new repository from inside the created directory. You can do that as below</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"first commit"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origing <span class="op">&lt;</span>repo_url<span class="op">&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin master</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="step-3-set-up-a-new-project-on-dbt-cloud-dashboard" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-set-up-a-new-project-on-dbt-cloud-dashboard">Step 3: Set Up a New Project on dbt Cloud Dashboard</h2>
+<p>In the previous step, we created a sample dbt project containing sample models and configurations. Now, we want to create a new project and connect our database and repository on the dbt Cloud dashboard.</p>
+<p>Before we continue, you should have</p>
+<ul>
+<li>some data already available in a database,</li>
+<li>a repository with the files generated at the previous step</li>
+</ul>
+<p>You can follow the steps below to set up a new project in dbt Cloud (keep in mind this step is different than the previous step in that we only generated some sample files).</p>
+<p><a href="https://vimeo.com/576196451">Set up a new dbt project on dbt Cloud</a></p>
+<p>Set up a new dbt project on dbt Cloud</p>
+<p>The <code>dbt_project.yml</code> file for our project is shown below (you can find the complete version in the <a href="https://github.com/e-alizadeh/sample_dbt_project.git">GitHub repo</a> to this post).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">'my_new_project'</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">'1.0.0'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">config-version</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">vars</span><span class="kw">:</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">selected_country</span><span class="kw">:</span><span class="at"> USA</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">selected_year</span><span class="kw">:</span><span class="at"> </span><span class="dv">2019</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># This setting configures which "profile" dbt uses for this project.</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">profile</span><span class="kw">:</span><span class="at"> </span><span class="st">'default'</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># There are other stuff that are generated automatically when you run `dbt init`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="dbt-models-and-features" class="level1">
+<h1>dbt Models and Features</h1>
+<section id="dbt-models" class="level2">
+<h2 class="anchored" data-anchor-id="dbt-models">dbt models</h2>
+<p>Let’s create simple dbt models that retrieve few columns of the tables.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="ot">"iso_code"</span>, <span class="ot">"total_cases"</span>, <span class="ot">"new_cases"</span> <span class="kw">from</span> covid_latest</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="ot">"code"</span>, <span class="ot">"year"</span>, <span class="ot">"continent"</span>, <span class="ot">"total_population"</span> <span class="kw">from</span> population_prosperity</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The dbt model name is the filename of the sql file in the <code>models</code> directory. The model name may differ from the table name in the database. For instance, in above, the dbt model <code>population</code> is the result of a <code>SELECT</code> statement on <code>population_prosperity</code> table in the database.</p>
+</div>
+</div>
+<section id="run-models" class="level3">
+<h3 class="anchored" data-anchor-id="run-models">Run models</h3>
+<p>You can run all models in your dbt project by executing <code>dbt run</code>. A sample dbt run output is shown below. You can see a summary or detailed log of running all dbt models. This helps a lot to debug any issue you may have in the queries. For instance, you can see a failed model that throws a Postgres error.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/dbr_run.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Detailed log of failed <strong>jinja_and_variable_usage</strong> dbt model</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="jinja-macros" class="level2">
+<h2 class="anchored" data-anchor-id="jinja-macros">Jinja &amp; Macros</h2>
+<p>dbt uses <a href="https://jinja.palletsprojects.com/">Jinja</a> templating language, making a dbt project an ideal programming environment for SQL. With Jinja, you can do transformations that are not normally possible in SQL, like using environment variables, or macros — abstract snippets of SQL, which is analogous to functions in most programming languages. Whenever you see a <code>{{ ... }}</code>, you’re already using Jinja. For more information about Jinja and additional Jinja-style functions defined, you can check <a href="https://docs.getdbt.com/docs/building-a-dbt-project/jinja-macros/">dbt documentation</a>.</p>
+<p>Later in this post, we will cover custom macros defined by dbt.</p>
+</section>
+<section id="using-variables" class="level2">
+<h2 class="anchored" data-anchor-id="using-variables">Using Variables</h2>
+<section id="define-a-variable" class="level3">
+<h3 class="anchored" data-anchor-id="define-a-variable">Define a variable</h3>
+<p>You can define your variables under the <code>vars</code> section in your <code>dbt_project.yml</code>. For instance, let’s define a variable called <code>selected_country</code> whose default value is <code>USA</code> and another one called <code>selected_year</code> whose default value is <code>2019</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> </span><span class="st">'my_new_project'</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">'1.0.0'</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">config-version</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">vars</span><span class="kw">:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">selected_country</span><span class="kw">:</span><span class="at"> USA</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">selected_year</span><span class="kw">:</span><span class="at"> </span><span class="dv">2019</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="use-a-variable" class="level3">
+<h3 class="anchored" data-anchor-id="use-a-variable">Use a Variable</h3>
+<p>You can use variables in your dbt models via <code>[var()](https://docs.getdbt.com/reference/dbt-jinja-functions/var)</code> Jinja function (<code>{{ var("var_key_name") }}</code> .</p>
+</section>
+</section>
+<section id="macros" class="level2">
+<h2 class="anchored" data-anchor-id="macros">Macros</h2>
+<p>There are many useful transformations and useful macros in <code>dbt_utils</code> that can be used in your project. For a list of all available macros, you can check their <a href="https://hub.getdbt.com/dbt-labs/dbt_utils/latest/">GitHub repo</a>.</p>
+<p>Now, let’s add dbt_utils to our project and install it by following the below steps:</p>
+<ol type="1">
+<li>Add dbt_utils macro to your&nbsp;<code>packages.yml</code>&nbsp;file, as follows:</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packages</span><span class="kw">:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">package</span><span class="kw">:</span><span class="at"> dbt-labs/dbt_utils</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.6.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Run&nbsp;<code>dbt deps</code>&nbsp;to install the package.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/dbt_deps.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Install packages using <code>dbt deps</code></figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="complex-dbt-models" class="level2">
+<h2 class="anchored" data-anchor-id="complex-dbt-models">Complex dbt models</h2>
+<p>The models (selects) are usually stacked on top of one another. For building more complex models, you will have to use <code>[ref()](https://docs.getdbt.com/reference/dbt-jinja-functions/ref)</code> macro. <code>ref()</code> is the most important function in dbt as it allows you to refer to other models. For instance, you may have a model (aka SELECT query) that does multiple stuff, and you don’t want to use it in other models. It will be difficult to build a complex model without using macros introduced earlier.</p>
+<section id="dbt-model-using-ref-and-global-variables" class="level3">
+<h3 class="anchored" data-anchor-id="dbt-model-using-ref-and-global-variables">dbt model using <code>ref()</code> and global variables</h3>
+<p>We can build more complex models using the two dbt models defined earlier in the post. For instance, let’s create a new dbt model that joins the above two tables on the country code and then filters based on selected country and year.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span> <span class="op">*</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span> {{<span class="fu">ref</span>(<span class="st">'population'</span>)}} </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">inner</span> <span class="kw">join</span> {{<span class="fu">ref</span>(<span class="st">'covid19_latest_stats'</span>)}} </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">on</span> {{<span class="fu">ref</span>(<span class="st">'population'</span>)}}.code <span class="op">=</span> {{<span class="fu">ref</span>(<span class="st">'covid19_latest_stats'</span>)}}.iso_code </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span> code<span class="op">=</span><span class="st">'{{ var("selected_country") }}'</span> <span class="kw">AND</span> <span class="dt">year</span><span class="op">=</span><span class="st">'{{ var("selected_year") }}'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Few points about the query above:</p>
+<ul>
+<li><code>{{ref('dbt_model_name')}}</code>is used to refer to dbt models available in the project.</li>
+<li>You can get a column from the model like <code>{{ref('dbt_model_name')}}.column_name</code>.</li>
+<li>You can use variables defined in <code>dbt_project.yml</code> file by <code>{{var("variable_name)}}</code>.</li>
+</ul>
+<p>The abbove code snippet joins the data from <code>population</code> and <code>covid19_latest_stats</code> models on the country code and filters them based on the selected_country=USA and selected_year=2019. The output of the model is shown below.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/jinja_and_variable_usage_output.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">The output of the <strong>jinja_and_variable_usage</strong> dbt model</figcaption><p></p>
+</figure>
+</div>
+<p>You can also see the compiled SQL code snippet by clicking on <strong>compile sql</strong> button. This is very useful particularly if you want to run the query outside the dbt tool.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/jinja_and_variable_usage_compiled_sql.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Compiled SQL code for <strong>jinja_and_variable_usage</strong> dbt model</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="dbt-model-using-dbt_utils-package-and-macros" class="level3">
+<h3 class="anchored" data-anchor-id="dbt-model-using-dbt_utils-package-and-macros">dbt model using dbt_utils package and macros</h3>
+<p><code>dbt_utils</code> package contains macros (aka functions) you can use in your dbt projects. A list of all macros is available on <a href="https://github.com/dbt-labs/dbt-utils/">dbt_utils’ GitHub page</a>.</p>
+<p>Let’s use dbt_utils <code>[pivot()](https://github.com/dbt-labs/dbt-utils/#pivot-source)</code> and <code>[get_column_values()](https://github.com/dbt-labs/dbt-utils/#get_column_values-source)</code> macros in a dbt model as below:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  continent,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  {{ dbt_utils.pivot(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      <span class="ot">"population.year"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      dbt_utils.get_column_values(<span class="fu">ref</span>(<span class="st">'population'</span>), <span class="ot">"year"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  ) }}</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span> {{ <span class="fu">ref</span>(<span class="st">'population'</span>) }}</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">group</span> <span class="kw">by</span> continent</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The above dbt model will compile to the following SQL query in dbt.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">select</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  continent,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(<span class="cf">case</span> <span class="cf">when</span> population.<span class="dt">year</span> <span class="op">=</span> <span class="st">'2015'</span> <span class="cf">then</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">0</span> <span class="cf">end</span>) <span class="kw">as</span> <span class="ot">"2015"</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sum</span>(<span class="cf">case</span> <span class="cf">when</span> population.<span class="dt">year</span> <span class="op">=</span> <span class="st">'2017'</span> <span class="cf">then</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">0</span> <span class="cf">end</span>) <span class="kw">as</span> <span class="ot">"2017"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sum</span>(<span class="cf">case</span> <span class="cf">when</span> population.<span class="dt">year</span> <span class="op">=</span> <span class="st">'2017'</span> <span class="cf">then</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">0</span> <span class="cf">end</span>) <span class="kw">as</span> <span class="ot">"2016"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sum</span>(<span class="cf">case</span> <span class="cf">when</span> population.<span class="dt">year</span> <span class="op">=</span> <span class="st">'2017'</span> <span class="cf">then</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">0</span> <span class="cf">end</span>) <span class="kw">as</span> <span class="ot">"2018"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">sum</span>(<span class="cf">case</span> <span class="cf">when</span> population.<span class="dt">year</span> <span class="op">=</span> <span class="st">'2017'</span> <span class="cf">then</span> <span class="dv">1</span> <span class="cf">else</span> <span class="dv">0</span> <span class="cf">end</span>) <span class="kw">as</span> <span class="ot">"2019"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span> <span class="ot">"d15em1n30ihttu"</span>.<span class="ot">"dbt_ealizadeh"</span>.<span class="ot">"population"</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="kw">group</span> <span class="kw">by</span> continent</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="kw">limit</span> <span class="dv">500</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">/* limit added automatically by dbt cloud */</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+</section>
+</section>
+</section>
+<section id="run-tests-in-dbt" class="level1">
+<h1>Run Tests in dbt</h1>
+<p>Another benefit of using dbt is the ability to test your data. Out of the box, dbt have the following generic tests: <code>unique</code>, <code>not_null</code>, <code>accepted_values</code> and <code>relationships</code>. An example of these tests on the model is shown below:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">models</span><span class="kw">:</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> covid19_latest_stats</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"A model of latest stats for covid19"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">columns</span><span class="kw">:</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> iso_code</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">"The country code"</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">tests</span><span class="kw">:</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> unique</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="at">                </span><span class="kw">-</span><span class="at"> not_null</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can run the tests via <code>dbt test</code>. You can see the output below</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/dbt_test.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Results of running dbt test on the dbt Cloud dashboard</figcaption><p></p>
+</figure>
+</div>
+<p>For more information on testing in dbt, you can visit <a href="https://docs.getdbt.com/docs/building-a-dbt-project/tests">dbt documentation</a>.</p>
+<hr>
+</section>
+<section id="generate-documentation-in-dbt" class="level1">
+<h1>Generate Documentation in dbt</h1>
+<p>You can generate documentation for your dbt project by simply running <code>dbt docs generate</code> in the command section as shown below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/dbt_docs_generate.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Generate documentation for a dbt project</figcaption><p></p>
+</figure>
+</div>
+<p>You can browse through the generated documentation by clicking on <strong>view docs</strong>. You can see an overview of the generated docs below.</p>
+<div class="ratio ratio-16x9"><iframe src="https://player.vimeo.com/video/576196029" frameborder="0" allow="autoplay; title=" "="" fullscreen;="" picture-in-picture"="" allowfullscreen=""></iframe></div>
+<!-- title='The documentation generated by the command `dbt docs generate`' >}} -->
+<p>In addition to <code>dbt docs generate</code>, dbt docs can also serve a webserver with the generated documentation. To do so, you need to simply run <code>dbt docs serve</code>. More information about generating docs for your dbt project is available <a href="https://docs.getdbt.com/docs/building-a-dbt-project/documentation">here</a>.</p>
+<hr>
+</section>
+<section id="other-features" class="level1">
+<h1>Other Features</h1>
+<section id="database-administration-using-hooks-operations" class="level2">
+<h2 class="anchored" data-anchor-id="database-administration-using-hooks-operations">Database administration using Hooks &amp; Operations</h2>
+<p>There are database management tasks that require running additional SQL queries, such as:</p>
+<ul>
+<li>Create user-defined functions</li>
+<li>Grant privileges on a table</li>
+<li>and many more</li>
+</ul>
+<p>dbt has two interfaces (hooks and operations) for executing these tasks and importantly version control them. Hooks and operations are briefly introduced here. For more info, you can check <a href="https://docs.getdbt.com/docs/building-a-dbt-project/hooks-operations">dbt documentation</a>.</p>
+<section id="hooks" class="level3">
+<h3 class="anchored" data-anchor-id="hooks">Hooks</h3>
+<p>Hooks are simply SQL snippets that are executed at different times. Hooks are defined in the <code>dbt_project.yml</code> file. Different hooks are:</p>
+<ul>
+<li><code>pre-hook</code>: executed before a model is built</li>
+<li><code>post-hook</code>: executed after a model is built</li>
+<li><code>on-run-start</code>: executed at the start of <code>dbt run</code></li>
+<li><code>on-run-end</code>: executed at the end of <code>dbt run</code></li>
+</ul>
+</section>
+<section id="operations" class="level3">
+<h3 class="anchored" data-anchor-id="operations">Operations</h3>
+<p>Operations are a convenient way to invoke a macro without running a model. Operations are triggered using <code>[dbt run-operation](https://docs.getdbt.com/reference/commands/run-operation)</code> command.</p>
+<p>Note that, unlike hooks, you need to explicitly execute the SQL in a <a href="https://docs.getdbt.com/docs/building-a-dbt-project/hooks-operations#operations">dbt operation</a>.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>dbt is a nice tool that is definitely worth giving a try as it may simplify your data ELT(or ETL) pipeline. In this post, we learned how to set up and use dbt for data transformation. I walked you through the different features of this tool. In particular, I provided a step-by-step guide on</p>
+<ul>
+<li>Configuring a dbt project</li>
+<li>Creating dbt models (SELECT statements)</li>
+<li>Build complex dbt models using global variables and macros</li>
+<li>Building complex models by referring to other dbt models</li>
+<li>Running tests</li>
+<li>Generating documentation</li>
+</ul>
+<p>You can find the GitHub repo containing all scripts (including the data ingestion script) below. <em>Feel free to fork the source code of this article.</em></p>
+<p><a href="https://github.com/e-alizadeh/sample_dbt_project">e-alizadeh/sample_dbt_project</a></p>
+</section>
+<section id="useful-links" class="level1">
+<h1>Useful Links</h1>
+<p><a href="https://ealizadeh.com/blog/deploy-postgresql-db-heroku">Step-by-Step Deployment of a Free PostgreSQL Database And Data Ingestion</a></p>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<p><a href="https://docs.getdbt.com/docs/introduction">What is dbt? | dbt Docs</a></p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{essi2021,
+  author = {Essi},
+  editor = {},
+  title = {Dbt for {Data} {Transformation} - {A} {Hands-on} {Tutorial}},
+  date = {2021-06-18},
+  url = {https://ealizadeh.com/blog/dbt-tutorial},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-essi2021" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Essi. 2021. <span>“Dbt for Data Transformation - A Hands-on
+Tutorial.”</span> June 18, 2021. <a href="https://ealizadeh.com/blog/dbt-tutorial">https://ealizadeh.com/blog/dbt-tutorial</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">©️ 2022 Esmaeil Alizadeh - All Rights Reserved</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/e-alizadeh">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/es_alizadeh">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
