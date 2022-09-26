@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: _site
+  preview:
+    port: 4321
+    browser: false
 
 website:
   title: "Essi Alizadeh"
@@ -10,6 +13,7 @@ website:
   favicon: assets/favicon.png
   open-graph: true
   google-analytics: "UA-180647948-1"
+  # margin-header: subscribe.html 
   twitter-card: 
     creator: "@es_alizadeh"
     site: "@es_alizadeh"

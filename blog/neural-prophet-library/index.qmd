@@ -1,0 +1,193 @@
+# NeuralProphet: A Time-Series Modeling Python Library based on Neural-Networks
+
+Created: March 9, 2021 9:57 AM
+Last Updated: May 30, 2021
+Last updated: September 7, 2022 10:14 PM
+Reading Time: 4 min read
+Show on Homepage?: Yes
+Tags: Machine Learning, Neural-Network, Python Library, Time Series Analysis
+id: 7
+
+<aside>
+👉 *This article is also published on [Towards Data Science Blog](https://towardsdatascience.com/neural-prophet-a-time-series-modeling-library-based-on-neural-networks-dd02dc8d868d).*
+
+</aside>
+
+- **Table of Content**
+
+[NeuralProphet](https://github.com/ourownstory/neural_prophet) is a python library for modeling time-series data based on neural networks. It’s built on top of [PyTorch](https://pytorch.org/) and is heavily inspired by [Facebook Prophet](https://github.com/facebook/prophet) and [AR-Net](https://github.com/ourownstory/AR-Net) libraries.
+
+# **NeuralProphet Library**
+
+## **NeuralProphet vs. Prophet**
+
+From the library name, you may ask what is the main difference between Facebook’s Prophet library and NeuralProphet. According to NeuralProphet’s [documentation](https://ourownstory.github.io/neural_prophet/changes-from-prophet/), the added features are[1]:
+
+- Using PyTorch’s Gradient Descent optimization engine making the modeling process much faster than Prophet
+- Using AR-Net for modeling time-series autocorrelation (aka serial correlation)
+- Custom losses and metrics
+- Having configurable non-linear layers of feed-forward neural networks,
+- *etc*.
+
+## **Project Maintainers**
+
+Based on the project’s GitHub page, the main maintainer of this project is [Oskar Triebe](https://github.com/ourownstory) from Stanford University with collaboration from Facebook and Monash University.
+
+## **Installation**
+
+The project is in the beta phase, so I would advise you to be cautious if you want to use this library in a production environment.
+
+You can install the package using `pip install neuralprophet`. However, if you are going to use the package in a Jupyter Notebook environment, you should install their live version `pip install neuralprophet[live]`. This will provide more features such as a live plot of train and validation loss using `plot_live_loss()`.
+
+```bash
+git clone https://github.com/ourownstory/neural_prophet
+cd neural_prophet
+pip install .[live]
+
+```
+
+I would recommend creating a fresh environment (a conda or venv) and installing the NeuralProphet package from the new environment letting the installer take care of all dependencies (it has Pandas, Jupyter Notebook, PyTorch as dependencies).
+
+Now that we have the package installed, let’s play!
+
+## **Implementation with a Case Study**
+
+Here, I’m using the daily climate data in Delhi from 2013 to 2017 that I found on [Kaggle](https://www.kaggle.com/sumanthvrao/daily-climate-time-series-data). First, let’s import the main packages.
+
+```python
+import pandas as pd
+from neuralprophet import NeuralProphet
+```
+
+Then, we can read the data into a Panda DataFrame. NeuralProphet object expects the time-series data to have a date column named `ds` and the time-series column value we want to predict as `y`.
+
+```python
+# Data is from https://www.kaggle.com/sumanthvrao/daily-climate-time-series-data
+df = pd.read_csv("./DailyDelhiClimateTrain.csv", parse_dates=["date"])
+df = df[["date", "meantemp"]]
+df.rename(columns={"date": "ds", "meantemp": "y"}, inplace=True)
+```
+
+Now let’s initialize the model. Below, I’ve brought all default arguments defined for the NeuralProphet object, including additional information about some. These are the hyperparameters you can configure in the model. Of course, if you are planning to use the default variables, you can just do `model = NeuralProphet()`.
+
+```python
+# model = NeuralProphet() if you're using default variables below.
+model = NeuralProphet(
+    growth="linear",  # Determine trend types: 'linear', 'discontinuous', 'off'
+    changepoints=None, # list of dates that may include change points (None -> automatic )
+    n_changepoints=5,
+    changepoints_range=0.8,
+    trend_reg=0,
+    trend_reg_threshold=False,
+    yearly_seasonality="auto",
+    weekly_seasonality="auto",
+    daily_seasonality="auto",
+    seasonality_mode="additive",
+    seasonality_reg=0,
+    n_forecasts=1,
+    n_lags=0,
+    num_hidden_layers=0,
+    d_hidden=None,     # Dimension of hidden layers of AR-Net
+    ar_sparsity=None,  # Sparcity in the AR coefficients
+    learning_rate=None,
+    epochs=40,
+    loss_func="Huber",
+    normalize="auto",  # Type of normalization ('minmax', 'standardize', 'soft', 'off')
+    impute_missing=True,
+    log_level=None, # Determines the logging level of the logger object
+)
+```
+
+After configuring the model and its hyperparameters, we need to train the model and make predictions. Let’s make up to a one-year prediction of the temperature.
+
+```python
+metrics = model.fit(df, validate_each_epoch=True, freq="D")
+future = model.make_future_dataframe(df, periods=365, n_historic_predictions=len(df))
+forecast = model.predict(future)
+```
+
+You can simply plot the forecast by calling `model.plot(forecast)` as following:
+
+```python
+fig, ax = plt.subplots(figsize=(14, 10))
+model.plot(forecast, xlabel="Date", ylabel="Temp", ax=ax)
+ax.set_title("Mean Temperature in Delhi", fontsize=28, fontweight="bold")
+```
+
+The one-year forecast plot is shown below, where the time period between 2017-01-01 to 2018-01-01 is the prediction. As can be seen, the forecast plot resembles the historical time-series. It both captured the seasonality as well as the slow-growing linear trend.
+
+![The mean temperature in Delhi and the one-year prediction](NeuralProphet%20A%20Time-Series%20Modeling%20Python%20Librar%2039ad9f25668a4ab38bc3f0639ead9563/Untitled.png)
+
+The mean temperature in Delhi and the one-year prediction
+
+You can plot the parameters by calling `model.plot_parameters()`
+
+![Model Parameters](NeuralProphet%20A%20Time-Series%20Modeling%20Python%20Librar%2039ad9f25668a4ab38bc3f0639ead9563/Untitled%201.png)
+
+Model Parameters
+
+The model loss using Mean Absolute Error (MAE) is plotted below. You can also use the Smoothed L1-Loss function.
+
+```python
+fig, ax = plt.subplots(figsize=(14, 10))
+ax.plot(metrics["MAE"], 'ob', linewidth=6, label="Training Loss")  
+ax.plot(metrics["MAE_val"], '-r', linewidth=2, label="Validation Loss")
+
+# You can use metrics["SmoothL1Loss"] and metrics["SmoothL1Loss_val"] too.
+```
+
+![Model Loss using MAE](NeuralProphet%20A%20Time-Series%20Modeling%20Python%20Librar%2039ad9f25668a4ab38bc3f0639ead9563/Untitled%202.png)
+
+Model Loss using MAE
+
+---
+
+# Conclusion
+
+In this post, we talked about NeuralProphet, a python library that models time-series based on Neural Networks. The library uses PyTorch as a backend. As a case study, we created a prediction model for daily Delhi climate time-series data and made a one-year prediction. An advantage of using this library is its similar syntax to Facebook’s Prophet library.
+
+<aside>
+📓 You can find the Jupyter notebook for this blog post on [GitHub](https://github.com/e-alizadeh/medium/blob/master/notebooks/NeuralProphet/neural_prophet.ipynb).
+
+</aside>
+
+---
+
+**Thanks for reading 🙏**
+
+*If you liked this post, you can join my mailing list to receive similar posts. You can follow me on [LinkedIn](https://www.linkedin.com/in/alizadehesmaeil/), [GitHub](https://github.com/e-alizadeh), [Twitter](https://twitter.com/intent/follow?screen_name=es_alizadeh&tw_p=followbutton) and [Medium](https://medium.com/@ealizadeh).*
+
+*And finally, you can find my knowledge forest 🌲 (raw digital notes) at [notes.ealizadeh.com](https://notes.ealizadeh.com/).*
+
+# **📩 Join my mailing list**
+
+[https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4](https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4)
+
+---
+
+# References
+
+[1] NeuralProphet, [Documentation](https://ourownstory.github.io/neural_prophet/)
+
+# Useful Links
+
+[1] O. J. Triebe et al, [AR-Net: A Simple Auto-Regressive Neural Network For Time-Series](https://arxiv.org/pdf/1911.12436.pdf), (2019)
+
+- View PDF directly here
+    
+    [https://arxiv.org/pdf/1911.12436.pdf](https://arxiv.org/pdf/1911.12436.pdf)
+    
+
+[Prophet](https://facebook.github.io/prophet/)
+
+[ourownstory/AR-Net](https://github.com/ourownstory/AR-Net)
+
+---
+
+⬅️   **Previous Post** 
+
+[Blog Posts](NeuralProphet%20A%20Time-Series%20Modeling%20Python%20Librar%2039ad9f25668a4ab38bc3f0639ead9563/Blog%20Posts%203ca92f26305344ac9e4045eb8f9ea7ba.csv)
+
+**➡️   Next Post**
+
+[Blog Posts](NeuralProphet%20A%20Time-Series%20Modeling%20Python%20Librar%2039ad9f25668a4ab38bc3f0639ead9563/Blog%20Posts%202548de4c4881428f9cb2e100610314b8.csv)

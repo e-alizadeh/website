@@ -1,0 +1,187 @@
+# Working with Missing Values in Pandas and NumPy
+
+Created: March 9, 2021 10:30 AM
+Last Updated: November 13, 2020
+Last updated: September 7, 2022 10:13 PM
+Reading Time: 4 min read
+Show on Homepage?: No
+Tags: Programming, Python
+id: 1
+
+<aside>
+👉 This blog post was originally published my [medium blog](https://medium.com/@ealizadeh/working-with-missing-values-in-pandas-and-numpy-25b23a69ca02).
+
+</aside>
+
+- **Table of Content**
+
+When working with data with missing values (aka NA or *not available*), we have to be careful about the operations we do. In this short article, we will look at different NA data types that someone may deal with when working with Pandas or NumPy libraries.
+
+There are different null objects such as **numpy.nan/numpy.NaN** (Not a Number), **pandas.NaT** (Not a Time), or python’s **None** type object. Null objects may behave unexpectedly and result in a [semantic error](https://en.wikipedia.org/wiki/Logic_error) (aka logic error) that is not easy to find or debug. Unlike [syntax errors](https://en.wikipedia.org/wiki/Syntax_error), your program will compile successfully even if there are semantic errors.
+
+***In this article, we will go over the following items:***
+
+- ***Comparison of null objects (“==” vs “is”)***
+- ***Finding null objects in Pandas & NumPy***
+- ***Calculations with missing values***
+
+***NOTE: Data imputation/wrangling techniques are not a part of this article (a topic for a future article).***
+
+---
+
+### **Comparing Null Objects (== vs. is )**
+
+When comparing a Python object that may be NA, keep in mind the difference between the two Python’s equality operators: “***is***”and “***==***”. Python’s keyword “***is***” compares the *identities* of two variables*,* while “***==***” compares two variables by checking whether they are equal. Let’s see how these two differ.
+
+```python
+None == None
+# >>> True
+
+None is None
+# >>> True
+```
+
+When comparing Python’s **None** object, both “**==**” and “**is**” yield the same results. However, the output is different when **numpy.nan** null object is used!
+
+```python
+numpy.nan == numpy.nan
+# >>> False
+
+numpy.nan is numpy.nan
+# >>> True
+```
+
+This behavior may result in a semantic error, particularly if we do an element-wise comparison. For example, assume that we have
+
+```python
+data = [1.0, np.nan, 2.0]
+```
+
+And we want to print a message on whether there is a missing value in the **data** or not.
+
+```python
+# Using "==" in the element-wise comparison
+for x in data:
+    if x == np.nan:
+        print(f"Using '==' -->  {x} is a nan!")
+    else:
+        print(f"Using '==' -->  {x} is not a nan!")
+
+# Using "is" in the element-wise comparison
+for x in data:
+    if x is np.nan:
+        print(f"Using 'is' -->  {x} is a nan!")
+    else:
+        print(f"Using 'is' -->  {x} is not a nan!")
+```
+
+```python
+Using '==' -->  1.0 is not a nan!
+Using '==' -->  nan is not a nan!
+Using '==' -->  2.0 is not a nan!
+Using 'is' -->  1.0 is not a nan!
+Using 'is' -->  nan is a nan!
+Using 'is' -->  2.0 is not a nan!
+```
+
+It is safer to use Pandas and/or NumPy’s built-in methods to check for missing values. We will cover this in the next section.
+
+# **Finding null objects in Pandas & NumPy**
+
+It is always safer to use NumPy or Pandas built-in methods to check for NAs. In NumPy, we can check for NaN entries by using *[numpy.isnan()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.isnan.html)* method. NumPy only supports its NaN objects and throws an error if we pass other null objects to numpy.*isnan()*.
+
+```python
+numpy.isnan(np.nan)
+# >>> True
+
+numpy.isnan(None)
+# >>> TypeError
+```
+
+I suggest you use *pandas.isna()* or its alias *pandas.isnull()* as they are more versatile than *numpy.isnan()* and accept other data objects and not only *numpy.nan*.
+
+```python
+# pandas.isna() is an alias of pandas.isnull()
+pandas.isna(np.nan)
+# >>> True
+
+pandas.isna(None)
+# >>> True
+
+pandas.isna(pd.NaT)
+# >>> True
+```
+
+# **Calculations with missing data**
+
+Let me tell you a story that happened to me a few days ago. I wanted to calculate the Median Absolute Deviation using *[mad()](https://www.statsmodels.org/dev/generated/statsmodels.robust.scale.mad.html)* from the *[statsmodel](https://www.statsmodels.org/)* library that is dependent on the *median()* function from NumPy. I had NaN entries in the data I was working on, and consequently, the output result was NaN since there was at least one missing value in the input array. It took me some time to find this semantic error. So, I figured the following out in a hard way:
+
+<aside>
+⚠️ Missing values propagate through arithmetic operations in NumPy and Pandas unless they are dropped or filled with a value.
+
+</aside>
+
+The following examples illustrate what happens when we calculate some statistics from our data without considering the missing values:
+
+```python
+2 + numpy.nan
+# >>> nan
+
+numpy.nan / 2
+# >>> nan
+```
+
+You have to be cautious about NaNs in your data when you are calculating any statistic. For example, let’s calculate the mean of an array including a NaN.
+
+```python
+numpy.mean([1.0, 2.0, 3.0, numpy.NaN])
+# >>> nan
+
+numpy.nanmean([1.0, 2.0, 3.0, numpy.NaN])
+# >>> 2.0
+```
+
+NumPy functions that calculate data statistics usually have counterpart functions to work with NaNs such as [numpy.nansum()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.nansum.html) and [numpy.nanstd()](https://docs.scipy.org/doc/numpy/reference/generated/numpy.nanstd.html).
+
+---
+
+# **Recommendations**
+
+- Always keep in mind the difference between equality operators “***==***” and “***is***”.
+- Use *Pandas* built-in methods to check for NA entries.
+- Pay attention to the behavior of functions in the presence of null objects, particularly functions to calculate statistical properties.
+
+---
+
+# Conclusion
+
+I believe next time you work with null objects in Python, you pay more attention to them. YI hope you learned something useful from my first ever article on [Medium.com](http://medium.com/). Feel free to provide me with any feedback or suggestion.
+
+<aside>
+📓 You can find a notebook for this article on [GitHub](https://github.com/e-alizadeh/medium/blob/master/notebooks/NotAvailable.ipynb) that includes additional examples.
+
+</aside>
+
+---
+
+**Thanks for reading 🙏**
+
+*If you liked this post, you can join my mailing list to receive similar posts. You can follow me on [LinkedIn](https://www.linkedin.com/in/alizadehesmaeil/), [GitHub](https://github.com/e-alizadeh), [Twitter](https://twitter.com/intent/follow?screen_name=es_alizadeh&tw_p=followbutton) and [Medium](https://medium.ealizadeh.com).*
+
+# **📩 Join my mailing list**
+
+[https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4](https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4)
+
+---
+
+# Useful Links
+
+[Working with missing data - pandas 1.2.3 documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html)
+
+[The Difference Between "is" and "==" in Python - dbader.org](https://dbader.org/blog/difference-between-is-and-equals-in-python)
+
+---
+
+**➡️   Next Post**
+
+[Blog Posts](Working%20with%20Missing%20Values%20in%20Pandas%20and%20NumPy%203a7ef1d1a9954458b642b121efff3874/Blog%20Posts%20bf11cd01010d47dcafd29028ab529db8.csv)

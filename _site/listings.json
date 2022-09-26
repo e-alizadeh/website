@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/blog/knn-and-kmeans/index.html",
       "/blog/automate-workflow-github-cron/index.html",
       "/blog/pandas-tutor-tool/index.html",
       "/blog/dbt-tutorial/index.html"

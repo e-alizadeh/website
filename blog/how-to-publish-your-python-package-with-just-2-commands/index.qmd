@@ -1,0 +1,153 @@
+# How to Publish Your Python Package with just 2 commands
+
+Created: March 2, 2021 10:09 PM
+Last Updated: February 25, 2021
+Last updated: September 7, 2022 10:14 PM
+Reading Time: 4 min read
+Show on Homepage?: No
+Tags: Poetry, Python, Software Development
+id: 12
+
+<aside>
+👉 This article is also published on **[Towards Data Science blog](https://towardsdatascience.com/how-to-publish-your-python-package-with-just-2-commands-39ea6a400285)**.
+
+</aside>
+
+- **Table of Contents**
+
+Packaging your Python library has never been easier now using [Poetry](https://python-poetry.org/). You may have a side project in Python that benefits others. You can publish it using Poetry. This post will show you how to build your own Python library and publish it on the most popular Python package repository [PyPI](https://pypi.org/).
+
+I will use one of my recent Python projects, [PyPocket](https://github.com/e-alizadeh/PyPocket/): a Python library (wrapper) for [Pocket](https://getpocket.com/) (previously known as Read It Later).
+
+# Prerequisite
+
+### 1. Project environment
+
+You need to have your project environment managed in Poetry since we will be using the `pyproject.toml` file to build our package and publish it.
+
+*You can check my post on [how to set up your Python environment using Conda and Poetry](https://ealizadeh.com/blog/guide-to-python-env-pkg-dependency-using-conda-poetry/).* If you are not using Conda, you can follow the steps I provided in the post but instead use other environment management systems like [Pipenv](https://github.com/pypa/pipenv) or [Virtualenv](https://virtualenv.pypa.io/en/latest/).
+
+### 2. Package repository
+
+We will need a package repository to host the Python package; the most popular one is [PyPI](https://pypi.org/). So, if you want to publish your library on PyPI, you need to first create an account on PyPI.
+
+# Packaging Instructions
+
+## Step 1: Build your package
+
+Once you have your Python package ready to be published, you first need to build your package using the following command from the directory that contains the `pyproject.toml` file:
+
+```bash
+poetry build
+```
+
+![How%20to%20Publish%20Your%20Python%20Package%20with%20just%202%20com%209bb65ba0dbab48d68759663e9c4ba7dd/Untitled.png](How%20to%20Publish%20Your%20Python%20Package%20with%20just%202%20com%209bb65ba0dbab48d68759663e9c4ba7dd/Untitled.png)
+
+The above command will create two files in the `dist` (distribution) directory. A folder will be created if there is no `dist` folder.
+
+First, a source distribution (often known as **sdist**) is created that is an archive of your package based on the current platform (`.tar.gz` for Unix and `.zip` for Windows systems)[1].
+
+In addition to sdist, `poetry build` creates a Python wheel (`.whl`) file. In a nutshell, a Python wheel is a ready-to-install format allowing you to skip the build stage, unlike the source distribution. A wheel filename is usually in the following format[2]:
+
+```bash
+{pkg-name}-{pkg-version}(-{build}?)-{python-implementation}-{application binary interface}-{platform}.whl
+```
+
+From the above figure, the package I built is called **pypocket** with version **0.2.0** in **Python 3** that is **not OS-specific** (none ABI) and suitable to run on **any** processor architecture.
+
+## Step 2: Publish your package
+
+Once the package is built, you can publish it on PyPI (or other package repositories).
+
+<aside>
+⚠️ Once you publish your package to PyPI, you will not be able to release an identical version (you can delete the package, but when trying to republish with the same version, you will get an error! I’ve been there). Hence, it’s recommended to test any package before pushing it to PyPI.
+
+</aside>
+
+### Test Your Package on TestPyPI
+
+It’s a good idea to first publish your package using the [TestPyPI](https://test.pypi.org/) framework. This way, if there is an issue with the published package, you can fix it and then publish it on PyPI. TestPyPI has an identical setup and user interface as PyPI, but it’s a *separate framework*. So, you need to create an account on TestPyPI too.
+
+Now, let’s publish our package on TestPyPI. First, add TestPyPI as an alternative package repository using the following command.
+
+```bash
+poetry config repositories.testpypi https://test.pypi.org/legacy/
+```
+
+You can publish your package to TestPyPI as the following:
+
+```bash
+poetry publish -r testpypi
+```
+
+![How%20to%20Publish%20Your%20Python%20Package%20with%20just%202%20com%209bb65ba0dbab48d68759663e9c4ba7dd/Untitled%201.png](How%20to%20Publish%20Your%20Python%20Package%20with%20just%202%20com%209bb65ba0dbab48d68759663e9c4ba7dd/Untitled%201.png)
+
+`poetry publish` will ask for your username and password (you can also use a token instead, more on this later). Notice that both the source distribution (`.tar.gz`) and the Python wheel are uploaded. Once the package is published, you should see something like the following on TestPyPI.
+
+![You can check that here [https://test.pypi.org/project/pypocket/](https://test.pypi.org/project/pypocket/)](How%20to%20Publish%20Your%20Python%20Package%20with%20just%202%20com%209bb65ba0dbab48d68759663e9c4ba7dd/Untitled%202.png)
+
+You can check that here [https://test.pypi.org/project/pypocket/](https://test.pypi.org/project/pypocket/)
+
+As can be seen from the above screenshot, you can install the package `pip install -i https://test.pypi.org/simple/ pypocket` and test it.
+
+### Publish Package on PyPI
+
+Once you’re happy with your Python library, you can publish it on PyPI using the following command:
+
+```bash
+poetry publish
+```
+
+Note that by default, Poetry publishes a package to PyPI. Therefore, you do not need to do `poetry config` or pass any argument to `poetry publish`.
+
+---
+
+### A point on using API Token instead of username and password
+
+You may notice that I’ve used my username and password when trying to publish the package. I would recommend using a token instead. You may have multiple projects in your PyPI account, and you can generate an API token for each project (package). This is particularly important if you want to automate your python packaging not to use your username and password during automated deployments. Another advantage of using an API token is that you can easily remove a token and even generate multiple tokens for a project.
+
+You can generate an API token by going to **Account settings** of your PyPI (or TestPyPI) account and then add an API token under the API tokens section. You will then be prompted to select a scope for your token (to use the token for a particular project or all your PyPI projects). The instruction to use the token will also be provided at this stage.
+
+---
+
+# Conclusion
+
+In this post we saw how we can build and publish a Python package using Poetry in two simple commands: `poetry build` and then `poetry publish`. We also went through the TestPyPI framework in order to test the Python package before publishing it on PyPI.
+
+---
+
+**Thanks for reading 🙏**
+
+*If you liked this post, you can join my mailing list to receive similar posts. You can follow me on [LinkedIn](https://www.linkedin.com/in/alizadehesmaeil/), [GitHub](https://github.com/e-alizadeh), [Twitter](https://twitter.com/intent/follow?screen_name=es_alizadeh&tw_p=followbutton) and [Medium](https://medium.com/@ealizadeh).*
+
+*And finally, you can find my knowledge forest 🌲 (raw digital notes) at [notes.ealizadeh.com](https://notes.ealizadeh.com/).*
+
+# **📩 Join my mailing list**
+
+[https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4](https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4)
+
+---
+
+# References
+
+[1] Python documentation, [Creating a Source Distribution](https://docs.python.org/3/distutils/sourcedist.html)
+
+[2] Brad Solomon (2020), [What Are Python Wheels and Why Should You Care?](https://realpython.com/python-wheels/), Real Python
+
+# Useful Links
+
+[Introduction | Documentation | Poetry - Python dependency management and packaging made easy.](https://python-poetry.org/docs/)
+
+## Related posts
+
+[A Guide to Python Environment, Dependency and Package Management: Conda + Poetry - Personal Website & Blog](https://ealizadeh.com/blog/guide-to-python-env-pkg-dependency-using-conda-poetry/)
+
+---
+
+⬅️   **Previous Post**
+
+[Blog Posts](How%20to%20Publish%20Your%20Python%20Package%20with%20just%202%20com%209bb65ba0dbab48d68759663e9c4ba7dd/Blog%20Posts%203fb0231f120b4fc486841b409c12a588.csv)
+
+**➡️   Next Post**
+
+[Blog Posts](How%20to%20Publish%20Your%20Python%20Package%20with%20just%202%20com%209bb65ba0dbab48d68759663e9c4ba7dd/Blog%20Posts%207754f39229e147c0a2ff843046f92723.csv)

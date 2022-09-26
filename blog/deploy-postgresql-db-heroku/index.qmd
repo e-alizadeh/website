@@ -1,0 +1,269 @@
+# Step-by-Step Deployment of a Free PostgreSQL Database And Data Ingestion
+
+Created: June 21, 2021 11:09 PM
+Last Updated: June 27, 2021
+Last updated: September 7, 2022 10:13 PM
+Reading Time: 6 min read
+Show on Homepage?: No
+Tags: Database, Guide to, Python
+id: 13
+
+<aside>
+👉 This article is also published on **[Towards Data Science blog](https://towardsdatascience.com/deploy-free-postgresql-database-in-heroku-and-ingest-data-8002c574a57d)**.
+
+</aside>
+
+- **Table of Contents**
+
+# In this post, you will learn how to ...
+
+- *Deploy a free PostgreSQL database in Heroku*
+- *Generate a Heroku API token (in two ways)*
+- *Dynamically retrieve Heroku database URL (useful to overcome a shortcoming of the free plan)*
+- Ingest data to *a table in the database using Pandas and SQLAlchemy*
+- *Specify data type of columns in the table using SQLAlchemy datatypes*
+
+## One-line summary of related technologies
+
+[PostgreSQL](https://www.postgresql.org/): a free and open-source object-relational database management system that emphasizes extensibility and SQL compliance. 
+
+[Heroku](https://www.heroku.com/): a platform as a service (PaaS) suitable for quick deployments with minimal needed DevOps experience.  
+
+[SQLAlchemy](https://www.sqlalchemy.org/): a Python SQL library and Object Relational Mapper (ORM) to interact with databases.
+
+[Pandas](https://pandas.pydata.org/): An open-source Python library for data analysis and manipulation. 
+
+# Prerequisite
+
+You will need the following Python libraries
+
+- [pandas](https://pandas.pydata.org/)
+- [psycopg2](https://pandas.pydata.org/)
+- [SQLAlchemy](https://www.sqlalchemy.org/)
+
+And also
+
+- [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) (verify your installation by entering `heroku --version` in the terminal)
+
+---
+
+# Heroku Signup and Deployment
+
+Heroku is a platform as a service (PaaS) that enables developers to build and run applications entirely in the cloud. Heroku offers a ready-to-use environment that makes it very simple to deploy your code as quickly as possible with little development experience. This is an excellent choice for beginners and small to medium-sized companies, unlike AWS, which usually requires experienced developers and has complicated deployment processes.
+
+## 1. Sign up to Heroku & Deploy Your First PostgreSQL Database
+
+You can [signup](https://signup.heroku.com/) for free to Heroku. After signing up and logging into your account, you will be directed to the Heroku Dashboard. Then, you can follow the instructions in the following clip to create a new app and add a PostgreSQL database.  
+
+[Deploy a new Heroku app and add the PostgreSQL driver](Step-by-Step%20Deployment%20of%20a%20Free%20PostgreSQL%20Datab%20c6565be042204579af1564b8f7be1c3f/heroku_deploy_app.mp4)
+
+Deploy a new Heroku app and add the PostgreSQL driver
+
+The free plan allows you to have a maximum of 20,000 rows of data and up to 20 connections to the database. This plan is usually enough for a small personal project. 
+
+<aside>
+⚠️ Note: In the free plan, the database credentials will occasionally change since Heroku rotates credentials periodically and sometimes perform maintenances.
+
+</aside>
+
+To address the issue of occasional changes in the database credentials, we can use Heroku CLI to retrieve the database URL dynamically. But first, let's go over the procedure for logging in to your account via Heroku CLI.
+
+## 2. Access your Heroku account using Token
+
+<aside>
+👉 What's covered in this section is applicable in general for working with any Heroku applications through **Heroku CLI**.
+
+</aside>
+
+### 2.1. Generate a Heroku API Token
+
+You can generate the token in the following two ways:
+
+**2.1.1. Heroku account (browser)**
+
+Go to **Account settings → Applications**. Under the **Authorizations** section, click on **Create authorization**. You have to give a description in the opened window and set the expiry time or just set no expiry for the token (by leaving the box blank).
+
+![Create a Heroku API token from Heroku dashboard](Step-by-Step%20Deployment%20of%20a%20Free%20PostgreSQL%20Datab%20c6565be042204579af1564b8f7be1c3f/heroku_token_generation_web-app.png)
+
+Create a Heroku API token from Heroku dashboard
+
+**2.1.2. Heroku CLI (terminal)**
+
+After installing the Heroku CLI, the first time you try to use a command that requires access to your account, you will be prompted to log in to your Heroku account on your browser. Once you're logged in, you can do almost anything through the Heroku API. For example, we can create a token by running the following:
+
+```bash
+$heroku authorization:create
+```
+
+The above command will generate a long-lived token for you. The first time you run the above command, you will be prompted to log in to your account in a browser. Once you successfully log into your account, you can get back to the terminal and see the generated token, as shown below.
+
+![Generate Heroku API token via Heroku CLI](Step-by-Step%20Deployment%20of%20a%20Free%20PostgreSQL%20Datab%20c6565be042204579af1564b8f7be1c3f/heroku_token_generation_cli.png)
+
+Generate Heroku API token via Heroku CLI
+
+### 2.2. Store your Heroku token in your environment
+
+Now that you have your Heroku API token, you need to set it in your terminal/environment as `HEROKU_API_KEY`. You can achieve this by running the following in your terminal:
+
+```bash
+export HEROKU_API_KEY=<your_token>
+```
+
+<aside>
+💡 **Tip on shell terminal variable scopes:** A variable set in the shell terminal will only be available in the terminal from which you ran and will die after closing it. Instead, you can put above command in your `~/.bash` or `~/.bashrc` file so that the variable will be available in any new terminal you open. This way, you don't need to worry about setting this variable again!
+
+</aside>
+
+Once you have `HEROKU_API_KEY` variable set in your terminal, you no longer need to use the web-based authentication or username and password to log in. This is particularly important if you want to use Heroku CLI as a part of an automation process or CI/CD. This way, you don’t need to log in each time and use the token in any different terminals. 
+
+### 2.3 Retrieve Heroku PostgreSQL Database URL
+
+You can get the database URL by running the following command:
+
+```bash
+$heroku config:get DATABASE_URL --app <your-app-name>
+```
+
+This will output the database URL in the format of 
+
+`postgres://<db_user>:<db_password>@<db_host>/<db_name>`
+
+We can use Python's standard library [subprocess](https://docs.python.org/3/library/subprocess.html) to run above command and retrieve the database credentials. This way we will have all our codes in Python!
+
+```python
+import subprocess
+heroku_app_name = "your-app-name"
+raw_db_url = subprocess.run(
+    ["heroku", "config:get", "DATABASE_URL", "--app", heroku_app_name],
+    capture_output=True  # capture_output arg is added in Python 3.7
+).stdout 
+```
+
+<aside>
+⚠️ **Caution:** Your Python (iPython) terminal/environment should have `HEROKU_API_KEY` set. You can verify that by running `os.environ["HEROKU_API_KEY"]` and verifying the token in the output.
+
+</aside>
+
+---
+
+# Data Ingestion to a Table
+
+## Create SQLAlchemy Engine
+
+Before we ingest data to a table in the deployed PostgreSQL database using Pandas, we have to create an SQLAlchemy engine that will be passed to the Pandas method. The SQLAlchemy engine/connection can be created using the following code snippet:
+
+```python
+import subprocess
+from sqlalchemy.engine.create import create_engine
+
+# Get the Database URL using Heroku CLI
+# -------------------------------------
+# Running the following from Python: $heroku config:get DATABASE_URL --app your-app-name
+heroku_app_name = "your-app-name"
+
+# Assumption: HEROKU_API_KEY is set in your terminal
+# You can confirm that it's set by running the following python command os.environ["HEROKU_API_KEY"]
+raw_db_url = subprocess.run(
+    ["heroku", "config:get", "DATABASE_URL", "--app", heroku_app_name],
+    capture_output=True  # capture_output arg is added in Python 3.7
+).stdout 
+
+# Convert binary string to a regular string & remove the newline character
+db_url = raw_db_url.decode("ascii").strip()
+
+# Convert "postgres://<db_address>"  --> "postgresql+psycopg2://<db_address>" needed for SQLAlchemy
+final_db_url = "postgresql+psycopg2://" + db_url.lstrip("postgres://")  # lstrip() is more suitable here than replace() function since we only want to replace postgres at the start!
+
+# Create SQLAlchemy engine
+# ------------------------
+engine = create_engine(final_db_url)
+```
+
+As you may note in the above, some string manipulation is required before creating the SQLAlchemy engine. 
+
+---
+
+## Ingest Data using Pandas & SQLAlchemy
+
+We can ingest the data into a table by simply using pandas `[to_sql()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_sql.html)` function and passing the SQLAlchemy engine/connection object to it.
+
+```python
+import pandas as pd
+from sqlalchemy.types import Integer, DateTime
+
+DATA_URL = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv"
+df = pd.read_csv(DATA_URL)
+
+df.to_sql(
+    "covid19",  # table name
+    con=engine,
+    if_exists='replace',
+    index=False,  # In order to avoid writing DataFrame index as a column
+    dtype={
+        "last_updated_date": DateTime(),
+        "total_cases": Integer(),
+        "new_cases": Integer()
+    }
+)
+```
+
+In the above example, the data type of few columns is specified. You can determine the dtype of columns by passing a dictionary in which keys should be the column names and the values should be the SQLAlchemy types. For all available dtypes, you can check SQLAlchemy [documentation](https://docs.sqlalchemy.org/en/14/core/type_basics.html) for the data types it supports. 
+
+# Additional Tips
+
+Reading data into a Pandas dataframe using pandas `[read_sql_table()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_sql_table.html)`.
+
+```python
+df = pd.read_sql_table(
+	"covid19",  # table name
+	con=engine
+)
+```
+
+You can run raw SQL queries using SQLAlchemy’s `[.execute(“SQL Query”)](https://docs.sqlalchemy.org/en/14/core/engines.html#sqlalchemy.create_engine)` function. For instance, if you want to drop the above table by running a SQL query, you can do so by doing the following: 
+
+```python
+engine.execute("DROP TABLE covid19") 
+```
+
+Above will create an SQLAlchemy cursor. 
+
+---
+
+# Conclusion
+
+In this post, we deployed a free PostgreSQL database using Heroku free plan. We also addressed the issue of changing database credentials by Heroku in the free plan by retrieving the database credentials dynamically via Heroku CLI. Using Pandas’ `to_sql()` function, we quickly created a table and even specified data types of columns via SQLAlchemy data types.
+
+---
+
+**Thanks for reading 🙏**
+
+*If you liked this post, you can join my mailing list to receive similar posts. You can follow me on [LinkedIn](https://www.linkedin.com/in/alizadehesmaeil/), [GitHub](https://github.com/e-alizadeh), [Twitter](https://twitter.com/intent/follow?screen_name=es_alizadeh&tw_p=followbutton) and [Medium](https://medium.ealizadeh.com).*
+
+# **📩 Join my mailing list**
+
+[https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4](https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4)
+
+---
+
+# Useful Links
+
+[Heroku CLI Authentication](https://devcenter.heroku.com/articles/authentication)
+
+[pandas.DataFrame.to_sql - pandas 1.2.5 documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_sql.html)
+
+[SQLAlchemy 1.4 Documentation](https://docs.sqlalchemy.org/en/14/core/type_basics.html)
+
+# Related posts
+
+[How To Deploy A Postgres Database For Free](https://towardsdatascience.com/how-to-deploy-a-postgres-database-for-free-95cf1d8387bf)
+
+---
+
+⬅️   **Previous Post**
+
+[Blog Posts](Step-by-Step%20Deployment%20of%20a%20Free%20PostgreSQL%20Datab%20c6565be042204579af1564b8f7be1c3f/Blog%20Posts%20afb049f09f594a75a9a285db93b2650c.csv)
+
+**➡️   Next Post**
+
+[Blog Posts](Step-by-Step%20Deployment%20of%20a%20Free%20PostgreSQL%20Datab%20c6565be042204579af1564b8f7be1c3f/Blog%20Posts%20f378ddb4481141b3941bf081929ea85f.csv)

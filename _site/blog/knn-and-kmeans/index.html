@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Essi">
+<meta name="dcterms.date" content="2022-03-21">
+
+<title>Essi Alizadeh - What K is in KNN and K-Means</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-180647948-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Essi Alizadeh - What K is in KNN and K-Means">
+<meta property="og:description" content="Get to know K-Nearest Neighbors and K-Means">
+<meta property="og:image" content="https://ealizadeh.com/blog/knn-and-kmeans/img/_featured_image.png">
+<meta property="og:site-name" content="Essi Alizadeh">
+<meta property="og:image:height" content="1250">
+<meta property="og:image:width" content="1250">
+<meta name="twitter:title" content="Essi Alizadeh - What K is in KNN and K-Means">
+<meta name="twitter:description" content="Get to know K-Nearest Neighbors and K-Means">
+<meta name="twitter:image" content="https://ealizadeh.com/blog/knn-and-kmeans/img/_featured_image.png">
+<meta name="twitter:creator" content="@es_alizadeh">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="1250">
+<meta name="twitter:image-width" content="1250">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Essi Alizadeh</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html">Blog</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">What K is in KNN and K-Means</h1>
+            <p class="subtitle lead">Get to know K-Nearest Neighbors and K-Means</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">K-Means</div>
+                <div class="quarto-category">KNN</div>
+                <div class="quarto-category">Machine Learnin</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Essi </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 21, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<p>subscribe.html</p>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#k-nearest-neighbor-knn" id="toc-k-nearest-neighbor-knn" class="nav-link" data-scroll-target="#k-nearest-neighbor-knn">K-Nearest Neighbor (KNN)</a>
+  <ul>
+  <li><a href="#what-k-in-k-nn-stands-for" id="toc-what-k-in-k-nn-stands-for" class="nav-link" data-scroll-target="#what-k-in-k-nn-stands-for">What <em>K</em> in <em>K</em>-NN stands for?</a></li>
+  <li><a href="#an-illustration-of-k-nn" id="toc-an-illustration-of-k-nn" class="nav-link" data-scroll-target="#an-illustration-of-k-nn">An Illustration of <em>K</em>-NN</a></li>
+  <li><a href="#pros-and-cons" id="toc-pros-and-cons" class="nav-link" data-scroll-target="#pros-and-cons">Pros and Cons</a></li>
+  </ul></li>
+  <li><a href="#k-means" id="toc-k-means" class="nav-link" data-scroll-target="#k-means"><em>K</em>-Means</a>
+  <ul>
+  <li><a href="#how-to-find-the-best-k" id="toc-how-to-find-the-best-k" class="nav-link" data-scroll-target="#how-to-find-the-best-k">How to find the best <strong><em>K</em></strong>?</a></li>
+  <li><a href="#pros-and-cons-1" id="toc-pros-and-cons-1" class="nav-link" data-scroll-target="#pros-and-cons-1">Pros and Cons</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#join-my-mailing-list" id="toc-join-my-mailing-list" class="nav-link" data-scroll-target="#join-my-mailing-list"><strong>📩 Join my mailing list</strong></a></li>
+  <li><a href="#other-posts-you-may-be-interested" id="toc-other-posts-you-may-be-interested" class="nav-link" data-scroll-target="#other-posts-you-may-be-interested">Other posts you may be interested</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In this post, we will go over two popular machine learning algorithms: <em>K</em>-Nearest Neighbors (aka <em>K</em>NN) and <em>K</em>-Means, and what <em>K</em> stands for in each algorithm. An overview of both popular ML techniques (including a visual illustration) will be provided.</p>
+<p>By the end of this post, we will be able to answer the following questions:</p>
+<ul>
+<li>What’s the difference between <em>K</em>NN and <em>K</em>-Means?</li>
+<li>What does <em>K</em> mean in <em>K</em>NN and K-Means?</li>
+<li>What is a <em>nonparametric</em> model?</li>
+<li>What is a <em>lazy learner</em> model?</li>
+<li>What is <em>within-cluster sum of squares</em>, WCSS (aka intracluster inertia/distance, within-cluster variance)?</li>
+<li>How to determine the best value K in K-Means?</li>
+<li>What are pros and cons of KNN?</li>
+<li>What are pros and cons of K-Means?</li>
+</ul>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>👉 The goal of this post is not to compare <em>K</em>NN and <em>K</em>-Means as each one addresses a different problem. Hence, comparing them is like comparing apples to oranges.</p>
+</div>
+</div>
+</section>
+<section id="k-nearest-neighbor-knn" class="level1">
+<h1>K-Nearest Neighbor (KNN)</h1>
+<p>KNN is a <em>nonparametric lazy supervised learning algorithm</em> mostly used for classification problems. There are a lot to unpack there, but the two main properties of the K-NN that you need to know are:</p>
+<ul>
+<li>KNN is a nonparametric algorithm meaning that the model does not make any assumption regarding the distribution of the underlying data [1].</li>
+<li>KNN is a lazy learner technique meaning that the algorithm does not learn the discriminative function from the training dataset. Instead it stores (memorizes) the training dataset, so, technically, a lazy learner algorithm doesn’t have a training step, and it delays the data abstraction until it’s asked to make a prediction [2].</li>
+</ul>
+<section id="what-k-in-k-nn-stands-for" class="level3">
+<h3 class="anchored" data-anchor-id="what-k-in-k-nn-stands-for">What <em>K</em> in <em>K</em>-NN stands for?</h3>
+<p><em>K</em> in <em>K</em>-Nearest Neighbors refers to the number of neighbors that one should take into consideration when predicting (voting for) the class of a new point. It will get more clear from the below example.</p>
+</section>
+<section id="an-illustration-of-k-nn" class="level2">
+<h2 class="anchored" data-anchor-id="an-illustration-of-k-nn">An Illustration of <em>K</em>-NN</h2>
+<p>As I mentioned earlier, <em>K</em>NN is a supervised learning technique, so we should have a labeled dataset. Let’s say we have two classes as can be seen in below image: Class A (blue points) and Class B (green points). A new data point (red) is given to us and we want to predict whether the new point belongs to Class A or Class B.</p>
+<p>Let’s first try <em>K</em> = 3. In this case, we have to find the three closest data points (aka three nearest neighbors) to the new (red) data point. As can be seen from the left side, two of three closest neighbors belong to Class B (green) and one belongs to Class A (blue). So, we should assign the new point to Class B.</p>
+<p><img src="img/202203082151_KNN.png" class="img-fluid"></p>
+<p>Now let’s set <em>K</em> = 5 (right side of above image). In this case, three out of the closest five points belong to Class A, so the new point should be classified as Class A. Unfortunately, there is no specific way of determining <em>K</em>, so we have to try a few values. Very low values of <em>K</em> like 1 or 2 may make the model very complex and sensitive to outliers. A common value for <em>K</em> is 5 [1].</p>
+</section>
+<section id="pros-and-cons" class="level2">
+<h2 class="anchored" data-anchor-id="pros-and-cons">Pros and Cons</h2>
+<p>Following are the advantages and drawbacks of KNN [3]:</p>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Useful for nonlinear data because KNN is a&nbsp;nonparametric&nbsp;algorithm.</li>
+<li>Can be used for both&nbsp;classification&nbsp;and&nbsp;regression&nbsp;problems, even though mostly used for classification.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li>Difficult to choose <em>K</em> since there is no statistical way to determine that.</li>
+<li>Slow prediction for large datasets.</li>
+<li>Computationally expensive since it has to store all the training data (Lazy Learner).</li>
+<li>Sensitive to non-normalized dataset.</li>
+<li>Sensitive to presence of irrelevant features.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="k-means" class="level1">
+<h1><em>K</em>-Means</h1>
+<p><em>K</em>-Means (aka <em>K</em>-Means clustering) is an unsupervised learning algorithm&nbsp;that divide unlabeled data into different groups (or clusters). <em>K</em> in <em>K</em>-means refers to the number of clusters/groups (a cluster is a group of similar observations/records). For instance, in the following example, the unlabeled dataset is grouped into different number of clusters depending on the value of <em>K</em>.</p>
+<p><img src="img/202203092227_K-Means.png" class="img-fluid"></p>
+<p>K-Means minimizes the <em>within-cluster</em> <em>sum of squares</em>, <strong>WCSS</strong> (aka intracluster inertia/distance, within-cluster variance). To put it simply, K-Means minimizes the sum of squared differences between data points and the mean of the assigned cluster [4].</p>
+<p><span class="math display">
+\text{WCSS}_{k} = \sum\limits_{x \in k}||x - \overline{x}||^{2}
+</span></p>
+<section id="how-to-find-the-best-k" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-find-the-best-k">How to find the best <strong><em>K</em></strong>?</h2>
+<p>There are several ways to determine <em>K</em> in the <em>K</em>-Means clustering algorithm:</p>
+<ul>
+<li><strong>Elbow Method</strong>: A common way to determine the number of ideal cluster (K) in <em>K</em>-means. In this approach, we run the <em>K</em>-means with several candidates and calculate the WCSS. The best <em>K</em> is selected based on a trade-off between the model complexity (overfitting) and the WCSS.</li>
+<li><strong>Silhouette Score</strong>: A score between -1 and 1 measuring the similarity among points of a cluster and comparing that with other clusters. A score of -1 indicates that a point is in the wrong cluster, whereas a score of 1 indicates that the point is in the right cluster [4].</li>
+<li><strong>gap statistics</strong>: A method to estimate the number of clusters in a dataset. gap statistic compares the change in the within-cluster variation of output of any clustering technique with an expected reference null distribution [5].</li>
+</ul>
+<p>We usually normalize/standardize continuous variables in the data preprocessing stage in order to avoid variables with much larger values dominating any modeling or analysis process <a href="P.%20C.%20Bruce%20and%20A.%20Bruce,%20*Practical%20Statistics%20for%20Data%20Scientists:%2050%20Essential%20Concepts*,%20First%20edition.%20O’Reilly,%202017">6</a>.</p>
+</section>
+<section id="pros-and-cons-1" class="level2">
+<h2 class="anchored" data-anchor-id="pros-and-cons-1">Pros and Cons</h2>
+<p>Some pros and cons of <em>K</em>-Means are given below.</p>
+<p><strong>Pros</strong></p>
+<ul>
+<li>High scalability since most of calculations can be run in parallel.</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li>The outliers can skew the centroids of clusters.</li>
+<li>Poor performance in higher dimensional.</li>
+</ul>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Few takeaways from this post:</p>
+<ul>
+<li><em>K</em>NN is a supervised learning algorithm mainly used for classification problems, whereas <em>K</em>-Means (aka <em>K</em>-means clustering) is an unsupervised learning algorithm.</li>
+<li><em>K</em> in <em>K</em>-Means refers to the number of clusters, whereas <em>K</em> in <em>K</em>NN is the number of nearest neighbors (based on the chosen distance metric).</li>
+<li><em>K</em> in <em>K</em>NN is determined by comparing the performance of algorithm using different values for <em>K</em>.</li>
+<li>There are few ways to determine the number of groups/clusters in a dataset prior to the <em>K</em>-means clustering, and that are:
+<ul>
+<li>Elbow Method,</li>
+<li>Silhouette Score,</li>
+<li>gap statistic.</li>
+</ul></li>
+</ul>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<p>[1]: <a href="https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-learning">K-Nearest Neighbor(KNN) Algorithm for Machine Learning</a></p>
+<p>[2]: <a href="https://sebastianraschka.com/faq/docs/lazy-knn.html">Why is Nearest Neighbor a Lazy Algorithm?</a></p>
+<p>[3]: <a href="https://tutorialspoint.com/machine_learning_with_python/machine_learning_with_python_knn_algorithm_finding_nearest_neighbors.htm">KNN Algorithm - Finding Nearest Neighbors</a></p>
+<p>[4]: <a href="https://towardsdatascience.com/a-deep-dive-into-k-means-f9a1ef2490f8?gi=8b7574fe442d">A deep dive into k-means</a></p>
+<p>[5]: R. Tibshirani, G. Walther, and T. Hastie, <em><a href="https://hastie.su.domains/Papers/gap.pdf">Estimating the number of clusters in a data set via the gap statistic</a></em>, Journal of the Royal Statistical Society: Series B (Statistical Methodology), vol.&nbsp;63, no. 2, pp.&nbsp;411–423, 2001</p>
+<hr>
+<p><strong>Thanks for reading 🙏</strong></p>
+<p><em>If you liked this post, you can join my mailing list to receive similar posts. You can follow me on <a href="https://www.linkedin.com/in/alizadehesmaeil/">LinkedIn</a>, <a href="https://github.com/e-alizadeh">GitHub</a>, <a href="https://twitter.com/intent/follow?screen_name=es_alizadeh&amp;tw_p=followbutton">Twitter</a> and <a href="https://medium.ealizadeh.com">Medium</a>.</em></p>
+</section>
+<section id="join-my-mailing-list" class="level1">
+<h1><strong>📩 Join my mailing list</strong></h1>
+<p><a href="https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4">https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4</a></p>
+<hr>
+</section>
+<section id="other-posts-you-may-be-interested" class="level1">
+<h1>Other posts you may be interested</h1>
+<p><a href="https://www.notion.so/2fd37eeb4a0f42bc9e641f870aee9ed9">Blog Posts</a></p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{essi2022,
+  author = {Essi},
+  editor = {},
+  title = {What {K} Is in {KNN} and {K-Means}},
+  date = {2022-03-21},
+  url = {https://ealizadeh.com/blog/knn-and-kmeans},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-essi2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Essi. 2022. <span>“What K Is in KNN and K-Means.”</span> March 21, 2022.
+<a href="https://ealizadeh.com/blog/knn-and-kmeans">https://ealizadeh.com/blog/knn-and-kmeans</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">©️ 2022 Esmaeil Alizadeh - All Rights Reserved</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/e-alizadeh">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/es_alizadeh">
+      <i class="bi bi-twitter" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
