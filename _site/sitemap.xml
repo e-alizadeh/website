@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://ealizadeh.com/blog.html</loc>
-    <lastmod>2022-09-26T01:40:58.825Z</lastmod>
+    <lastmod>2022-09-26T02:05:58.708Z</lastmod>
   </url>
   <url>
     <loc>https://ealizadeh.com/index.html</loc>
@@ -39,5 +39,57 @@
   <url>
     <loc>https://ealizadeh.com/blog/knn-and-kmeans/index.html</loc>
     <lastmod>2022-09-26T01:40:43.012Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/3-ways-to-add-images-to-your-jupyter-notebook/index.html</loc>
+    <lastmod>2022-09-26T02:05:28.983Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/cognitive-errors-art-of-thinking-clearly/index.html</loc>
+    <lastmod>2022-09-26T02:05:30.828Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/deploy-postgresql-db-heroku/index.html</loc>
+    <lastmod>2022-09-26T02:05:32.635Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/guide-to-estimates-in-exploratory-data-analysis/index.html</loc>
+    <lastmod>2022-09-26T02:05:34.946Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html</loc>
+    <lastmod>2022-09-26T02:05:37.028Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/how-to-publish-your-python-package-with-just-2-commands/index.html</loc>
+    <lastmod>2022-09-26T02:05:38.505Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/introduction-to-dynamic-time-warping/index.html</loc>
+    <lastmod>2022-09-26T02:05:40.709Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/mlxtend-library-for-data-science/index.html</loc>
+    <lastmod>2022-09-26T02:05:42.981Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/neural-prophet-library/index.html</loc>
+    <lastmod>2022-09-26T02:05:44.674Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/non-minimum-phase-systems/index.html</loc>
+    <lastmod>2022-09-26T02:05:46.221Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/sdv-library-for-modeling-datasets/index.html</loc>
+    <lastmod>2022-09-26T02:05:48.224Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/statistics-data-vs-sampling-distribution/index.html</loc>
+    <lastmod>2022-09-26T02:05:52.025Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/blog/working-with-missing-values-in-pandas-and-numpy/index.html</loc>
+    <lastmod>2022-09-26T02:05:53.762Z</lastmod>
   </url>
 </urlset>
