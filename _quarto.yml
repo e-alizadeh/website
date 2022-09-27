@@ -42,11 +42,16 @@ format:
       light: cosmo
       # dark: darkly
     css: styles.css
+    code-copy: true
+    code-overflow: wrap
     toc: true
     toc-title: "On this page"
     toc-depth: 4
     html-math-method: katex
     smooth-scroll: true
     highlight-style: tango
+    fig-align: center
     include-in-header:
       - assets/external_style.html
+
+freeze: true

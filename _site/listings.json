@@ -2,7 +2,6 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/blog/3-ways-to-add-images-to-your-jupyter-notebook/index.html",
       "/blog/cognitive-errors-art-of-thinking-clearly/index.html",
       "/blog/deploy-postgresql-db-heroku/index.html",
       "/blog/guide-to-estimates-in-exploratory-data-analysis/index.html",
@@ -18,7 +17,8 @@
       "/blog/knn-and-kmeans/index.html",
       "/blog/automate-workflow-github-cron/index.html",
       "/blog/pandas-tutor-tool/index.html",
-      "/blog/dbt-tutorial/index.html"
+      "/blog/dbt-tutorial/index.html",
+      "/blog/3-ways-to-add-images-to-your-jupyter-notebook/index.html"
     ]
   }
 ]
