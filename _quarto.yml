@@ -36,6 +36,8 @@ website:
       - icon: twitter 
         href: https://twitter.com/es_alizadeh
 
+bibliography: blog/references.bib
+
 format:
   html:
     theme: 
