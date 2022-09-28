@@ -1,6 +1,6 @@
 ---
 title: "3 Ways to Add Images to Your Jupyter Notebook"
-date: "2021-03-04"
+date: "2020-11-06"
 categories: [Python, Data Science, Visualization, Jupyter]
 image: "img/_featured_image.png"
 id: 5
