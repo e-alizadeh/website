@@ -2,7 +2,6 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/blog/cognitive-errors-art-of-thinking-clearly/index.html",
       "/blog/deploy-postgresql-db-heroku/index.html",
       "/blog/guide-to-estimates-in-exploratory-data-analysis/index.html",
       "/blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html",
@@ -18,6 +17,7 @@
       "/blog/automate-workflow-github-cron/index.html",
       "/blog/pandas-tutor-tool/index.html",
       "/blog/dbt-tutorial/index.html",
+      "/blog/cognitive-errors-art-of-thinking-clearly/index.html",
       "/blog/3-ways-to-add-images-to-your-jupyter-notebook/index.html"
     ]
   }
