@@ -6,7 +6,7 @@ image: "img/_featured_image.png"
 id: 6
 ---
 
-![](img/_featured_image.png)
+![](img/_featured_image.png){fig-alt="A connected graph of various cognitive biases."}
 
 :::{.callout-note}
 👉 This article is also published on **[Towards Data Science blog](https://towardsdatascience.com/15-cognitive-errors-every-analyst-must-know-268540e34ade)**.
@@ -64,16 +64,14 @@ The probability of actually being infected when the test results are positive is
 
 > The brain seeks patterns.
 
-The brain seeks patterns, coherence, and order where none really exists. As per this cognitive bias, we are oversensitive to finding a structure or rule. The human’s false pattern recognition is also known as [apophenia](https://en.wikipedia.org/wiki/Apophenia). 
+The brain seeks patterns, coherence, and order where none really exists. 
+As per this cognitive bias, we are oversensitive to finding a structure or rule. 
+The human's false pattern recognition is also known as [apophenia](https://en.wikipedia.org/wiki/Apophenia). 
 That is the tendency to make meaningful connections between unrelated things. 
-Examples of such phenomena are gambler’s fallacy, figures in clouds, and patterns with no deliberate designs. 
-A popular example of this is the “Face on Mars,” as shown below
+Examples of such phenomena are gambler's fallacy, figures in clouds, and patterns with no deliberate designs. 
+A popular example of this is the "Face on Mars" as shown below:
 
-![abc](img/wikipedia_Martian_face_viking_cropped.png)
-
-
-A cropped version of the small part of the Cydonia region, taken by the Viking 1 orbiter and released by NASA/JPL on July 25, 1976. (Source: [Wikipedia](https://en.wikipedia.org/wiki/Cydonia_(Mars)#%22Face_on_Mars%22))
-
+![A cropped version of the small part of the Cydonia region, taken by the Viking 1 orbiter and released by NASA/JPL on July 25, 1976. (Source: [Wikipedia](https://en.wikipedia.org/wiki/Cydonia_(Mars)#%22Face_on_Mars%22))](img/wikipedia_Martian_face_viking_cropped.png){fig-alt="Face on Mars (clustering illusion)" width="400"}
 
 This is prominent in the gambling, misinterpretation of statistics, conspiracy theories, *etc*. 
 This cognitive error is also linked to two other errors: coincidence and false causality. 
@@ -81,7 +79,7 @@ The way to overcome the clustering illusion, particularly for anyone working wit
 
 ## 3. Confirmation Bias
 
-![Confirmation bias](img/ConfirmationBias.png)
+![Confirmation bias](img/ConfirmationBias.png){fig-alt="A discussion between two people illustrating the confirmation bias."}
 
 The confirmation bias is the only cognitive error that the book author wrote two parts about it. 
 The following quote from the book says it all:
@@ -139,13 +137,12 @@ So, because of the ITT error, the drug looks much more effective than it actuall
 ## 8. False Causality
 
 > The Correlation does not imply causation.
-> 
 
 This fallacy occurs when we wrongly infer a cause-and-effect relationship between two measurements solely based on their correlation. 
 For instance, the per capita consumption of mozzarella cheese is highly correlated with civil engineering PhDs awarded (r=0.9586). 
 Does this mean that the consumption of mozzarella cheese leads to more civil engineering doctorates awarded?
 
-![Does the consumption of mozzarella cheese actually lead to more civil engineering PhDs awarded? (Graph: [TylerVigen.com](http://tylervigen.com/), Data sources: [U.S. Department of Agriculture](https://www.census.gov/compendia/statab/2012/tables/12s0217.xls) and [National Science Foundation](https://www.nsf.gov/statistics/infbrief/nsf11305/))](img/FalseCausality_Correlation.png)
+![Does the consumption of mozzarella cheese actually lead to more civil engineering PhDs awarded? (Graph: [TylerVigen.com](http://tylervigen.com/), Data sources: [U.S. Department of Agriculture](https://www.census.gov/compendia/statab/2012/tables/12s0217.xls) and [National Science Foundation](https://www.nsf.gov/statistics/infbrief/nsf11305/))](img/FalseCausality_Correlation.png){fig-alt="A time-series plot showing the correlation between mozzarella cheese consumption and awarded civil engineering doctorates (false causality)."}
 
 
 ## 9. The Problem with Averages
