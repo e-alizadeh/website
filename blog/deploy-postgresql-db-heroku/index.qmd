@@ -8,11 +8,9 @@ id: 13
 
 ![](img/_featured_image.png)
 
-
 :::{.callout-note}
 👉 This article is also published on **[Towards Data Science blog](https://towardsdatascience.com/deploy-free-postgresql-database-in-heroku-and-ingest-data-8002c574a57d)**.
 :::
-
 
 ### In this post, you will learn how to ...
 

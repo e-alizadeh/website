@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Essi">
+<meta name="author" content="Essi Alizadeh">
+<meta name="dcterms.date" content="2020-12-14">
 
-<title>Essi Alizadeh – index</title>
+<title>Essi Alizadeh - A Guide to Metrics (Estimates) in Exploratory Data Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -84,6 +85,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -158,6 +178,19 @@ ga('send', {
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Essi Alizadeh - A Guide to Metrics (Estimates) in Exploratory Data Analysis">
+<meta property="og:description" content="Exploratory data analysis (EDA) is an important step in any data science project. We always try to get a glance of our data by computing descriptive statistics of our dataset.">
+<meta property="og:image" content="https://ealizadeh.com/blog/guide-to-estimates-in-exploratory-data-analysis/img/_featured_image.png">
+<meta property="og:site-name" content="Essi Alizadeh">
+<meta property="og:image:height" content="507">
+<meta property="og:image:width" content="854">
+<meta name="twitter:title" content="Essi Alizadeh - A Guide to Metrics (Estimates) in Exploratory Data Analysis">
+<meta name="twitter:description" content="Exploratory data analysis (EDA) is an important step in any data science project. We always try to get a glance of our data by computing descriptive statistics of our dataset.">
+<meta name="twitter:image" content="https://ealizadeh.com/blog/guide-to-estimates-in-exploratory-data-analysis/img/_featured_image.png">
+<meta name="twitter:creator" content="@es_alizadeh">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="507">
+<meta name="twitter:image-width" content="854">
 </head>
 
 <body class="nav-fixed">
@@ -192,7 +225,41 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">A Guide to Metrics (Estimates) in Exploratory Data Analysis</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Data Science</div>
+                <div class="quarto-category">Exploratory Data Analysis</div>
+                <div class="quarto-category">Guide to</div>
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">Statistics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Essi Alizadeh </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 14, 2020</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -200,8 +267,7 @@ ga('send', {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#a-guide-to-metrics-estimates-in-exploratory-data-analysis" id="toc-a-guide-to-metrics-estimates-in-exploratory-data-analysis" class="nav-link active" data-scroll-target="#a-guide-to-metrics-estimates-in-exploratory-data-analysis">A Guide to Metrics (Estimates) in Exploratory Data Analysis</a></li>
-  <li><a href="#estimates-of-location" id="toc-estimates-of-location" class="nav-link" data-scroll-target="#estimates-of-location">Estimates of Location</a>
+  <li><a href="#estimates-of-location" id="toc-estimates-of-location" class="nav-link active" data-scroll-target="#estimates-of-location">Estimates of Location</a>
   <ul>
   <li><a href="#mean" id="toc-mean" class="nav-link" data-scroll-target="#mean">Mean</a>
   <ul class="collapse">
@@ -220,41 +286,45 @@ ga('send', {
   <li><a href="#python-implementation-1" id="toc-python-implementation-1" class="nav-link" data-scroll-target="#python-implementation-1">Python Implementation</a></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#join-my-mailing-list" id="toc-join-my-mailing-list" class="nav-link" data-scroll-target="#join-my-mailing-list"><strong>📩 Join my mailing list</strong></a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<section id="a-guide-to-metrics-estimates-in-exploratory-data-analysis" class="level1 page-columns page-full">
-<h1>A Guide to Metrics (Estimates) in Exploratory Data Analysis</h1>
-<p>Created: March 4, 2021 8:45 PM Last Updated: December 29, 2020 Last updated: September 7, 2022 10:14 PM Reading Time: 9 min read Show on Homepage?: No Tags: Data Science, Exploratory Data Analysis, Guide to, Python, Statistics id: 8</p>
-<aside>
-<p>👉 This article is also published on&nbsp;<a href="https://towardsdatascience.com/a-guide-to-metrics-in-exploratory-data-analysis-250b33f72297"><strong>Towards Data Science blog</strong></a>.</p>
-</aside>
-<ul>
-<li><strong>Table of Contents</strong></li>
-</ul>
-<p>Exploratory data analysis (EDA) is an important step in any data science project. We always try to get a glance of our data by computing descriptive statistics of our dataset. If you are like me, the first function you call might be Pandas <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html"><strong>dataframe.describe()</strong></a> to obtain descriptive statistics. While such analysis is important, <em>we often underestimate the importance of choosing the correct sample statistics/metrics/estimates</em>.</p>
+
+<p><img src="img/_featured_image.png" class="img-fluid" alt="A wordcloud of different metrics used in Exploratory Data Analysis"></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>👉 This article is also published on&nbsp;<strong><a href="https://towardsdatascience.com/a-guide-to-metrics-in-exploratory-data-analysis-250b33f72297">Towards Data Science blog</a></strong>.</p>
+</div>
+</div>
+<p>Exploratory data analysis (EDA) is an important step in any data science project. We always try to get a glance of our data by computing descriptive statistics of our dataset. If you are like me, the first function you call might be Pandas <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html"><code>dataframe.describe()</code></a> to obtain descriptive statistics. While such analysis is important, <em>we often underestimate the importance of choosing the correct sample statistics/metrics/estimates</em>.</p>
 <p>In this post, we will go over several metrics that you can use in your data science projects. In particular, we are going to cover several estimates of location and variability and their robustness (sensitiveness to outliers).</p>
 <p>The following common metrics/estimates are covered in this article:</p>
 <ul>
-<li><em>Estimates of location</em> (first moment of the distribution)
+<li>Estimates of location (first moment of the distribution)
 <ul>
-<li><em>mean, trimmed/truncated mean, weighted mean</em></li>
-<li><em>median, weighted median</em></li>
+<li>mean, trimmed/truncated mean, weighted mean</li>
+<li>median, weighted median</li>
 </ul></li>
-<li><em>Estimates of variability</em> (second moment of the distribution)
+<li>Estimates of variability (second moment of the distribution)
 <ul>
-<li><em>range</em></li>
-<li><em>variance and standard deviation</em></li>
-<li><em>mean absolute deviation, median absolute deviation</em></li>
-<li><em>percentiles (quantiles)</em></li>
+<li>range</li>
+<li>variance and standard deviation</li>
+<li>mean absolute deviation, median absolute deviation</li>
+<li>percentiles (quantiles)</li>
 </ul></li>
 </ul>
 <p>For each metric, we will cover:</p>
@@ -263,60 +333,134 @@ ga('send', {
 <li>Whether the metric is robust (sensitiveness to extreme cases)</li>
 <li>Python implementation and an example</li>
 </ul>
-<aside>
-<p>👉 <em>The focus of this article is on the metrics and estimates used in the univariate analysis of numeric data</em>.</p>
-</aside>
-<p>A note before we start: data scientists and business analysts usually refer to values calculated from the data as a <em>metric</em>, whereas statisticians use the term <em>estimates</em> for such values[1].</p>
-</section>
-<section id="estimates-of-location" class="level1 page-columns page-full">
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The focus of this article is on the metrics and estimates used in the univariate analysis of numeric data.</p>
+</div>
+</div>
+<p>A note before we start: data scientists and business analysts usually refer to values calculated from the data as a <em>metric</em>, whereas statisticians use the term <em>estimates</em> for such values<span class="citation" data-cites="bruce2017practical">(see <a href="#ref-bruce2017practical" role="doc-biblioref">Bruce and Bruce 2017</a>)</span>.</p>
+<section id="estimates-of-location" class="level1">
 <h1>Estimates of Location</h1>
 <p>Estimates of location are measures of the central tendency of the data (where most of the data is located). In statistics, this is usually referred to as the first moment of a distribution.</p>
-<section id="mean" class="level2 page-columns page-full">
+<section id="mean" class="level2">
 <h2 class="anchored" data-anchor-id="mean">Mean</h2>
 <p>The <em>arithmetic mean</em>, or simply <em>mean</em> or <em>average</em> is probably the most popular estimate of location. There different variants of mean, such as <em>weighted mean</em> or <em>trimmed/truncated mean</em>. You can see how they can be computed below.</p>
 <p><span class="math display">
 \begin{matrix}
-\text{Mean} &amp; {= \bar{x} = \frac{\sum\limits_{i}^{n}x_{i}}{n}\quad\quad\quad\quad} &amp; {(1.1)} \\
-\text{Weighted Mean} &amp; {= {\bar{x}}_{w} = \frac{\sum\limits_{i = 1}^{n}w_{i}x_{i}}{\sum\limits_{i}^{n}w_{i}}} &amp; {(1.2)} \\
-\text{Truncated Mean} &amp; {= {\bar{x}}_{\text{tr}} = \frac{\sum\limits_{i = p + 1}^{n - p}x_{i}}{n - 2p}} &amp; {(1.3)}
+    \text{Mean} &amp; {= \bar{x} = \frac{\sum\limits_{i}^{n}x_{i}}{n}\quad\quad\quad\quad} &amp; {(1.1)} \\
+    \text{Weighted Mean} &amp; {= {\bar{x}}_{w} = \frac{\sum\limits_{i = 1}^{n}w_{i}x_{i}}{\sum\limits_{i}^{n}w_{i}}} &amp; {(1.2)} \\
+    \text{Truncated Mean} &amp; {= {\bar{x}}_{\text{tr}} = \frac{\sum\limits_{i = p + 1}^{n - p}x_{i}}{n - 2p}} &amp; {(1.3)}
 \end{matrix}
 </span></p>
-<p><span class="math inline">*n*</span> denotes the total number of observations (rows).</p>
+<p><span class="math inline">n</span> denotes the total number of observations (rows).</p>
 <p>Weighted mean (equation 1.2) is a variant of mean that can be used in situations where the sample data does not represent different groups in a dataset. By assigning a larger weight to groups that are under-represented, the computed weighted mean will more accurately represent all groups in our dataset.</p>
-<aside>
-<p>⚠️ Extreme values can easily influence both the <strong>mean</strong> and <strong>weighted mean</strong> since neither one is a robust metric!</p>
-</aside>
-<aside>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Extreme values can easily influence both the <strong>mean</strong> and <strong>weighted mean</strong> since neither one is a robust metric!</p>
+</div>
+</div>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <p>💡 <strong>Robust estimate</strong>: A metric that is not sensitive to extreme values (outliers).</p>
-</aside>
-<p>Another variant of mean is the <em>trimmed mean</em> (eq. 1.3) that is a robust estimate. This metric is used in calculating the final score in many sports where a panel of judges will each give a score. Then the lowest and the highest scores are dropped and the mean of the remaining scores are computed as a part of the final score[2]. One such example is in the international diving score system.</p>
-<aside>
+</div>
+</div>
+</div>
+<!-- Equation numbering -->
+<p>Another variant of mean is the <em>trimmed mean</em> (eq. 1.3) that is a robust estimate. This metric is used in calculating the final score in many sports where a panel of judges will each give a score. Then the lowest and the highest scores are dropped and the mean of the remaining scores are computed as a part of the final score<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. One such example is in the international diving score system.</p>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <p>💡 In statistics, <span class="math inline">\bar{\mathbf{x}}</span> refers to a <strong>sample</strong> mean, whereas <span class="math inline">\mu</span> refers to the <strong>population</strong> mean.</p>
-</aside>
+</div>
+</div>
+</div>
 <section id="a-use-case-for-the-weighted-mean" class="level3">
 <h3 class="anchored" data-anchor-id="a-use-case-for-the-weighted-mean">A Use Case for the Weighted Mean</h3>
 <p>If you want to buy a smartphone or a smartwatch or any gadget where there are many options, you can use the following method to choose among various options available for a gadget.</p>
 <p>Let’s assume you want to buy a smartphone, and the following features are important to you: 1) battery life, 2) camera quality, 3) price, and 4) the phone design. Then, you give the following weights to each one:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339/Untitled.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Table 1: List of features and their corresponding weights</figcaption><p></p>
-</figure>
-</div>
-<p>Table 1: List of features and their corresponding weights</p>
+<table class="table">
+<caption>List of features and their corresponding weights</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">FEATURE</th>
+<th style="text-align: center;">WEIGHT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Battery life</td>
+<td style="text-align: center;">0.15</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Camera quality</td>
+<td style="text-align: center;">0.30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Price</td>
+<td style="text-align: center;">0.25</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Phone design</td>
+<td style="text-align: center;">0.30</td>
+</tr>
+</tbody>
+</table>
+
+<!-- 
+```
+#| label: tbl-weight-mean
+#| tbl-cap: Planets
+
+from IPython.display import Markdown
+from tabulate import tabulate
+table = [
+    ["Battery life", 0.15],
+    ["Camera quality", 0.30],
+    ["Price", 0.25],
+    ["Phone design", 0.30]
+]
+Markdown(tabulate(table, headers=["FEATURE","WEIGHT"]))
+``` 
+-->
 <p>Let’s say you have two options an iPhone and Google’s Pixel. You can give each feature a score of some value between 1 and 10 (1 being the worst and 10 being the best). After going over some reviews, you may give the following scores to the features of each phone.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339/Untitled%201.png" class="img-fluid figure-img"></p>
+<p><img src="img/weighted_mean_scores.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Table 2: Scores given to iPhone and Pixel for each score</figcaption><p></p>
 </figure>
 </div>
-<p>Table 2: Scores given to iPhone and Pixel for each score</p>
 <p>So, which phone is better for you?</p>
 <p><span class="math display">
 \begin{matrix}
-\text{iPhone score} &amp; {= 0.15 \times 6 + 0.3 \times 9 + 0.25 \times 1 + 0.3 \times 9 = 6.55} \\
-\text{Google Pixel score} &amp; {= 0.15 \times 5 + 0.3 \times 9.5 + 0.25 \times 8 + 0.3 \times 5 = 7.1} \\
+    \text{iPhone score} &amp; {= 0.15 \times 6 + 0.3 \times 9 + 0.25 \times 1 + 0.3 \times 9 = 6.55} \\
+    \text{Google Pixel score} &amp; {= 0.15 \times 5 + 0.3 \times 9.5 + 0.25 \times 8 + 0.3 \times 5 = 7.1} \\
 \end{matrix}
 </span></p>
 <p>And based on your feature preferences, the Google Pixel might be the better option for you!</p>
@@ -327,21 +471,21 @@ ga('send', {
 <p>Median is the middle of a sorted list, and it’s a robust estimate. For an ordered sequence <span class="math inline">x_1, x_2, ..., x_n</span>, the median is computed as follows:</p>
 <p><span class="math display">
 \begin{matrix}
-{\text{if~}n\text{~is~odd}\quad} &amp; \left. {}\longrightarrow\quad\text{Median} = x_{\frac{n + 1}{2}} \right. \\
-{\text{if~}n\text{~is~even}\quad} &amp; \left. {}\longrightarrow\quad\text{Median} = \frac{1}{2}(x_{\frac{n}{2}} + x_{\frac{n + 1}{2}}) \right. \\
+    {\text{if~}n\text{~is~odd}\quad} &amp; \left. {}\longrightarrow\quad\text{Median} = x_{\frac{n + 1}{2}} \right. \\
+    {\text{if~}n\text{~is~even}\quad} &amp; \left. {}\longrightarrow\quad\text{Median} = \frac{1}{2}(x_{\frac{n}{2}} + x_{\frac{n + 1}{2}}) \right. \\
 \end{matrix}
 </span></p>
 <p>Analogous to the weighted mean, we can also have the <em>weighted median</em> that can be computed as follows for an ordered sequence <span class="math inline">x_1, x_2, ..., x_n</span> with weights <span class="math inline">w_1, w_2, …, w_n</span> where <span class="math inline">w_i&gt;0</span>.</p>
 <p><span class="math display">
 \begin{matrix}
-&amp; {\text{Weighted~Median} = x_{k}} \\
-&amp; {\text{where}\quad\sum\limits_{i = 1}^{n}w_{i} = 1\quad\text{and}\quad\sum\limits_{i = k + 1}^{n}w_{i} \leq \frac{1}{2}\quad\text{and}\quad\sum\limits_{i = 1}^{k - 1}w_{i} \leq \frac{1}{2}} \\
+    &amp; {\text{Weighted~Median} = x_{k}} \\
+    &amp; {\text{where}\quad\sum\limits_{i = 1}^{n}w_{i} = 1\quad\text{and}\quad\sum\limits_{i = k + 1}^{n}w_{i} \leq \frac{1}{2}\quad\text{and}\quad\sum\limits_{i = 1}^{k - 1}w_{i} \leq \frac{1}{2}} \\
 \end{matrix}
 </span></p>
 </section>
 <section id="mode" class="level2">
 <h2 class="anchored" data-anchor-id="mode">Mode</h2>
-<p>The mode is the value that appears most often in the data and is typically used for categorical data, and less for numeric data[1].</p>
+<p>The mode is the value that appears most often in the data and is typically used for categorical data, and less for numeric data <span class="citation" data-cites="bruce2017practical">(see <a href="#ref-bruce2017practical" role="doc-biblioref">Bruce and Bruce 2017</a>)</span>.</p>
 </section>
 <section id="python-implementation" class="level2">
 <h2 class="anchored" data-anchor-id="python-implementation">Python Implementation</h2>
@@ -356,8 +500,9 @@ ga('send', {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"weights"</span>: [<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.5</span>] <span class="co"># Not necessarily add up to 1!!</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>data, weights <span class="op">=</span> df[<span class="st">"data"</span>], df[<span class="st">"weights"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You can use NumPy’s <code>[average()](https://numpy.org/doc/stable/reference/generated/numpy.average.html)</code> function to calculate the mean and weighted mean (equations 1.1 &amp; 1.2). For computing truncated mean, you can use <code>[trim_mean()](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.trim_mean.html)</code> from the SciPy stats module. A common choice for truncating the top and bottom of the data is 10%<a href="A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339.md">[1]</a>.</p>
-<p>You can use NumPy’s <code>[median()](https://numpy.org/doc/stable/reference/generated/numpy.median.html)</code> function to calculate the median. For computing the weighted median, you can use <code>weighted_median()</code> from the <a href="https://github.com/FilippoBovo/robustats">robustats</a> Python library (you can install it using <code>pip install robustats</code>). Robustats is a high-performance Python library to compute robust statistical estimators implemented in C.</p>
+<!-- Equation numbering -->
+<p>You can use NumPy’s <a href="https://numpy.org/doc/stable/reference/generated/numpy.average.html"><code>average()</code></a> function to calculate the mean and weighted mean (equations 1.1 &amp; 1.2). For computing truncated mean, you can use <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.trim_mean.html"><code>trim_mean()</code></a> from the SciPy stats module. A common choice for truncating the top and bottom of the data is 10%<span class="citation" data-cites="bruce2017practical">(see <a href="#ref-bruce2017practical" role="doc-biblioref">Bruce and Bruce 2017</a>)</span>.</p>
+<p>You can use NumPy’s <code>[median()](https://numpy.org/doc/stable/reference/generated/numpy.median.html)</code> function to calculate the median. For computing the weighted median, you can use <code>weighted_median()</code> from the <a href="https://github.com/FilippoBovo/robustats">robustats</a> Python library (you can install it using <code>pip install robustats</code>)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Robustats is a high-performance Python library to compute robust statistical estimators implemented in C.</p>
 <p>For computing the mode, you can either use the <code>mode()</code> function either from the robustats library that is particularly useful on large datasets or from <code>scipy.stats</code> module.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mean <span class="op">=</span> np.average(data) <span class="co"># You can use Pandas dataframe.mean()</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>weighted_mean <span class="op">=</span> np.average(data, weights<span class="op">=</span>weights)</span>
@@ -381,13 +526,14 @@ ga('send', {
 <p>Now, let’s see if we just remove 20 from our data, how that will impact our mean.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mean <span class="op">=</span> np.average(data[:<span class="op">-</span><span class="dv">1</span>]) <span class="co"># Remove the last data point (20)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Mean: "</span>, mean.<span class="bu">round</span>(<span class="dv">3</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> Mean:  <span class="fl">2.143</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> Mean:  <span class="fl">2.143</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can see how the last data point (20) impacted the mean (4.375 vs 2.143). There can be many situations that we may end up with some outliers that should be cleaned from our datasets like faulty measurements that are in orders of magnitude away from other data points.</p>
 </section>
 </section>
-<section id="estimates-of-variability" class="level1 page-columns page-full">
+<section id="estimates-of-variability" class="level1">
 <h1>Estimates of Variability</h1>
-<p>The second dimension (or moment) addresses how the data is spread out (variability or dispersion of the data). For this, we have to measure the difference (aka residual) between an estimate of location and an observed value<a href="A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339.md">[1]</a>.</p>
+<p>The second dimension (or moment) addresses how the data is spread out (variability or dispersion of the data). For this, we have to measure the difference (aka residual) between an estimate of location and an observed value<span class="citation" data-cites="bruce2017practical">(see <a href="#ref-bruce2017practical" role="doc-biblioref">Bruce and Bruce 2017</a>)</span>.</p>
 <section id="mean-absolute-deviation" class="level2">
 <h2 class="anchored" data-anchor-id="mean-absolute-deviation">Mean Absolute Deviation</h2>
 <p>One way to get this estimate is to calculate the difference between the largest and the lowest value to get the <em>range</em>. However, the range is, by definition, very sensitive to the two extreme values. Another option is the mean absolute deviation that is <em>the average of the sum of all absolute deviation from the mean</em>, as can be seen in the below formula:</p>
@@ -396,7 +542,7 @@ ga('send', {
 </span></p>
 <p>One reason why the mean absolute deviation receives less attention is since mathematically it’s preferable not to work with absolute values if there are other desirable options such as squared values available <span class="math inline">(</span>for instance, <span class="math inline">x^2</span> is differentiable everywhere while the derivative of  <span class="math inline">|x|</span> is not defined at <span class="math inline">x=0)</span>.</p>
 </section>
-<section id="variance-standard-deviation" class="level2 page-columns page-full">
+<section id="variance-standard-deviation" class="level2">
 <h2 class="anchored" data-anchor-id="variance-standard-deviation">Variance &amp; Standard Deviation</h2>
 <p>The variance and standard deviation are much more popular statistics than the mean absolute deviation to estimate the data dispersion.</p>
 <p><span class="math display">
@@ -406,23 +552,64 @@ ga('send', {
 \text{Standard Deviation} &amp; {= s = \sqrt{\text{Variance}}} \\
 \end{matrix}
 </span></p>
-<aside>
-<p>💡 In statistics, <span class="math inline">s</span> is used to refer to a <em><strong>sample</strong> standard deviation</em>, whereas <span class="math inline">\sigma</span> refers to the <em><strong>population</strong> standard deviation</em>.</p>
-</aside>
-<aside>
-<p>💡 The variance is actually the average of the squared deviations from the mean.</p>
-</aside>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In statistics, <span class="math inline">s</span> is used to refer to a <strong>sample</strong> standard deviation, whereas <span class="math inline">\sigma</span> refers to the <strong>population</strong> standard deviation.</p>
+</div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The variance is actually the average of the squared deviations from the mean.</p>
+</div>
+</div>
 <p>As can be noted from the formula, the standard deviation is on the same scale as the original data making it an easier metric to interpret than the variance. Analogous to the trimmed mean, we can also compute the <em>trimmed/truncated standard deviation</em> that is less sensitive to outliers.</p>
-<p>A good way of remembering some of the above estimates of variability is to link them to other metrics or distances that share a similar formulation<a href="A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339.md">[1]</a>. For instance,</p>
-<aside>
+<p>A good way of remembering some of the above estimates of variability is to link them to other metrics or distances that share a similar formulation <span class="citation" data-cites="bruce2017practical">(see <a href="#ref-bruce2017practical" role="doc-biblioref">Bruce and Bruce 2017</a>)</span>. For instance,</p>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <p>💡 Variance <span class="math inline">\equiv</span> Mean Squared Error (MSE) (aka Mean Squared Deviation MSD)</p>
-</aside>
-<aside>
+</div>
+</div>
+</div>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <p>💡 Standard deviation <span class="math inline">\equiv</span> L2-norm, Euclidean norm</p>
-</aside>
-<aside>
+</div>
+</div>
+</div>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <p>💡 Mean absolute deviation <span class="math inline">\equiv</span> L1-norm, Manhattan norm, Taxicab norm</p>
-</aside>
+</div>
+</div>
+</div>
 </section>
 <section id="median-absolute-deviation-mad" class="level2">
 <h2 class="anchored" data-anchor-id="median-absolute-deviation-mad">Median Absolute Deviation (MAD)</h2>
@@ -434,21 +621,35 @@ ga('send', {
 \end{matrix}
 </span></p>
 </section>
-<section id="percentiles" class="level2 page-columns page-full">
+<section id="percentiles" class="level2">
 <h2 class="anchored" data-anchor-id="percentiles">Percentiles</h2>
-<p>Percentiles (or quantiles) is another measure of the data dispersion that is based on <strong><em><a href="https://en.wikipedia.org/wiki/Order_statistic">order statistics</a></em></strong> (statistics based on sorted data). <span class="math inline">P</span>-th percentile is the least percentage of the values that are lower than or equal to <span class="math inline">P</span> percent.</p>
-<aside>
+<p>Percentiles (or quantiles) is another measure of the data dispersion that is based on <a href="https://en.wikipedia.org/wiki/Order_statistic">order statistics</a> (statistics based on sorted data). <span class="math inline">P</span>-th percentile is the least percentage of the values that are lower than or equal to <span class="math inline">P</span> percent.</p>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <p>💡 The median is the 50th percentile (0.5 quantile, or Q2).</p>
-</aside>
-<aside>
-<p>💡 The percentile is technically a weighted average<a href="A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339.md">[1]</a>.</p>
-</aside>
-<p>25th (Q1) and 75th (Q3) percentiles are particularly interesting since their difference (Q3 – Q1) shows the middle 50% of the data. The difference is known as the <a href="https://en.wikipedia.org/wiki/Interquartile_range">**interquartile range (IQR)</a>** (IQR=Q3-Q1). Percentiles are used to visualize data distribution using boxplots.</p>
+</div>
+</div>
+</div>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>💡 The percentile is technically a weighted average<span class="citation" data-cites="bruce2017practical">(see <a href="#ref-bruce2017practical" role="doc-biblioref">Bruce and Bruce 2017</a>)</span>.</p>
+</div>
+</div>
+</div>
+<p>25th (Q1) and 75th (Q3) percentiles are particularly interesting since their difference (Q3 – Q1) shows the middle 50% of the data. The difference is known as the <a href="https://en.wikipedia.org/wiki/Interquartile_range"><strong>interquartile range (IQR)</strong></a> (IQR=Q3-Q1). Percentiles are used to visualize data distribution using boxplots.</p>
 <p>A nice article about boxplots is available on <a href="https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51">Towards Data Science blog</a>.</p>
 </section>
 <section id="python-implementation-1" class="level2">
 <h2 class="anchored" data-anchor-id="python-implementation-1">Python Implementation</h2>
-<p>You can use NumPy’s <code>[var()](https://numpy.org/doc/stable/reference/generated/numpy.var.html)</code> and <code>[std()](https://numpy.org/doc/stable/reference/generated/numpy.std.html)</code> function to calculate the variance and standard deviation, respectively. On the other hand, to calculate the mean absolute deviation, you can use Pandas <code>[mad()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.mad.html)</code> function. For computing the trimmed standard deviation, you can use SciPy’s <code>[tstd()](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.tstd.html)</code> from the stats module. You can use Pandas <code>[boxplot()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.boxplot.html)</code> to quickly visualize a boxplot of the data.</p>
+<p>You can use NumPy’s <a href="https://numpy.org/doc/stable/reference/generated/numpy.var.html"><code>var()</code></a> and <a href="https://numpy.org/doc/stable/reference/generated/numpy.std.html"><code>std()</code></a> function to calculate the variance and standard deviation, respectively. On the other hand, to calculate the mean absolute deviation, you can use Pandas <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.mad.html"><code>mad()</code></a> function. For computing the trimmed standard deviation, you can use SciPy’s <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.tstd.html"><code>tstd()</code></a> from the stats module. You can use Pandas <a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.boxplot.html"><code>boxplot()</code></a> to quickly visualize a boxplot of the data.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
@@ -479,55 +680,57 @@ ga('send', {
 <hr>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339/Untitled%202.png" class="img-fluid figure-img"></p>
+<p><img src="img/list_of_all_metrics.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Table 3: A list of all metrics/estimates</figcaption><p></p>
 </figure>
 </div>
-<p>Table 3: A list of all metrics/estimates</p>
-<hr>
 </section>
 </section>
-<section id="conclusion" class="level1 page-columns page-full">
+<section id="conclusion" class="level1">
 <h1>Conclusion</h1>
-<p>In this post, I talked about various estimates of location and variability. In particular, I covered more than 10 different sample statistics and whether they are robust metrics or not. A table of all the metric along with their corresponding Python and R functions are summarized in Table 3. We also saw how the presence of an outlier may impact non-robust metrics like the mean. In this case, we may want to use a robust estimate. However, in some problems, we are interested in studying extreme cases and outliers such as anomaly detection.</p>
-<aside>
+<p>In this post, I talked about various estimates of location and variability. In particular, I covered more than 10 different sample statistics and whether they are robust metrics or not. A table of all the metric along with their corresponding Python and R functions are summarized in Table 3. <!-- Quarto numbering --> We also saw how the presence of an outlier may impact non-robust metrics like the mean. In this case, we may want to use a robust estimate. However, in some problems, we are interested in studying extreme cases and outliers such as anomaly detection.</p>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <p>📓 You can find the Jupyter notebook for this blog post on <a href="https://github.com/e-alizadeh/medium/blob/master/notebooks/A_Guide_to_Metrics_Estimates_in_EDA.ipynb">GitHub</a>.</p>
-</aside>
-<hr>
-<p><strong>Thanks for reading 🙏</strong></p>
-<p><em>If you liked this post, you can join my mailing list to receive similar posts. You can follow me on <a href="https://www.linkedin.com/in/alizadehesmaeil/">LinkedIn</a>, <a href="https://github.com/e-alizadeh">GitHub</a>, <a href="https://twitter.com/intent/follow?screen_name=es_alizadeh&amp;tw_p=followbutton">Twitter</a> and <a href="https://medium.com/@ealizadeh">Medium</a>.</em></p>
-<p><em>And finally, you can find my knowledge forest 🌲 (raw digital notes) at <a href="https://notes.ealizadeh.com/">notes.ealizadeh.com</a>.</em></p>
-</section>
-<section id="join-my-mailing-list" class="level1">
-<h1><strong>📩 Join my mailing list</strong></h1>
-<p><a href="https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4">https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4</a></p>
-<hr>
-</section>
-<section id="references" class="level1">
-<h1>References</h1>
-<p>[1] P. Bruce &amp; A. Bruce (2017), <em>Practical Statistics for Data Scientists</em>, First Edition, O’Reilly</p>
-<p>[2] Wikipedia, <a href="https://en.wikipedia.org/wiki/Truncated_mean">Truncated mean</a></p>
+</div>
+</div>
+</div>
 </section>
 <section id="useful-links" class="level1">
 <h1>Useful Links</h1>
 <p><a href="https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51">Understanding Boxplots</a></p>
-<hr>
-<p>⬅️ <strong>Previous Post</strong></p>
-<p><a href="A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339/Blog%20Posts%20bc607458a43f4c429c109d0dc11482f0.csv">Blog Posts</a></p>
-<p><strong>➡️ Next Post</strong></p>
-<p><a href="A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339/Blog%20Posts%209f62aac4c8a54ac69481419dc2cfd9e0.csv">Blog Posts</a></p>
+
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{essi,
-  author = {Essi},
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-bruce2017practical" class="csl-entry" role="doc-biblioentry">
+Bruce, Peter, and Andrew Bruce. 2017. <em>Practical Statistics for Data Scientists: 50 Essential Concepts</em>. O’Reilly Media.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Wikipedia, <a href="https://en.wikipedia.org/wiki/Truncated_mean">Truncated mean</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>https://github.com/FilippoBovo/robustats<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{alizadeh2020,
+  author = {Essi Alizadeh},
   editor = {},
+  title = {A {Guide} to {Metrics} {(Estimates)} in {Exploratory} {Data}
+    {Analysis}},
+  date = {2020-12-14},
   url = {https://ealizadeh.com/blog/guide-to-estimates-in-exploratory-data-analysis},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-essi" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
-Essi. n.d. <a href="https://ealizadeh.com/blog/guide-to-estimates-in-exploratory-data-analysis">https://ealizadeh.com/blog/guide-to-estimates-in-exploratory-data-analysis</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-alizadeh2020" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Essi Alizadeh. 2020. <span>“A Guide to Metrics (Estimates) in
+Exploratory Data Analysis.”</span> December 14, 2020. <a href="https://ealizadeh.com/blog/guide-to-estimates-in-exploratory-data-analysis">https://ealizadeh.com/blog/guide-to-estimates-in-exploratory-data-analysis</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

@@ -1,34 +1,35 @@
-# A Guide to Metrics (Estimates) in Exploratory Data Analysis
-
-Created: March 4, 2021 8:45 PM
-Last Updated: December 29, 2020
-Last updated: September 7, 2022 10:14 PM
-Reading Time: 9 min read
-Show on Homepage?: No
-Tags: Data Science, Exploratory Data Analysis, Guide to, Python, Statistics
+---
+title: "A Guide to Metrics (Estimates) in Exploratory Data Analysis"
+date: "2020-12-14"
+categories: [Data Science, Exploratory Data Analysis, Guide to, Python, Statistics]
+image: "img/_featured_image.png"
 id: 8
+---
 
-<aside>
-👉 This article is also published on [**Towards Data Science blog**](https://towardsdatascience.com/a-guide-to-metrics-in-exploratory-data-analysis-250b33f72297).
+![](img/_featured_image.png){fig-alt="A wordcloud of different metrics used in Exploratory Data Analysis"}
 
-</aside>
 
-- **Table of Contents**
+:::{.callout-note}
+👉 This article is also published on **[Towards Data Science blog](https://towardsdatascience.com/a-guide-to-metrics-in-exploratory-data-analysis-250b33f72297)**.
+:::
 
-Exploratory data analysis (EDA) is an important step in any data science project. We always try to get a glance of our data by computing descriptive statistics of our dataset. If you are like me, the first function you call might be Pandas [**dataframe.describe()**](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html) to obtain descriptive statistics. While such analysis is important, *we often underestimate the importance of choosing the correct sample statistics/metrics/estimates*.
+Exploratory data analysis (EDA) is an important step in any data science project. We always try to get a glance of our data by computing descriptive statistics of our dataset. 
+If you are like me, the first function you call might be Pandas [`dataframe.describe()`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.describe.html) to obtain descriptive statistics. 
+While such analysis is important, *we often underestimate the importance of choosing the correct sample statistics/metrics/estimates*.
 
-In this post, we will go over several metrics that you can use in your data science projects. In particular, we are going to cover several estimates of location and variability and their robustness (sensitiveness to outliers).
+In this post, we will go over several metrics that you can use in your data science projects. 
+In particular, we are going to cover several estimates of location and variability and their robustness (sensitiveness to outliers).
 
 The following common metrics/estimates are covered in this article:
 
-- *Estimates of location* (first moment of the distribution)
-    - *mean, trimmed/truncated mean, weighted mean*
-    - *median, weighted median*
-- *Estimates of variability* (second moment of the distribution)
-    - *range*
-    - *variance and standard deviation*
-    - *mean absolute deviation, median absolute deviation*
-    - *percentiles (quantiles)*
+- Estimates of location (first moment of the distribution)
+    - mean, trimmed/truncated mean, weighted mean
+    - median, weighted median
+- Estimates of variability (second moment of the distribution)
+    - range
+    - variance and standard deviation
+    - mean absolute deviation, median absolute deviation
+    - percentiles (quantiles)
     
 
 For each metric, we will cover:
@@ -37,72 +38,98 @@ For each metric, we will cover:
 - Whether the metric is robust (sensitiveness to extreme cases)
 - Python implementation and an example
 
-<aside>
-👉 *The focus of this article is on the metrics and estimates used in the univariate analysis of numeric data*.
+:::{.callout-note}
+The focus of this article is on the metrics and estimates used in the univariate analysis of numeric data.
+:::
 
-</aside>
-
-A note before we start: data scientists and business analysts usually refer to values calculated from the data as a *metric*,  whereas statisticians use the term *estimates* for such values[1].
+A note before we start: data scientists and business analysts usually refer to values calculated from the data as a *metric*, whereas statisticians use the term *estimates* for such values[see @bruce2017practical].
 
 # Estimates of Location
 
-Estimates of location are measures of the central tendency of the data (where most of the data is located). In statistics, this is usually referred to as the first moment of a distribution.
+Estimates of location are measures of the central tendency of the data (where most of the data is located). 
+In statistics, this is usually referred to as the first moment of a distribution.
 
 ## Mean
 
-The *arithmetic mean*, or simply *mean* or *average* is probably the most popular estimate of location. There different variants of mean, such as *weighted mean* or *trimmed/truncated mean*. You can see how they can be computed below.
+The *arithmetic mean*, or simply *mean* or *average* is probably the most popular estimate of location. 
+There different variants of mean, such as *weighted mean* or *trimmed/truncated mean*. You can see how they can be computed below.
 
 $$
 \begin{matrix}
-\text{Mean} & {= \bar{x} = \frac{\sum\limits_{i}^{n}x_{i}}{n}\quad\quad\quad\quad} & {(1.1)} \\
-\text{Weighted Mean} & {= {\bar{x}}_{w} = \frac{\sum\limits_{i = 1}^{n}w_{i}x_{i}}{\sum\limits_{i}^{n}w_{i}}} & {(1.2)} \\
-\text{Truncated Mean} & {= {\bar{x}}_{\text{tr}} = \frac{\sum\limits_{i = p + 1}^{n - p}x_{i}}{n - 2p}} & {(1.3)} 
+    \text{Mean} & {= \bar{x} = \frac{\sum\limits_{i}^{n}x_{i}}{n}\quad\quad\quad\quad} & {(1.1)} \\
+    \text{Weighted Mean} & {= {\bar{x}}_{w} = \frac{\sum\limits_{i = 1}^{n}w_{i}x_{i}}{\sum\limits_{i}^{n}w_{i}}} & {(1.2)} \\
+    \text{Truncated Mean} & {= {\bar{x}}_{\text{tr}} = \frac{\sum\limits_{i = p + 1}^{n - p}x_{i}}{n - 2p}} & {(1.3)} 
 \end{matrix}
 $$
 
-$*n*$ denotes the total number of observations (rows).
+$n$ denotes the total number of observations (rows).
 
-Weighted mean (equation 1.2) is a variant of mean that can be used in situations where the sample data does not represent different groups in a dataset. By assigning a larger weight to groups that are under-represented, the computed weighted mean will more accurately represent all groups in our dataset.
+Weighted mean (equation 1.2) is a variant of mean that can be used in situations where the sample data does not represent different groups in a dataset. 
+By assigning a larger weight to groups that are under-represented, the computed weighted mean will more accurately represent all groups in our dataset.
 
-<aside>
-⚠️ Extreme values can easily influence both the **mean** and **weighted mean** since neither one is a robust metric!
+:::{.callout-important}
+Extreme values can easily influence both the **mean** and **weighted mean** since neither one is a robust metric!
+:::
 
-</aside>
-
-<aside>
+:::{.callout}
 💡 **Robust estimate**: A metric that is not sensitive to extreme values (outliers).
+:::
 
-</aside>
+<!-- Equation numbering -->
+Another variant of mean is the *trimmed mean* (eq. 1.3) that is a robust estimate. 
+This metric is used in calculating the final score in many sports where a panel of judges will each give a score. 
+Then the lowest and the highest scores are dropped and the mean of the remaining scores are computed as a part of the final score[^truncated-mean]. 
+One such example is in the international diving score system.
 
-Another variant of mean is the *trimmed mean* (eq. 1.3) that is a robust estimate. This metric is used in calculating the final score in many sports where a panel of judges will each give a score. Then the lowest and the highest scores are dropped and the mean of the remaining scores are computed as a part of the final score[2]. One such example is in the international diving score system.
-
-<aside>
+:::{.callout}
 💡 In statistics, $\bar{\mathbf{x}}$ refers to a **sample** mean, whereas $\mu$ refers to the **population** mean.
-
-</aside>
+:::
 
 ### A Use Case for the Weighted Mean
 
 If you want to buy a smartphone or a smartwatch or any gadget where there are many options, you can use the following method to choose among various options available for a gadget.
 
-Let’s assume you want to buy a smartphone, and the following features are important to you: 1) battery life, 2) camera quality, 3) price, and 4) the phone design. Then, you give the following weights to each one:
+Let's assume you want to buy a smartphone, and the following features are important to you: 1) battery life, 2) camera quality, 3) price, and 4) the phone design. Then, you give the following weights to each one:
 
-![Table 1: List of features and their corresponding weights](A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339/Untitled.png)
+|     FEATURE    | WEIGHT |
+|:--------------:|:------:|
+|  Battery life  |  0.15  |
+| Camera quality |  0.30  |
+|      Price     |  0.25  |
+|  Phone design  |  0.30  |
 
-Table 1: List of features and their corresponding weights
+: List of features and their corresponding weights {tbl-colwidths="[25,25]"}
 
-Let’s say you have two options an iPhone and Google’s Pixel. You can give each feature a score of some value between 1 and 10 (1 being the worst and 10 being the best). After going over some reviews, you may give the following scores to the features of each phone.
+<!-- 
+```
+#| label: tbl-weight-mean
+#| tbl-cap: Planets
 
-![Table 2: Scores given to iPhone and Pixel for each score](A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339/Untitled%201.png)
+from IPython.display import Markdown
+from tabulate import tabulate
+table = [
+    ["Battery life", 0.15],
+    ["Camera quality", 0.30],
+    ["Price", 0.25],
+    ["Phone design", 0.30]
+]
+Markdown(tabulate(table, headers=["FEATURE","WEIGHT"]))
+``` 
+-->
 
-Table 2: Scores given to iPhone and Pixel for each score
+
+Let's say you have two options an iPhone and Google's Pixel. 
+You can give each feature a score of some value between 1 and 10 (1 being the worst and 10 being the best). 
+After going over some reviews, you may give the following scores to the features of each phone.
+
+![Table 2: Scores given to iPhone and Pixel for each score](img/weighted_mean_scores.png)
 
 So, which phone is better for you?
 
 $$
 \begin{matrix}
-\text{iPhone score} & {= 0.15 \times 6 + 0.3 \times 9 + 0.25 \times 1 + 0.3 \times 9 = 6.55} \\
-\text{Google Pixel score} & {= 0.15 \times 5 + 0.3 \times 9.5 + 0.25 \times 8 + 0.3 \times 5 = 7.1} \\
+    \text{iPhone score} & {= 0.15 \times 6 + 0.3 \times 9 + 0.25 \times 1 + 0.3 \times 9 = 6.55} \\
+    \text{Google Pixel score} & {= 0.15 \times 5 + 0.3 \times 9.5 + 0.25 \times 8 + 0.3 \times 5 = 7.1} \\
 \end{matrix}
 $$
 
@@ -114,8 +141,8 @@ Median is the middle of a sorted list, and it’s a robust estimate. For an orde
 
 $$
 \begin{matrix}
-{\text{if~}n\text{~is~odd}\quad} & \left. {}\longrightarrow\quad\text{Median} = x_{\frac{n + 1}{2}} \right. \\
-{\text{if~}n\text{~is~even}\quad} & \left. {}\longrightarrow\quad\text{Median} = \frac{1}{2}(x_{\frac{n}{2}} + x_{\frac{n + 1}{2}}) \right. \\
+    {\text{if~}n\text{~is~odd}\quad} & \left. {}\longrightarrow\quad\text{Median} = x_{\frac{n + 1}{2}} \right. \\
+    {\text{if~}n\text{~is~even}\quad} & \left. {}\longrightarrow\quad\text{Median} = \frac{1}{2}(x_{\frac{n}{2}} + x_{\frac{n + 1}{2}}) \right. \\
 \end{matrix}
 $$
 
@@ -123,18 +150,18 @@ Analogous to the weighted mean, we can also have the *weighted median* that can 
 
 $$
 \begin{matrix}
- & {\text{Weighted~Median} = x_{k}} \\
- & {\text{where}\quad\sum\limits_{i = 1}^{n}w_{i} = 1\quad\text{and}\quad\sum\limits_{i = k + 1}^{n}w_{i} \leq \frac{1}{2}\quad\text{and}\quad\sum\limits_{i = 1}^{k - 1}w_{i} \leq \frac{1}{2}} \\
+    & {\text{Weighted~Median} = x_{k}} \\
+    & {\text{where}\quad\sum\limits_{i = 1}^{n}w_{i} = 1\quad\text{and}\quad\sum\limits_{i = k + 1}^{n}w_{i} \leq \frac{1}{2}\quad\text{and}\quad\sum\limits_{i = 1}^{k - 1}w_{i} \leq \frac{1}{2}} \\
 \end{matrix}
 $$
 
 ## Mode
 
-The mode is the value that appears most often in the data and is typically used for categorical data, and less for numeric data[1].
+The mode is the value that appears most often in the data and is typically used for categorical data, and less for numeric data [see @bruce2017practical].
 
 ## Python Implementation
 
-Let’s first import all necessary Python libraries and generate our dataset.
+Let's first import all necessary Python libraries and generate our dataset.
 
 ```python
 import pandas as pd
@@ -148,10 +175,14 @@ df = pd.DataFrame({
 })
 data, weights = df["data"], df["weights"]
 ```
+<!-- Equation numbering -->
+You can use NumPy’s [`average()`](https://numpy.org/doc/stable/reference/generated/numpy.average.html) function to calculate the mean and weighted mean (equations 1.1 & 1.2). 
+For computing truncated mean, you can use [`trim_mean()`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.trim_mean.html) from the SciPy stats module. 
+A common choice for truncating the top and bottom of the data is 10%[see @bruce2017practical].
 
-You can use NumPy’s `[average()](https://numpy.org/doc/stable/reference/generated/numpy.average.html)` function to calculate the mean and weighted mean (equations 1.1 & 1.2). For computing truncated mean, you can use `[trim_mean()](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.trim_mean.html)` from the SciPy stats module. A common choice for truncating the top and bottom of the data is 10%[[1]](A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339.md).
-
-You can use NumPy’s `[median()](https://numpy.org/doc/stable/reference/generated/numpy.median.html)` function to calculate the median. For computing the weighted median, you can use `weighted_median()` from the [robustats](https://github.com/FilippoBovo/robustats) Python library (you can install it using `pip install robustats`). Robustats is a high-performance Python library to compute robust statistical estimators implemented in C.
+You can use NumPy’s `[median()](https://numpy.org/doc/stable/reference/generated/numpy.median.html)` function to calculate the median. 
+For computing the weighted median, you can use `weighted_median()` from the [robustats](https://github.com/FilippoBovo/robustats) Python library (you can install it using `pip install robustats`)[^robustats]. 
+Robustats is a high-performance Python library to compute robust statistical estimators implemented in C.
 
 For computing the mode, you can either use the `mode()` function either from the robustats library that is particularly useful on large datasets or from `scipy.stats` module.
 
@@ -180,30 +211,33 @@ print("Mode: ", mode)
 >>> Mode:  ModeResult(mode=array([2]), count=array([4]))
 ```
 
-Now, let’s see if we just remove 20 from our data, how that will impact our mean.
+Now, let's see if we just remove 20 from our data, how that will impact our mean.
 
 ```python
 mean = np.average(data[:-1]) # Remove the last data point (20)
 print("Mean: ", mean.round(3))
->>> Mean:  2.143
 
+>>> Mean:  2.143
 ```
 
-You can see how the last data point (20) impacted the mean (4.375 vs 2.143). There can be many situations that we may end up with some outliers that should be cleaned from our datasets like faulty measurements that are in orders of magnitude away from other data points.
+You can see how the last data point (20) impacted the mean (4.375 vs 2.143). 
+There can be many situations that we may end up with some outliers that should be cleaned from our datasets like faulty measurements that are in orders of magnitude away from other data points.
 
 # Estimates of Variability
 
-The second dimension (or moment) addresses how the data is spread out (variability or dispersion of the data). For this, we have to measure the difference (aka residual) between an estimate of location and an observed value[[1]](A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339.md).
+The second dimension (or moment) addresses how the data is spread out (variability or dispersion of the data). For this, we have to measure the difference (aka residual) between an estimate of location and an observed value[see @bruce2017practical].
 
 ## Mean Absolute Deviation
 
-One way to get this estimate is to calculate the difference between the largest and the lowest value to get the *range*. However, the range is, by definition, very sensitive to the two extreme values. Another option is the mean absolute deviation that is *the average of the sum of all absolute deviation from the mean*, as can be seen in the below formula:
+One way to get this estimate is to calculate the difference between the largest and the lowest value to get the *range*. 
+However, the range is, by definition, very sensitive to the two extreme values. 
+Another option is the mean absolute deviation that is *the average of the sum of all absolute deviation from the mean*, as can be seen in the below formula:
 
 $$
 \text{Mean~absolute~deviation} = \frac{\sum\limits_{i = 1}^{n}\mid x_{i} - \bar{x}\mid}{n}
 $$
 
-One reason why the mean absolute deviation receives less attention is since mathematically it’s preferable not to work with absolute values if there are other desirable options such as squared values available $($for instance, $x^2$ is differentiable everywhere while the derivative of  $|x|$ is not defined at $x=0)$.
+One reason why the mean absolute deviation receives less attention is since mathematically it's preferable not to work with absolute values if there are other desirable options such as squared values available $($for instance, $x^2$ is differentiable everywhere while the derivative of  $|x|$ is not defined at $x=0)$.
 
 ## Variance & Standard Deviation
 
@@ -217,34 +251,31 @@ $$
 \end{matrix}
 $$
 
-<aside>
-💡 In statistics, $s$ is used to refer to a ***sample** standard deviation*, whereas $\sigma$ refers to the ***population** standard deviation*.
+:::{.callout-important}
+In statistics, $s$ is used to refer to a **sample** standard deviation, whereas $\sigma$ refers to the **population** standard deviation.
+:::
 
-</aside>
+:::{.callout-note}
+The variance is actually the average of the squared deviations from the mean.
+:::
 
-<aside>
-💡 The variance is actually the average of the squared deviations from the mean.
+As can be noted from the formula, the standard deviation is on the same scale as the original data making it an easier metric to interpret than the variance. 
+Analogous to the trimmed mean, we can also compute the *trimmed/truncated standard deviation* that is less sensitive to outliers.
 
-</aside>
+A good way of remembering some of the above estimates of variability is to link them to other metrics or distances that share a similar formulation [see @bruce2017practical]. 
+For instance,
 
-As can be noted from the formula, the standard deviation is on the same scale as the original data making it an easier metric to interpret than the variance. Analogous to the trimmed mean, we can also compute the *trimmed/truncated standard deviation* that is less sensitive to outliers.
-
-A good way of remembering some of the above estimates of variability is to link them to other metrics or distances that share a similar formulation[[1]](A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339.md). For instance,
-
-<aside>
+:::{.callout}
 💡 Variance $\equiv$ Mean Squared Error (MSE) (aka Mean Squared Deviation MSD)
+:::
 
-</aside>
-
-<aside>
+:::{.callout}
 💡 Standard deviation $\equiv$ L2-norm, Euclidean norm
+:::
 
-</aside>
-
-<aside>
+:::{.callout}
 💡 Mean absolute deviation $\equiv$ L1-norm, Manhattan norm, Taxicab norm
-
-</aside>
+:::
 
 ## Median Absolute Deviation (MAD)
 
@@ -259,25 +290,28 @@ $$
 
 ## Percentiles
 
-Percentiles (or quantiles) is another measure of the data dispersion that is based on ***[order statistics](https://en.wikipedia.org/wiki/Order_statistic)*** (statistics based on sorted data). $P$-th percentile is the least percentage of the values that are lower than or equal to $P$ percent.
+Percentiles (or quantiles) is another measure of the data dispersion that is based on [order statistics](https://en.wikipedia.org/wiki/Order_statistic) (statistics based on sorted data). $P$-th percentile is the least percentage of the values that are lower than or equal to $P$ percent.
 
-<aside>
+:::{.callout}
 💡 The median is the 50th percentile (0.5 quantile, or Q2).
+:::
 
-</aside>
+:::{.callout}
+💡 The percentile is technically a weighted average[see @bruce2017practical].
+:::
 
-<aside>
-💡 The percentile is technically a weighted average[[1]](A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339.md).
-
-</aside>
-
-25th (Q1) and 75th (Q3) percentiles are particularly interesting since their difference (Q3 – Q1) shows the middle 50% of the data. The difference is known as the [**interquartile range (IQR)](https://en.wikipedia.org/wiki/Interquartile_range)** (IQR=Q3-Q1). Percentiles are used to visualize data distribution using boxplots. 
+25th (Q1) and 75th (Q3) percentiles are particularly interesting since their difference (Q3 – Q1) shows the middle 50% of the data. 
+The difference is known as the [**interquartile range (IQR)**](https://en.wikipedia.org/wiki/Interquartile_range) (IQR=Q3-Q1). 
+Percentiles are used to visualize data distribution using boxplots. 
 
 A nice article about boxplots is available on [Towards Data Science blog](https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51).
 
 ## Python Implementation
 
-You can use NumPy’s `[var()](https://numpy.org/doc/stable/reference/generated/numpy.var.html)` and `[std()](https://numpy.org/doc/stable/reference/generated/numpy.std.html)` function to calculate the variance and standard deviation, respectively. On the other hand, to calculate the mean absolute deviation, you can use Pandas `[mad()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.mad.html)` function. For computing the trimmed standard deviation, you can use SciPy’s `[tstd()](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.tstd.html)` from the stats module. You can use Pandas `[boxplot()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.boxplot.html)` to quickly visualize a boxplot of the data.
+You can use NumPy's [`var()`](https://numpy.org/doc/stable/reference/generated/numpy.var.html) and [`std()`](https://numpy.org/doc/stable/reference/generated/numpy.std.html) function to calculate the variance and standard deviation, respectively. 
+On the other hand, to calculate the mean absolute deviation, you can use Pandas [`mad()`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.mad.html) function. 
+For computing the trimmed standard deviation, you can use SciPy's [`tstd()`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.tstd.html) from the stats module. 
+You can use Pandas [`boxplot()`](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.boxplot.html) to quickly visualize a boxplot of the data.
 
 ```python
 import pandas as pd
@@ -314,51 +348,28 @@ print("Interquantile Range (IQR): ", IQR)
 
 ---
 
-![Table 3: A list of all metrics/estimates](A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339/Untitled%202.png)
+![Table 3: A list of all metrics/estimates](img/list_of_all_metrics.png)
 
-Table 3: A list of all metrics/estimates
-
----
 
 # Conclusion
 
-In this post, I talked about various estimates of location and variability. In particular, I covered more than 10 different sample statistics and whether they are robust metrics or not. A table of all the metric along with their corresponding Python and R functions are summarized in Table 3. We also saw how the presence of an outlier may impact non-robust metrics like the mean. In this case, we may want to use a robust estimate. However, in some problems, we are interested in studying extreme cases and outliers such as anomaly detection.
+In this post, I talked about various estimates of location and variability. 
+In particular, I covered more than 10 different sample statistics and whether they are robust metrics or not. 
+A table of all the metric along with their corresponding Python and R functions are summarized in Table 3. <!-- Quarto numbering -->
+We also saw how the presence of an outlier may impact non-robust metrics like the mean. 
+In this case, we may want to use a robust estimate. However, in some problems, we are interested in studying extreme cases and outliers such as anomaly detection.
 
-<aside>
+:::{.callout}
 📓 You can find the Jupyter notebook for this blog post on [GitHub](https://github.com/e-alizadeh/medium/blob/master/notebooks/A_Guide_to_Metrics_Estimates_in_EDA.ipynb).
-
-</aside>
-
----
-
-**Thanks for reading 🙏**
-
-*If you liked this post, you can join my mailing list to receive similar posts. You can follow me on [LinkedIn](https://www.linkedin.com/in/alizadehesmaeil/), [GitHub](https://github.com/e-alizadeh), [Twitter](https://twitter.com/intent/follow?screen_name=es_alizadeh&tw_p=followbutton) and [Medium](https://medium.com/@ealizadeh).*
-
-*And finally, you can find my knowledge forest 🌲 (raw digital notes) at [notes.ealizadeh.com](https://notes.ealizadeh.com/).*
-
-# **📩 Join my mailing list**
-
-[https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4](https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4)
-
----
-
-# References
-
-[1] P. Bruce & A. Bruce (2017), *Practical Statistics for Data Scientists*, First Edition, O’Reilly
-
-[2] Wikipedia, [Truncated mean](https://en.wikipedia.org/wiki/Truncated_mean)
+:::
 
 # Useful Links
 
 [Understanding Boxplots](https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51)
 
----
 
-⬅️   **Previous Post** 
+[^truncated-mean]: Wikipedia, [Truncated mean](https://en.wikipedia.org/wiki/Truncated_mean)
 
-[Blog Posts](A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339/Blog%20Posts%20bc607458a43f4c429c109d0dc11482f0.csv)
+[^robustats]: https://github.com/FilippoBovo/robustats
 
-**➡️   Next Post**
 
-[Blog Posts](A%20Guide%20to%20Metrics%20(Estimates)%20in%20Exploratory%20Data%203a6e0e9d11994f6580f53eb90a242339/Blog%20Posts%209f62aac4c8a54ac69481419dc2cfd9e0.csv)
