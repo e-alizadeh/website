@@ -1,6 +1,10 @@
 ---
 title: "15 Cognitive Errors Every Analyst Must Know (+ Network Graph View)"
 date: "2020-12-01"
+# description: |
+#     In this article, I will go over 15 cognitive errors from the book 'The Art of Thinking Clearly' by Rolf Dobelli. 
+#     Any scientist, analyst, or basically anyone who works with data needs to be familiar with these fallacies. 
+#     My goal is to present these cognitive errors to think about them in your daily life and avoid falling into one!
 categories: [Psychology, Decision-Making, Cognitive Bias, Book, Self-Improvement]
 image: "img/_featured_image.png"
 id: 6
@@ -12,7 +16,7 @@ id: 6
 👉 This article is also published on **[Towards Data Science blog](https://towardsdatascience.com/15-cognitive-errors-every-analyst-must-know-268540e34ade)**.
 :::
 
-In this article, I will go over 15 cognitive errors from the book “The Art of Thinking Clearly” by Rolf Dobelli. 
+In this article, I will go over 15 cognitive errors from the book "The Art of Thinking Clearly" by Rolf Dobelli. 
 Any scientist, analyst, or basically anyone who works with data needs to be familiar with these fallacies. 
 My goal is to present these cognitive errors to think about them in your daily life and avoid falling into one!
 
