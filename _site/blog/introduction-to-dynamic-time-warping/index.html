@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Essi">
+<meta name="author" content="Essi Alizadeh">
+<meta name="dcterms.date" content="2020-10-11">
 
-<title>Essi Alizadeh – index</title>
+<title>Essi Alizadeh - An Illustrative Introduction to Dynamic Time Warping</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -84,6 +85,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -158,6 +178,19 @@ ga('send', {
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Essi Alizadeh - An Illustrative Introduction to Dynamic Time Warping">
+<meta property="og:description" content="+ math behind it">
+<meta property="og:image" content="https://ealizadeh.com/blog/introduction-to-dynamic-time-warping/img/bp02_featured_image.png">
+<meta property="og:site-name" content="Essi Alizadeh">
+<meta property="og:image:height" content="753">
+<meta property="og:image:width" content="1024">
+<meta name="twitter:title" content="Essi Alizadeh - An Illustrative Introduction to Dynamic Time Warping">
+<meta name="twitter:description" content="+ math behind it">
+<meta name="twitter:image" content="https://ealizadeh.com/blog/introduction-to-dynamic-time-warping/img/bp02_featured_image.png">
+<meta name="twitter:creator" content="@es_alizadeh">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="753">
+<meta name="twitter:image-width" content="1024">
 </head>
 
 <body class="nav-fixed">
@@ -192,7 +225,41 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">An Illustrative Introduction to Dynamic Time Warping</h1>
+            <p class="subtitle lead">+ math behind it</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Getting Started</div>
+                <div class="quarto-category">Pattern Recognition</div>
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">Time Series Analysis</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Essi Alizadeh </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 11, 2020</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -200,53 +267,55 @@ ga('send', {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#an-illustrative-introduction-to-dynamic-time-warping" id="toc-an-illustrative-introduction-to-dynamic-time-warping" class="nav-link active" data-scroll-target="#an-illustrative-introduction-to-dynamic-time-warping">An Illustrative Introduction to Dynamic Time Warping</a>
+  <li><a href="#formulation" id="toc-formulation" class="nav-link active" data-scroll-target="#formulation">Formulation</a>
   <ul>
-  <li><a href="#formulation" id="toc-formulation" class="nav-link" data-scroll-target="#formulation"><strong>Formulation</strong></a>
-  <ul class="collapse">
-  <li><a href="#warping-path-and-dtw-distance" id="toc-warping-path-and-dtw-distance" class="nav-link" data-scroll-target="#warping-path-and-dtw-distance"><strong>Warping Path and DTW distance</strong></a></li>
+  <li><a href="#warping-path-and-dtw-distance" id="toc-warping-path-and-dtw-distance" class="nav-link" data-scroll-target="#warping-path-and-dtw-distance">Warping Path and DTW distance</a></li>
   </ul></li>
-  <li><a href="#restrictions-on-the-warping-function" id="toc-restrictions-on-the-warping-function" class="nav-link" data-scroll-target="#restrictions-on-the-warping-function"><strong>Restrictions on the Warping function</strong></a></li>
-  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation"><strong>Implementation</strong></a></li>
-  </ul></li>
-  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1"><strong>Example 1</strong></a>
+  <li><a href="#restrictions-on-the-warping-function" id="toc-restrictions-on-the-warping-function" class="nav-link" data-scroll-target="#restrictions-on-the-warping-function">Restrictions on the Warping function</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example 1</a>
   <ul>
-  <li><a href="#compute-dtw-distance-and-warp-path" id="toc-compute-dtw-distance-and-warp-path" class="nav-link" data-scroll-target="#compute-dtw-distance-and-warp-path"><strong>Compute DTW distance and warp&nbsp;path</strong></a></li>
+  <li><a href="#compute-dtw-distance-and-warp-path" id="toc-compute-dtw-distance-and-warp-path" class="nav-link" data-scroll-target="#compute-dtw-distance-and-warp-path">Compute DTW distance and warp&nbsp;path</a></li>
   </ul></li>
-  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2"><strong>Example 2</strong></a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example 2</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#join-my-mailing-list" id="toc-join-my-mailing-list" class="nav-link" data-scroll-target="#join-my-mailing-list"><strong>📩 Join my mailing list</strong></a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<section id="an-illustrative-introduction-to-dynamic-time-warping" class="level1 page-columns page-full">
-<h1>An Illustrative Introduction to Dynamic Time Warping</h1>
-<p>Created: March 9, 2021 11:33 AM Last Updated: February 25, 2021 Last updated: September 7, 2022 10:13 PM Reading Time: 7 min read Show on Homepage?: Yes Tags: Dynamic Programming, Getting Started, Pattern Recognition, Python, Time Series Analysis id: 2</p>
-<aside>
-<p>👉 This blog post was originally published on <a href="https://towardsdatascience.com/an-illustrative-introduction-to-dynamic-time-warping-36aa98513b98">Towards Data Science blog</a>.</p>
-</aside>
-<ul>
-<li><strong>Table of Content</strong></li>
-</ul>
+
+<p><img src="img/bp02_featured_image.png" class="img-fluid" alt="Featured image of the post"></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>👉 This article is also published on&nbsp;<a href="https://towardsdatascience.com/an-illustrative-introduction-to-dynamic-time-warping-36aa98513b98"><strong>Towards Data Science blog</strong></a>.</p>
+</div>
+</div>
 <p>Dynamic Time Warping (DTW) is a way to compare two -usually temporal- sequences that do not sync up perfectly. It is a method to calculate the optimal matching between two sequences. DTW is useful in many domains such as speech recognition, data mining, financial markets, etc. It’s commonly used in data mining to measure the distance between two time-series.</p>
 <p>In this post, we will go over the mathematics behind DTW. Then, two illustrative examples are provided to better understand the concept. If you are not interested in the math behind it, please jump to examples.</p>
 <section id="formulation" class="level2">
-<h2 class="anchored" data-anchor-id="formulation"><strong>Formulation</strong></h2>
+<h2 class="anchored" data-anchor-id="formulation">Formulation</h2>
 <p>Let’s assume we have two sequences like the following:</p>
 <p><span class="math display">
-X=x_1,x_2,...,x_i,...,x_n \\Y=y_1,y_2,...,y_j,...,y_m
+    X=x_1,x_2,...,x_i,...,x_n \\
+    Y=y_1,y_2,...,y_j,...,y_m
 </span></p>
-<p>The sequences <span class="math inline">X</span> and <span class="math inline">Y</span>can be arranged to form an <span class="math inline">n \text{-by-} m</span> grid, where each point <span class="math inline">(i, j)</span> is the alignment between <span class="math inline">x_i</span> and <span class="math inline">y_j</span>.</p>
+<p>The sequences <span class="math inline">X</span> and <span class="math inline">Y</span> can be arranged to form an <span class="math inline">n \text{-by-} m</span> grid, where each point <span class="math inline">(i, j)</span> is the alignment between <span class="math inline">x_i</span> and <span class="math inline">y_j</span>.</p>
 <p>A warping path <span class="math inline">W</span> maps the elements of <span class="math inline">X</span> and <span class="math inline">Y</span> to minimize the <em>distance</em> between them. <span class="math inline">W</span> is a sequence of grid points <span class="math inline">(i,j)</span>. We will see an example of the warping path later.</p>
 <section id="warping-path-and-dtw-distance" class="level3">
-<h3 class="anchored" data-anchor-id="warping-path-and-dtw-distance"><strong>Warping Path and DTW distance</strong></h3>
+<h3 class="anchored" data-anchor-id="warping-path-and-dtw-distance">Warping Path and DTW distance</h3>
 <p>The Optimal path to <span class="math inline">(i_k,j_k)</span> can be computed by:</p>
 <p><span class="math display">
 D_\text{min}(i_k,j_k) = \min_{i_{k−1},\;j_{k−1}} D_\text{min}(i_{k−1},j_{k−1}) + d(i_k,j_k∣i_{k−1},j_{k−1})
@@ -256,8 +325,8 @@ D_\text{min}(i_k,j_k) = \min_{i_{k−1},\;j_{k−1}} D_\text{min}(i_{k−1},j_{k
 </section>
 </section>
 <section id="restrictions-on-the-warping-function" class="level2">
-<h2 class="anchored" data-anchor-id="restrictions-on-the-warping-function"><strong>Restrictions on the Warping function</strong></h2>
-<p>The warping path is found using a dynamic programming approach to align two sequences. Going through all possible paths is “combinatorically explosive”[1]. Therefore, for efficiency purposes, it’s important to limit the number of possible warping paths, and hence the following constraints are outlined:</p>
+<h2 class="anchored" data-anchor-id="restrictions-on-the-warping-function">Restrictions on the Warping function</h2>
+<p>The warping path is found using a dynamic programming approach to align two sequences. Going through all possible paths is “combinatorically explosive”<span class="citation" data-cites="berndt1994dtw">(see <a href="#ref-berndt1994dtw" role="doc-biblioref">Berndt and Clifford 1994</a>)</span>. Therefore, for efficiency purposes, it’s important to limit the number of possible warping paths, and hence the following constraints are outlined:</p>
 <ul>
 <li><strong>Boundary Condition:</strong> This constraint ensures that the warping path begins with the start points of both signals and terminates with their endpoints.</li>
 </ul>
@@ -294,7 +363,7 @@ i_t - i_{t-1} \le 1 \quad \text{and} \quad  j_t - j_{t-1} \le 1
 </ul>
 </section>
 <section id="implementation" class="level2">
-<h2 class="anchored" data-anchor-id="implementation"><strong>Implementation</strong></h2>
+<h2 class="anchored" data-anchor-id="implementation">Implementation</h2>
 <p>Let’s import all python packages we need.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -347,9 +416,8 @@ i_t - i_{t-1} \le 1 \quad \text{and} \quad  j_t - j_{t-1} \le 1
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>            </span>
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> cost</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-</section>
 <section id="example-1" class="level1">
-<h1><strong>Example 1</strong></h1>
+<h1>Example 1</h1>
 <p>In this example, we have two sequences <span class="math inline">x</span> and <span class="math inline">y</span>&nbsp;with different lengths.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create two sequences</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>]</span>
@@ -357,11 +425,10 @@ i_t - i_{t-1} \le 1 \quad \text{and} \quad  j_t - j_{t-1} \le 1
 <p>We cannot calculate the distance between <span class="math inline">x</span> and <span class="math inline">y</span> since they don’t have equal lengths (the code follows).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="An%20Illustrative%20Introduction%20to%20Dynamic%20Time%20Warpi%20e00d4777e00940068894d298b24856b4/Untitled.png" class="img-fluid figure-img"></p>
+<p><img src="img/euclidean_distance.png" class="img-fluid figure-img" alt="Calculating Euclidean distance for two signals with different lengths. Is it possible?"></p>
 <p></p><figcaption class="figure-caption">Example 1: Euclidean distance between x and y (is it possible? 🤔 )</figcaption><p></p>
 </figure>
 </div>
-<p>Example 1: Euclidean distance between x and y (is it possible? 🤔 )</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">10</span>))</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the border and axes ticks</span></span>
@@ -380,8 +447,8 @@ i_t - i_{t-1} \le 1 \quad \text{and} \quad  j_t - j_{t-1} \le 1
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"ex1_euclidean_distance.png"</span>, <span class="op">**</span>savefig_options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="compute-dtw-distance-and-warp-path" class="level3">
-<h3 class="anchored" data-anchor-id="compute-dtw-distance-and-warp-path"><strong>Compute DTW distance and warp&nbsp;path</strong></h3>
-<p>Many Python packages calculate the DTW by just providing the sequences and the type of distance (usually Euclidean by default). Here, we use a popular Python implementation of DTW that is&nbsp;<a href="https://github.com/slaypni/fastdtw">FastDTW</a>&nbsp;which is an approximate DTW algorithm with lower time and memory complexities[2].</p>
+<h3 class="anchored" data-anchor-id="compute-dtw-distance-and-warp-path">Compute DTW distance and warp&nbsp;path</h3>
+<p>Many Python packages calculate the DTW by just providing the sequences and the type of distance (usually Euclidean by default). Here, we use a popular Python implementation of DTW that is&nbsp;<a href="https://github.com/slaypni/fastdtw">FastDTW</a>&nbsp;which is an approximate DTW algorithm with lower time and memory complexities <span class="citation" data-cites="salvador2007fastdtw">(see <a href="#ref-salvador2007fastdtw" role="doc-biblioref">Salvador and Chan 2007</a>)</span>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dtw_distance, warp_path <span class="op">=</span> fastdtw(x, y, dist<span class="op">=</span>euclidean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Note that we are using <a href="https://pypi.org/project/scipy/">SciPy</a>’s distance function Euclidean that we imported earlier. For a better understanding of the warp path, let’s first compute the accumulated cost matrix and then visualize the path on a grid. The following code will plot a heatmap of the accumulated cost matrix.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cost_matrix <span class="op">=</span> compute_accumulated_cost_matrix(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -402,11 +469,10 @@ i_t - i_{t-1} \le 1 \quad \text{and} \quad  j_t - j_{t-1} \le 1
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"ex1_heatmap.png"</span>, <span class="op">**</span>savefig_options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="An%20Illustrative%20Introduction%20to%20Dynamic%20Time%20Warpi%20e00d4777e00940068894d298b24856b4/Untitled%201.png" class="img-fluid figure-img"></p>
+<p><img src="img/accumuldated_cost_matrix_warping_path.png" class="img-fluid figure-img" alt="Accumulated cost matrix and warping path"></p>
 <p></p><figcaption class="figure-caption">Example 1: Accumulated cost matrix and warping path</figcaption><p></p>
 </figure>
 </div>
-<p>Example 1: Accumulated cost matrix and warping path</p>
 <p>The color bar shows the cost of each point in the grid. As can be seen, the warp path (blue line) is going through the lowest cost on the grid. Let’s see the DTW distance and the warping path by printing these two variables.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"DTW distance: "</span>, dtw_distance)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Warp path: "</span>, warp_path)</span>
@@ -442,15 +508,14 @@ i_t - i_{t-1} \le 1 \quad \text{and} \quad  j_t - j_{t-1} \le 1
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"ex1_dtw_distance.png"</span>, <span class="op">**</span>savefig_options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="An%20Illustrative%20Introduction%20to%20Dynamic%20Time%20Warpi%20e00d4777e00940068894d298b24856b4/Untitled%202.png" class="img-fluid figure-img"></p>
+<p><img src="img/dtw_between_x_and_y.png" class="img-fluid figure-img" alt="DTW distance between x and y"></p>
 <p></p><figcaption class="figure-caption">Example 1: DTW distance between x and y</figcaption><p></p>
 </figure>
 </div>
-<p>Example 1: DTW distance between x and y</p>
 </section>
 </section>
 <section id="example-2" class="level1">
-<h1><strong>Example 2</strong></h1>
+<h1>Example 2</h1>
 <p>In this example, we will use two sinusoidal signals and see how they will be matched by calculating the DTW distance between them.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>time1 <span class="op">=</span> np.linspace(start<span class="op">=</span><span class="dv">0</span>, stop<span class="op">=</span><span class="dv">1</span>, num<span class="op">=</span><span class="dv">50</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>time2 <span class="op">=</span> time1[<span class="dv">0</span>:<span class="dv">40</span>]</span>
@@ -475,60 +540,59 @@ i_t - i_{t-1} \le 1 \quad \text{and} \quad  j_t - j_{t-1} \le 1
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">"ex2_dtw_distance.png"</span>, <span class="op">**</span>savefig_options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="An%20Illustrative%20Introduction%20to%20Dynamic%20Time%20Warpi%20e00d4777e00940068894d298b24856b4/Untitled%203.png" class="img-fluid figure-img"></p>
+<p><img src="img/dtw_sinusoidals.png" class="img-fluid figure-img" alt="DTW distance between two sinosoidal signal, x1 and x2"></p>
 <p></p><figcaption class="figure-caption">Example 2: DTW distance between x1 and x2</figcaption><p></p>
 </figure>
 </div>
-<p>Example 2: DTW distance between x1 and x2</p>
 <p>As can be seen in above figure, the DTW distance between the two signals is particularly powerful when the signals have similar patterns. The extrema (maximum and minimum points) between the two signals are correctly mapped. Moreover, unlike Euclidean distance, we may see many-to-one mapping when DTW distance is used, particularly if the two signals have different lengths.</p>
 <p>You may spot an issue with dynamic time warping from the figure above. Can you guess what it is?</p>
-<p>The issue is around the head and tail of time-series that do not properly match. This is because the DTW algorithm cannot afford the warping invariance for at the endpoints. In short, the effect of this is that a small difference at the sequence endpoints will tend to contribute disproportionately to the estimated similarity[3].</p>
-<hr>
+<p>The issue is around the head and tail of time-series that do not properly match. This is because the DTW algorithm cannot afford the warping invariance for at the endpoints. In short, the effect of this is that a small difference at the sequence endpoints will tend to contribute disproportionately to the estimated similarity <span class="citation" data-cites="silva2016dtw_endpoints">(see <a href="#ref-silva2016dtw_endpoints" role="doc-biblioref">Silva et al. 2016</a>)</span>.</p>
 </section>
-<section id="conclusion" class="level1 page-columns page-full">
+<section id="conclusion" class="level1">
 <h1>Conclusion</h1>
 <p>DTW is an algorithm to find an optimal alignment between two sequences and a useful distance metric to have in our toolbox. This technique is useful when we are working with two non-linear sequences, particularly if one sequence is a non-linear stretched/shrunk version of the other. The warping path is a combination of “chess king” moves that starts from the head of two sequences and ends with their tails.</p>
-<aside>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <p>📓 You can find the Jupyter notebook for this blog post on <a href="https://github.com/e-alizadeh/medium/blob/master/notebooks/intro_to_dtw.ipynb">GitHub</a>.</p>
-</aside>
-<hr>
-<p><strong>Thanks for reading 🙏</strong></p>
-<p><em>If you liked this post, you can join my mailing list to receive similar posts. You can follow me on <a href="https://www.linkedin.com/in/alizadehesmaeil/">LinkedIn</a>, <a href="https://github.com/e-alizadeh">GitHub</a>, <a href="https://twitter.com/intent/follow?screen_name=es_alizadeh&amp;tw_p=followbutton">Twitter</a> and <a href="https://medium.com/@ealizadeh">Medium</a>.</em></p>
-<p>**</p>
-<p><em>And finally, you can find my knowledge forest 🌲 (raw digital notes) at <a href="https://notes.ealizadeh.com/">notes.ealizadeh.com</a>.</em></p>
-</section>
-<section id="join-my-mailing-list" class="level1">
-<h1><strong>📩 Join my mailing list</strong></h1>
-<p><a href="https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4">https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4</a></p>
-<hr>
-</section>
-<section id="references" class="level1">
-<h1>References</h1>
-<p>[1] Donald J. Berndt and James Clifford,&nbsp;<em><a href="https://www.aaai.org/Papers/Workshops/1994/WS-94-03/WS94-03-031.pdf">Using Dynamic Time Warping to Find Patterns in Time Series</a></em>, 3rd International Conference on Knowledge Discovery and Data Mining</p>
-<p>[2] Salvador, S. and P. Chan,&nbsp;<em><a href="https://cs.fit.edu/~pkc/papers/tdm04.pdf">FastDTW: Toward accurate dynamic time warping in linear time and space</a></em>&nbsp;(2007), Intelligent Data Analysis</p>
-<p>[3] Diego Furtado Silva,&nbsp;<em>et al.</em>,&nbsp;<em><a href="https://core.ac.uk/display/147806669">On the effect of endpoints on dynamic time warping</a></em>&nbsp;(2016), SIGKDD Workshop on Mining and Learning from Time Series</p>
+</div>
+</div>
+</div>
 </section>
 <section id="useful-links" class="level1">
 <h1>Useful Links</h1>
 <p><a href="https://nipunbatra.github.io/blog/ml/2014/05/01/dtw.html">Programatically understanding dynamic time warping (DTW)</a></p>
 <p><a href="https://databricks.com/blog/2019/04/30/understanding-dynamic-time-warping.html">Understanding Dynamic Time Warping - The Databricks Blog</a></p>
-<hr>
-<p>⬅️ <strong>Previous Post</strong></p>
-<p><a href="An%20Illustrative%20Introduction%20to%20Dynamic%20Time%20Warpi%20e00d4777e00940068894d298b24856b4/Blog%20Posts%20c8462d522bed4c5f8118a5f922f1757b.csv">Blog Posts</a></p>
-<p><strong>➡️ Next Post</strong></p>
-<p><a href="An%20Illustrative%20Introduction%20to%20Dynamic%20Time%20Warpi%20e00d4777e00940068894d298b24856b4/Blog%20Posts%2054d65f4bdcb24cd0b031ebbf1276432c.csv">Blog Posts</a></p>
+
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{essi,
-  author = {Essi},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-berndt1994dtw" class="csl-entry" role="doc-biblioentry">
+Berndt, Donald J, and James Clifford. 1994. <span>“Using Dynamic Time Warping to Find Patterns in Time Series.”</span> In <em>KDD Workshop</em>, 10:359–70. 16. Seattle, WA, USA. <a href="https://www.aaai.org/Papers/Workshops/1994/WS-94-03/WS94-03-031.pdf">https://www.aaai.org/Papers/Workshops/1994/WS-94-03/WS94-03-031.pdf</a>.
+</div>
+<div id="ref-salvador2007fastdtw" class="csl-entry" role="doc-biblioentry">
+Salvador, Stan, and Philip Chan. 2007. <span>“Toward Accurate Dynamic Time Warping in Linear Time and Space.”</span> <em>Intelligent Data Analysis</em> 11 (5): 561–80. <a href="https://cs.fit.edu/~pkc/papers/tdm04.pdf">https://cs.fit.edu/~pkc/papers/tdm04.pdf</a>.
+</div>
+<div id="ref-silva2016dtw_endpoints" class="csl-entry" role="doc-biblioentry">
+Silva, Diego Furtado, GEAPA Batista, Eamonn Keogh, et al. 2016. <span>“On the Effect of Endpoints on Dynamic Time Warping.”</span> <em>SIGKDD MiLeTS</em> 16: 10. <a href="https://core.ac.uk/display/147806669">https://core.ac.uk/display/147806669</a>.
+</div>
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{alizadeh2020,
+  author = {Essi Alizadeh},
   editor = {},
+  title = {An {Illustrative} {Introduction} to {Dynamic} {Time}
+    {Warping}},
+  date = {2020-10-11},
   url = {https://ealizadeh.com/blog/introduction-to-dynamic-time-warping},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-essi" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
-Essi. n.d. <a href="https://ealizadeh.com/blog/introduction-to-dynamic-time-warping">https://ealizadeh.com/blog/introduction-to-dynamic-time-warping</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-alizadeh2020" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Essi Alizadeh. 2020. <span>“An Illustrative Introduction to Dynamic Time
+Warping.”</span> October 11, 2020. <a href="https://ealizadeh.com/blog/introduction-to-dynamic-time-warping">https://ealizadeh.com/blog/introduction-to-dynamic-time-warping</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
