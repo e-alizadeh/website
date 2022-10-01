@@ -25,7 +25,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "10 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n7 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n6 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n5 min\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n5 min\n\n\n\n\n\n\nMar 21, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9 min\n\n\n\n\n\n\nJan 20, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n3 min\n\n\n\n\n\n\nDec 8, 2021\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n6 min\n\n\n\n\n\n\nJun 26, 2021\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n10 min\n\n\n\n\n\n\nJun 18, 2021\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n10 min\n\n\n\n\n\n\nDec 1, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n3 min\n\n\n\n\n\n\nNov 6, 2020\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "9 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n7 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n6 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n5 min\n\n\n\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n5 min\n\n\n\n\n\n\nMar 21, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9 min\n\n\n\n\n\n\nJan 20, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n3 min\n\n\n\n\n\n\nDec 8, 2021\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n6 min\n\n\n\n\n\n\nJun 26, 2021\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n10 min\n\n\n\n\n\n\nJun 18, 2021\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n10 min\n\n\n\n\n\n\nDec 14, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n10 min\n\n\n\n\n\n\nDec 1, 2020\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n3 min\n\n\n\n\n\n\nNov 6, 2020\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -527,79 +527,79 @@
   {
     "objectID": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html",
     "href": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html",
-    "title": "Essi Alizadeh",
+    "title": "A Guide to Python Environment, Dependency and Package Management: Conda + Poetry",
     "section": "",
-    "text": "Created: March 8, 2021 11:38 AM Last Updated: January 29, 2021 Last updated: September 7, 2022 10:14 PM Reading Time: 8 min read Show on Homepage?: No Tags: Conda, Package Management, Poetry, Programming, Python id: 11\n\n👉 This article is also published on Towards Data Science blog.\n\n\nTable of Contents\n\nIf you work on multiple Python projects at different development stages, you probably have different environments on your system. There are various tools for creating an isolated environment and install the libraries you need for your project. This post discusses different available technologies for Python packaging, environment, and dependencies management systems. Then, we will go over an ideal setup (of course, in my opinion 🙂) suitable for most Python projects using conda and Poetry.\n👉 In this post, the words library and package are used interchangeably, and they both refer to the Python package."
+    "text": "If you work on multiple Python projects at different development stages, you probably have different environments on your system. There are various tools for creating an isolated environment and install the libraries you need for your project. This post discusses different available technologies for Python packaging, environment, and dependencies management systems. Then, we will go over an ideal setup (of course, in my opinion 🙂) suitable for most Python projects using conda and Poetry.\nIn this post, library and package are used interchangeably, and they both refer to the Python package."
   },
   {
     "objectID": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#a-quick-note-on-package-repositories",
     "href": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#a-quick-note-on-package-repositories",
-    "title": "Essi Alizadeh",
+    "title": "A Guide to Python Environment, Dependency and Package Management: Conda + Poetry",
     "section": "A Quick Note on Package Repositories",
     "text": "A Quick Note on Package Repositories\nThe most popular Python package repository is the Python Package Index (PyPI), a public repository for many Python libraries. You can install packages from PyPI by running pip install package_name. Python libraries can also be packaged using conda, and a popular host for conda packages is Anaconda. You can install conda packages by running conda install package_name in your conda environment."
   },
   {
     "objectID": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#issues-with-conda",
     "href": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#issues-with-conda",
-    "title": "Essi Alizadeh",
+    "title": "A Guide to Python Environment, Dependency and Package Management: Conda + Poetry",
     "section": "Issues with conda",
     "text": "Issues with conda\nI think conda tries to do too much. After several years of using conda, here are few of my observations on conda as a package and dependency management:\n\nPerformance issues\nMy main problem with conda is its performance issues. Creating a new environment or even updating an old one may sometimes take a long time, especially if you have many packages. This is probably because conda tries to resolve the dependencies. There were few times that it took more than 30 minutes (yes, 30 minutes, not 30 seconds!) to create an environment. I initially thought that there is a connection issue or problems with connecting to the package repositories.\n\n\nDependency resolver issues\nConda may not even resolve the dependency issues. Since we cannot see the dependencies of specific conda packages (unlike Poetry), it may not be easy to resolve those issues.\n\n\nPython packaging\nAnother issue with conda is when you want to build a conda package for your library and publish it. It’s not trivial (at least for me) since you would need several configuration files (like meta.yml, setup.py, etc.). You may have dependency issues too. You can find more information on how to build a conda package here."
   },
   {
     "objectID": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#pyproject.toml-python-configuration-file",
     "href": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#pyproject.toml-python-configuration-file",
-    "title": "Essi Alizadeh",
+    "title": "A Guide to Python Environment, Dependency and Package Management: Conda + Poetry",
     "section": "pyproject.toml: Python Configuration file",
     "text": "pyproject.toml: Python Configuration file\npyproject.toml file is a new Python configuration file defined in PEP518 to store build system requirements, dependencies, and many other configurations. You can even replace setup.cfg and setup.py files in most scenarios. You can save most configurations related to specific python packages like pytest, coverage, bumpversion, Black code styling, and many more in a single pyproject.toml file. You previously had to either write those configurations in individual files or other configuration files like setup.cfg. However, pyproject.toml can include all of them and also all project package requirements too."
   },
   {
     "objectID": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#step-1-create-a-minimal-conda-environment",
     "href": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#step-1-create-a-minimal-conda-environment",
-    "title": "Essi Alizadeh",
+    "title": "A Guide to Python Environment, Dependency and Package Management: Conda + Poetry",
     "section": "Step 1: Create a minimal conda environment",
     "text": "Step 1: Create a minimal conda environment\nYou can create a conda environment from the following YAML file by running conda env create -f environment.yaml. This will create a fresh conda environment that has Python 3.8. In a conda environment, you can pass a list of channels (the order is important) from which you want to install your packages. In addition to the default channel on Anaconda Cloud that is curated by Anaconda Inc., there are other channels that you can install packages. A popular channel is conda-forge that includes a community-led collection of packages. If you have a private conda channel, you can write it in the channels section.\nname: post\n\nchannels:\n  - default\n  - conda-forge\n\ndependencies:\n  - python=3.8"
   },
   {
     "objectID": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#step-2-install-poetry-tool",
     "href": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#step-2-install-poetry-tool",
-    "title": "Essi Alizadeh",
+    "title": "A Guide to Python Environment, Dependency and Package Management: Conda + Poetry",
     "section": "Step 2: Install Poetry tool",
     "text": "Step 2: Install Poetry tool\nYou can install Poetry as per their instruction here. The recommended way is to install Poetry using the following command for OSx, Linux, or WSL (Windows Subsystem Linux).\ncurl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -\nNote: Installing Poetry using the preferred approach that is by the custom installer (the first approach that downloads get-poetry.py script) will install Poetry isolated from the rest of the system.\n⚠️ Although not recommended, there is also a pip version of Poetry that you can install (pip install poetry). The developers warn against using the pip version in the documentation since it might cause some conflicts with other packages in the environment. But, if our environment is basically empty (although some base packages are installed like pip when creating a conda environment), then it is probably fine to install it through pip!"
   },
   {
     "objectID": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#step-3-configure-your-poetry",
     "href": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#step-3-configure-your-poetry",
-    "title": "Essi Alizadeh",
+    "title": "A Guide to Python Environment, Dependency and Package Management: Conda + Poetry",
     "section": "Step 3: Configure your Poetry",
-    "text": "Step 3: Configure your Poetry\nTo configure Poetry for a new project, Poetry makes it very easy to create a configuration file with all your desired settings. You can interactively create a pyproject.toml file by simply running poetry init. This will prompt few questions about the desired Python packages you want to install. You can press Enter to process with default options.\n\n\n\nInteractive configuration by running poetry init\n\n\nInteractive configuration by running poetry init\nAs you can see in the above screenshot, you can add some packages only for development dependencies. Initializing the Poetry for your project will create the pyproject.toml file that includes all configurations we defined during the setup. We have one main section for all dependencies (used in both production and development environments), but we also have a section that contains packages used mainly for development purposes like pytest, sphinx, etc. This is the other advantage over other dependency management tools. You only need one configuration file for both your production and development environments.\n[tool.poetry]\nname = \"my_package\"\nversion = \"0.0.1\"\ndescription = \"\"\nauthors = [\"ealizadeh <abc@edf.com>\"]\n\n[tool.poetry.dependencies]\npython = \"^3.8\"\nrequests = \"^2.25.1\"\n\n[tool.poetry.dev-dependencies]\npytest = \"^6.2.1\"\n\n[build-system]\nrequires = [\"poetry-core>=1.0.0\"]\nbuild-backend = \"poetry.core.masonry.api\"\n\n[tool.pytest.ini_options]\nminversion = \"6.0\"\naddopts = \"-ra -q\"\ntestpaths = [\n    \"tests\",  # You should have a \"tests\" directory\n]"
+    "text": "Step 3: Configure your Poetry\nTo configure Poetry for a new project, Poetry makes it very easy to create a configuration file with all your desired settings. You can interactively create a pyproject.toml file by simply running poetry init. This will prompt few questions about the desired Python packages you want to install. You can press Enter to process with default options.\n\n\n\nInteractive configuration by running poetry init\n\n\nAs you can see in the above screenshot, you can add some packages only for development dependencies. Initializing the Poetry for your project will create the pyproject.toml file that includes all configurations we defined during the setup. We have one main section for all dependencies (used in both production and development environments), but we also have a section that contains packages used mainly for development purposes like pytest, sphinx, etc. This is the other advantage over other dependency management tools. You only need one configuration file for both your production and development environments.\n[tool.poetry]\nname = \"my_package\"\nversion = \"0.0.1\"\ndescription = \"\"\nauthors = [\"ealizadeh <abc@edf.com>\"]\n\n[tool.poetry.dependencies]\npython = \"^3.8\"\nrequests = \"^2.25.1\"\n\n[tool.poetry.dev-dependencies]\npytest = \"^6.2.1\"\n\n[build-system]\nrequires = [\"poetry-core>=1.0.0\"]\nbuild-backend = \"poetry.core.masonry.api\"\n\n[tool.pytest.ini_options]\nminversion = \"6.0\"\naddopts = \"-ra -q\"\ntestpaths = [\n    \"tests\",  # You should have a \"tests\" directory\n]"
   },
   {
     "objectID": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#step-4-installing-dependencies",
     "href": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#step-4-installing-dependencies",
-    "title": "Essi Alizadeh",
+    "title": "A Guide to Python Environment, Dependency and Package Management: Conda + Poetry",
     "section": "Step 4: Installing dependencies",
-    "text": "Step 4: Installing dependencies\nOnce you have your dependencies and other configurations in a pyproject.toml file, you can install the dependencies by simply running\npoetry install\nThis will create a poetry.lock file. This file basically contains the exact versions of all the packages locking the project with those specific versions. You need to commit both the pyproject.toml file and poetry.lock file. I would strongly recommend you not to update the poetry.lock file manually. Let poetry do its magic!!"
+    "text": "Step 4: Installing dependencies\nOnce you have your dependencies and other configurations in a pyproject.toml file, you can install the dependencies by simply running\npoetry install\nThis will create a poetry.lock file. This file basically contains the exact versions of all the packages locking the project with those specific versions. You need to commit both the pyproject.toml file and poetry.lock file. I would strongly recommend you not to update the poetry.lock file manually. Let poetry does its magic!!"
   },
   {
     "objectID": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#add-new-packages",
     "href": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#add-new-packages",
-    "title": "Essi Alizadeh",
+    "title": "A Guide to Python Environment, Dependency and Package Management: Conda + Poetry",
     "section": "Add new packages",
-    "text": "Add new packages\nIf you want to add (or remove) a package to your environment, I would highly recommend you to do so by using the following command\npoetry add package_name\nThis will automatically add the package name and version to your pyproject.toml file and updates the poetry.lock accordingly. poetry add takes care of all dependencies, and adds the package in the [tool.poetry.dependencies] section.\nIf you want to add a package to your development environment, you can simly pass a --dev option as below\npoetry add package_name --dev\nYou can specify a specific version of a package, or even adding a package through git+https or git+ssh (see here for more details)."
+    "text": "Add new packages\nIf you want to add (or remove) a package to your environment, I would highly recommend you to do so by using the following command:\npoetry add package_name\nThis will automatically add the package name and version to your pyproject.toml file and updates the poetry.lock accordingly. poetry add takes care of all dependencies, and adds the package in the [tool.poetry.dependencies] section.\nIf you want to add a package to your development environment, you can simly pass a --dev option as below:\npoetry add package_name --dev\nYou can specify a specific version of a package, or even adding a package through git+https or git+ssh (see here for more details)."
   },
   {
     "objectID": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#remove-packages",
     "href": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#remove-packages",
-    "title": "Essi Alizadeh",
+    "title": "A Guide to Python Environment, Dependency and Package Management: Conda + Poetry",
     "section": "Remove packages",
-    "text": "Remove packages\nYou can remove a package as following\npoetry remove package_to_remove"
+    "text": "Remove packages\nYou can remove a package as following:\npoetry remove package_to_remove"
   },
   {
     "objectID": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#show-package-dependencies",
     "href": "blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html#show-package-dependencies",
-    "title": "Essi Alizadeh",
+    "title": "A Guide to Python Environment, Dependency and Package Management: Conda + Poetry",
     "section": "Show package dependencies",
-    "text": "Show package dependencies\nIf you want to see a list of all installed packages in your environment, you can run the following command:\npoetry show\nNote that this will show the package dependencies too. It is sometimes helpful to see the dependencies of a Python package. Fortunately, you can do so using poetry show . For instance, we can see the list of dependencies of requests package in our environment using the following command:\npoetry show requests\n\n\n\nAll dependencies of requests package in the project\n\n\nAll dependencies of requests package in the project\nEven better, you can see all your project’s dependencies by just running:\npoetry show --tree\n\n\n\nA tree of all your project dependencies\n\n\nA tree of all your project dependencies\nFrom above figure, you can see that the blue-font package names (requests and pytest) are explicitly added to pyproject.toml file. Other libraries, in yellow, are their dependencies and do not need to be in your toml file.\nNote: You may use pip freeze (pip freeze > requirements.txt if you want to output the result into a file) to output all installed packages in your environment, but that will be quite messy."
+    "text": "Show package dependencies\nIf you want to see a list of all installed packages in your environment, you can run the following command:\npoetry show\nNote that this will show the package dependencies too. It is sometimes helpful to see the dependencies of a Python package. Fortunately, you can do so using poetry show. For instance, we can see the list of dependencies of requests package in our environment using the following command:\npoetry show requests\n\n\n\nAll dependencies of requests package in the project\n\n\nEven better, you can see all your project’s dependencies by just running:\npoetry show --tree\n\n\n\nA tree of all your project dependencies\n\n\nFrom above figure, you can see that the blue-font package names (requests and pytest) are explicitly added to pyproject.toml file. Other libraries, in yellow, are their dependencies and do not need to be in your toml file.\n\n\n\n\n\n\nNote\n\n\n\nYou may use pip freeze (pip freeze > requirements.txt if you want to output the result into a file) to output all installed packages in your environment, but that will be quite messy."
   },
   {
     "objectID": "blog/how-to-publish-your-python-package-with-just-2-commands/index.html",
