@@ -39,6 +39,7 @@ website:
 bibliography: 
   - "blog/references.bib"
   - "blog/online.bib"
+  - "blog/wikipedia.bib"
 
 format:
   html:

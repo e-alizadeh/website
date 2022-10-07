@@ -1,21 +1,21 @@
-# MLxtend: A Python Library with Interesting Tools for Data Science Tasks
-
-Created: March 8, 2021 8:42 PM
-Last Updated: July 17, 2021
-Last updated: September 7, 2022 10:13 PM
-Reading Time: 6 min read
-Show on Homepage?: No
-Tags: Data Science, Exploratory Data Analysis, Machine Learning, Python, Python Library
+---
+title: "MLxtend: A Python Library with Interesting Tools for Data Science Tasks"
+subtitle: "Create counterfactual records, draw PCA correlation graphs and decision boundaries, perform bias-variance decomposition, bootstrapping, and much more"
+date: "2021-07-17"
+categories: [Data Science, Exploratory Data Analysis, Machine Learning, Python Library]
+image: "img/_featured_image.jpg"
 id: 9
+slug: "mlxtend-library-for-data-science"
+---
 
-<aside>
-👉 *This article is also published on [Towards Data Science Blog](https://towardsdatascience.com/mlxtend-a-python-library-with-interesting-tools-for-data-science-tasks-d54c723f89cd).*
+![](img/_featured_image.jpg){fig-alt="Featured image of the post"}
 
-</aside>
 
-- **Table of Content**
+:::{.callout-note}
+👉 This article is also published on [**Towards Data Science blog**](https://towardsdatascience.com/mlxtend-a-python-library-with-interesting-tools-for-data-science-tasks-d54c723f89cd).
+:::
 
-[MLxtend](https://rasbt.github.io/mlxtend/) library (Machine Learning extensions) has many interesting functions for everyday data analysis and machine learning tasks. Although there are many machine learning libraries available for Python such as [scikit-learn](https://scikit-learn.org/), [TensorFlow](https://www.tensorflow.org/), [Keras](https://keras.io/), [PyTorch](https://pytorch.org/), *etc*, however, MLxtend offers additional functionalities and can be a valuable addition to your data science toolbox.
+[MLxtend](https://rasbt.github.io/mlxtend/) library [^mlxtend] (Machine Learning extensions) has many interesting functions for everyday data analysis and machine learning tasksAlthough there are many machine learning libraries available for Python such as [scikit-learn](https://scikit-learn.org/), [TensorFlow](https://www.tensorflow.org/), [Keras](https://keras.io/), [PyTorch](https://pytorch.org/), *etc*, however, MLxtend offers additional functionalities and can be a valuable addition to your data science toolbox.
 
 In this post, I will go over several tools of the library, in particular, I will cover:
 
@@ -27,25 +27,29 @@ In this post, I will go over several tools of the library, in particular, I will
 - Bootstrapping
 - 
 
-For a list of all functionalities this library offers, you can visit MLxtend’s [documentation](https://rasbt.github.io/mlxtend/)[1].
+For a list of all functionalities this library offers, you can visit MLxtend's [documentation](https://rasbt.github.io/mlxtend/)[see @raschka2018mlxtend].
 
-👉 *A link to a free one-page summary of this post is available at the end of the post.*
+:::{.callout}
+👉 A link to a free one-page summary of this post is available at the end of the post.
+:::
 
 ---
 
-## **MLxtend Library**
+## MLxtend Library
 
-MLxtend library is developed by [Sebastian Raschka](https://sebastianraschka.com/) (a professor of statistics at the University of Wisconsin-Madison). The library has nice API documentation as well as many examples.
+MLxtend library is developed by [Sebastian Raschka](https://sebastianraschka.com/) (a professor of statistics at the University of Wisconsin-Madison).
+The library has nice API documentation as well as many examples.
 
 You can install the MLxtend package through the Python Package Index (PyPi) by running
-
 `pip install mlxtend`.
 
-## **Dataset**
+## Dataset
 
-In this post, I’m using the wine data set obtained from the [Kaggle](https://www.kaggle.com/tug004/3wine-classification-dataset). The data contains 13 attributes of alcohol for three types of wine. This is a multiclass classification dataset, and you can find the description of the dataset [here](https://archive.ics.uci.edu/ml/datasets/wine).
+In this post, I'm using the wine data set obtained from the [Kaggle](https://www.kaggle.com/tug004/3wine-classification-dataset).
+The data contains 13 attributes of alcohol for three types of wine.
+This is a multiclass classification dataset, and you can find the description of the dataset [here](https://archive.ics.uci.edu/ml/datasets/wine).
 
-First, let’s import the data and prepare the input variables $X$ (feature set) and the output variable $y$ (target).
+First, let's import the data and prepare the input variables $X$ (feature set) and the output variable $y$ (target).
 
 ```python
 import pandas as pd
@@ -63,13 +67,18 @@ X = X_df.values
 attribute_names = X_df.columns
 ```
 
-## **MLxtend Functionalities**
+## MLxtend Functionalities
 
-### **Create Counterfactual (for model interpretability)**
+### Create Counterfactual (for model interpretability)
 
-For creating counterfactual records (in the context of machine learning), we need to modify the features of some records from the training set in order to change the model prediction[2]. This may be helpful in explaining the behavior of a trained model. The algorithm used in the library to create counterfactual records is developed by Wachter *et al*[3].
+For creating counterfactual records (in the context of machine learning), we need to modify the features of some records from the training set in order to change the model prediction[see @online_rasbt_mlxtend_counterfactual].
+This may be helpful in explaining the behavior of a trained model.
+The algorithm used in the library to create counterfactual records is developed by Wachter *et al* [see @wachter2017counterfactual].
 
-You can create counterfactual records using *[create_counterfactual()](https://rasbt.github.io/mlxtend/user_guide/evaluate/create_counterfactual/)* from the library. Note that this implementation works with any scikit-learn estimator that supports the `predict()` function. Below is an example of creating a counterfactual record for an ML model. The counterfactual record is highlighted in a red dot within the classifier’s decision regions (we will go over how to draw decision regions of classifiers later in the post).
+You can create counterfactual records using *[create_counterfactual()](https://rasbt.github.io/mlxtend/user_guide/evaluate/create_counterfactual/)* from the library.
+Note that this implementation works with any scikit-learn estimator that supports the `predict()` function.
+Below is an example of creating a counterfactual record for an ML model.
+The counterfactual record is highlighted in a red dot within the classifier's decision regions (we will go over how to draw decision regions of classifiers later in the post).
 
 ```python
 from sklearn.linear_model import LogisticRegression
@@ -114,13 +123,16 @@ ax.scatter(
 )
 ```
 
-![A counterfactual record is highlighted within a classifier’s decision region](MLxtend%20A%20Python%20Library%20with%20Interesting%20Tools%20fo%20264ef2d64cce4a179cc8263b7c027dd3/bp09_counterfactual_instance.png)
-
-A counterfactual record is highlighted within a classifier’s decision region
+![A counterfactual record is highlighted within a classifier's decision region](img/counterfactual_instance.png){fig-alt="A counterfactual record is highlighted within a classifier's decision region"}
 
 **PCA Correlation Circle**
 
-An interesting and different way to look at PCA results is through a correlation circle that can be plotted using *[plot_pca_correlation_graph()](https://rasbt.github.io/mlxtend/user_guide/plotting/plot_pca_correlation_graph/)*. We basically compute the correlation between the original dataset columns and the PCs (principal components). Then, these correlations are plotted as vectors on a unit-circle. The axes of the circle are the selected dimensions (*a.k.a.* PCs). You can specify the PCs you’re interested in by passing them as a tuple to `dimensions` function argument. The correlation circle axes labels show the percentage of the [explained variance](https://en.wikipedia.org/wiki/Explained_variation) for the corresponding PC[1].
+An interesting and different way to look at PCA results is through a correlation circle that can be plotted using *[plot_pca_correlation_graph()](https://rasbt.github.io/mlxtend/user_guide/plotting/plot_pca_correlation_graph/)*.
+We basically compute the correlation between the original dataset columns and the PCs (principal components).
+Then, these correlations are plotted as vectors on a unit-circle.
+The axes of the circle are the selected dimensions (*a.k.a.* PCs).
+You can specify the PCs you're interested in by passing them as a tuple to `dimensions` function argument.
+The correlation circle axes labels show the percentage of the [explained variance](https://en.wikipedia.org/wiki/Explained_variation) for the corresponding PC[see @raschka2018mlxtend].
 
 Remember that the normalization is important in PCA because the PCA projects the original data on to the directions that maximize the variance.
 
@@ -138,21 +150,25 @@ fig, correlation_matrix = plot_pca_correlation_graph(
 )
 ```
 
-![PCA correlation circle diagram between the first two principal components and all data attributes](MLxtend%20A%20Python%20Library%20with%20Interesting%20Tools%20fo%20264ef2d64cce4a179cc8263b7c027dd3/bp09_correlation_circle_dim1_vs_dim2.png)
+![PCA correlation circle diagram between the first two principal components and all data attributes](img/correlation_circle_dim1_vs_dim2.png){fig-alt="PCA correlation circle diagram."}
 
 PCA correlation circle diagram between the first two principal components and all data attributes
 
-![Correlation matrix between wine features and the first two PCs](MLxtend%20A%20Python%20Library%20with%20Interesting%20Tools%20fo%20264ef2d64cce4a179cc8263b7c027dd3/bp09_pca_correlation_matrix.png)
+![Correlation matrix between wine features and the first two PCs](img/pca_correlation_matrix.png)
 
 Correlation matrix between wine features and the first two PCs
 
-### **Bias-Variance Decomposition**
+### Bias-Variance Decomposition
 
-You often hear about the bias-variance tradeoff to show the model performance. In supervised learning, the goal often is to minimize both the bias error (to prevent underfitting) and variance (to prevent overfitting) so that our model can generalize beyond the training set[4]. This process is known as a bias-variance tradeoff.
+You often hear about the bias-variance tradeoff to show the model performance.
+In supervised learning, the goal often is to minimize both the bias error (to prevent underfitting) and variance (to prevent overfitting) so that our model can generalize beyond the training set [see @wiki:bias_variance]. 
+This process is known as a bias-variance tradeoff.
 
-Note that we cannot calculate the actual bias and variance for a predictive model, and the bias-variance tradeoff is a concept that an ML engineer should always consider and tries to find a sweet spot between the two.Having said that, we can still study the model’s expected generalization error for certain problems. In particular, we can use the bias-variance decomposition to decompose the generalization error into a sum of 1) bias, 2) variance, and 3) *irreducible error*[4,5].
+Note that we cannot calculate the actual bias and variance for a predictive model, and the bias-variance tradeoff is a concept that an ML engineer should always consider and tries to find a sweet spot between the two.Having said that, we can still study the model's expected generalization error for certain problems.
+In particular, we can use the bias-variance decomposition to decompose the generalization error into a sum of 1) bias, 2) variance, and 3) *irreducible error*[4,5].
 
-The bias-variance decomposition can be implemented through *[bias_variance_decomp()](https://rasbt.github.io/mlxtend/user_guide/evaluate/bias_variance_decomp/)* in the library. An example of such implementation for a decision tree classifier is given below.
+The bias-variance decomposition can be implemented through *[bias_variance_decomp()](https://rasbt.github.io/mlxtend/user_guide/evaluate/bias_variance_decomp/)* in the library.
+An example of such implementation for a decision tree classifier is given below.
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
@@ -187,11 +203,12 @@ print(f"Average variance: {avg_var.round(3)}")
 >>> Average variance: 0.076
 ```
 
-### **Plotting Decision Regions of Classifiers**
+### Plotting Decision Regions of Classifiers
 
-MLxtend library has an out-of-the-box function *[plot_decision_regions()](https://rasbt.github.io/mlxtend/user_guide/plotting/plot_decision_regions/)* to draw a classifier’s decision regions in 1 or 2 dimensions.
+MLxtend library has an out-of-the-box function *[plot_decision_regions()](https://rasbt.github.io/mlxtend/user_guide/plotting/plot_decision_regions/)* to draw a classifier's decision regions in 1 or 2 dimensions.
 
-Here, I will draw decision regions for several scikit-learn as well as MLxtend models. Let’s first import the models and initialize them.
+Here, I will draw decision regions for several scikit-learn as well as MLxtend models.
+Let's first import the models and initialize them.
 
 ```python
 # Models
@@ -218,7 +235,7 @@ all_classifiers = [
 ]
 ```
 
-Now that we have initialized all the classifiers, let’s train the models and draw decision boundaries using [*plot_decision_regions()*](https://rasbt.github.io/mlxtend/user_guide/plotting/plot_decision_regions/) from the MLxtend library.
+Now that we have initialized all the classifiers, let's train the models and draw decision boundaries using [*plot_decision_regions()*](https://rasbt.github.io/mlxtend/user_guide/plotting/plot_decision_regions/) from the MLxtend library.
 
 ```python
 from mlxtend.plotting import plot_decision_regions
@@ -249,13 +266,12 @@ for classifier, grid in zip(
     ax.set_ylabel("Phenols", fontsize=20, fontweight="bold")
 ```
 
-![Decision regions of all classifiers](MLxtend%20A%20Python%20Library%20with%20Interesting%20Tools%20fo%20264ef2d64cce4a179cc8263b7c027dd3/bp09_all_classifiers_decision_regions.png)
+![Decision regions of all classifiers](img/all_classifiers_decision_regions.png){fig-alt="Decision regions of all classifiers"}
 
-Decision regions of all classifiers
+### Matrix of Scatter Plots
 
-### **Matrix of Scatter Plots**
-
-Another useful tool from MLxtend is the ability to draw a matrix of scatter plots for features (using *[scatterplotmatrix()](https://rasbt.github.io/mlxtend/user_guide/plotting/scatterplotmatrix/)*). In order to add another dimension to the scatter plots, we can also assign different colors for different target classes.
+Another useful tool from MLxtend is the ability to draw a matrix of scatter plots for features (using *[scatterplotmatrix()](https://rasbt.github.io/mlxtend/user_guide/plotting/scatterplotmatrix/)*).
+In order to add another dimension to the scatter plots, we can also assign different colors for different target classes.
 
 ```python
 from mlxtend.plotting import scatterplotmatrix
@@ -265,15 +281,18 @@ fig, axes = scatterplotmatrix(X[y==1], fig_axes=(fig, axes), alpha=0.5)
 fig, axes = scatterplotmatrix(X[y==2], fig_axes=(fig, axes), alpha=0.5, names=attribute_names)
 ```
 
-![A matrix of scatter plot of all wine attributes with different colors for wine types](MLxtend%20A%20Python%20Library%20with%20Interesting%20Tools%20fo%20264ef2d64cce4a179cc8263b7c027dd3/bp09_matrix_scatter_plots.png)
+![A matrix of scatter plot of all wine attributes with different colors for wine types](img/matrix_scatter_plots.png){fig-alt="Scatter plots of all wine attributes."}
 
 A matrix of scatter plot of all wine attributes with different colors for wine types
 
-By the way, for plotting similar scatter plots, you can also use Pandas’ *[scatter_matrix()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.plotting.scatter_matrix.html)* or seaborn’s *[pairplot()](https://seaborn.pydata.org/generated/seaborn.pairplot.html)* function.
+By the way, for plotting similar scatter plots, you can also use Pandas' *[scatter_matrix()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.plotting.scatter_matrix.html)* or seaborn's *[pairplot()](https://seaborn.pydata.org/generated/seaborn.pairplot.html)* function.
 
 ### **Bootstrapping**
 
-The [bootstrap](https://en.wikipedia.org/wiki/Bootstrapping_(statistics)) is an easy way to estimate a sample statistic and generate the corresponding confidence interval by drawing [random samples with replacement](https://en.wikipedia.org/wiki/Sampling_(statistics)#Replacement_of_selected_units). For this, you can use the *[bootstrap()](https://rasbt.github.io/mlxtend/user_guide/evaluate/bootstrap/)* function from the library. Note that you can pass a custom statistic to the bootstrap function through argument `func`. The custom function must return a scalar value.
+The [bootstrap](https://en.wikipedia.org/wiki/Bootstrapping_(statistics)) is an easy way to estimate a sample statistic and generate the corresponding confidence interval by drawing [random samples with replacement](https://en.wikipedia.org/wiki/Sampling_(statistics)#Replacement_of_selected_units).
+For this, you can use the *[bootstrap()](https://rasbt.github.io/mlxtend/user_guide/evaluate/bootstrap/)* function from the library.
+Note that you can pass a custom statistic to the bootstrap function through argument `func`.
+The custom function must return a scalar value.
 
 ```python
 from mlxtend.evaluate import bootstrap
@@ -302,51 +321,17 @@ print(
 >>> CI95: [4.8, 5.26]
 ```
 
+:::{.callout-note}
+👉 You can download a one-page summary of this post [here](./mlxtend-one-page-summary.pdf).
+:::
+
 # Conclusion
 
-In this post, we went over several MLxtend library functionalities, in particular, we talked about creating counterfactual instances for better model interpretability and plotting decision regions for classifiers, drawing PCA correlation circle, analyzing bias-variance tradeoff through decomposition, drawing a matrix of scatter plots of features with colored targets, and implementing the bootstrapping. The library is a nice addition to your data science toolbox, and I recommend giving this library a try.
+In this post, we went over several MLxtend library functionalities, in particular, we talked about creating counterfactual instances for better model interpretability and plotting decision regions for classifiers, drawing PCA correlation circle, analyzing bias-variance tradeoff through decomposition, drawing a matrix of scatter plots of features with colored targets, and implementing the bootstrapping.
+The library is a nice addition to your data science toolbox, and I recommend giving this library a try.
 
-<aside>
+:::{.callout-note}
 📓 You can find the Jupyter notebook for this blog post on [GitHub](https://github.com/e-alizadeh/medium/blob/master/notebooks/MLxtend.ipynb).
+:::
 
-</aside>
-
-**One-Page Summary**
-
-[MLxtend%20A%20Python%20Library%20with%20Interesting%20Tools%20fo%20264ef2d64cce4a179cc8263b7c027dd3/mlxtend-one-page-summary.pdf](MLxtend%20A%20Python%20Library%20with%20Interesting%20Tools%20fo%20264ef2d64cce4a179cc8263b7c027dd3/mlxtend-one-page-summary.pdf)
-
----
-
-**Thanks for reading 🙏**
-
-*If you liked this post, you can join my mailing list to receive similar posts. You can follow me on [LinkedIn](https://www.linkedin.com/in/alizadehesmaeil/), [GitHub](https://github.com/e-alizadeh), [Twitter](https://twitter.com/intent/follow?screen_name=es_alizadeh&tw_p=followbutton) and [Medium](https://medium.com/@ealizadeh).*
-
-*And finally, you can find my knowledge forest 🌲 (raw digital notes) at [notes.ealizadeh.com](https://notes.ealizadeh.com/).*
-
-# **📩 Join my mailing list**
-
-[https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4](https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4)
-
----
-
-# References
-
-[1] Sebastian Raschka, [MLxtend](https://rasbt.github.io/mlxtend/)
-
-[2] Sebastian Raschka, [Create Counterfactual](https://rasbt.github.io/mlxtend/user_guide/evaluate/create_counterfactual/), MLxtend API documentation
-
-[3] S. Wachter *et al* (2018), [Counterfactual Explanations without Opening the Black Box: Automated Decisions and the GDPR](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3063289), 31(2), Harvard Journal of Law & Technology
-
-[4] Wikipedia, [Bias–variance tradeoff](https://en.wikipedia.org/wiki/Bias-variance_tradeoff)
-
-[5] Sebastian Raschka, [Bias-Variance Decomposition](https://rasbt.github.io/mlxtend/user_guide/evaluate/bias_variance_decomp/), MLxtend API documentation
-
----
-
-⬅️   **Previous Post** 
-
-[Blog Posts](MLxtend%20A%20Python%20Library%20with%20Interesting%20Tools%20fo%20264ef2d64cce4a179cc8263b7c027dd3/Blog%20Posts%20dcc0d4c69e054266bdb839a1838b8e6e.csv)
-
-**➡️   Next Post**
-
-[Blog Posts](MLxtend%20A%20Python%20Library%20with%20Interesting%20Tools%20fo%20264ef2d64cce4a179cc8263b7c027dd3/Blog%20Posts%20417f7ebd27c54596bd58a6c5aad3c79d.csv)
+[^mlxtend]: [MLxtend Documentation](https://rasbt.github.io/mlxtend/)

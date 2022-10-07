@@ -2,7 +2,6 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/blog/mlxtend-library-for-data-science/index.html",
       "/blog/neural-prophet-library/index.html",
       "/blog/non-minimum-phase-systems/index.html",
       "/blog/sdv-library-for-modeling-datasets/index.html",
@@ -11,6 +10,7 @@
       "/blog/knn-and-kmeans/index.html",
       "/blog/automate-workflow-github-cron/index.html",
       "/blog/pandas-tutor-tool/index.html",
+      "/blog/mlxtend-library-for-data-science/index.html",
       "/blog/deploy-postgresql-db-heroku/index.html",
       "/blog/dbt-tutorial/index.html",
       "/blog/how-to-publish-your-python-package-with-just-2-commands/index.html",

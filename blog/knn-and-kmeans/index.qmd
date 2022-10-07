@@ -1,8 +1,8 @@
 ---
 title: "What K is in KNN and K-Means"
-subtitle: "Get to know K-Nearest Neighbors and K-Means "
+subtitle: "Get to know K-Nearest Neighbors and K-Means"
 date: "2022-03-21"
-categories: [K-Means, KNN, Machine Learnin]
+categories: [K-Means, KNN, Machine Learning]
 image: "img/_featured_image.png"
 id: 17
 slug: "knn-and-kmeans"
