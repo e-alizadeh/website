@@ -2,7 +2,6 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/blog/introduction-to-dynamic-time-warping/index.html",
       "/blog/mlxtend-library-for-data-science/index.html",
       "/blog/neural-prophet-library/index.html",
       "/blog/non-minimum-phase-systems/index.html",
@@ -18,7 +17,8 @@
       "/blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html",
       "/blog/guide-to-estimates-in-exploratory-data-analysis/index.html",
       "/blog/cognitive-errors-art-of-thinking-clearly/index.html",
-      "/blog/3-ways-to-add-images-to-your-jupyter-notebook/index.html"
+      "/blog/3-ways-to-add-images-to-your-jupyter-notebook/index.html",
+      "/blog/introduction-to-dynamic-time-warping/index.html"
     ]
   }
 ]

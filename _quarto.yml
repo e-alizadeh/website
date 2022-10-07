@@ -36,7 +36,9 @@ website:
       - icon: twitter 
         href: https://twitter.com/es_alizadeh
 
-bibliography: blog/references.bib
+bibliography: 
+  - "blog/references.bib"
+  - "blog/online.bib"
 
 format:
   html:

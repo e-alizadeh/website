@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Essi">
+<meta name="author" content="Essi Alizadeh">
 <meta name="dcterms.date" content="2022-03-21">
 
 <title>Essi Alizadeh - What K is in KNN and K-Means</title>
@@ -21,6 +21,25 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
 }
 </style>
 
@@ -162,7 +181,7 @@ ga('send', {
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Essi </p>
+               <p>Essi Alizadeh </p>
             </div>
     </div>
       
@@ -179,9 +198,7 @@ ga('send', {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
-<p>subscribe.html</p>
-</div></div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
@@ -199,9 +216,6 @@ ga('send', {
   <li><a href="#pros-and-cons-1" id="toc-pros-and-cons-1" class="nav-link" data-scroll-target="#pros-and-cons-1">Pros and Cons</a></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  <li><a href="#join-my-mailing-list" id="toc-join-my-mailing-list" class="nav-link" data-scroll-target="#join-my-mailing-list"><strong>📩 Join my mailing list</strong></a></li>
-  <li><a href="#other-posts-you-may-be-interested" id="toc-other-posts-you-may-be-interested" class="nav-link" data-scroll-target="#other-posts-you-may-be-interested">Other posts you may be interested</a></li>
   </ul>
 </nav>
     </div>
@@ -243,8 +257,8 @@ Note
 <h1>K-Nearest Neighbor (KNN)</h1>
 <p>KNN is a <em>nonparametric lazy supervised learning algorithm</em> mostly used for classification problems. There are a lot to unpack there, but the two main properties of the K-NN that you need to know are:</p>
 <ul>
-<li>KNN is a nonparametric algorithm meaning that the model does not make any assumption regarding the distribution of the underlying data [1].</li>
-<li>KNN is a lazy learner technique meaning that the algorithm does not learn the discriminative function from the training dataset. Instead it stores (memorizes) the training dataset, so, technically, a lazy learner algorithm doesn’t have a training step, and it delays the data abstraction until it’s asked to make a prediction [2].</li>
+<li>KNN is a nonparametric algorithm meaning that the model does not make any assumption regarding the distribution of the underlying data <span class="citation" data-cites="online_javatpoint_knn">(see <a href="#ref-online_javatpoint_knn" role="doc-biblioref">JavaTpoint N/A</a>)</span>.</li>
+<li>KNN is a lazy learner technique meaning that the algorithm does not learn the discriminative function from the training dataset. Instead it stores (memorizes) the training dataset, so, technically, a lazy learner algorithm doesn’t have a training step, and it delays the data abstraction until it’s asked to make a prediction <span class="citation" data-cites="online_rasbt_lazy_knn">(see <a href="#ref-online_rasbt_lazy_knn" role="doc-biblioref">Raschka N/A</a>)</span>.</li>
 </ul>
 <section id="what-k-in-k-nn-stands-for" class="level3">
 <h3 class="anchored" data-anchor-id="what-k-in-k-nn-stands-for">What <em>K</em> in <em>K</em>-NN stands for?</h3>
@@ -255,11 +269,11 @@ Note
 <p>As I mentioned earlier, <em>K</em>NN is a supervised learning technique, so we should have a labeled dataset. Let’s say we have two classes as can be seen in below image: Class A (blue points) and Class B (green points). A new data point (red) is given to us and we want to predict whether the new point belongs to Class A or Class B.</p>
 <p>Let’s first try <em>K</em> = 3. In this case, we have to find the three closest data points (aka three nearest neighbors) to the new (red) data point. As can be seen from the left side, two of three closest neighbors belong to Class B (green) and one belongs to Class A (blue). So, we should assign the new point to Class B.</p>
 <p><img src="img/202203082151_KNN.png" class="img-fluid"></p>
-<p>Now let’s set <em>K</em> = 5 (right side of above image). In this case, three out of the closest five points belong to Class A, so the new point should be classified as Class A. Unfortunately, there is no specific way of determining <em>K</em>, so we have to try a few values. Very low values of <em>K</em> like 1 or 2 may make the model very complex and sensitive to outliers. A common value for <em>K</em> is 5 [1].</p>
+<p>Now let’s set <em>K</em> = 5 (right side of above image). In this case, three out of the closest five points belong to Class A, so the new point should be classified as Class A. Unfortunately, there is no specific way of determining <em>K</em>, so we have to try a few values. Very low values of <em>K</em> like 1 or 2 may make the model very complex and sensitive to outliers. A common value for <em>K</em> is 5 <span class="citation" data-cites="online_javatpoint_knn">(see <a href="#ref-online_javatpoint_knn" role="doc-biblioref">JavaTpoint N/A</a>)</span>.</p>
 </section>
 <section id="pros-and-cons" class="level2">
 <h2 class="anchored" data-anchor-id="pros-and-cons">Pros and Cons</h2>
-<p>Following are the advantages and drawbacks of KNN [3]:</p>
+<p>Following are the advantages and drawbacks of KNN <span class="citation" data-cites="online_tutorialspoint_knn">(see <a href="#ref-online_tutorialspoint_knn" role="doc-biblioref">Point N/A</a>)</span>:</p>
 <p><strong>Pros</strong></p>
 <ul>
 <li>Useful for nonlinear data because KNN is a&nbsp;nonparametric&nbsp;algorithm.</li>
@@ -280,7 +294,7 @@ Note
 <h1><em>K</em>-Means</h1>
 <p><em>K</em>-Means (aka <em>K</em>-Means clustering) is an unsupervised learning algorithm&nbsp;that divide unlabeled data into different groups (or clusters). <em>K</em> in <em>K</em>-means refers to the number of clusters/groups (a cluster is a group of similar observations/records). For instance, in the following example, the unlabeled dataset is grouped into different number of clusters depending on the value of <em>K</em>.</p>
 <p><img src="img/202203092227_K-Means.png" class="img-fluid"></p>
-<p>K-Means minimizes the <em>within-cluster</em> <em>sum of squares</em>, <strong>WCSS</strong> (aka intracluster inertia/distance, within-cluster variance). To put it simply, K-Means minimizes the sum of squared differences between data points and the mean of the assigned cluster [4].</p>
+<p>K-Means minimizes the <em>within-cluster</em> <em>sum of squares</em>, <strong>WCSS</strong> (aka intracluster inertia/distance, within-cluster variance). To put it simply, K-Means minimizes the sum of squared differences between data points and the mean of the assigned cluster <span class="citation" data-cites="online_tds_helm_kmeans">(see <a href="#ref-online_tds_helm_kmeans" role="doc-biblioref">Helm 2021-06-01</a>)</span>.</p>
 <p><span class="math display">
 \text{WCSS}_{k} = \sum\limits_{x \in k}||x - \overline{x}||^{2}
 </span></p>
@@ -289,10 +303,10 @@ Note
 <p>There are several ways to determine <em>K</em> in the <em>K</em>-Means clustering algorithm:</p>
 <ul>
 <li><strong>Elbow Method</strong>: A common way to determine the number of ideal cluster (K) in <em>K</em>-means. In this approach, we run the <em>K</em>-means with several candidates and calculate the WCSS. The best <em>K</em> is selected based on a trade-off between the model complexity (overfitting) and the WCSS.</li>
-<li><strong>Silhouette Score</strong>: A score between -1 and 1 measuring the similarity among points of a cluster and comparing that with other clusters. A score of -1 indicates that a point is in the wrong cluster, whereas a score of 1 indicates that the point is in the right cluster [4].</li>
-<li><strong>gap statistics</strong>: A method to estimate the number of clusters in a dataset. gap statistic compares the change in the within-cluster variation of output of any clustering technique with an expected reference null distribution [5].</li>
+<li><strong>Silhouette Score</strong>: A score between -1 and 1 measuring the similarity among points of a cluster and comparing that with other clusters. A score of -1 indicates that a point is in the wrong cluster, whereas a score of 1 indicates that the point is in the right cluster <span class="citation" data-cites="online_tds_helm_kmeans">(see <a href="#ref-online_tds_helm_kmeans" role="doc-biblioref">Helm 2021-06-01</a>)</span>.</li>
+<li><strong>gap statistics</strong>: A method to estimate the number of clusters in a dataset. gap statistic compares the change in the within-cluster variation of output of any clustering technique with an expected reference null distribution <span class="citation" data-cites="tibshirani2001gap_statistics">(see <a href="#ref-tibshirani2001gap_statistics" role="doc-biblioref">Tibshirani, Walther, and Hastie 2001</a>)</span>.</li>
 </ul>
-<p>We usually normalize/standardize continuous variables in the data preprocessing stage in order to avoid variables with much larger values dominating any modeling or analysis process <a href="P.%20C.%20Bruce%20and%20A.%20Bruce,%20*Practical%20Statistics%20for%20Data%20Scientists:%2050%20Essential%20Concepts*,%20First%20edition.%20O’Reilly,%202017">6</a>.</p>
+<p>We usually normalize/standardize continuous variables in the data preprocessing stage in order to avoid variables with much larger values dominating any modeling or analysis process <span class="citation" data-cites="bruce2017practical">(see <a href="#ref-bruce2017practical" role="doc-biblioref">Bruce and Bruce 2017</a>)</span>.</p>
 </section>
 <section id="pros-and-cons-1" class="level2">
 <h2 class="anchored" data-anchor-id="pros-and-cons-1">Pros and Cons</h2>
@@ -322,41 +336,41 @@ Note
 <li>gap statistic.</li>
 </ul></li>
 </ul>
-</section>
-<section id="references" class="level1">
-<h1>References</h1>
-<p>[1]: <a href="https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-learning">K-Nearest Neighbor(KNN) Algorithm for Machine Learning</a></p>
-<p>[2]: <a href="https://sebastianraschka.com/faq/docs/lazy-knn.html">Why is Nearest Neighbor a Lazy Algorithm?</a></p>
-<p>[3]: <a href="https://tutorialspoint.com/machine_learning_with_python/machine_learning_with_python_knn_algorithm_finding_nearest_neighbors.htm">KNN Algorithm - Finding Nearest Neighbors</a></p>
-<p>[4]: <a href="https://towardsdatascience.com/a-deep-dive-into-k-means-f9a1ef2490f8?gi=8b7574fe442d">A deep dive into k-means</a></p>
-<p>[5]: R. Tibshirani, G. Walther, and T. Hastie, <em><a href="https://hastie.su.domains/Papers/gap.pdf">Estimating the number of clusters in a data set via the gap statistic</a></em>, Journal of the Royal Statistical Society: Series B (Statistical Methodology), vol.&nbsp;63, no. 2, pp.&nbsp;411–423, 2001</p>
-<hr>
-<p><strong>Thanks for reading 🙏</strong></p>
-<p><em>If you liked this post, you can join my mailing list to receive similar posts. You can follow me on <a href="https://www.linkedin.com/in/alizadehesmaeil/">LinkedIn</a>, <a href="https://github.com/e-alizadeh">GitHub</a>, <a href="https://twitter.com/intent/follow?screen_name=es_alizadeh&amp;tw_p=followbutton">Twitter</a> and <a href="https://medium.ealizadeh.com">Medium</a>.</em></p>
-</section>
-<section id="join-my-mailing-list" class="level1">
-<h1><strong>📩 Join my mailing list</strong></h1>
-<p><a href="https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4">https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4</a></p>
-<hr>
-</section>
-<section id="other-posts-you-may-be-interested" class="level1">
-<h1>Other posts you may be interested</h1>
-<p><a href="https://www.notion.so/2fd37eeb4a0f42bc9e641f870aee9ed9">Blog Posts</a></p>
+
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{essi2022,
-  author = {Essi},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-bruce2017practical" class="csl-entry" role="doc-biblioentry">
+Bruce, Peter, and Andrew Bruce. 2017. <em>Practical Statistics for Data Scientists: 50 Essential Concepts</em>. O’Reilly Media.
+</div>
+<div id="ref-online_tds_helm_kmeans" class="csl-entry" role="doc-biblioentry">
+Helm, Martin. 2021-06-01. <span>“A Deep Dive into k-Means.”</span> <a href="https://towardsdatascience.com/a-deep-dive-into-k-means-f9a1ef2490f8">https://towardsdatascience.com/a-deep-dive-into-k-means-f9a1ef2490f8</a>.
+</div>
+<div id="ref-online_javatpoint_knn" class="csl-entry" role="doc-biblioentry">
+JavaTpoint. N/A. <span>“K-Nearest Neighbor(KNN) Algorithm for Machine Learning.”</span> <a href="https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-learning">https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-learning</a>.
+</div>
+<div id="ref-online_tutorialspoint_knn" class="csl-entry" role="doc-biblioentry">
+Point, Tutorials. N/A. <span>“KNN Algorithm - Finding Nearest Neighbors.”</span> <a href="https://tutorialspoint.com/machine_learning_with_python/machine_learning_with_python_knn_algorithm_finding_nearest_neighbors.htm">https://tutorialspoint.com/machine_learning_with_python/machine_learning_with_python_knn_algorithm_finding_nearest_neighbors.htm</a>.
+</div>
+<div id="ref-online_rasbt_lazy_knn" class="csl-entry" role="doc-biblioentry">
+Raschka, Sebastian. N/A. <span>“Why Is Nearest Neighbor a Lazy Algorithm?”</span> <a href="https://sebastianraschka.com/faq/docs/lazy-knn.html">https://sebastianraschka.com/faq/docs/lazy-knn.html</a>.
+</div>
+<div id="ref-tibshirani2001gap_statistics" class="csl-entry" role="doc-biblioentry">
+Tibshirani, Robert, Guenther Walther, and Trevor Hastie. 2001. <span>“Estimating the Number of Clusters in a Data Set via the Gap Statistic.”</span> <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 63 (2): 411–23. <a href="https://hastie.su.domains/Papers/gap.pdf">https://hastie.su.domains/Papers/gap.pdf</a>.
+</div>
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{alizadeh2022,
+  author = {Essi Alizadeh},
   editor = {},
   title = {What {K} Is in {KNN} and {K-Means}},
   date = {2022-03-21},
   url = {https://ealizadeh.com/blog/knn-and-kmeans},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-essi2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
-Essi. 2022. <span>“What K Is in KNN and K-Means.”</span> March 21, 2022.
-<a href="https://ealizadeh.com/blog/knn-and-kmeans">https://ealizadeh.com/blog/knn-and-kmeans</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-alizadeh2022" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Essi Alizadeh. 2022. <span>“What K Is in KNN and K-Means.”</span> March
+21, 2022. <a href="https://ealizadeh.com/blog/knn-and-kmeans">https://ealizadeh.com/blog/knn-and-kmeans</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
