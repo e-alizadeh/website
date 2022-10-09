@@ -2,7 +2,6 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/blog/non-minimum-phase-systems/index.html",
       "/blog/sdv-library-for-modeling-datasets/index.html",
       "/blog/statistics-data-vs-sampling-distribution/index.html",
       "/blog/working-with-missing-values-in-pandas-and-numpy/index.html",
@@ -18,6 +17,7 @@
       "/blog/neural-prophet-library/index.html",
       "/blog/cognitive-errors-art-of-thinking-clearly/index.html",
       "/blog/3-ways-to-add-images-to-your-jupyter-notebook/index.html",
+      "/blog/non-minimum-phase-systems/index.html",
       "/blog/introduction-to-dynamic-time-warping/index.html"
     ]
   }
