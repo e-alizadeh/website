@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Essi">
+<meta name="author" content="Essi Alizadeh">
+<meta name="dcterms.date" content="2020-12-03">
 
-<title>Essi Alizadeh – index</title>
+<title>Essi Alizadeh - NeuralProphet: A Time-Series Modeling Python Library based on Neural-Networks</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -142,6 +143,15 @@ ga('send', {
 
 
 <link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Essi Alizadeh - NeuralProphet: A Time-Series Modeling Python Library based on Neural-Networks">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://ealizadeh.com/blog/neural-prophet-library/img/_featured_image.jpg">
+<meta property="og:site-name" content="Essi Alizadeh">
+<meta name="twitter:title" content="Essi Alizadeh - NeuralProphet: A Time-Series Modeling Python Library based on Neural-Networks">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://ealizadeh.com/blog/neural-prophet-library/img/_featured_image.jpg">
+<meta name="twitter:creator" content="@es_alizadeh">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
@@ -176,7 +186,41 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">NeuralProphet: A Time-Series Modeling Python Library based on Neural-Networks</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Machine Learning</div>
+                <div class="quarto-category">Neural-Network</div>
+                <div class="quarto-category">Python Library</div>
+                <div class="quarto-category">Time Series Analysis</div>
+                <div class="quarto-category">Tutorial</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Essi Alizadeh </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">December 3, 2020</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -184,42 +228,44 @@ ga('send', {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#neuralprophet-a-time-series-modeling-python-library-based-on-neural-networks" id="toc-neuralprophet-a-time-series-modeling-python-library-based-on-neural-networks" class="nav-link active" data-scroll-target="#neuralprophet-a-time-series-modeling-python-library-based-on-neural-networks">NeuralProphet: A Time-Series Modeling Python Library based on Neural-Networks</a></li>
-  <li><a href="#neuralprophet-library" id="toc-neuralprophet-library" class="nav-link" data-scroll-target="#neuralprophet-library"><strong>NeuralProphet Library</strong></a>
+  <li><a href="#neuralprophet-library" id="toc-neuralprophet-library" class="nav-link active" data-scroll-target="#neuralprophet-library">NeuralProphet Library</a>
   <ul>
-  <li><a href="#neuralprophet-vs.-prophet" id="toc-neuralprophet-vs.-prophet" class="nav-link" data-scroll-target="#neuralprophet-vs.-prophet"><strong>NeuralProphet vs.&nbsp;Prophet</strong></a></li>
-  <li><a href="#project-maintainers" id="toc-project-maintainers" class="nav-link" data-scroll-target="#project-maintainers"><strong>Project Maintainers</strong></a></li>
-  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><strong>Installation</strong></a></li>
+  <li><a href="#neuralprophet-vs.-prophet" id="toc-neuralprophet-vs.-prophet" class="nav-link" data-scroll-target="#neuralprophet-vs.-prophet">NeuralProphet vs.&nbsp;Prophet</a></li>
+  <li><a href="#project-maintainers" id="toc-project-maintainers" class="nav-link" data-scroll-target="#project-maintainers">Project Maintainers</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
   <li><a href="#implementation-with-a-case-study" id="toc-implementation-with-a-case-study" class="nav-link" data-scroll-target="#implementation-with-a-case-study"><strong>Implementation with a Case Study</strong></a></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#join-my-mailing-list" id="toc-join-my-mailing-list" class="nav-link" data-scroll-target="#join-my-mailing-list"><strong>📩 Join my mailing list</strong></a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<section id="neuralprophet-a-time-series-modeling-python-library-based-on-neural-networks" class="level1 page-columns page-full">
-<h1>NeuralProphet: A Time-Series Modeling Python Library based on Neural-Networks</h1>
-<p>Created: March 9, 2021 9:57 AM Last Updated: May 30, 2021 Last updated: September 7, 2022 10:14 PM Reading Time: 4 min read Show on Homepage?: Yes Tags: Machine Learning, Neural-Network, Python Library, Time Series Analysis id: 7</p>
-<aside>
-<p>👉 <em>This article is also published on&nbsp;<a href="https://towardsdatascience.com/neural-prophet-a-time-series-modeling-library-based-on-neural-networks-dd02dc8d868d">Towards Data Science Blog</a>.</em></p>
-</aside>
-<ul>
-<li><strong>Table of Content</strong></li>
-</ul>
-<p><a href="https://github.com/ourownstory/neural_prophet">NeuralProphet</a>&nbsp;is a python library for modeling time-series data based on neural networks. It’s built on top of&nbsp;<a href="https://pytorch.org/">PyTorch</a>&nbsp;and is heavily inspired by&nbsp;<a href="https://github.com/facebook/prophet">Facebook Prophet</a>&nbsp;and&nbsp;<a href="https://github.com/ourownstory/AR-Net">AR-Net</a>&nbsp;libraries.</p>
-</section>
+
+<p><img src="img/_featured_image.png" class="img-fluid" alt="Featured image of the post"></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>👉 This article is also published on&nbsp;<a href="https://towardsdatascience.com/neural-prophet-a-time-series-modeling-library-based-on-neural-networks-dd02dc8d868d"><strong>Towards Data Science blog</strong></a>.</p>
+</div>
+</div>
+<p><a href="https://github.com/ourownstory/neural_prophet">NeuralProphet</a> <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>&nbsp;is a python library for modeling time-series data based on neural networks. It’s built on top of&nbsp;<a href="https://pytorch.org/">PyTorch</a>&nbsp;and is heavily inspired by&nbsp;<a href="https://github.com/facebook/prophet">Facebook Prophet</a>&nbsp;and&nbsp;<a href="https://github.com/ourownstory/AR-Net">AR-Net</a>&nbsp;libraries.</p>
 <section id="neuralprophet-library" class="level1">
-<h1><strong>NeuralProphet Library</strong></h1>
+<h1>NeuralProphet Library</h1>
 <section id="neuralprophet-vs.-prophet" class="level2">
-<h2 class="anchored" data-anchor-id="neuralprophet-vs.-prophet"><strong>NeuralProphet vs.&nbsp;Prophet</strong></h2>
-<p>From the library name, you may ask what is the main difference between Facebook’s Prophet library and NeuralProphet. According to NeuralProphet’s&nbsp;<a href="https://ourownstory.github.io/neural_prophet/changes-from-prophet/">documentation</a>, the added features are[1]:</p>
+<h2 class="anchored" data-anchor-id="neuralprophet-vs.-prophet">NeuralProphet vs.&nbsp;Prophet</h2>
+<p>From the library name, you may ask what is the main difference between Facebook’s Prophet library and NeuralProphet. According to NeuralProphet’s&nbsp;<a href="https://ourownstory.github.io/neural_prophet/changes-from-prophet/">documentation</a>, the added features are:</p>
 <ul>
 <li>Using PyTorch’s Gradient Descent optimization engine making the modeling process much faster than Prophet</li>
 <li>Using AR-Net for modeling time-series autocorrelation (aka serial correlation)</li>
@@ -229,11 +275,11 @@ ga('send', {
 </ul>
 </section>
 <section id="project-maintainers" class="level2">
-<h2 class="anchored" data-anchor-id="project-maintainers"><strong>Project Maintainers</strong></h2>
+<h2 class="anchored" data-anchor-id="project-maintainers">Project Maintainers</h2>
 <p>Based on the project’s GitHub page, the main maintainer of this project is&nbsp;<a href="https://github.com/ourownstory">Oskar Triebe</a>&nbsp;from Stanford University with collaboration from Facebook and Monash University.</p>
 </section>
 <section id="installation" class="level2">
-<h2 class="anchored" data-anchor-id="installation"><strong>Installation</strong></h2>
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
 <p>The project is in the beta phase, so I would advise you to be cautious if you want to use this library in a production environment.</p>
 <p>You can install the package using&nbsp;<code>pip install neuralprophet</code>. However, if you are going to use the package in a Jupyter Notebook environment, you should install their live version&nbsp;<code>pip install neuralprophet[live]</code>. This will provide more features such as a live plot of train and validation loss using&nbsp;<code>plot_live_loss()</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/ourownstory/neural_prophet</span>
@@ -289,19 +335,17 @@ ga('send', {
 <p>The one-year forecast plot is shown below, where the time period between 2017-01-01 to 2018-01-01 is the prediction. As can be seen, the forecast plot resembles the historical time-series. It both captured the seasonality as well as the slow-growing linear trend.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="NeuralProphet%20A%20Time-Series%20Modeling%20Python%20Librar%2039ad9f25668a4ab38bc3f0639ead9563/Untitled.png" class="img-fluid figure-img"></p>
+<p><img src="img/mean_temp_1yr_prediction.png" class="img-fluid figure-img" alt="The mean temperature in Delhi and the one-year prediction."></p>
 <p></p><figcaption class="figure-caption">The mean temperature in Delhi and the one-year prediction</figcaption><p></p>
 </figure>
 </div>
-<p>The mean temperature in Delhi and the one-year prediction</p>
 <p>You can plot the parameters by calling <code>model.plot_parameters()</code></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="NeuralProphet%20A%20Time-Series%20Modeling%20Python%20Librar%2039ad9f25668a4ab38bc3f0639ead9563/Untitled%201.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Model Parameters</figcaption><p></p>
+<p><img src="img/model_parameters.png" class="img-fluid figure-img" alt="Neural-Prophet model parameters"></p>
+<p></p><figcaption class="figure-caption">Model parameters</figcaption><p></p>
 </figure>
 </div>
-<p>Model Parameters</p>
 <p>The model loss using Mean Absolute Error (MAE) is plotted below. You can also use the Smoothed L1-Loss function.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">10</span>))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ax.plot(metrics[<span class="st">"MAE"</span>], <span class="st">'ob'</span>, linewidth<span class="op">=</span><span class="dv">6</span>, label<span class="op">=</span><span class="st">"Training Loss"</span>)  </span>
@@ -310,60 +354,52 @@ ga('send', {
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># You can use metrics["SmoothL1Loss"] and metrics["SmoothL1Loss_val"] too.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="NeuralProphet%20A%20Time-Series%20Modeling%20Python%20Librar%2039ad9f25668a4ab38bc3f0639ead9563/Untitled%202.png" class="img-fluid figure-img"></p>
+<p><img src="img/model_loss_mae.png" class="img-fluid figure-img" alt="Model Loss using MAE"></p>
 <p></p><figcaption class="figure-caption">Model Loss using MAE</figcaption><p></p>
 </figure>
 </div>
-<p>Model Loss using MAE</p>
-<hr>
 </section>
 </section>
-<section id="conclusion" class="level1 page-columns page-full">
+<section id="conclusion" class="level1">
 <h1>Conclusion</h1>
 <p>In this post, we talked about NeuralProphet, a python library that models time-series based on Neural Networks. The library uses PyTorch as a backend. As a case study, we created a prediction model for daily Delhi climate time-series data and made a one-year prediction. An advantage of using this library is its similar syntax to Facebook’s Prophet library.</p>
-<aside>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <p>📓 You can find the Jupyter notebook for this blog post on&nbsp;<a href="https://github.com/e-alizadeh/medium/blob/master/notebooks/NeuralProphet/neural_prophet.ipynb">GitHub</a>.</p>
-</aside>
-<hr>
-<p><strong>Thanks for reading 🙏</strong></p>
-<p><em>If you liked this post, you can join my mailing list to receive similar posts. You can follow me on <a href="https://www.linkedin.com/in/alizadehesmaeil/">LinkedIn</a>, <a href="https://github.com/e-alizadeh">GitHub</a>, <a href="https://twitter.com/intent/follow?screen_name=es_alizadeh&amp;tw_p=followbutton">Twitter</a> and <a href="https://medium.com/@ealizadeh">Medium</a>.</em></p>
-<p><em>And finally, you can find my knowledge forest 🌲 (raw digital notes) at <a href="https://notes.ealizadeh.com/">notes.ealizadeh.com</a>.</em></p>
-</section>
-<section id="join-my-mailing-list" class="level1">
-<h1><strong>📩 Join my mailing list</strong></h1>
-<p><a href="https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4">https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4</a></p>
-<hr>
-</section>
-<section id="references" class="level1">
-<h1>References</h1>
-<p>[1] NeuralProphet, <a href="https://ourownstory.github.io/neural_prophet/">Documentation</a></p>
+</div>
+</div>
+</div>
 </section>
 <section id="useful-links" class="level1">
 <h1>Useful Links</h1>
-<p>[1] O. J. Triebe et al, <a href="https://arxiv.org/pdf/1911.12436.pdf">AR-Net: A Simple Auto-Regressive Neural Network For Time-Series</a>, (2019)</p>
-<ul>
-<li><p>View PDF directly here</p>
-<p><a href="https://arxiv.org/pdf/1911.12436.pdf">https://arxiv.org/pdf/1911.12436.pdf</a></p></li>
-</ul>
-<p><a href="https://facebook.github.io/prophet/">Prophet</a></p>
-<p><a href="https://github.com/ourownstory/AR-Net">ourownstory/AR-Net</a></p>
-<hr>
-<p>⬅️ <strong>Previous Post</strong></p>
-<p><a href="NeuralProphet%20A%20Time-Series%20Modeling%20Python%20Librar%2039ad9f25668a4ab38bc3f0639ead9563/Blog%20Posts%203ca92f26305344ac9e4045eb8f9ea7ba.csv">Blog Posts</a></p>
-<p><strong>➡️ Next Post</strong></p>
-<p><a href="NeuralProphet%20A%20Time-Series%20Modeling%20Python%20Librar%2039ad9f25668a4ab38bc3f0639ead9563/Blog%20Posts%202548de4c4881428f9cb2e100610314b8.csv">Blog Posts</a></p>
+<p><a href="https://facebook.github.io/prophet/">Facebook’s Prophet Library</a></p>
+<p><a href="https://github.com/ourownstory/AR-Net">AR-Net GitHub</a></p>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{essi,
-  author = {Essi},
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://ourownstory.github.io/neural_prophet/">NeuralProphet Documentation</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{alizadeh2020,
+  author = {Essi Alizadeh},
   editor = {},
+  title = {NeuralProphet: {A} {Time-Series} {Modeling} {Python}
+    {Library} Based on {Neural-Networks}},
+  date = {2020-12-03},
   url = {https://ealizadeh.com/blog/neural-prophet-library},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-essi" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
-Essi. n.d. <a href="https://ealizadeh.com/blog/neural-prophet-library">https://ealizadeh.com/blog/neural-prophet-library</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-alizadeh2020" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Essi Alizadeh. 2020. <span>“NeuralProphet: A Time-Series Modeling Python
+Library Based on Neural-Networks.”</span> December 3, 2020. <a href="https://ealizadeh.com/blog/neural-prophet-library">https://ealizadeh.com/blog/neural-prophet-library</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
