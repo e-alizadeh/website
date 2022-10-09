@@ -99,12 +99,10 @@ Now that we are familiar with Transfer Functions, let's see how a non-minimum ph
 Below are two systems that have the same poles but with different zeros.
 System 1 has a zero at $s=-2$, whereas System 2 has a zero at $s=2$.
 
-::: {#fig-systems_tf layout-ncol=2}
+:::{layout-ncol=2}
+![System 1 transfer function](img/sys1_transfer_func.png){#fig-sys1}
 
-![System 1 transfer function](img/sys1_transfer_func.png){#fig-sys1 fig-alt="System 1 transfer function"}
-
-![System 2 transfer function](img/sys2_transfer_func.png){#fig-sys2 fig-alt="System 2 transfer function"}
-
+![System 2 transfer function](img/sys2_transfer_func.png){#fig-sys2}
 :::
 
 Let's separate poles and zeros of System 1 for our analysis.
@@ -115,15 +113,13 @@ As noted earlier, we are interested in the model zeros in this article, so we wi
 
 Let's see how the modified input $U'(s)$ of System 1 is in the time-domain by applying an inverse $\mathscr{L}-$transform
 
-$$
+<!-- No need to enclose LaTeX environments that has \begin{} ... \end{} -->
 \begin{aligned}
       \frac{U'(s)}{U(s)} &= s + 2 \\ 
       \longrightarrow U'(s) &= (s + 2) U(s) \\
       \mathscr{L}^{-1}  \{ U'(s) \} &= \mathscr{L}^{-1}  \{ (s + 2) U(s) \} \\ 
       \longrightarrow \: u'(t) &= \frac{d}{dt}u(t) + 2u(t)
-
 \end{aligned}
-$$
 
 Following the same procedure for System 2, the modified input for System 2 will be
 

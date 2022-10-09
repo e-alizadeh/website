@@ -1,5 +1,9 @@
 /* css styles */
 
+.figure-caption {
+  text-align: center;
+}
+
 /* Hide BibTeX citation code*/
 pre.quarto-appendix-bibtex {
     display: none;
