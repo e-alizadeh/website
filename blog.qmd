@@ -4,7 +4,7 @@ listing:
   contents: blog
   sort: "date desc"
   type: grid
-  categories: true
+  categories: false
   fields: [image, date, title, subtitle, reading-time]
   # sort-ui: true
 #   feed: true
