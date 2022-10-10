@@ -60,4 +60,4 @@ format:
     include-in-header:
       - assets/external_style.html
 
-freeze: true
+freeze: auto
