@@ -8,7 +8,7 @@ project:
 website:
   title: "Essi Alizadeh"
   description: "Personal website"
-  site-url: https://ealizadeh.com
+  site-url: https://new.ealizadeh.com
   repo-url: https://github.com/e-alizadeh/website   
   favicon: assets/favicon.png
   open-graph: true
