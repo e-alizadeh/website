@@ -1,0 +1,4 @@
+- source: project
+  netlify:
+    - id: ce0fad3a-1ed3-4687-a2cc-9c2e92a7e9d9
+      url: 'https://ealizadeh.netlify.app'
