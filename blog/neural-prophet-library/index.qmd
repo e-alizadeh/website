@@ -3,7 +3,7 @@ title: "NeuralProphet: A Time-Series Modeling Python Library based on Neural-Net
 subtitle: ""
 date: "2020-12-03"
 categories: [Machine Learning, Neural-Network, Python Library, Time Series Analysis, Tutorial]
-image: "img/_featured_image.jpg"
+image: "img/_featured_image.png"
 id: 7
 slug: "neural-prophet-library"
 ---

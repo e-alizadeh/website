@@ -3,7 +3,7 @@ title: "Synthetic Data Vault (SDV): A Python Library for Dataset Modeling"
 subtitle: "A tool to generate complex datasets using statistical & machine-learning models."
 date: "2020-11-09"
 categories: [Data Modeling, Data Science, Machine Learning, Python Library, Time Series Analysis]
-image: "img/_featured_image.jpg"
+image: "img/_featured_image.png"
 id: 4
 slug: "sdv-library-for-modeling-datasets"
 ---

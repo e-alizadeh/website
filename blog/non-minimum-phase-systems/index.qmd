@@ -3,7 +3,7 @@ title: "A Guide to Non-Minimum Phase Systems"
 subtitle: "Why the water is cold first when you turn the hot water knob on in the shower?"
 date: "2020-10-31"
 categories: [Control Systems Theory, Engineering, Guide to, Mathematical Modeling]
-image: "img/_featured_image.jpg"
+image: "img/_featured_image.png"
 id: 3
 slug: "non-minimum-phase-systems"
 ---
