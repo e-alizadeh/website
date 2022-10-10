@@ -25,7 +25,8 @@ website:
       - href: index.qmd
         text: Home
       - blog.qmd
-      - about.qmd
+      - contact_me.qmd
+      # - about.qmd
   page-footer: 
     border: false
     # background: light

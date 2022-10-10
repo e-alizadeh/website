@@ -1,38 +1,27 @@
 ---
 title: "Essi Alizadeh"
+image: assets/caricature_headshot.png
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/es_alizadeh
+    - icon: medium
+      text: Medium
+      href: https://medium.ealizadeh.com/
+    - icon: github
+      text: GitHub
+      href: https://github.com/e-alizadeh
+    - icon: linkedin
+      text: Linkedin
+      href: https://www.linkedin.com/in/alizadehesmaeil/
+    - icon: google-scholar
+      text: Google Scholar
+      href: https://scholar.google.ca/citations?user=N-WO93UAAAAJ
 ---
 
-::: {.column-page-inset}
-::: {.column-page-inset-left}
 I'm an engineer and a data scientist.
 
 \~ In Permanent Beta: Learning, Improving, Evolving \~
-:::
 
-<div class="column-margin column-container">
-![](assets/caricature_headshot.png){.rounded}
-</div>
-:::
-
-{{< pagebreak >}}
-
-
-::: {.column-page-inset .text-center}
-```{=html}
-<a class="btn btn-outline-light", href="https://twitter.com/es_alizadeh" target="_blank" rel="noopener noreferrer">
-    <i class="bi bi-twitter" style="color: rgb(29, 161, 242);" role='img' aria-label='Twitter'></i>
-</a>
-<a class="btn btn-outline-light", href="https://medium.ealizadeh.com/" target="_blank" rel="noopener noreferrer">
-    <i class="bi bi-medium" style="color: rgb(51, 3, 0);" role='img' aria-label='Medium'></i>
-</a>
-<a class="btn btn-outline-light", href="https://github.com/e-alizadeh" target="_blank" rel="noopener noreferrer">
-    <i class="bi bi-github" style="color: rgb(51, 3, 0);" role='img' aria-label='Github'></i>
-</a>
-<a class="btn btn-outline-light", href="https://www.linkedin.com/in/alizadehesmaeil/" target="_blank" rel="noopener noreferrer">
-    <i class="bi bi-linkedin" style="color: rgb(0, 119, 181);" role='img' aria-label='LinkedIn'></i>
-</a>
-<a class="btn btn-outline-light", href="https://scholar.google.ca/citations?user=N-WO93UAAAAJ" target="_blank" rel="noopener noreferrer">
-    <i class="ai ai-google-scholar" style="color: rgb(66, 133, 244);" role='img' aria-label='Google Scholar'></i>
-</a>
-```
-:::

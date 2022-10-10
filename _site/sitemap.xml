@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ealizadeh.com/about.html</loc>
-    <lastmod>2022-10-10T16:38:57.374Z</lastmod>
+    <lastmod>2022-10-10T18:42:00.766Z</lastmod>
   </url>
   <url>
     <loc>https://ealizadeh.com/blog/post-with-code/index.html</loc>
@@ -14,11 +14,11 @@
   </url>
   <url>
     <loc>https://ealizadeh.com/blog.html</loc>
-    <lastmod>2022-10-10T17:47:41.276Z</lastmod>
+    <lastmod>2022-10-10T19:30:53.945Z</lastmod>
   </url>
   <url>
     <loc>https://ealizadeh.com/index.html</loc>
-    <lastmod>2022-10-10T17:47:22.324Z</lastmod>
+    <lastmod>2022-10-10T19:28:36.613Z</lastmod>
   </url>
   <url>
     <loc>https://ealizadeh.com/blog/automate-github-actions-cron/index.html</loc>
@@ -26,15 +26,15 @@
   </url>
   <url>
     <loc>https://ealizadeh.com/blog/automate-workflow-github-cron/index.html</loc>
-    <lastmod>2022-10-10T16:54:24.078Z</lastmod>
+    <lastmod>2022-10-10T19:28:25.090Z</lastmod>
   </url>
   <url>
     <loc>https://ealizadeh.com/blog/pandas-tutor-tool/index.html</loc>
-    <lastmod>2022-09-26T01:12:31.152Z</lastmod>
+    <lastmod>2022-10-10T19:24:31.375Z</lastmod>
   </url>
   <url>
     <loc>https://ealizadeh.com/blog/dbt-tutorial/index.html</loc>
-    <lastmod>2022-10-09T03:28:40.826Z</lastmod>
+    <lastmod>2022-10-10T20:57:46.939Z</lastmod>
   </url>
   <url>
     <loc>https://ealizadeh.com/blog/knn-and-kmeans/index.html</loc>
@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://ealizadeh.com/blog/cognitive-errors-art-of-thinking-clearly/index.html</loc>
-    <lastmod>2022-10-09T02:40:42.551Z</lastmod>
+    <lastmod>2022-10-10T18:28:35.552Z</lastmod>
   </url>
   <url>
     <loc>https://ealizadeh.com/blog/deploy-postgresql-db-heroku/index.html</loc>
@@ -70,7 +70,7 @@
   </url>
   <url>
     <loc>https://ealizadeh.com/blog/mlxtend-library-for-data-science/index.html</loc>
-    <lastmod>2022-10-07T03:55:47.596Z</lastmod>
+    <lastmod>2022-10-10T19:31:14.476Z</lastmod>
   </url>
   <url>
     <loc>https://ealizadeh.com/blog/neural-prophet-library/index.html</loc>
@@ -91,5 +91,17 @@
   <url>
     <loc>https://ealizadeh.com/blog/working-with-missing-values-in-pandas-and-numpy/index.html</loc>
     <lastmod>2022-10-10T04:41:46.316Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/contact-me.html</loc>
+    <lastmod>2022-10-10T18:43:48.885Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/index_old.html</loc>
+    <lastmod>2022-10-10T20:58:20.365Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ealizadeh.com/contact_me.html</loc>
+    <lastmod>2022-10-10T18:53:17.485Z</lastmod>
   </url>
 </urlset>
