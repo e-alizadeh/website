@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.2.203">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Essi Alizadeh">
+<meta name="author" content="Esmaeil Alizadeh">
 <meta name="dcterms.date" content="2021-06-26">
 
 <title>Essi Alizadeh - Step-by-Step Deployment of a Free PostgreSQL Database And Data Ingestion</title>
@@ -145,14 +145,15 @@ ga('send', {
 <link rel="stylesheet" href="../../styles.css">
 <meta property="og:title" content="Essi Alizadeh - Step-by-Step Deployment of a Free PostgreSQL Database And Data Ingestion">
 <meta property="og:description" content="PostgreSQL: a free and open-source object-relational database management system that emphasizes extensibility and SQL compliance.">
-<meta property="og:image" content="https://ealizadeh.com/blog/deploy-postgresql-db-heroku/img/_featured_image.png">
+<meta property="og:image" content="https://new.ealizadeh.com/blog/deploy-postgresql-db-heroku/img/_featured_image.png">
 <meta property="og:site-name" content="Essi Alizadeh">
 <meta property="og:image:height" content="1453">
 <meta property="og:image:width" content="1944">
 <meta name="twitter:title" content="Essi Alizadeh - Step-by-Step Deployment of a Free PostgreSQL Database And Data Ingestion">
 <meta name="twitter:description" content="PostgreSQL: a free and open-source object-relational database management system that emphasizes extensibility and SQL compliance.">
-<meta name="twitter:image" content="https://ealizadeh.com/blog/deploy-postgresql-db-heroku/img/_featured_image.png">
+<meta name="twitter:image" content="https://new.ealizadeh.com/blog/deploy-postgresql-db-heroku/img/_featured_image.png">
 <meta name="twitter:creator" content="@es_alizadeh">
+<meta name="twitter:site" content="@es_alizadeh">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image-height" content="1453">
 <meta name="twitter:image-width" content="1944">
@@ -175,13 +176,16 @@ ga('send', {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html">Home</a>
+    <a class="nav-link" href="../../index.html">
+ <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog.html">Blog</a>
+    <a class="nav-link" href="../../blog.html">
+ <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">About</a>
+    <a class="nav-link" href="../../contact_me.html">
+ <span class="menu-text">Contact me</span></a>
   </li>  
 </ul>
               <div id="quarto-search" class="" title="Search"></div>
@@ -208,7 +212,7 @@ ga('send', {
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Essi Alizadeh </p>
+               <p>Esmaeil Alizadeh </p>
             </div>
     </div>
       
@@ -218,6 +222,7 @@ ga('send', {
         <p class="date">June 26, 2021</p>
       </div>
     </div>
+    
       
     </div>
     
@@ -225,7 +230,330 @@ ga('send', {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<!-- Main CSS style -->
+<style type="text/css" media="screen">
+    #mailchimp {
+   /* background: #F7F9FB; */
+   color: #595c5f;
+   /* padding: 20px 15px; */
+}
+   #mailchimp input {
+   border-width: 2px;
+   border-style: solid;
+   border-color: gray;
+   color: gray;
+   font-family: Arial, Helvetica, sans-serif;
+   font-size: 14px;
+   /*font-style: italic;*/
+   margin-bottom: 10px;
+   padding: 8px 10px;
+   /* width: 275px; */
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+   }
+   #mailchimp input.email { background: #fff; padding: 10px; text-align: left;}
+   #mailchimp input.name { background: #fff; padding: 10px; text-align: left;}
+   #mailchimp input[type="submit"] {
+       background: #8FC1E3;
+       border: none;
+       color: #fff;
+       cursor: pointer;
+       font-size: 15px;
+       margin-top: -2px;
+       /* width: 55%; */
+       /* padding: 8px 0; */
+   }
+   #mailchimp input[type="submit"]:hover { background: #99DDFF; color: #fff }
+   
+   .mailinglist{
+       color: #595c5f;
+       text-align: left;
+       font-size: 18px;
+       font-weight: bold;
+       font-family: Arial, Helvetica, sans-serif;
+       /* padding-left: 2.0em; */
+       padding-bottom: 3px;
+   }
+
+   .footnote {
+       color: grey;
+       font-family: Arial, Helvetica, sans-serif;
+       font-size: 12px;
+       margin-top: -3px;
+       padding-left: 1.5em;
+       }
+   /* Errors */
+   .error {
+   border-color: red;
+   }
+
+   .error-message {
+        color: red;
+        font-style: italic;
+        font-size: 12px;
+        margin-top: -4px;
+        margin-bottom: 3px;
+        padding-left: 1.5em;
+    }
+</style>
+
+
+<!-- Begin Integrating Email Constraint Validation using a JavaScript API -->
+<script>
+   // Add the novalidate attribute when the JS loads
+   var forms = document.querySelectorAll('.validate');
+   for (var i = 0; i < forms.length; i++) {
+       forms[i].setAttribute('novalidate', true);
+   }
+
+
+   // Validate the field
+   var hasError = function (field) {
+
+       // Don't validate submits, buttons, file and reset inputs, and disabled fields
+       if (field.disabled || field.type === 'file' || field.type === 'reset' || field.type === 'submit' || field.type === 'button') return;
+
+       // Get validity
+       var validity = field.validity;
+
+       // If valid, return null
+       if (validity.valid) return;
+
+       // If field is required and empty
+       if (validity.valueMissing) return 'Please fill out this field.';
+
+       // If not the right type
+       if (validity.typeMismatch) {
+
+           // Email
+           if (field.type === 'email') return 'Please enter an email address.';
+
+           // URL
+           if (field.type === 'url') return 'Please enter a URL.';
+
+       }
+
+       // If too short
+       if (validity.tooShort) return 'Please lengthen this text to ' + field.getAttribute('minLength') + ' characters or more. You are currently using ' + field.value.length + ' characters.';
+
+       // If too long
+       if (validity.tooLong) return 'Please shorten this text to no more than ' + field.getAttribute('maxLength') + ' characters. You are currently using ' + field.value.length + ' characters.';
+
+       // If pattern doesn't match
+       if (validity.patternMismatch) {
+
+           // If pattern info is included, return custom error
+           if (field.hasAttribute('title')) return field.getAttribute('title');
+
+           // Otherwise, generic error
+           return 'Please match the requested format.';
+
+       }
+
+       // If number input isn't a number
+       if (validity.badInput) return 'Please enter a number.';
+
+       // If a number value doesn't match the step interval
+       if (validity.stepMismatch) return 'Please select a valid value.';
+
+       // If a number field is over the max
+       if (validity.rangeOverflow) return 'Please select a value that is no more than ' + field.getAttribute('max') + '.';
+
+       // If a number field is below the min
+       if (validity.rangeUnderflow) return 'Please select a value that is no less than ' + field.getAttribute('min') + '.';
+
+       // If all else fails, return a generic catchall error
+       return 'The value you entered for this field is invalid.';
+
+   };
+
+
+   // Show an error message
+   var showError = function (field, error) {
+
+       // Add error class to field
+       field.classList.add('error');
+   
+       // If the field is a radio button and part of a group, error all and get the last item in the group
+       if (field.type === 'radio' && field.name) {
+           var group = field.form.querySelectorAll('[name="' + field.name + '"]');
+           if (group.length > 0) {
+               for (var i = 0; i < group.length; i++) {
+                   group[i].classList.add('error');
+               }
+               field = group[group.length - 1];
+           }
+       }
+
+       // Get field id or name
+       var id = field.id || field.name;
+       if (!id) return;
+
+       // Check if error message field already exists
+       // If not, create one
+       var message = field.form.querySelector('.error-message#error-for-' + id );
+       if (!message) {
+           message = document.createElement('div');
+           message.className = 'error-message';
+           message.id = 'error-for-' + id;
+           
+           // If the field is a radio button or checkbox, insert error after the label
+           var label;
+           if (field.type === 'radio' || field.type ==='checkbox') {
+               label = field.form.querySelector('label[for="' + id + '"]') || field.parentNode;
+               if (label) {
+                   label.parentNode.insertBefore( message, label.nextSibling );
+               }
+           }
+
+           // Otherwise, insert it after the field
+           if (!label) {
+               field.parentNode.insertBefore( message, field.nextSibling );
+           }
+
+       }
+       
+       // Add ARIA role to the field
+       field.setAttribute('aria-describedby', 'error-for-' + id);
+
+       // Update error message
+       message.innerHTML = error;
+
+       // Show error message
+       message.style.display = 'block';
+       message.style.visibility = 'visible';
+
+   };
+
+
+   // Remove the error message
+   var removeError = function (field) {
+
+       // Remove error class to field
+       field.classList.remove('error');
+       
+       // Remove ARIA role from the field
+       field.removeAttribute('aria-describedby');
+
+       // If the field is a radio button and part of a group, remove error from all and get the last item in the group
+       if (field.type === 'radio' && field.name) {
+           var group = field.form.querySelectorAll('[name="' + field.name + '"]');
+           if (group.length > 0) {
+               for (var i = 0; i < group.length; i++) {
+                   group[i].classList.remove('error');
+               }
+               field = group[group.length - 1];
+           }
+       }
+
+       // Get field id or name
+       var id = field.id || field.name;
+       if (!id) return;
+       
+
+       // Check if an error message is in the DOM
+       var message = field.form.querySelector('.error-message#error-for-' + id + '');
+       if (!message) return;
+
+       // If so, hide it
+       message.innerHTML = '';
+       message.style.display = 'none';
+       message.style.visibility = 'hidden';
+
+   };
+
+
+   // Listen to all blur events
+   document.addEventListener('blur', function (event) {
+
+       // Only run if the field is in a form to be validated
+       if (!event.target.form.classList.contains('validate')) return;
+
+       // Validate the field
+       var error = hasError(event.target);
+   
+       // If there's an error, show it
+       if (error) {
+           showError(event.target, error);
+           return;
+       }
+
+       // Otherwise, remove any existing error message
+       removeError(event.target);
+
+   }, true);
+
+
+   // Check all fields on submit
+   document.addEventListener('submit', function (event) {
+
+       // Only run on forms flagged for validation
+       if (!event.target.classList.contains('validate')) return;
+
+       // Get all of the form elements
+       var fields = event.target.elements;
+
+       // Validate each field
+       // Store the first field with an error to a variable so we can bring it into focus later
+       var error, hasErrors;
+       for (var i = 0; i < fields.length; i++) {
+           error = hasError(fields[i]);
+           if (error) {
+               showError(fields[i], error);
+               if (!hasErrors) {
+                   hasErrors = fields[i];
+               }
+           }
+       }
+
+       // If there are errrors, don't submit form and focus on first element with error
+       if (hasErrors) {
+           event.preventDefault();
+           hasErrors.focus();
+       }
+
+       // Otherwise, let the form submit normally
+       // You could also bolt in an Ajax form submit process here
+
+   }, false);
+</script>
+<!-- End of JavaScript Email Constraint Validation -->
+
+
+<!-- Begin MailChimp Signup Form -->
+<div id="mailchimp">
+   <form action="https://ealizadeh.us10.list-manage.com/subscribe/post?u=912b9dacf23679bd0a6e46b22&amp;id=31485d9fc5" method="post" id="mc-embedded-subscribe-form" class="validate" style="max-width:450px;margin:auto" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
+       <!-- <i class="fa fa-envelope icon"> </i> -->    
+       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Subscribe</h3>
+           <!-- <div class="input-icons">  -->
+                       <!-- <div class="input-icons">  -->
+           <div class="clear">
+               <i class="fa fa-envelope"> </i>
+               <input class="required email" type="email" size="17" placeholder="E-mail Address" name="EMAIL" id="mce-EMAIL" title="The domain portion of the email address is invalid (the portion after the @)." pattern="^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*(\.\w{2,})+$" required="">
+           </div>
+           <div class="clear">
+               <i class="fa fa-user"> </i> 
+               <input class="name" type="text" size="17" placeholder="Name (Optional)" name="FNAME" id="mce-FNAME">
+           </div>
+
+           <!-- <div class="footnote"> -->
+               <p class="footnote"> No Spam. Unsubscribe anytime.</p>
+           <!-- </div> -->
+       <div id="mce-responses" class="clear">
+           <div class="response" id="mce-error-response" style="display:none"></div>
+           <div class="response" id="mce-success-response" style="display:none"></div>
+       </div>
+       
+       <!-- <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_f2d244c0df42a0431bd08ddea_aeaa9dd034" tabindex="-1" value=""></div> -->
+       <div class="clear">
+           <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+       </div>
+   </form>
+</div>
+<!--End of MailChimp Signup Form-->
+</div></div>
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
@@ -489,17 +817,16 @@ Important
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{alizadeh2021,
-  author = {Essi Alizadeh},
-  editor = {},
+  author = {Esmaeil Alizadeh},
   title = {Step-by-Step {Deployment} of a {Free} {PostgreSQL} {Database}
     {And} {Data} {Ingestion}},
   date = {2021-06-26},
-  url = {https://ealizadeh.com/blog/deploy-postgresql-db-heroku},
+  url = {https://new.ealizadeh.com/blog/deploy-postgresql-db-heroku},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-alizadeh2021" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
-Essi Alizadeh. 2021. <span>“Step-by-Step Deployment of a Free PostgreSQL
-Database And Data Ingestion.”</span> June 26, 2021. <a href="https://ealizadeh.com/blog/deploy-postgresql-db-heroku">https://ealizadeh.com/blog/deploy-postgresql-db-heroku</a>.
+Esmaeil Alizadeh. 2021. <span>“Step-by-Step Deployment of a Free
+PostgreSQL Database And Data Ingestion.”</span> June 26, 2021. <a href="https://new.ealizadeh.com/blog/deploy-postgresql-db-heroku">https://new.ealizadeh.com/blog/deploy-postgresql-db-heroku</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -542,7 +869,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -578,24 +922,42 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>

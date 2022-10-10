@@ -1,107 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ealizadeh.com/about.html</loc>
-    <lastmod>2022-10-10T18:42:00.766Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/3-ways-to-add-images-to-your-jupyter-notebook/index.html</loc>
+    <lastmod>2022-10-10T21:28:15.254Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/post-with-code/index.html</loc>
-    <lastmod>2022-09-15T03:30:54.600Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/automate-workflow-github-cron/index.html</loc>
+    <lastmod>2022-10-10T21:28:17.673Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/welcome/index.html</loc>
-    <lastmod>2022-09-15T02:23:12.994Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/cognitive-errors-art-of-thinking-clearly/index.html</loc>
+    <lastmod>2022-10-10T21:28:19.683Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog.html</loc>
-    <lastmod>2022-10-10T19:30:53.945Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/dbt-tutorial/index.html</loc>
+    <lastmod>2022-10-10T21:28:22.058Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/index.html</loc>
-    <lastmod>2022-10-10T19:28:36.613Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/deploy-postgresql-db-heroku/index.html</loc>
+    <lastmod>2022-10-10T21:28:23.933Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/automate-github-actions-cron/index.html</loc>
-    <lastmod>2022-09-16T03:00:27.728Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/guide-to-estimates-in-exploratory-data-analysis/index.html</loc>
+    <lastmod>2022-10-10T21:28:25.874Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/automate-workflow-github-cron/index.html</loc>
-    <lastmod>2022-10-10T19:28:25.090Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html</loc>
+    <lastmod>2022-10-10T21:28:27.560Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/pandas-tutor-tool/index.html</loc>
-    <lastmod>2022-10-10T19:24:31.375Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/how-to-publish-your-python-package-with-just-2-commands/index.html</loc>
+    <lastmod>2022-10-10T21:28:29.004Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/dbt-tutorial/index.html</loc>
-    <lastmod>2022-10-10T20:57:46.939Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/introduction-to-dynamic-time-warping/index.html</loc>
+    <lastmod>2022-10-10T21:28:31.167Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/knn-and-kmeans/index.html</loc>
-    <lastmod>2022-10-10T04:49:01.488Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/knn-and-kmeans/index.html</loc>
+    <lastmod>2022-10-10T21:28:32.694Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/3-ways-to-add-images-to-your-jupyter-notebook/index.html</loc>
-    <lastmod>2022-09-29T02:17:22.921Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/mlxtend-library-for-data-science/index.html</loc>
+    <lastmod>2022-10-10T21:28:34.939Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/cognitive-errors-art-of-thinking-clearly/index.html</loc>
-    <lastmod>2022-10-10T18:28:35.552Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/neural-prophet-library/index.html</loc>
+    <lastmod>2022-10-10T21:28:36.506Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/deploy-postgresql-db-heroku/index.html</loc>
-    <lastmod>2022-09-29T02:17:41.577Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/non-minimum-phase-systems/index.html</loc>
+    <lastmod>2022-10-10T21:28:38.074Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/guide-to-estimates-in-exploratory-data-analysis/index.html</loc>
-    <lastmod>2022-09-29T03:11:00.335Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/pandas-tutor-tool/index.html</loc>
+    <lastmod>2022-10-10T21:28:40.217Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/guide-to-python-env-pkg-dependency-using-conda-poetry/index.html</loc>
-    <lastmod>2022-10-01T02:37:05.552Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/sdv-library-for-modeling-datasets/index.html</loc>
+    <lastmod>2022-10-10T21:28:41.944Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/how-to-publish-your-python-package-with-just-2-commands/index.html</loc>
-    <lastmod>2022-10-01T03:16:05.655Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/statistics-data-vs-sampling-distribution/index.html</loc>
+    <lastmod>2022-10-10T21:28:43.611Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/introduction-to-dynamic-time-warping/index.html</loc>
-    <lastmod>2022-10-05T02:35:35.328Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog/working-with-missing-values-in-pandas-and-numpy/index.html</loc>
+    <lastmod>2022-10-10T21:28:45.438Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/mlxtend-library-for-data-science/index.html</loc>
-    <lastmod>2022-10-10T19:31:14.476Z</lastmod>
+    <loc>https://new.ealizadeh.com/blog.html</loc>
+    <lastmod>2022-10-10T21:28:55.875Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/neural-prophet-library/index.html</loc>
-    <lastmod>2022-10-10T04:26:02.871Z</lastmod>
+    <loc>https://new.ealizadeh.com/contact_me.html</loc>
+    <lastmod>2022-10-10T21:28:57.238Z</lastmod>
   </url>
   <url>
-    <loc>https://ealizadeh.com/blog/non-minimum-phase-systems/index.html</loc>
-    <lastmod>2022-10-10T04:24:38.153Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ealizadeh.com/blog/sdv-library-for-modeling-datasets/index.html</loc>
-    <lastmod>2022-10-10T04:24:39.856Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ealizadeh.com/blog/statistics-data-vs-sampling-distribution/index.html</loc>
-    <lastmod>2022-10-10T04:42:36.873Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ealizadeh.com/blog/working-with-missing-values-in-pandas-and-numpy/index.html</loc>
-    <lastmod>2022-10-10T04:41:46.316Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ealizadeh.com/contact-me.html</loc>
-    <lastmod>2022-10-10T18:43:48.885Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ealizadeh.com/index_old.html</loc>
-    <lastmod>2022-10-10T20:58:20.365Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ealizadeh.com/contact_me.html</loc>
-    <lastmod>2022-10-10T18:53:17.485Z</lastmod>
+    <loc>https://new.ealizadeh.com/index.html</loc>
+    <lastmod>2022-10-10T21:28:58.926Z</lastmod>
   </url>
 </urlset>
