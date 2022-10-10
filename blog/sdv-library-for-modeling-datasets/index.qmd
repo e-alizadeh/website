@@ -1,60 +1,90 @@
-# Synthetic Data Vault (SDV): A Python Library for Dataset Modeling
-
-Created: March 4, 2021 7:28 PM
-Last Updated: February 25, 2021
-Last updated: September 7, 2022 10:13 PM
-Reading Time: 6 min read
-Show on Homepage?: No
-Tags: Data Modeling, Data Science, Machine Learning, Python Library, Time Series Analysis
+---
+title: "Synthetic Data Vault (SDV): A Python Library for Dataset Modeling"
+subtitle: "A tool to generate complex datasets using statistical & machine-learning models."
+date: "2020-11-09"
+categories: [Data Modeling, Data Science, Machine Learning, Python Library, Time Series Analysis]
+image: "img/_featured_image.jpg"
 id: 4
+slug: "sdv-library-for-modeling-datasets"
+---
 
-![https://ealizadeh.com/wp-content/uploads/2020/11/BP04_SDV_featured_image.png](https://ealizadeh.com/wp-content/uploads/2020/11/BP04_SDV_featured_image.png)
+![](img/_featured_image.png){fig-alt="Featured image of the post"}
 
-<aside>
-👉 This article is also published on [**Towards Data Science blog**](https://towardsdatascience.com/synthetic-data-vault-sdv-a-python-library-for-dataset-modeling-b48c406e7398).
+:::{.callout-note}
+👉 This article is also published on [**Towards Data Science blog**](https://towardsdatascience.com/synthetic-data-vault-sdv-a-python-library-for-dataset-modeling-b48c406e7398).
+:::
 
-</aside>
 
-In data science, you usually need a realistic dataset to test your proof of concept. Creating fake data that captures the behavior of the actual data may sometimes be a rather tricky task. Several python packages try to achieve this task. Few popular python packages are **[Faker](https://github.com/joke2k/faker/)**, **[Mimesis](https://github.com/lk-geimfari/mimesis)**. However, there are mostly generating simple data like generating names, addresses, emails, *etc*.
+In data science, you usually need a realistic dataset to test your proof of concept.
+Creating fake data that captures the behavior of the actual data may sometimes be a rather tricky task.
+Several python packages try to achieve this task.
+Few popular python packages are [Faker](https://github.com/joke2k/faker/), [Mimesis](https://github.com/lk-geimfari/mimesis).
+However, there are mostly generating simple data like generating names, addresses, emails, *etc*.
 
-To create data that captures the attributes of a complex dataset, like having time-series that somehow capture the actual data’s statistical properties, we will need a tool that generates data using different approaches. [Synthetic Data Vault (SDV)](https://sdv.dev/) python library is a tool that models complex datasets using statistical and machine learning models. This tool can be a great new tool in the toolbox of anyone who works with data and modeling.
+To create data that captures the attributes of a complex dataset, like having time-series that somehow capture the actual data's statistical properties, we will need a tool that generates data using different approaches.
+[Synthetic Data Vault (SDV)](https://sdv.dev/) python library is a tool that models complex datasets using statistical and machine learning models.
+This tool can be a great new tool in the toolbox of anyone who works with data and modeling.
 
 ## Why this library?
 
-The main reason I’m interested in this tool is for *system testing*: It’s much better to have datasets that are generated from the same actual underlying process. This way we can test our work/model in a realistic scenario rather than having unrealistic cases. There are other reasons why we need synthetic data such as *data understanding, data compression, data augmentation*, and *data privacy* [[1]](Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a.md)*.*
+The main reason I'm interested in this tool is for *system testing*: It's much better to have datasets that are generated from the same actual underlying process.
+This way we can test our work/model in a realistic scenario rather than having unrealistic cases.
+There are other reasons why we need synthetic data such as *data understanding, data compression, data augmentation*, and *data privacy* [see @thesis:xu2020synthesizing].
 
-The [Synthetic Data Vault (SDV)](https://sdv.dev/) was first introduced in the paper “[The Synthetic data vault](https://dai.lids.mit.edu/wp-content/uploads/2018/03/SDV.pdf)“, then used in the context of generative modeling in the master thesis “[The Synthetic Data Vault: Generative Modeling for Relational Databases](https://dspace.mit.edu/handle/1721.1/109616)” by Neha Patki. Finally, the SDV library was developed as a part of Andrew Montanez’s master thesis “[SDV: An Open Source Library for Synthetic Data Generation](https://dai.lids.mit.edu/wp-content/uploads/2018/12/Andrew_MEng.pdf)“. Another master thesis to add new features to SDV was done by Lei Xu “[Synthesizing Tabular Data using conditional GAN](https://dai.lids.mit.edu/wp-content/uploads/2020/02/Lei_SMThesis_neo.pdf)“.
+The [Synthetic Data Vault (SDV)](https://sdv.dev/) was first introduced in the paper ["The Synthetic data vault"](https://dai.lids.mit.edu/wp-content/uploads/2018/03/SDV.pdf), then used in the context of generative modeling in the master thesis ["The Synthetic Data Vault: Generative Modeling for Relational Databases"](https://dspace.mit.edu/handle/1721.1/109616)” by Neha Patki.
+Finally, the SDV library was developed as a part of Andrew Montanez's master thesis ["SDV: An Open Source Library for Synthetic Data Generation"](https://dai.lids.mit.edu/wp-content/uploads/2018/12/Andrew_MEng.pdf).
+Another master thesis to add new features to SDV was done by Lei Xu ["Synthesizing Tabular Data using conditional GAN"](https://dai.lids.mit.edu/wp-content/uploads/2020/02/Lei_SMThesis_neo.pdf).
 
 All these work and research were done in the MIT Data-to-AI laboratory under the supervision of Kalyan Veeramachaneni – a principal research scientist at MIT Laboratory for Information and Decision Systems (LIDS, MIT).
 
-The reason I’m bringing the history of the SDV is to appreciate the amount of work and research that has gone behind this library. An interesting article talking about the potential of using this tool, particularly in data privacy is available [here](https://news.mit.edu/2020/real-promise-synthetic-data-1016).
+The reason I'm bringing the history of the SDV is to appreciate the amount of work and research that has gone behind this library.
+An interesting article talking about the potential of using this tool, particularly in data privacy is available [here](https://news.mit.edu/2020/real-promise-synthetic-data-1016).
 
 # SDV Library
 
-The workflow of this library is shown below. A user provides the data and the schema and then fits a model to the data. At last, new synthetic data is obtained from the fitted model [[2]](Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a.md). Moreover, the SDV library allows the user to save a fitted model (`model.save("model.pkl")`) for any future use.
+The workflow of this library is shown below.
+A user provides the data and the schema and then fits a model to the data.
+At last, new synthetic data is obtained from the fitted model [see @patki2016sdv].
+Moreover, the SDV library allows the user to save a fitted model (`model.save("model.pkl")`) for any future use.
 
-![The SDV workflow (reprinted from [2])](Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Untitled.png)
-
-The SDV workflow (reprinted from [2])
+![The SDV workflow (reprinted from [see @patki2016sdv])](img/sdv_workflow_reprinted.png){fig-alt="The SDV workflow"}
 
 ## Time-Series Data Modeling using PAR
 
-A probabilistic autoregressive (PAR) model is used to model multi-type multivariate time-series data. The SDV library has this model implemented in the `PAR` class (from time-series module).
+A probabilistic autoregressive (PAR) model is used to model multi-type multivariate time-series data.
+The SDV library has this model implemented in the `PAR` class (from time-series module).
 
-Let’s work out an example to explain different arguments of `PAR` class. We are going to work with a time-series of temperatures in multiple cities. The dataset will have the following column: *Date*, *City*, *Measuring Device*, *Where, Noise*.
+Let's work out an example to explain different arguments of `PAR` class.
+We are going to work with a time-series of temperatures in multiple cities.
+The dataset will have the following column: *Date*, *City*, *Measuring Device*, *Where, Noise*.
 
 In `PAR`, there are four types of columns considered in a dataset.
 
-1. **Sequence Index**: This is the data column with the row dependencies (should be sorted like datetime or numeric values). In time-series, this is usually the time axis. In our example, the sequence index will be the Date column.
-2. **Entity Columns**: These columns are the abstract entities that form the group of measurements, where each group is a time-series (hence the rows within each group should be sorted). However, rows of different entities are independent of each other. In our example, the entity column(s) will be only the City column. By the way, we can have more columns as the argument type should be a list.
-3. **Context Columns**: These columns provide information about the time-series’ entities and will not change over time. In other words, the context columns should be constant within groups. In our example, Measuring Device and Where are the context columns.
-4. **Data Columns**: Any other columns that do not belong to the above categories will be considered data columns. The PAR class does not have an argument for assigning data columns. So, the remaining columns that are not listed in any of the previous three categories will automatically be considered data columns. In our example, the *Noise* column is the data column.
+1. Sequence Index: This is the data column with the row dependencies (should be sorted like datetime or numeric values).
+In time-series, this is usually the time axis.
+In our example, the sequence index will be the Date column.
+
+2. Entity Columns: These columns are the abstract entities that form the group of measurements, where each group is a time-series (hence the rows within each group should be sorted).
+However, rows of different entities are independent of each other.
+In our example, the entity column(s) will be only the City column.
+By the way, we can have more columns as the argument type should be a list.
+
+3. Context Columns: These columns provide information about the time-series' entities and will not change over time.
+In other words, the context columns should be constant within groups.
+In our example, Measuring Device and Where are the context columns.
+
+4. Data Columns: Any other columns that do not belong to the above categories will be considered data columns.
+The PAR class does not have an argument for assigning data columns.
+So, the remaining columns that are not listed in any of the previous three categories will automatically be considered data columns.
+In our example, the *Noise* column is the data column.
 
 ### Sample code
 
-### **Example 1: Single Time-Series (one entity)**
+### Example 1: Single Time-Series (one entity)
 
-The PAR model for time series is implemented in `PAR()` class from `sdv.timeseries` module. If we want to model a single time-series data, then we only need to set the `sequence_index` argument of the `PAR()` class to the datetime column (the column illustrating the order of the time-series sequence). 
+The PAR model for time series is implemented in `PAR()` class from `sdv.timeseries` module.
+If we want to model a single time-series data, then we only need to set the `sequence_index` argument of the `PAR()` class to the datetime column (the column illustrating the order of the time-series sequence).
+
 
 ```python
 import pandas as pd
@@ -68,7 +98,9 @@ model = PAR(sequence_index="Date")
 model.fit(actual_data)
 model.save("data_generation_model_single_city.pkl")
 
-# After a model is trained and pickled. We can comment above code and just load the model next time. 
+# After a model is trained and pickled.
+We can comment above code and just load the model next time.
+
 model = PAR.load("data_generation_model_single_city.pkl")
 
 # Generate new data
@@ -84,11 +116,13 @@ print(stat_info1.join(stat_info2))
 stat_info1.join(stat_info2)
 ```
 
-![Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Untitled%201.png](Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Untitled%201.png)
+![Comparison of summary statistics between real data and the PAR generated data.](img/ex1_summary_stats_real_vs_generated_data.png){fig-alt="Comparison of summary statistics between real data and the PAR generated data."}
 
-### **Example 2: Time-series with multiple entities**
+### Example 2: Time-series with multiple entities
 
-The SDV is capable of having multiple entities meaning multiple time-series. In our example, we have temperature measurements for multiple cities. In other words, each city has a group of measurements that will be treated independently.
+The SDV is capable of having multiple entities meaning multiple time-series.
+In our example, we have temperature measurements for multiple cities.
+In other words, each city has a group of measurements that will be treated independently.
 
 ```python
 import pandas as pd
@@ -106,7 +140,8 @@ model = PAR(
 model.fit(all_data)
 model.save("data_generation_model_multiple_city.pkl")
 
-# After a model is trained and pickled. We can comment above code and just load the model next time. 
+# After a model is trained and pickled. We can comment above code and just load the model next time.
+
 model = PAR.load("data_generation_model_multiple_city.pkl")
 
 # Generate new data for two fake cities
@@ -124,17 +159,21 @@ stat_comparison = stat_info1.join(stat_info2).join(stat_info3).join(stat_info4).
 stat_comparison
 ```
 
-![Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Untitled%202.png](Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Untitled%202.png)
+![Comparison of summary statistics between real data and the PAR generated data.](img/ex2_summary_stats_real_vs_generated_data.png){fig-alt="Comparison of summary statistics between real data and the PAR generated data."}
 
 A detailed example of time-series modeling using the PAR model can be found [here](https://sdv.dev/SDV/user_guides/timeseries/par.html).
 
 ## Relational Data
 
-SDV can model relational datasets by generating data after you specify the data schema using `sdv.Metadata()`. Moreover, you can plot the [**entity-relationship (ER) diagram**](https://www.guru99.com/er-diagram-tutorial-dbms.html) by using the library built-in function. After the metadata is ready, new data can be generated using the Hierarchical Modeling Algorithm. You can find more information [**here**](https://sdv.dev/SDV/user_guides/relational/index.html).
+SDV can model relational datasets by generating data after you specify the data schema using `sdv.Metadata()`.
+Moreover, you can plot the [**entity-relationship (ER) diagram**](https://www.guru99.com/er-diagram-tutorial-dbms.html) by using the library built-in function.
+After the metadata is ready, new data can be generated using the Hierarchical Modeling Algorithm.
+You can find more information [**here**](https://sdv.dev/SDV/user_guides/relational/index.html).
 
 ## Single Table Data
 
-SDV can also model a single table dataset. It uses statistical and deep learning models that are:
+SDV can also model a single table dataset.
+It uses statistical and deep learning models that are:
 
 - A [**Gaussian Copula**](https://sdv.dev/SDV/user_guides/single_table/gaussian_copula.html#gaussian-copula) to model the multivariate distribution, and
 - A Generative Adversarial Network (GAN) to model tabular data (based on the paper “[**Modeling Tabular data using Conditional GAN**](https://arxiv.org/abs/1907.00503)“.
@@ -143,47 +182,17 @@ More information about modeling single table datasets is available [**here**](h
 
 ## Benchmarking Data
 
-The SDV library provides the ability to benchmark synthetic data generators using the [**SDGym library**](https://github.com/sdv-dev/SDGym) to evaluate the performance of synthesizer. You can find more information [**here**](https://sdv.dev/SDV/user_guides/benchmarking/single_table.html).
-
----
+The SDV library provides the ability to benchmark synthetic data generators using the [**SDGym library**](https://github.com/sdv-dev/SDGym) to evaluate the performance of synthesizer.
+You can find more information [**here**](https://sdv.dev/SDV/user_guides/benchmarking/single_table.html).
 
 # Conclusion
 
-In this post, we went over the main features of the SDV library and how useful it is in generating anonymous datasets based on realistic data. The main features are modeling single table data, time-series, relational datasets, and also data benchmarking. One point to mention here is that you need to provide a large dataset for SDV models to train with. This way, the model can generate a meaningful dataset that truly captures the real process. Give this library a try and let me know what you think?
+In this post, we went over the main features of the SDV library and how useful it is in generating anonymous datasets based on realistic data.
+The main features are modeling single table data, time-series, relational datasets, and also data benchmarking.
+One point to mention here is that you need to provide a large dataset for SDV models to train with.
+This way, the model can generate a meaningful dataset that truly captures the real process.
+Give this library a try and let me know what you think?
 
-<aside>
+:::{.callout}
 📓 You can find the notebook for this post on [GitHub](https://github.com/e-alizadeh/medium/blob/master/notebooks/SDV/SDV.ipynb).
-
-</aside>
-
----
-
-**Thanks for reading 🙏**
-
-*If you liked this post, you can join my mailing list to receive similar posts. You can follow me on [LinkedIn](https://www.linkedin.com/in/alizadehesmaeil/), [GitHub](https://github.com/e-alizadeh), [Twitter](https://twitter.com/intent/follow?screen_name=es_alizadeh&tw_p=followbutton) and [Medium](https://medium.com/@ealizadeh).*
-
-*And finally, you can find my knowledge forest 🌲 (raw digital notes) at [notes.ealizadeh.com](https://notes.ealizadeh.com/).*
-
-# **📩 Join my mailing list**
-
-[https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4](https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4)
-
----
-
-# **References**
-
-[1] Lei Xu, [Synthesizing Tabular Data using Conditional GAN](https://dai.lids.mit.edu/wp-content/uploads/2020/02/Lei_SMThesis_neo.pdf), (2020), Master thesis, MIT
-
-[2] N. Patki *et al*, [The Synthetic data vault](https://dai.lids.mit.edu/wp-content/uploads/2018/03/SDV.pdf) (2016), International Conference on Data Science and Advance Analytics (DSAA-16)
-
-[3] MIT News, [The real promise of synthetic data](https://news.mit.edu/2020/real-promise-synthetic-data-1016) (Ocotber 16, 2020)
-
----
-
-⬅️   **Previous Post** 
-
-[Blog Posts](Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Blog%20Posts%2090be1d7275d04ff6b452cd57ba789b17.csv)
-
-**➡️   Next Post**
-
-[Blog Posts](Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Blog%20Posts%20b1006b421cf943fb849245b5623887de.csv)
+:::

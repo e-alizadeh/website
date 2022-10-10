@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Essi">
+<meta name="author" content="Essi Alizadeh">
+<meta name="dcterms.date" content="2020-10-31">
 
-<title>Essi Alizadeh – index</title>
+<title>Essi Alizadeh - Synthetic Data Vault (SDV): A Python Library for Dataset Modeling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -84,6 +85,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -142,6 +162,15 @@ ga('send', {
 
 
 <link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Essi Alizadeh - Synthetic Data Vault (SDV): A Python Library for Dataset Modeling">
+<meta property="og:description" content="Why the water is cold first when you turn the hot water knob on in the shower?">
+<meta property="og:image" content="https://ealizadeh.com/blog/sdv-library-for-modeling-datasets/img/_featured_image.jpg">
+<meta property="og:site-name" content="Essi Alizadeh">
+<meta name="twitter:title" content="Essi Alizadeh - Synthetic Data Vault (SDV): A Python Library for Dataset Modeling">
+<meta name="twitter:description" content="Why the water is cold first when you turn the hot water knob on in the shower?">
+<meta name="twitter:image" content="https://ealizadeh.com/blog/sdv-library-for-modeling-datasets/img/_featured_image.jpg">
+<meta name="twitter:creator" content="@es_alizadeh">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
@@ -176,7 +205,42 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Synthetic Data Vault (SDV): A Python Library for Dataset Modeling</h1>
+            <p class="subtitle lead">Why the water is cold first when you turn the hot water knob on in the shower?</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Data Modeling</div>
+                <div class="quarto-category">Data Science</div>
+                <div class="quarto-category">Machine Learning</div>
+                <div class="quarto-category">Python Library</div>
+                <div class="quarto-category">Time Series Analysis</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Essi Alizadeh </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 31, 2020</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -184,81 +248,77 @@ ga('send', {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#synthetic-data-vault-sdv-a-python-library-for-dataset-modeling" id="toc-synthetic-data-vault-sdv-a-python-library-for-dataset-modeling" class="nav-link active" data-scroll-target="#synthetic-data-vault-sdv-a-python-library-for-dataset-modeling">Synthetic Data Vault (SDV): A Python Library for Dataset Modeling</a>
-  <ul>
-  <li><a href="#why-this-library" id="toc-why-this-library" class="nav-link" data-scroll-target="#why-this-library">Why this library?</a></li>
-  </ul></li>
+  <li><a href="#why-this-library" id="toc-why-this-library" class="nav-link active" data-scroll-target="#why-this-library">Why this library?</a></li>
   <li><a href="#sdv-library" id="toc-sdv-library" class="nav-link" data-scroll-target="#sdv-library">SDV Library</a>
   <ul>
   <li><a href="#time-series-data-modeling-using-par" id="toc-time-series-data-modeling-using-par" class="nav-link" data-scroll-target="#time-series-data-modeling-using-par">Time-Series Data Modeling using PAR</a>
   <ul class="collapse">
   <li><a href="#sample-code" id="toc-sample-code" class="nav-link" data-scroll-target="#sample-code">Sample code</a></li>
-  <li><a href="#example-1-single-time-series-one-entity" id="toc-example-1-single-time-series-one-entity" class="nav-link" data-scroll-target="#example-1-single-time-series-one-entity"><strong>Example 1: Single Time-Series (one entity)</strong></a></li>
-  <li><a href="#example-2-time-series-with-multiple-entities" id="toc-example-2-time-series-with-multiple-entities" class="nav-link" data-scroll-target="#example-2-time-series-with-multiple-entities"><strong>Example 2: Time-series with multiple entities</strong></a></li>
+  <li><a href="#example-1-single-time-series-one-entity" id="toc-example-1-single-time-series-one-entity" class="nav-link" data-scroll-target="#example-1-single-time-series-one-entity">Example 1: Single Time-Series (one entity)</a></li>
+  <li><a href="#example-2-time-series-with-multiple-entities" id="toc-example-2-time-series-with-multiple-entities" class="nav-link" data-scroll-target="#example-2-time-series-with-multiple-entities">Example 2: Time-series with multiple entities</a></li>
   </ul></li>
   <li><a href="#relational-data" id="toc-relational-data" class="nav-link" data-scroll-target="#relational-data">Relational Data</a></li>
   <li><a href="#single-table-data" id="toc-single-table-data" class="nav-link" data-scroll-target="#single-table-data">Single Table Data</a></li>
   <li><a href="#benchmarking-data" id="toc-benchmarking-data" class="nav-link" data-scroll-target="#benchmarking-data">Benchmarking Data</a></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#join-my-mailing-list" id="toc-join-my-mailing-list" class="nav-link" data-scroll-target="#join-my-mailing-list"><strong>📩 Join my mailing list</strong></a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><strong>References</strong></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<section id="synthetic-data-vault-sdv-a-python-library-for-dataset-modeling" class="level1 page-columns page-full">
-<h1>Synthetic Data Vault (SDV): A Python Library for Dataset Modeling</h1>
-<p>Created: March 4, 2021 7:28 PM Last Updated: February 25, 2021 Last updated: September 7, 2022 10:13 PM Reading Time: 6 min read Show on Homepage?: No Tags: Data Modeling, Data Science, Machine Learning, Python Library, Time Series Analysis id: 4</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://ealizadeh.com/wp-content/uploads/2020/11/BP04_SDV_featured_image.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">https://ealizadeh.com/wp-content/uploads/2020/11/BP04_SDV_featured_image.png</figcaption><p></p>
-</figure>
+
+<p><img src="img/_featured_image.png" class="img-fluid" alt="Featured image of the post"></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<aside>
-<p>👉 This article is also published on <a href="https://towardsdatascience.com/synthetic-data-vault-sdv-a-python-library-for-dataset-modeling-b48c406e7398"><strong>Towards Data Science blog</strong></a>.</p>
-</aside>
-<p>In data science, you usually need a realistic dataset to test your proof of concept. Creating fake data that captures the behavior of the actual data may sometimes be a rather tricky task. Several python packages try to achieve this task. Few popular python packages are&nbsp;<strong><a href="https://github.com/joke2k/faker/">Faker</a></strong>,&nbsp;<strong><a href="https://github.com/lk-geimfari/mimesis">Mimesis</a></strong>. However, there are mostly generating simple data like generating names, addresses, emails,&nbsp;<em>etc</em>.</p>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>👉 This article is also published on&nbsp;<a href="https://towardsdatascience.com/synthetic-data-vault-sdv-a-python-library-for-dataset-modeling-b48c406e7398"><strong>Towards Data Science blog</strong></a>.</p>
+</div>
+</div>
+<p>In data science, you usually need a realistic dataset to test your proof of concept. Creating fake data that captures the behavior of the actual data may sometimes be a rather tricky task. Several python packages try to achieve this task. Few popular python packages are&nbsp;<a href="https://github.com/joke2k/faker/">Faker</a>,&nbsp;<a href="https://github.com/lk-geimfari/mimesis">Mimesis</a>. However, there are mostly generating simple data like generating names, addresses, emails,&nbsp;<em>etc</em>.</p>
 <p>To create data that captures the attributes of a complex dataset, like having time-series that somehow capture the actual data’s statistical properties, we will need a tool that generates data using different approaches. <a href="https://sdv.dev/">Synthetic Data Vault (SDV)</a> python library is a tool that models complex datasets using statistical and machine learning models. This tool can be a great new tool in the toolbox of anyone who works with data and modeling.</p>
 <section id="why-this-library" class="level2">
 <h2 class="anchored" data-anchor-id="why-this-library">Why this library?</h2>
-<p>The main reason I’m interested in this tool is for&nbsp;<em>system testing</em>: It’s much better to have datasets that are generated from the same actual underlying process. This way we can test our work/model in a realistic scenario rather than having unrealistic cases. There are other reasons why we need synthetic data such as <em>data understanding, data compression, data augmentation</em>, and <em>data privacy</em> <a href="Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a.md">[1]</a><em>.</em></p>
-<p>The&nbsp;<a href="https://sdv.dev/">Synthetic Data Vault (SDV)</a>&nbsp;was first introduced in the paper&nbsp;“<a href="https://dai.lids.mit.edu/wp-content/uploads/2018/03/SDV.pdf">The Synthetic data vault</a>“, then used in the context of generative modeling in the master thesis “<a href="https://dspace.mit.edu/handle/1721.1/109616">The Synthetic Data Vault: Generative Modeling for Relational Databases</a>”&nbsp;by Neha Patki. Finally, the SDV library was developed as a part of Andrew Montanez’s master thesis&nbsp;“<a href="https://dai.lids.mit.edu/wp-content/uploads/2018/12/Andrew_MEng.pdf">SDV: An Open Source Library for Synthetic Data Generation</a>“. Another master thesis to add new features to SDV was done by Lei Xu&nbsp;“<a href="https://dai.lids.mit.edu/wp-content/uploads/2020/02/Lei_SMThesis_neo.pdf">Synthesizing Tabular Data using conditional GAN</a>“.</p>
+<p>The main reason I’m interested in this tool is for&nbsp;<em>system testing</em>: It’s much better to have datasets that are generated from the same actual underlying process. This way we can test our work/model in a realistic scenario rather than having unrealistic cases. There are other reasons why we need synthetic data such as <em>data understanding, data compression, data augmentation</em>, and <em>data privacy</em> <span class="citation" data-cites="thesis:xu2020synthesizing">(see <a href="#ref-thesis:xu2020synthesizing" role="doc-biblioref">Xu 2020</a>)</span>.</p>
+<p>The&nbsp;<a href="https://sdv.dev/">Synthetic Data Vault (SDV)</a>&nbsp;was first introduced in the paper&nbsp;<a href="https://dai.lids.mit.edu/wp-content/uploads/2018/03/SDV.pdf">“The Synthetic data vault”</a>, then used in the context of generative modeling in the master thesis <a href="https://dspace.mit.edu/handle/1721.1/109616">“The Synthetic Data Vault: Generative Modeling for Relational Databases”</a>”&nbsp;by Neha Patki. Finally, the SDV library was developed as a part of Andrew Montanez’s master thesis <a href="https://dai.lids.mit.edu/wp-content/uploads/2018/12/Andrew_MEng.pdf">“SDV: An Open Source Library for Synthetic Data Generation”</a>. Another master thesis to add new features to SDV was done by Lei Xu&nbsp;<a href="https://dai.lids.mit.edu/wp-content/uploads/2020/02/Lei_SMThesis_neo.pdf">“Synthesizing Tabular Data using conditional GAN”</a>.</p>
 <p>All these work and research were done in the MIT Data-to-AI laboratory under the supervision of Kalyan Veeramachaneni – a principal research scientist at MIT Laboratory for Information and Decision Systems (LIDS, MIT).</p>
 <p>The reason I’m bringing the history of the SDV is to appreciate the amount of work and research that has gone behind this library. An interesting article talking about the potential of using this tool, particularly in data privacy is available <a href="https://news.mit.edu/2020/real-promise-synthetic-data-1016">here</a>.</p>
 </section>
-</section>
 <section id="sdv-library" class="level1">
 <h1>SDV Library</h1>
-<p>The workflow of this library is shown below. A user provides the data and the schema and then fits a model to the data. At last, new synthetic data is obtained from the fitted model <a href="Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a.md">[2]</a>. Moreover, the SDV library allows the user to save a fitted model (<code>model.save("model.pkl")</code>) for any future use.</p>
+<p>The workflow of this library is shown below. A user provides the data and the schema and then fits a model to the data. At last, new synthetic data is obtained from the fitted model <span class="citation" data-cites="patki2016sdv">(see <a href="#ref-patki2016sdv" role="doc-biblioref">Patki, Wedge, and Veeramachaneni 2016</a>)</span>. Moreover, the SDV library allows the user to save a fitted model (<code>model.save("model.pkl")</code>) for any future use.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Untitled.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">The SDV workflow (reprinted from [2])</figcaption><p></p>
+<p><img src="img/sdv_workflow_reprinted.png" class="img-fluid figure-img" alt="The SDV workflow"></p>
+<p></p><figcaption class="figure-caption">The SDV workflow (reprinted from <span class="citation" data-cites="patki2016sdv">(see <a href="#ref-patki2016sdv" role="doc-biblioref">Patki, Wedge, and Veeramachaneni 2016</a>)</span>)</figcaption><p></p>
 </figure>
 </div>
-<p>The SDV workflow (reprinted from [2])</p>
 <section id="time-series-data-modeling-using-par" class="level2">
 <h2 class="anchored" data-anchor-id="time-series-data-modeling-using-par">Time-Series Data Modeling using PAR</h2>
 <p>A probabilistic autoregressive (PAR) model is used to model multi-type multivariate time-series data. The SDV library has this model implemented in&nbsp;the <code>PAR</code>&nbsp;class&nbsp;(from time-series module).</p>
 <p>Let’s work out an example to explain different arguments of&nbsp;<code>PAR</code>&nbsp;class. We are going to work with a time-series of temperatures in multiple cities. The dataset will have the following column:&nbsp;<em>Date</em>,&nbsp;<em>City</em>,&nbsp;<em>Measuring Device</em>,&nbsp;<em>Where, Noise</em>.</p>
 <p>In&nbsp;<code>PAR</code>, there are four types of columns considered in a dataset.</p>
 <ol type="1">
-<li><strong>Sequence Index</strong>: This is the data column with the row dependencies (should be sorted like datetime or numeric values). In time-series, this is usually the time axis. In our example, the sequence index will be the&nbsp;Date&nbsp;column.</li>
-<li><strong>Entity Columns</strong>: These columns are the abstract entities that form the group of measurements, where each group is a time-series (hence the rows within each group should be sorted). However, rows of different entities are independent of each other. In our example, the entity column(s) will be only the&nbsp;City&nbsp;column. By the way, we can have more columns as the argument type should be a list.</li>
-<li><strong>Context Columns</strong>: These columns provide information about the time-series’ entities and will not change over time. In other words, the&nbsp;context columns should be constant within groups. In our example,&nbsp;Measuring Device&nbsp;and&nbsp;Where&nbsp;are the context columns.</li>
-<li><strong>Data Columns</strong>: Any other columns that do not belong to the above categories will be considered data columns. The&nbsp;PAR&nbsp;class does not have an argument for assigning data columns. So, the remaining columns that are not listed in any of the previous three categories will automatically be considered data columns. In our example, the&nbsp;<em>Noise</em>&nbsp;column is the data column.</li>
+<li><p>Sequence Index: This is the data column with the row dependencies (should be sorted like datetime or numeric values). In time-series, this is usually the time axis. In our example, the sequence index will be the&nbsp;Date&nbsp;column.</p></li>
+<li><p>Entity Columns: These columns are the abstract entities that form the group of measurements, where each group is a time-series (hence the rows within each group should be sorted). However, rows of different entities are independent of each other. In our example, the entity column(s) will be only the&nbsp;City&nbsp;column. By the way, we can have more columns as the argument type should be a list.</p></li>
+<li><p>Context Columns: These columns provide information about the time-series’ entities and will not change over time. In other words, the&nbsp;context columns should be constant within groups. In our example,&nbsp;Measuring Device&nbsp;and&nbsp;Where&nbsp;are the context columns.</p></li>
+<li><p>Data Columns: Any other columns that do not belong to the above categories will be considered data columns. The&nbsp;PAR&nbsp;class does not have an argument for assigning data columns. So, the remaining columns that are not listed in any of the previous three categories will automatically be considered data columns. In our example, the&nbsp;<em>Noise</em>&nbsp;column is the data column.</p></li>
 </ol>
 <section id="sample-code" class="level3">
 <h3 class="anchored" data-anchor-id="sample-code">Sample code</h3>
 </section>
 <section id="example-1-single-time-series-one-entity" class="level3">
-<h3 class="anchored" data-anchor-id="example-1-single-time-series-one-entity"><strong>Example 1: Single Time-Series (one entity)</strong></h3>
+<h3 class="anchored" data-anchor-id="example-1-single-time-series-one-entity">Example 1: Single Time-Series (one entity)</h3>
 <p>The PAR model for time series is implemented in&nbsp;<code>PAR()</code>&nbsp;class from&nbsp;<code>sdv.timeseries</code>&nbsp;module. If we want to model a single time-series data, then we only need to set the&nbsp;<code>sequence_index</code>&nbsp;argument of the&nbsp;<code>PAR()</code>&nbsp;class to the datetime column (the column illustrating the order of the time-series sequence).</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sdv.timeseries <span class="im">import</span> PAR</span>
@@ -271,29 +331,31 @@ ga('send', {
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>model.fit(actual_data)</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>model.save(<span class="st">"data_generation_model_single_city.pkl"</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># After a model is trained and pickled. We can comment above code and just load the model next time. </span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> PAR.load(<span class="st">"data_generation_model_single_city.pkl"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># After a model is trained and pickled.</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>We can comment above code <span class="kw">and</span> just load the model <span class="bu">next</span> time.</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate new data</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> model1.sample(num_sequences<span class="op">=</span><span class="dv">1</span>)   <span class="co"># may take few seconds to generate</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>new_data[<span class="st">"Date"</span>] <span class="op">=</span> pd.to_datetime(new_data[<span class="st">"Date"</span>])</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare descriptive statistics</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>stat_info1 <span class="op">=</span> actual_data.describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="st">"Real Data"</span>})</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>stat_info2 <span class="op">=</span> new_data.describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="st">"PAR Generated Data"</span>})</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stat_info1.join(stat_info2))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> PAR.load(<span class="st">"data_generation_model_single_city.pkl"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate new data</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> model1.sample(num_sequences<span class="op">=</span><span class="dv">1</span>)   <span class="co"># may take few seconds to generate</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>new_data[<span class="st">"Date"</span>] <span class="op">=</span> pd.to_datetime(new_data[<span class="st">"Date"</span>])</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare descriptive statistics</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>stat_info1 <span class="op">=</span> actual_data.describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="st">"Real Data"</span>})</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>stat_info2 <span class="op">=</span> new_data.describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="st">"PAR Generated Data"</span>})</span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>stat_info1.join(stat_info2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(stat_info1.join(stat_info2))</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>stat_info1.join(stat_info2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Untitled%201.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Untitled%201.png</figcaption><p></p>
+<p><img src="img/ex1_summary_stats_real_vs_generated_data.png" class="img-fluid figure-img" alt="Comparison of summary statistics between real data and the PAR generated data."></p>
+<p></p><figcaption class="figure-caption">Comparison of summary statistics between real data and the PAR generated data.</figcaption><p></p>
 </figure>
 </div>
 </section>
 <section id="example-2-time-series-with-multiple-entities" class="level3">
-<h3 class="anchored" data-anchor-id="example-2-time-series-with-multiple-entities"><strong>Example 2: Time-series with multiple entities</strong></h3>
+<h3 class="anchored" data-anchor-id="example-2-time-series-with-multiple-entities">Example 2: Time-series with multiple entities</h3>
 <p>The SDV is capable of having multiple entities meaning multiple time-series. In our example, we have temperature measurements for multiple cities. In other words, each city has a group of measurements that will be treated independently.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sdv.timeseries <span class="im">import</span> PAR</span>
@@ -310,26 +372,27 @@ ga('send', {
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>model.fit(all_data)</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>model.save(<span class="st">"data_generation_model_multiple_city.pkl"</span>)</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># After a model is trained and pickled. We can comment above code and just load the model next time. </span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> PAR.load(<span class="st">"data_generation_model_multiple_city.pkl"</span>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate new data for two fake cities</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> model1.sample(num_sequences<span class="op">=</span><span class="dv">2</span>)   <span class="co"># may take few seconds to generate</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare descriptive statistics</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>stat_info1 <span class="op">=</span> all_data.describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="st">"Original Data"</span>})</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>stat_info2 <span class="op">=</span> new_cities[new_cities[<span class="st">"City"</span>] <span class="op">==</span> cities[<span class="dv">0</span>]].describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="ss">f"PAR Generated Data </span><span class="sc">{</span>cities[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>})</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>stat_info3 <span class="op">=</span> new_cities[new_cities[<span class="st">"City"</span>] <span class="op">==</span> cities[<span class="dv">1</span>]].describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="ss">f"PAR Generated Data </span><span class="sc">{</span>cities[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>})</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>stat_info4 <span class="op">=</span> all_data[all_data[<span class="st">"City"</span>] <span class="op">==</span> <span class="st">"City A"</span>].describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="st">"Original Data (City A)"</span>})</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>stat_info5 <span class="op">=</span> all_data[all_data[<span class="st">"City"</span>] <span class="op">==</span> <span class="st">"City B"</span>].describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="st">"Original Data (City B)"</span>})</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>stat_info6 <span class="op">=</span> all_data[all_data[<span class="st">"City"</span>] <span class="op">==</span> <span class="st">"City C"</span>].describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="st">"Original Data (City C)"</span>})</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>stat_comparison <span class="op">=</span> stat_info1.join(stat_info2).join(stat_info3).join(stat_info4).join(stat_info5).join(stat_info6)</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>stat_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># After a model is trained and pickled. We can comment above code and just load the model next time.</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> PAR.load(<span class="st">"data_generation_model_multiple_city.pkl"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate new data for two fake cities</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> model1.sample(num_sequences<span class="op">=</span><span class="dv">2</span>)   <span class="co"># may take few seconds to generate</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare descriptive statistics</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>stat_info1 <span class="op">=</span> all_data.describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="st">"Original Data"</span>})</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>stat_info2 <span class="op">=</span> new_cities[new_cities[<span class="st">"City"</span>] <span class="op">==</span> cities[<span class="dv">0</span>]].describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="ss">f"PAR Generated Data </span><span class="sc">{</span>cities[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>})</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>stat_info3 <span class="op">=</span> new_cities[new_cities[<span class="st">"City"</span>] <span class="op">==</span> cities[<span class="dv">1</span>]].describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="ss">f"PAR Generated Data </span><span class="sc">{</span>cities[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>})</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>stat_info4 <span class="op">=</span> all_data[all_data[<span class="st">"City"</span>] <span class="op">==</span> <span class="st">"City A"</span>].describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="st">"Original Data (City A)"</span>})</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>stat_info5 <span class="op">=</span> all_data[all_data[<span class="st">"City"</span>] <span class="op">==</span> <span class="st">"City B"</span>].describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="st">"Original Data (City B)"</span>})</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>stat_info6 <span class="op">=</span> all_data[all_data[<span class="st">"City"</span>] <span class="op">==</span> <span class="st">"City C"</span>].describe().rename(columns<span class="op">=</span>{<span class="st">"Temp"</span>: <span class="st">"Original Data (City C)"</span>})</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>stat_comparison <span class="op">=</span> stat_info1.join(stat_info2).join(stat_info3).join(stat_info4).join(stat_info5).join(stat_info6)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>stat_comparison</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Untitled%202.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Untitled%202.png</figcaption><p></p>
+<p><img src="img/ex2_summary_stats_real_vs_generated_data.png" class="img-fluid figure-img" alt="Comparison of summary statistics between real data and the PAR generated data."></p>
+<p></p><figcaption class="figure-caption">Comparison of summary statistics between real data and the PAR generated data.</figcaption><p></p>
 </figure>
 </div>
 <p>A detailed example of time-series modeling using the PAR model can be found <a href="https://sdv.dev/SDV/user_guides/timeseries/par.html">here</a>.</p>
@@ -351,47 +414,45 @@ ga('send', {
 <section id="benchmarking-data" class="level2">
 <h2 class="anchored" data-anchor-id="benchmarking-data">Benchmarking Data</h2>
 <p>The SDV library provides the ability to benchmark synthetic data generators using&nbsp;the <a href="https://github.com/sdv-dev/SDGym"><strong>SDGym library</strong></a>&nbsp;to evaluate the performance of synthesizer. You can find more information&nbsp;<a href="https://sdv.dev/SDV/user_guides/benchmarking/single_table.html"><strong>here</strong></a>.</p>
-<hr>
 </section>
 </section>
-<section id="conclusion" class="level1 page-columns page-full">
+<section id="conclusion" class="level1">
 <h1>Conclusion</h1>
 <p>In this post, we went over the main features of the SDV library and how useful it is in generating anonymous datasets based on realistic data. The main features are modeling single table data, time-series, relational datasets, and also data benchmarking. One point to mention here is that you need to provide a large dataset for SDV models to train with. This way, the model can generate a meaningful dataset that truly captures the real process. Give this library a try and let me know what you think?</p>
-<aside>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <p>📓 You can find the notebook for this post on <a href="https://github.com/e-alizadeh/medium/blob/master/notebooks/SDV/SDV.ipynb">GitHub</a>.</p>
-</aside>
-<hr>
-<p><strong>Thanks for reading 🙏</strong></p>
-<p><em>If you liked this post, you can join my mailing list to receive similar posts. You can follow me on <a href="https://www.linkedin.com/in/alizadehesmaeil/">LinkedIn</a>, <a href="https://github.com/e-alizadeh">GitHub</a>, <a href="https://twitter.com/intent/follow?screen_name=es_alizadeh&amp;tw_p=followbutton">Twitter</a> and <a href="https://medium.com/@ealizadeh">Medium</a>.</em></p>
-<p><em>And finally, you can find my knowledge forest 🌲 (raw digital notes) at <a href="https://notes.ealizadeh.com/">notes.ealizadeh.com</a>.</em></p>
-</section>
-<section id="join-my-mailing-list" class="level1">
-<h1><strong>📩 Join my mailing list</strong></h1>
-<p><a href="https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4">https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4</a></p>
-<hr>
-</section>
-<section id="references" class="level1">
-<h1><strong>References</strong></h1>
-<p>[1] Lei Xu,&nbsp;<a href="https://dai.lids.mit.edu/wp-content/uploads/2020/02/Lei_SMThesis_neo.pdf">Synthesizing Tabular Data using Conditional GAN</a>, (2020), Master thesis, MIT</p>
-<p>[2] N. Patki&nbsp;<em>et al</em>,&nbsp;<a href="https://dai.lids.mit.edu/wp-content/uploads/2018/03/SDV.pdf">The Synthetic data vault</a>&nbsp;(2016), International Conference on Data Science and Advance Analytics (DSAA-16)</p>
-<p>[3] MIT News,&nbsp;<a href="https://news.mit.edu/2020/real-promise-synthetic-data-1016">The real promise of synthetic data</a>&nbsp;(Ocotber 16, 2020)</p>
-<hr>
-<p>⬅️ <strong>Previous Post</strong></p>
-<p><a href="Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Blog%20Posts%2090be1d7275d04ff6b452cd57ba789b17.csv">Blog Posts</a></p>
-<p><strong>➡️ Next Post</strong></p>
-<p><a href="Synthetic%20Data%20Vault%20(SDV)%20A%20Python%20Library%20for%20Da%204335036dc6a34840ad641aa682aff56a/Blog%20Posts%20b1006b421cf943fb849245b5623887de.csv">Blog Posts</a></p>
+</div>
+</div>
+</div>
+
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{essi,
-  author = {Essi},
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-patki2016sdv" class="csl-entry" role="doc-biblioentry">
+Patki, Neha, Roy Wedge, and Kalyan Veeramachaneni. 2016. <span>“The Synthetic Data Vault.”</span> In <em>2016 IEEE International Conference on Data Science and Advanced Analytics (DSAA)</em>, 399–410. IEEE. <a href="https://dai.lids.mit.edu/wp-content/uploads/2018/03/SDV.pdf">https://dai.lids.mit.edu/wp-content/uploads/2018/03/SDV.pdf</a>.
+</div>
+<div id="ref-thesis:xu2020synthesizing" class="csl-entry" role="doc-biblioentry">
+Xu, Lei. 2020. <span>“Synthesizing Tabular Data Using Conditional GAN.”</span> Master’s thesis, Massachusetts Institute of Technology. <a href="https://dai.lids.mit.edu/wp-content/uploads/2020/02/Lei_SMThesis_neo.pdf">https://dai.lids.mit.edu/wp-content/uploads/2020/02/Lei_SMThesis_neo.pdf</a>.
+</div>
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{alizadeh2020,
+  author = {Essi Alizadeh},
   editor = {},
+  title = {Synthetic {Data} {Vault} {(SDV):} {A} {Python} {Library} for
+    {Dataset} {Modeling}},
+  date = {2020-10-31},
   url = {https://ealizadeh.com/blog/sdv-library-for-modeling-datasets},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-essi" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
-Essi. n.d. <a href="https://ealizadeh.com/blog/sdv-library-for-modeling-datasets">https://ealizadeh.com/blog/sdv-library-for-modeling-datasets</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-alizadeh2020" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Essi Alizadeh. 2020. <span>“Synthetic Data Vault (SDV): A Python Library
+for Dataset Modeling.”</span> October 31, 2020. <a href="https://ealizadeh.com/blog/sdv-library-for-modeling-datasets">https://ealizadeh.com/blog/sdv-library-for-modeling-datasets</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
