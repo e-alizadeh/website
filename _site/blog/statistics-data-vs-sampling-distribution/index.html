@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Essi Alizadeh">
+<meta name="dcterms.date" content="2021-01-11">
 
-<title>Essi Alizadeh – index</title>
+<title>Essi Alizadeh - Data Distribution vs.&nbsp;Sampling Distribution: What You Need to Know</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -84,6 +85,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -158,6 +178,19 @@ ga('send', {
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Essi Alizadeh - Data Distribution vs.&nbsp;Sampling Distribution: What You Need to Know">
+<meta property="og:description" content="Learn about Central Limit Theorem, Standard Error, and Bootstrapping in the context of the sampling distribution.">
+<meta property="og:image" content="https://ealizadeh.com/blog/statistics-data-vs-sampling-distribution/img/_featured_image.png">
+<meta property="og:site-name" content="Essi Alizadeh">
+<meta property="og:image:height" content="429">
+<meta property="og:image:width" content="1418">
+<meta name="twitter:title" content="Essi Alizadeh - Data Distribution vs.&nbsp;Sampling Distribution: What You Need to Know">
+<meta name="twitter:description" content="Learn about Central Limit Theorem, Standard Error, and Bootstrapping in the context of the sampling distribution.">
+<meta name="twitter:image" content="https://ealizadeh.com/blog/statistics-data-vs-sampling-distribution/img/_featured_image.png">
+<meta name="twitter:creator" content="@es_alizadeh">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image-height" content="429">
+<meta name="twitter:image-width" content="1418">
 </head>
 
 <body class="nav-fixed">
@@ -192,7 +225,41 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Data Distribution vs.&nbsp;Sampling Distribution: What You Need to Know</h1>
+            <p class="subtitle lead">Learn about Central Limit Theorem, Standard Error, and Bootstrapping in the context of the sampling distribution.</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Bootstrapping</div>
+                <div class="quarto-category">Data Science</div>
+                <div class="quarto-category">Distribution</div>
+                <div class="quarto-category">Statistics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Essi Alizadeh </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 11, 2021</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -200,32 +267,38 @@ ga('send', {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-distribution-vs.-sampling-distribution-what-you-need-to-know" id="toc-data-distribution-vs.-sampling-distribution-what-you-need-to-know" class="nav-link active" data-scroll-target="#data-distribution-vs.-sampling-distribution-what-you-need-to-know">Data Distribution vs.&nbsp;Sampling Distribution: What You Need to Know</a></li>
-  <li><a href="#data-distribution" id="toc-data-distribution" class="nav-link" data-scroll-target="#data-distribution"><strong>Data Distribution</strong></a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#data-distribution" id="toc-data-distribution" class="nav-link" data-scroll-target="#data-distribution">Data Distribution</a></li>
   <li><a href="#sampling-distribution" id="toc-sampling-distribution" class="nav-link" data-scroll-target="#sampling-distribution">Sampling Distribution</a></li>
   <li><a href="#central-limit-theorem-clt" id="toc-central-limit-theorem-clt" class="nav-link" data-scroll-target="#central-limit-theorem-clt">Central Limit Theorem (CLT)</a></li>
   <li><a href="#standard-error-se" id="toc-standard-error-se" class="nav-link" data-scroll-target="#standard-error-se">Standard Error (SE)</a></li>
   <li><a href="#bootstrapping" id="toc-bootstrapping" class="nav-link" data-scroll-target="#bootstrapping">Bootstrapping</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#join-my-mailing-list" id="toc-join-my-mailing-list" class="nav-link" data-scroll-target="#join-my-mailing-list"><strong>📩 Join my mailing list</strong></a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<section id="data-distribution-vs.-sampling-distribution-what-you-need-to-know" class="level1 page-columns page-full">
-<h1>Data Distribution vs.&nbsp;Sampling Distribution: What You Need to Know</h1>
-<p>Created: March 8, 2021 4:39 PM Last Updated: February 25, 2021 Last updated: September 7, 2022 10:13 PM Reading Time: 5 min read Show on Homepage?: Yes Tags: Bootstrapping, Data Science, Distribution, Statistics id: 10</p>
-<aside>
-<p>👉 This article is also published on <strong><a href="https://towardsdatascience.com/data-distribution-vs-sampling-distribution-what-you-need-to-know-294819109796">Towards Data Science blog</a></strong>.</p>
-</aside>
-<ul>
-<li><strong>Table of Contents</strong></li>
-</ul>
+
+<p><img src="img/_featured_image.png" class="img-fluid" alt="Featured image of the post"></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>👉 This article is also published on&nbsp;<a href="https://towardsdatascience.com/data-distribution-vs-sampling-distribution-what-you-need-to-know-294819109796"><strong>Towards Data Science blog</strong></a>.</p>
+</div>
+</div>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <p>It is important to distinguish between the data distribution (aka population distribution) and the sampling distribution. The distinction is critical when working with the central limit theorem or other concepts like the standard deviation and standard error.</p>
 <p>In this post we will go over the above concepts and as well as bootstrapping to estimate the sampling distribution. In particular, we will cover the following:</p>
 <ul>
@@ -237,12 +310,22 @@ ga('send', {
 </ul>
 <hr>
 </section>
-<section id="data-distribution" class="level1 page-columns page-full">
-<h1><strong>Data Distribution</strong></h1>
+<section id="data-distribution" class="level1">
+<h1>Data Distribution</h1>
 <p>Much of the statistics deals with inferring from samples drawn from a larger population. Hence, we need to distinguish between the analysis done the original data as opposed to analyzing its samples. First, let’s go over the definition of the data distribution:</p>
-<aside>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>💡 <strong>Data distribution:</strong>&nbsp;The frequency distribution of individual data points in the original dataset.</p>
-</aside>
+</div>
+</div>
 <p>Let’s first generate random skewed data that will result in a non-normal (non-Gaussian) data distribution. The reason behind generating non-normal data is to better illustrate the relation between data distribution and the sampling distribution.</p>
 <p>So, let’s import the Python plotting packages and generate right-skewed data.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting packages and initial setup</span></span>
@@ -271,18 +354,27 @@ ga('send', {
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>sns.histplot(skewed_data_scaled, bins<span class="op">=</span><span class="dv">30</span>, stat<span class="op">=</span><span class="st">"density"</span>, kde<span class="op">=</span><span class="va">True</span>, legend<span class="op">=</span><span class="va">False</span>, ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="Data%20Distribution%20vs%20Sampling%20Distribution%20What%20Yo%2089ae3957a7154fa098dad2a05926e48f/Untitled.png" class="img-fluid figure-img"></p>
+<p><img src="img/data_distribution.png" class="img-fluid figure-img" alt="The histogram of generated right-skewed data"></p>
 <p></p><figcaption class="figure-caption">The histogram of generated right-skewed data</figcaption><p></p>
 </figure>
 </div>
-<p>The histogram of generated right-skewed data</p>
 </section>
-<section id="sampling-distribution" class="level1 page-columns page-full">
+<section id="sampling-distribution" class="level1">
 <h1>Sampling Distribution</h1>
 <p>In the sampling distribution, you draw samples from the dataset and compute a statistic like the mean. It’s very important to differentiate between the data distribution and the sampling distribution as most confusion comes from the operation done on either the original dataset or its (re)samples.</p>
-<aside>
-<p>💡 <strong>Sampling distribution</strong>: The frequency distribution of a sample statistic (aka metric) over many samples drawn from the dataset[1]. Or to put it simply, the distribution of sample statistics is called the sampling distribution.</p>
-</aside>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>💡 <strong>Sampling distribution</strong>: The frequency distribution of a sample statistic (aka metric) over many samples drawn from the dataset <span class="citation" data-cites="bruce2017practical">(see <a href="#ref-bruce2017practical" role="doc-biblioref">Bruce and Bruce 2017</a>)</span>. Or to put it simply, the distribution of sample statistics is called the sampling distribution.</p>
+</div>
+</div>
 <p>The algorithm to obtain the sampling distribution is as follows:</p>
 <ol type="1">
 <li>Draw a sample from the dataset.</li>
@@ -311,25 +403,45 @@ ga('send', {
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> Mean: <span class="fl">0.23269</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="Data%20Distribution%20vs%20Sampling%20Distribution%20What%20Yo%2089ae3957a7154fa098dad2a05926e48f/Untitled%201.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Data%20Distribution%20vs%20Sampling%20Distribution%20What%20Yo%2089ae3957a7154fa098dad2a05926e48f/Untitled%201.png</figcaption><p></p>
+<p><img src="img/sampling_distribution.png" class="img-fluid figure-img" alt="Sampling distribution"></p>
+<p></p><figcaption class="figure-caption">Sampling Distrubtion</figcaption><p></p>
 </figure>
 </div>
 <p>Above sampling distribution is basically the histogram of the mean of each drawn sample (in above, we draw samples of 50 elements over 2000 iterations). The mean of the above sampling distribution is around 0.23, as can be noted from computing the mean of all samples means.</p>
-<aside>
-<p>⚠️ Do not confuse the sampling distribution with the sample distribution. The sampling distribution considers the distribution of sample statistics (e.g.&nbsp;mean), whereas the sample distribution is basically the distribution of the sample taken from the population.</p>
-</aside>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>⚠️ Do not confuse the sampling distribution with the sample distribution. The sampling distribution considers the distribution of sample statistics (e.g. mean), whereas the sample distribution is basically the distribution of the sample taken from the population.</p>
+</div>
+</div>
 </section>
-<section id="central-limit-theorem-clt" class="level1 page-columns page-full">
+<section id="central-limit-theorem-clt" class="level1">
 <h1>Central Limit Theorem (CLT)</h1>
-<aside>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>💡 <strong>Central Limit Theorem</strong>: As the sample size gets larger, the <strong>sampling distribution</strong> tends to be more like a normal distribution (bell-curve shape).</p>
-</aside>
-<p><em>In CLT, we analyze the sampling distribution and not a data distribution, an important distinction to be made.</em> CLT is popular in hypothesis testing and confidence interval analysis, and it’s important to be aware of this concept, even though with the use of bootstrap in data science, this theorem is less talked about or considered in the practice of data science[1]. More on bootstrapping is provided later in the post.</p>
+</div>
+</div>
+<p><em>In CLT, we analyze the sampling distribution and not a data distribution, an important distinction to be made.</em> CLT is popular in hypothesis testing and confidence interval analysis, and it’s important to be aware of this concept, even though with the use of bootstrap in data science, this theorem is less talked about or considered in the practice of data science <span class="citation" data-cites="bruce2017practical">(see <a href="#ref-bruce2017practical" role="doc-biblioref">Bruce and Bruce 2017</a>)</span>. More on bootstrapping is provided later in the post.</p>
 </section>
-<section id="standard-error-se" class="level1 page-columns page-full">
+<section id="standard-error-se" class="level1">
 <h1>Standard Error (SE)</h1>
-<p>The <strong><a href="https://en.wikipedia.org/wiki/Standard_error">standard error</a></strong> is a metric to describe <em>the variability of a statistic in the sampling distribution</em>. We can compute the standard error as follows:</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Standard_error"><strong>standard error</strong></a> is a metric to describe <em>the variability of a statistic in the sampling distribution</em>. We can compute the standard error as follows:</p>
 <p><span class="math display">
 \text{Standard~Error} = SE = \frac{s}{\sqrt{n}}
 </span></p>
@@ -342,9 +454,19 @@ ga('send', {
 <li>An estimate of the standard error is obtained by computing the standard deviation of the previous steps’ statistics.</li>
 </ol>
 <p>While the above approach can be used to estimate the standard error, we can use bootstrapping instead, which is preferable. I will go over that in the next section.</p>
-<aside>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>⚠️ Do not confuse the standard error with the standard deviation. The standard deviation captures the variability of the individual data points (how spread the data is), unlike the standard error that captures a sample statistic’s variability.</p>
-</aside>
+</div>
+</div>
 </section>
 <section id="bootstrapping" class="level1">
 <h1>Bootstrapping</h1>
@@ -369,42 +491,40 @@ ga('send', {
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> Standard Error: <span class="op">+/-</span> <span class="fl">0.00144</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> CI95: [<span class="fl">0.23023</span>, <span class="fl">0.23601</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="conclusion" class="level1 page-columns page-full">
+<section id="conclusion" class="level1">
 <h1>Conclusion</h1>
 <p>The main takeaway is to differentiate between whatever computation you do on the original dataset or the sample of the dataset. Plotting a histogram of the data will result in data distribution, whereas plotting a sample statistic computed over samples of data will result in a sampling distribution. On a similar note, the standard deviation tells us how the data is spread, whereas the standard error tells us how a sample statistic is spread out.</p>
-<aside>
+<div class="callout callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <p>👉 You can find the Jupyter notebook for this blog post on <a href="https://github.com/e-alizadeh/medium/blob/master/notebooks/data_vs_sampling_distributions.ipynb">GitHub</a>.</p>
-</aside>
-<hr>
-<p><strong>Thanks for reading 🙏</strong></p>
-<p><em>If you liked this post, you can join my mailing list to receive similar posts. You can follow me on <a href="https://www.linkedin.com/in/alizadehesmaeil/">LinkedIn</a>, <a href="https://github.com/e-alizadeh">GitHub</a>, <a href="https://twitter.com/intent/follow?screen_name=es_alizadeh&amp;tw_p=followbutton">Twitter</a> and <a href="https://medium.com/@ealizadeh">Medium</a>.</em></p>
-<p><em>And finally, you can find my knowledge forest 🌲 (raw digital notes) at <a href="https://notes.ealizadeh.com/">notes.ealizadeh.com</a>.</em></p>
-</section>
-<section id="join-my-mailing-list" class="level1">
-<h1><strong>📩 Join my mailing list</strong></h1>
-<p><a href="https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4">https://chilipepper.io/form/burning-darkcrimson-piquillo-fcdff002-5e7b-4d46-a75e-6290908a51f4</a></p>
-<hr>
-</section>
-<section id="references" class="level1">
-<h1>References</h1>
-<p>[1] P. Bruce &amp; A. Bruce (2017),&nbsp;<em>Practical Statistics for Data Scientists</em>, First Edition, O’Reilly</p>
-<hr>
-<p>⬅️ <strong>Previous Post</strong></p>
-<p><a href="Data%20Distribution%20vs%20Sampling%20Distribution%20What%20Yo%2089ae3957a7154fa098dad2a05926e48f/Blog%20Posts%20ad2ae5caaf8441639a32bda41d0ac556.csv">Blog Posts</a></p>
-<p><strong>➡️ Next Post</strong></p>
-<p><a href="Data%20Distribution%20vs%20Sampling%20Distribution%20What%20Yo%2089ae3957a7154fa098dad2a05926e48f/Blog%20Posts%20ebcaf4f928874cc993ae86674999bfc4.csv">Blog Posts</a></p>
+</div>
+</div>
+</div>
+
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{alizadeh,
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-bruce2017practical" class="csl-entry" role="doc-biblioentry">
+Bruce, Peter, and Andrew Bruce. 2017. <em>Practical Statistics for Data Scientists: 50 Essential Concepts</em>. O’Reilly Media.
+</div>
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{alizadeh2021,
   author = {Essi Alizadeh},
   editor = {},
+  title = {Data {Distribution} Vs. {Sampling} {Distribution:} {What}
+    {You} {Need} to {Know}},
+  date = {2021-01-11},
   url = {https://ealizadeh.com/blog/statistics-data-vs-sampling-distribution},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-alizadeh" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
-Essi Alizadeh. n.d. <a href="https://ealizadeh.com/blog/statistics-data-vs-sampling-distribution">https://ealizadeh.com/blog/statistics-data-vs-sampling-distribution</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-alizadeh2021" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Essi Alizadeh. 2021. <span>“Data Distribution Vs. Sampling Distribution:
+What You Need to Know.”</span> January 11, 2021. <a href="https://ealizadeh.com/blog/statistics-data-vs-sampling-distribution">https://ealizadeh.com/blog/statistics-data-vs-sampling-distribution</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
