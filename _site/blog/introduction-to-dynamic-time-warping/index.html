@@ -194,7 +194,7 @@ ga('send', {
 <meta name="twitter:image-width" content="1024">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -229,7 +229,7 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">An Illustrative Introduction to Dynamic Time Warping</h1>
@@ -266,6 +266,27 @@ ga('send', {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#formulation" id="toc-formulation" class="nav-link active" data-scroll-target="#formulation">Formulation</a>
+  <ul>
+  <li><a href="#warping-path-and-dtw-distance" id="toc-warping-path-and-dtw-distance" class="nav-link" data-scroll-target="#warping-path-and-dtw-distance">Warping Path and DTW distance</a></li>
+  </ul></li>
+  <li><a href="#restrictions-on-the-warping-function" id="toc-restrictions-on-the-warping-function" class="nav-link" data-scroll-target="#restrictions-on-the-warping-function">Restrictions on the Warping function</a></li>
+  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example 1</a>
+  <ul>
+  <li><a href="#compute-dtw-distance-and-warp-path" id="toc-compute-dtw-distance-and-warp-path" class="nav-link" data-scroll-target="#compute-dtw-distance-and-warp-path">Compute DTW distance and warp&nbsp;path</a></li>
+  </ul></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example 2</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
 <!-- Main CSS style -->
@@ -563,7 +584,7 @@ ga('send', {
 <div id="mailchimp">
    <form action="https://ealizadeh.us10.list-manage.com/subscribe/post?u=912b9dacf23679bd0a6e46b22&amp;id=31485d9fc5" method="post" id="mc-embedded-subscribe-form" class="validate" style="max-width:450px;margin:auto" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
        <!-- <i class="fa fa-envelope icon"> </i> -->    
-       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Subscribe</h3>
+       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Mailing List</h3>
            <!-- <div class="input-icons">  -->
                        <!-- <div class="input-icons">  -->
            <div class="clear">
@@ -591,25 +612,6 @@ ga('send', {
 </div>
 <!--End of MailChimp Signup Form-->
 </div></div>
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#formulation" id="toc-formulation" class="nav-link active" data-scroll-target="#formulation">Formulation</a>
-  <ul>
-  <li><a href="#warping-path-and-dtw-distance" id="toc-warping-path-and-dtw-distance" class="nav-link" data-scroll-target="#warping-path-and-dtw-distance">Warping Path and DTW distance</a></li>
-  </ul></li>
-  <li><a href="#restrictions-on-the-warping-function" id="toc-restrictions-on-the-warping-function" class="nav-link" data-scroll-target="#restrictions-on-the-warping-function">Restrictions on the Warping function</a></li>
-  <li><a href="#implementation" id="toc-implementation" class="nav-link" data-scroll-target="#implementation">Implementation</a></li>
-  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example 1</a>
-  <ul>
-  <li><a href="#compute-dtw-distance-and-warp-path" id="toc-compute-dtw-distance-and-warp-path" class="nav-link" data-scroll-target="#compute-dtw-distance-and-warp-path">Compute DTW distance and warp&nbsp;path</a></li>
-  </ul></li>
-  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example 2</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a></li>
-  </ul>
-</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -1053,6 +1055,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="e-alizadeh/website" data-repo-id="R_kgDOH_Z9yg" data-category="Blog" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">

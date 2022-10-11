@@ -28,7 +28,7 @@ However, since that’s overwhelming and many of them are not directly related t
 
 <iframe height="910" style="width: 100%;" scrolling="no" title="34 Cognitive Errors" src="https://codepen.io/e-alizadeh/embed/dyOjJYG?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/e-alizadeh/pen/dyOjJYG">
-  34 Cognitive Errors</a> by Essi Alizadeh (<a href="https://codepen.io/e-alizadeh">@e-alizadeh</a>)
+  34 Cognitive Errors</a> by Essi Alizadeh (<a href="https://codepen.io/e-alizadeh">\@e-alizadeh</a>)
   on <a href="https://codepen.io">CodePen</a>.
 </iframe>
 

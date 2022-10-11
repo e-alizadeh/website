@@ -190,7 +190,7 @@ ga('send', {
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -225,7 +225,7 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">MLxtend: A Python Library with Interesting Tools for Data Science Tasks</h1>
@@ -262,6 +262,25 @@ ga('send', {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#mlxtend-library" id="toc-mlxtend-library" class="nav-link active" data-scroll-target="#mlxtend-library">MLxtend Library</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
+  <li><a href="#mlxtend-functionalities" id="toc-mlxtend-functionalities" class="nav-link" data-scroll-target="#mlxtend-functionalities">MLxtend Functionalities</a>
+  <ul>
+  <li><a href="#create-counterfactual-for-model-interpretability" id="toc-create-counterfactual-for-model-interpretability" class="nav-link" data-scroll-target="#create-counterfactual-for-model-interpretability">Create Counterfactual (for model interpretability)</a></li>
+  <li><a href="#bias-variance-decomposition" id="toc-bias-variance-decomposition" class="nav-link" data-scroll-target="#bias-variance-decomposition">Bias-Variance Decomposition</a></li>
+  <li><a href="#plotting-decision-regions-of-classifiers" id="toc-plotting-decision-regions-of-classifiers" class="nav-link" data-scroll-target="#plotting-decision-regions-of-classifiers">Plotting Decision Regions of Classifiers</a></li>
+  <li><a href="#matrix-of-scatter-plots" id="toc-matrix-of-scatter-plots" class="nav-link" data-scroll-target="#matrix-of-scatter-plots">Matrix of Scatter Plots</a></li>
+  <li><a href="#bootstrapping" id="toc-bootstrapping" class="nav-link" data-scroll-target="#bootstrapping"><strong>Bootstrapping</strong></a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
 <!-- Main CSS style -->
@@ -559,7 +578,7 @@ ga('send', {
 <div id="mailchimp">
    <form action="https://ealizadeh.us10.list-manage.com/subscribe/post?u=912b9dacf23679bd0a6e46b22&amp;id=31485d9fc5" method="post" id="mc-embedded-subscribe-form" class="validate" style="max-width:450px;margin:auto" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
        <!-- <i class="fa fa-envelope icon"> </i> -->    
-       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Subscribe</h3>
+       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Mailing List</h3>
            <!-- <div class="input-icons">  -->
                        <!-- <div class="input-icons">  -->
            <div class="clear">
@@ -587,23 +606,6 @@ ga('send', {
 </div>
 <!--End of MailChimp Signup Form-->
 </div></div>
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#mlxtend-library" id="toc-mlxtend-library" class="nav-link active" data-scroll-target="#mlxtend-library">MLxtend Library</a></li>
-  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset">Dataset</a></li>
-  <li><a href="#mlxtend-functionalities" id="toc-mlxtend-functionalities" class="nav-link" data-scroll-target="#mlxtend-functionalities">MLxtend Functionalities</a>
-  <ul>
-  <li><a href="#create-counterfactual-for-model-interpretability" id="toc-create-counterfactual-for-model-interpretability" class="nav-link" data-scroll-target="#create-counterfactual-for-model-interpretability">Create Counterfactual (for model interpretability)</a></li>
-  <li><a href="#bias-variance-decomposition" id="toc-bias-variance-decomposition" class="nav-link" data-scroll-target="#bias-variance-decomposition">Bias-Variance Decomposition</a></li>
-  <li><a href="#plotting-decision-regions-of-classifiers" id="toc-plotting-decision-regions-of-classifiers" class="nav-link" data-scroll-target="#plotting-decision-regions-of-classifiers">Plotting Decision Regions of Classifiers</a></li>
-  <li><a href="#matrix-of-scatter-plots" id="toc-matrix-of-scatter-plots" class="nav-link" data-scroll-target="#matrix-of-scatter-plots">Matrix of Scatter Plots</a></li>
-  <li><a href="#bootstrapping" id="toc-bootstrapping" class="nav-link" data-scroll-target="#bootstrapping"><strong>Bootstrapping</strong></a></li>
-  </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  </ul>
-</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -1079,6 +1081,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="e-alizadeh/website" data-repo-id="R_kgDOH_Z9yg" data-category="Blog" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">

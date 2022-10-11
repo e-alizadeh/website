@@ -159,7 +159,7 @@ ga('send', {
 <meta name="twitter:image-width" content="1944">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -194,7 +194,7 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Step-by-Step Deployment of a Free PostgreSQL Database And Data Ingestion</h1>
@@ -229,6 +229,36 @@ ga('send', {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#in-this-post-you-will-learn-how-to" id="toc-in-this-post-you-will-learn-how-to" class="nav-link active" data-scroll-target="#in-this-post-you-will-learn-how-to">In this post, you will learn how to …</a></li>
+  <li><a href="#one-line-summary-of-related-technologies" id="toc-one-line-summary-of-related-technologies" class="nav-link" data-scroll-target="#one-line-summary-of-related-technologies">One-line summary of related technologies</a></li>
+  <li><a href="#prerequisite" id="toc-prerequisite" class="nav-link" data-scroll-target="#prerequisite">Prerequisite</a></li>
+  <li><a href="#heroku-signup-and-deployment" id="toc-heroku-signup-and-deployment" class="nav-link" data-scroll-target="#heroku-signup-and-deployment">Heroku Signup and Deployment</a>
+  <ul>
+  <li><a href="#sign-up-to-heroku-deploy-your-first-postgresql-database" id="toc-sign-up-to-heroku-deploy-your-first-postgresql-database" class="nav-link" data-scroll-target="#sign-up-to-heroku-deploy-your-first-postgresql-database">1. Sign up to Heroku &amp; Deploy Your First PostgreSQL Database</a></li>
+  <li><a href="#access-your-heroku-account-using-token" id="toc-access-your-heroku-account-using-token" class="nav-link" data-scroll-target="#access-your-heroku-account-using-token">2. Access your Heroku account using Token</a>
+  <ul class="collapse">
+  <li><a href="#generate-a-heroku-api-token" id="toc-generate-a-heroku-api-token" class="nav-link" data-scroll-target="#generate-a-heroku-api-token">2.1. Generate a Heroku API Token</a></li>
+  <li><a href="#store-your-heroku-token-in-your-environment" id="toc-store-your-heroku-token-in-your-environment" class="nav-link" data-scroll-target="#store-your-heroku-token-in-your-environment">2.2. Store your Heroku token in your environment</a></li>
+  <li><a href="#retrieve-heroku-postgresql-database-url" id="toc-retrieve-heroku-postgresql-database-url" class="nav-link" data-scroll-target="#retrieve-heroku-postgresql-database-url">2.3 Retrieve Heroku PostgreSQL Database URL</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#data-ingestion-to-a-table" id="toc-data-ingestion-to-a-table" class="nav-link" data-scroll-target="#data-ingestion-to-a-table">Data Ingestion to a&nbsp;Table</a>
+  <ul>
+  <li><a href="#create-sqlalchemy-engine" id="toc-create-sqlalchemy-engine" class="nav-link" data-scroll-target="#create-sqlalchemy-engine">Create SQLAlchemy Engine</a></li>
+  <li><a href="#ingest-data-using-pandas-sqlalchemy" id="toc-ingest-data-using-pandas-sqlalchemy" class="nav-link" data-scroll-target="#ingest-data-using-pandas-sqlalchemy">Ingest Data using Pandas &amp; SQLAlchemy</a></li>
+  </ul></li>
+  <li><a href="#additional-tips" id="toc-additional-tips" class="nav-link" data-scroll-target="#additional-tips">Additional Tips</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a></li>
+  <li><a href="#related-posts" id="toc-related-posts" class="nav-link" data-scroll-target="#related-posts">Related posts</a></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
 <!-- Main CSS style -->
@@ -526,7 +556,7 @@ ga('send', {
 <div id="mailchimp">
    <form action="https://ealizadeh.us10.list-manage.com/subscribe/post?u=912b9dacf23679bd0a6e46b22&amp;id=31485d9fc5" method="post" id="mc-embedded-subscribe-form" class="validate" style="max-width:450px;margin:auto" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
        <!-- <i class="fa fa-envelope icon"> </i> -->    
-       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Subscribe</h3>
+       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Mailing List</h3>
            <!-- <div class="input-icons">  -->
                        <!-- <div class="input-icons">  -->
            <div class="clear">
@@ -554,34 +584,6 @@ ga('send', {
 </div>
 <!--End of MailChimp Signup Form-->
 </div></div>
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#in-this-post-you-will-learn-how-to" id="toc-in-this-post-you-will-learn-how-to" class="nav-link active" data-scroll-target="#in-this-post-you-will-learn-how-to">In this post, you will learn how to …</a></li>
-  <li><a href="#one-line-summary-of-related-technologies" id="toc-one-line-summary-of-related-technologies" class="nav-link" data-scroll-target="#one-line-summary-of-related-technologies">One-line summary of related technologies</a></li>
-  <li><a href="#prerequisite" id="toc-prerequisite" class="nav-link" data-scroll-target="#prerequisite">Prerequisite</a></li>
-  <li><a href="#heroku-signup-and-deployment" id="toc-heroku-signup-and-deployment" class="nav-link" data-scroll-target="#heroku-signup-and-deployment">Heroku Signup and Deployment</a>
-  <ul>
-  <li><a href="#sign-up-to-heroku-deploy-your-first-postgresql-database" id="toc-sign-up-to-heroku-deploy-your-first-postgresql-database" class="nav-link" data-scroll-target="#sign-up-to-heroku-deploy-your-first-postgresql-database">1. Sign up to Heroku &amp; Deploy Your First PostgreSQL Database</a></li>
-  <li><a href="#access-your-heroku-account-using-token" id="toc-access-your-heroku-account-using-token" class="nav-link" data-scroll-target="#access-your-heroku-account-using-token">2. Access your Heroku account using Token</a>
-  <ul class="collapse">
-  <li><a href="#generate-a-heroku-api-token" id="toc-generate-a-heroku-api-token" class="nav-link" data-scroll-target="#generate-a-heroku-api-token">2.1. Generate a Heroku API Token</a></li>
-  <li><a href="#store-your-heroku-token-in-your-environment" id="toc-store-your-heroku-token-in-your-environment" class="nav-link" data-scroll-target="#store-your-heroku-token-in-your-environment">2.2. Store your Heroku token in your environment</a></li>
-  <li><a href="#retrieve-heroku-postgresql-database-url" id="toc-retrieve-heroku-postgresql-database-url" class="nav-link" data-scroll-target="#retrieve-heroku-postgresql-database-url">2.3 Retrieve Heroku PostgreSQL Database URL</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#data-ingestion-to-a-table" id="toc-data-ingestion-to-a-table" class="nav-link" data-scroll-target="#data-ingestion-to-a-table">Data Ingestion to a&nbsp;Table</a>
-  <ul>
-  <li><a href="#create-sqlalchemy-engine" id="toc-create-sqlalchemy-engine" class="nav-link" data-scroll-target="#create-sqlalchemy-engine">Create SQLAlchemy Engine</a></li>
-  <li><a href="#ingest-data-using-pandas-sqlalchemy" id="toc-ingest-data-using-pandas-sqlalchemy" class="nav-link" data-scroll-target="#ingest-data-using-pandas-sqlalchemy">Ingest Data using Pandas &amp; SQLAlchemy</a></li>
-  </ul></li>
-  <li><a href="#additional-tips" id="toc-additional-tips" class="nav-link" data-scroll-target="#additional-tips">Additional Tips</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a></li>
-  <li><a href="#related-posts" id="toc-related-posts" class="nav-link" data-scroll-target="#related-posts">Related posts</a></li>
-  </ul>
-</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -960,6 +962,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="e-alizadeh/website" data-repo-id="R_kgDOH_Z9yg" data-category="Blog" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">

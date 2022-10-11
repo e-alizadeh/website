@@ -159,7 +159,7 @@ ga('send', {
 <meta name="twitter:image-width" content="1014">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -194,7 +194,7 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Automate Your Workflow with GitHub Actions and Cron</h1>
@@ -229,6 +229,35 @@ ga('send', {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#requirement-a-script-you-want-to-run-on-a-time-based-schedule" id="toc-requirement-a-script-you-want-to-run-on-a-time-based-schedule" class="nav-link" data-scroll-target="#requirement-a-script-you-want-to-run-on-a-time-based-schedule">Requirement: A script you want to run on a time-based schedule</a>
+  <ul>
+  <li><a href="#considerations-before-automation" id="toc-considerations-before-automation" class="nav-link" data-scroll-target="#considerations-before-automation">Considerations before automation</a></li>
+  </ul></li>
+  <li><a href="#github-actions-set-up" id="toc-github-actions-set-up" class="nav-link" data-scroll-target="#github-actions-set-up">GitHub Actions Set up</a></li>
+  <li><a href="#cron-cron-job" id="toc-cron-cron-job" class="nav-link" data-scroll-target="#cron-cron-job">Cron (Cron job)</a>
+  <ul>
+  <li><a href="#cron-job-examples" id="toc-cron-job-examples" class="nav-link" data-scroll-target="#cron-job-examples">Cron job examples</a></li>
+  </ul></li>
+  <li><a href="#use-case-1" id="toc-use-case-1" class="nav-link" data-scroll-target="#use-case-1">Use Case 1</a>
+  <ul>
+  <li><a href="#where-should-we-start-from" id="toc-where-should-we-start-from" class="nav-link" data-scroll-target="#where-should-we-start-from">Where should we start from?</a></li>
+  <li><a href="#which-softwarelibraries-we-must-install" id="toc-which-softwarelibraries-we-must-install" class="nav-link" data-scroll-target="#which-softwarelibraries-we-must-install">Which software/libraries we must install?</a></li>
+  <li><a href="#where-can-i-find-the-script-i-want-to-run" id="toc-where-can-i-find-the-script-i-want-to-run" class="nav-link" data-scroll-target="#where-can-i-find-the-script-i-want-to-run">Where can I find the script I want to run?</a></li>
+  <li><a href="#run-the-script" id="toc-run-the-script" class="nav-link" data-scroll-target="#run-the-script">Run the script</a></li>
+  <li><a href="#putting-everything-together" id="toc-putting-everything-together" class="nav-link" data-scroll-target="#putting-everything-together">Putting everything together</a></li>
+  </ul></li>
+  <li><a href="#use-case-2" id="toc-use-case-2" class="nav-link" data-scroll-target="#use-case-2">Use Case 2</a></li>
+  <li><a href="#github-actions-cost" id="toc-github-actions-cost" class="nav-link" data-scroll-target="#github-actions-cost">GitHub Actions Cost</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
 <!-- Main CSS style -->
@@ -526,7 +555,7 @@ ga('send', {
 <div id="mailchimp">
    <form action="https://ealizadeh.us10.list-manage.com/subscribe/post?u=912b9dacf23679bd0a6e46b22&amp;id=31485d9fc5" method="post" id="mc-embedded-subscribe-form" class="validate" style="max-width:450px;margin:auto" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
        <!-- <i class="fa fa-envelope icon"> </i> -->    
-       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Subscribe</h3>
+       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Mailing List</h3>
            <!-- <div class="input-icons">  -->
                        <!-- <div class="input-icons">  -->
            <div class="clear">
@@ -554,33 +583,6 @@ ga('send', {
 </div>
 <!--End of MailChimp Signup Form-->
 </div></div>
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#requirement-a-script-you-want-to-run-on-a-time-based-schedule" id="toc-requirement-a-script-you-want-to-run-on-a-time-based-schedule" class="nav-link" data-scroll-target="#requirement-a-script-you-want-to-run-on-a-time-based-schedule">Requirement: A script you want to run on a time-based schedule</a>
-  <ul>
-  <li><a href="#considerations-before-automation" id="toc-considerations-before-automation" class="nav-link" data-scroll-target="#considerations-before-automation">Considerations before automation</a></li>
-  </ul></li>
-  <li><a href="#github-actions-set-up" id="toc-github-actions-set-up" class="nav-link" data-scroll-target="#github-actions-set-up">GitHub Actions Set up</a></li>
-  <li><a href="#cron-cron-job" id="toc-cron-cron-job" class="nav-link" data-scroll-target="#cron-cron-job">Cron (Cron job)</a>
-  <ul>
-  <li><a href="#cron-job-examples" id="toc-cron-job-examples" class="nav-link" data-scroll-target="#cron-job-examples">Cron job examples</a></li>
-  </ul></li>
-  <li><a href="#use-case-1" id="toc-use-case-1" class="nav-link" data-scroll-target="#use-case-1">Use Case 1</a>
-  <ul>
-  <li><a href="#where-should-we-start-from" id="toc-where-should-we-start-from" class="nav-link" data-scroll-target="#where-should-we-start-from">Where should we start from?</a></li>
-  <li><a href="#which-softwarelibraries-we-must-install" id="toc-which-softwarelibraries-we-must-install" class="nav-link" data-scroll-target="#which-softwarelibraries-we-must-install">Which software/libraries we must install?</a></li>
-  <li><a href="#where-can-i-find-the-script-i-want-to-run" id="toc-where-can-i-find-the-script-i-want-to-run" class="nav-link" data-scroll-target="#where-can-i-find-the-script-i-want-to-run">Where can I find the script I want to run?</a></li>
-  <li><a href="#run-the-script" id="toc-run-the-script" class="nav-link" data-scroll-target="#run-the-script">Run the script</a></li>
-  <li><a href="#putting-everything-together" id="toc-putting-everything-together" class="nav-link" data-scroll-target="#putting-everything-together">Putting everything together</a></li>
-  </ul></li>
-  <li><a href="#use-case-2" id="toc-use-case-2" class="nav-link" data-scroll-target="#use-case-2">Use Case 2</a></li>
-  <li><a href="#github-actions-cost" id="toc-github-actions-cost" class="nav-link" data-scroll-target="#github-actions-cost">GitHub Actions Cost</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  </ul>
-</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -944,6 +946,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="e-alizadeh/website" data-repo-id="R_kgDOH_Z9yg" data-category="Blog" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">

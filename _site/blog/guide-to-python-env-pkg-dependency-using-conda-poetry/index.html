@@ -159,7 +159,7 @@ ga('send', {
 <meta name="twitter:image-width" content="790">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -194,7 +194,7 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">A Guide to Python Environment, Dependency and Package Management: Conda + Poetry</h1>
@@ -232,6 +232,46 @@ ga('send', {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul>
+  <li><a href="#a-quick-note-on-package-repositories" id="toc-a-quick-note-on-package-repositories" class="nav-link" data-scroll-target="#a-quick-note-on-package-repositories">A Quick Note on Package Repositories</a></li>
+  </ul></li>
+  <li><a href="#conda-jack-of-all-trades" id="toc-conda-jack-of-all-trades" class="nav-link" data-scroll-target="#conda-jack-of-all-trades">Conda: Jack of all trades?</a>
+  <ul>
+  <li><a href="#issues-with-conda" id="toc-issues-with-conda" class="nav-link" data-scroll-target="#issues-with-conda">Issues with conda</a>
+  <ul class="collapse">
+  <li><a href="#performance-issues" id="toc-performance-issues" class="nav-link" data-scroll-target="#performance-issues">Performance issues</a></li>
+  <li><a href="#dependency-resolver-issues" id="toc-dependency-resolver-issues" class="nav-link" data-scroll-target="#dependency-resolver-issues">Dependency resolver issues</a></li>
+  <li><a href="#python-packaging" id="toc-python-packaging" class="nav-link" data-scroll-target="#python-packaging">Python packaging</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#poetry" id="toc-poetry" class="nav-link" data-scroll-target="#poetry">Poetry</a>
+  <ul>
+  <li><a href="#pyproject.toml-python-configuration-file" id="toc-pyproject.toml-python-configuration-file" class="nav-link" data-scroll-target="#pyproject.toml-python-configuration-file">pyproject.toml: Python Configuration file</a></li>
+  </ul></li>
+  <li><a href="#the-proposed-setup" id="toc-the-proposed-setup" class="nav-link" data-scroll-target="#the-proposed-setup">The Proposed Setup</a>
+  <ul>
+  <li><a href="#step-1-create-a-minimal-conda-environment" id="toc-step-1-create-a-minimal-conda-environment" class="nav-link" data-scroll-target="#step-1-create-a-minimal-conda-environment">Step 1: Create a minimal conda environment</a></li>
+  <li><a href="#step-2-install-poetry-tool" id="toc-step-2-install-poetry-tool" class="nav-link" data-scroll-target="#step-2-install-poetry-tool">Step 2: Install Poetry tool</a></li>
+  <li><a href="#step-3-configure-your-poetry" id="toc-step-3-configure-your-poetry" class="nav-link" data-scroll-target="#step-3-configure-your-poetry">Step 3: Configure your Poetry</a></li>
+  <li><a href="#step-4-installing-dependencies" id="toc-step-4-installing-dependencies" class="nav-link" data-scroll-target="#step-4-installing-dependencies">Step 4: Installing dependencies</a></li>
+  </ul></li>
+  <li><a href="#poetry-tips" id="toc-poetry-tips" class="nav-link" data-scroll-target="#poetry-tips">Poetry tips</a>
+  <ul>
+  <li><a href="#add-new-packages" id="toc-add-new-packages" class="nav-link" data-scroll-target="#add-new-packages">Add new packages</a></li>
+  <li><a href="#remove-packages" id="toc-remove-packages" class="nav-link" data-scroll-target="#remove-packages">Remove packages</a></li>
+  <li><a href="#show-package-dependencies" id="toc-show-package-dependencies" class="nav-link" data-scroll-target="#show-package-dependencies">Show package dependencies</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
 <!-- Main CSS style -->
@@ -529,7 +569,7 @@ ga('send', {
 <div id="mailchimp">
    <form action="https://ealizadeh.us10.list-manage.com/subscribe/post?u=912b9dacf23679bd0a6e46b22&amp;id=31485d9fc5" method="post" id="mc-embedded-subscribe-form" class="validate" style="max-width:450px;margin:auto" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
        <!-- <i class="fa fa-envelope icon"> </i> -->    
-       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Subscribe</h3>
+       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Mailing List</h3>
            <!-- <div class="input-icons">  -->
                        <!-- <div class="input-icons">  -->
            <div class="clear">
@@ -557,44 +597,6 @@ ga('send', {
 </div>
 <!--End of MailChimp Signup Form-->
 </div></div>
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
-  <ul>
-  <li><a href="#a-quick-note-on-package-repositories" id="toc-a-quick-note-on-package-repositories" class="nav-link" data-scroll-target="#a-quick-note-on-package-repositories">A Quick Note on Package Repositories</a></li>
-  </ul></li>
-  <li><a href="#conda-jack-of-all-trades" id="toc-conda-jack-of-all-trades" class="nav-link" data-scroll-target="#conda-jack-of-all-trades">Conda: Jack of all trades?</a>
-  <ul>
-  <li><a href="#issues-with-conda" id="toc-issues-with-conda" class="nav-link" data-scroll-target="#issues-with-conda">Issues with conda</a>
-  <ul class="collapse">
-  <li><a href="#performance-issues" id="toc-performance-issues" class="nav-link" data-scroll-target="#performance-issues">Performance issues</a></li>
-  <li><a href="#dependency-resolver-issues" id="toc-dependency-resolver-issues" class="nav-link" data-scroll-target="#dependency-resolver-issues">Dependency resolver issues</a></li>
-  <li><a href="#python-packaging" id="toc-python-packaging" class="nav-link" data-scroll-target="#python-packaging">Python packaging</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#poetry" id="toc-poetry" class="nav-link" data-scroll-target="#poetry">Poetry</a>
-  <ul>
-  <li><a href="#pyproject.toml-python-configuration-file" id="toc-pyproject.toml-python-configuration-file" class="nav-link" data-scroll-target="#pyproject.toml-python-configuration-file">pyproject.toml: Python Configuration file</a></li>
-  </ul></li>
-  <li><a href="#the-proposed-setup" id="toc-the-proposed-setup" class="nav-link" data-scroll-target="#the-proposed-setup">The Proposed Setup</a>
-  <ul>
-  <li><a href="#step-1-create-a-minimal-conda-environment" id="toc-step-1-create-a-minimal-conda-environment" class="nav-link" data-scroll-target="#step-1-create-a-minimal-conda-environment">Step 1: Create a minimal conda environment</a></li>
-  <li><a href="#step-2-install-poetry-tool" id="toc-step-2-install-poetry-tool" class="nav-link" data-scroll-target="#step-2-install-poetry-tool">Step 2: Install Poetry tool</a></li>
-  <li><a href="#step-3-configure-your-poetry" id="toc-step-3-configure-your-poetry" class="nav-link" data-scroll-target="#step-3-configure-your-poetry">Step 3: Configure your Poetry</a></li>
-  <li><a href="#step-4-installing-dependencies" id="toc-step-4-installing-dependencies" class="nav-link" data-scroll-target="#step-4-installing-dependencies">Step 4: Installing dependencies</a></li>
-  </ul></li>
-  <li><a href="#poetry-tips" id="toc-poetry-tips" class="nav-link" data-scroll-target="#poetry-tips">Poetry tips</a>
-  <ul>
-  <li><a href="#add-new-packages" id="toc-add-new-packages" class="nav-link" data-scroll-target="#add-new-packages">Add new packages</a></li>
-  <li><a href="#remove-packages" id="toc-remove-packages" class="nav-link" data-scroll-target="#remove-packages">Remove packages</a></li>
-  <li><a href="#show-package-dependencies" id="toc-show-package-dependencies" class="nav-link" data-scroll-target="#show-package-dependencies">Show package dependencies</a></li>
-  </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a></li>
-  </ul>
-</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -979,6 +981,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="e-alizadeh/website" data-repo-id="R_kgDOH_Z9yg" data-category="Blog" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">

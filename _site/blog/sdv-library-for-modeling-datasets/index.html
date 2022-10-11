@@ -178,7 +178,7 @@ ga('send', {
 <meta name="twitter:image-width" content="882">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -213,7 +213,7 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Synthetic Data Vault (SDV): A Python Library for Dataset Modeling</h1>
@@ -251,6 +251,28 @@ ga('send', {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-this-library" id="toc-why-this-library" class="nav-link active" data-scroll-target="#why-this-library">Why this library?</a></li>
+  <li><a href="#sdv-library" id="toc-sdv-library" class="nav-link" data-scroll-target="#sdv-library">SDV Library</a>
+  <ul>
+  <li><a href="#time-series-data-modeling-using-par" id="toc-time-series-data-modeling-using-par" class="nav-link" data-scroll-target="#time-series-data-modeling-using-par">Time-Series Data Modeling using PAR</a>
+  <ul class="collapse">
+  <li><a href="#sample-code" id="toc-sample-code" class="nav-link" data-scroll-target="#sample-code">Sample code</a></li>
+  <li><a href="#example-1-single-time-series-one-entity" id="toc-example-1-single-time-series-one-entity" class="nav-link" data-scroll-target="#example-1-single-time-series-one-entity">Example 1: Single Time-Series (one entity)</a></li>
+  <li><a href="#example-2-time-series-with-multiple-entities" id="toc-example-2-time-series-with-multiple-entities" class="nav-link" data-scroll-target="#example-2-time-series-with-multiple-entities">Example 2: Time-series with multiple entities</a></li>
+  </ul></li>
+  <li><a href="#relational-data" id="toc-relational-data" class="nav-link" data-scroll-target="#relational-data">Relational Data</a></li>
+  <li><a href="#single-table-data" id="toc-single-table-data" class="nav-link" data-scroll-target="#single-table-data">Single Table Data</a></li>
+  <li><a href="#benchmarking-data" id="toc-benchmarking-data" class="nav-link" data-scroll-target="#benchmarking-data">Benchmarking Data</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
 <!-- Main CSS style -->
@@ -548,7 +570,7 @@ ga('send', {
 <div id="mailchimp">
    <form action="https://ealizadeh.us10.list-manage.com/subscribe/post?u=912b9dacf23679bd0a6e46b22&amp;id=31485d9fc5" method="post" id="mc-embedded-subscribe-form" class="validate" style="max-width:450px;margin:auto" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
        <!-- <i class="fa fa-envelope icon"> </i> -->    
-       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Subscribe</h3>
+       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Mailing List</h3>
            <!-- <div class="input-icons">  -->
                        <!-- <div class="input-icons">  -->
            <div class="clear">
@@ -576,26 +598,6 @@ ga('send', {
 </div>
 <!--End of MailChimp Signup Form-->
 </div></div>
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#why-this-library" id="toc-why-this-library" class="nav-link active" data-scroll-target="#why-this-library">Why this library?</a></li>
-  <li><a href="#sdv-library" id="toc-sdv-library" class="nav-link" data-scroll-target="#sdv-library">SDV Library</a>
-  <ul>
-  <li><a href="#time-series-data-modeling-using-par" id="toc-time-series-data-modeling-using-par" class="nav-link" data-scroll-target="#time-series-data-modeling-using-par">Time-Series Data Modeling using PAR</a>
-  <ul class="collapse">
-  <li><a href="#sample-code" id="toc-sample-code" class="nav-link" data-scroll-target="#sample-code">Sample code</a></li>
-  <li><a href="#example-1-single-time-series-one-entity" id="toc-example-1-single-time-series-one-entity" class="nav-link" data-scroll-target="#example-1-single-time-series-one-entity">Example 1: Single Time-Series (one entity)</a></li>
-  <li><a href="#example-2-time-series-with-multiple-entities" id="toc-example-2-time-series-with-multiple-entities" class="nav-link" data-scroll-target="#example-2-time-series-with-multiple-entities">Example 2: Time-series with multiple entities</a></li>
-  </ul></li>
-  <li><a href="#relational-data" id="toc-relational-data" class="nav-link" data-scroll-target="#relational-data">Relational Data</a></li>
-  <li><a href="#single-table-data" id="toc-single-table-data" class="nav-link" data-scroll-target="#single-table-data">Single Table Data</a></li>
-  <li><a href="#benchmarking-data" id="toc-benchmarking-data" class="nav-link" data-scroll-target="#benchmarking-data">Benchmarking Data</a></li>
-  </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  </ul>
-</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -917,6 +919,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="e-alizadeh/website" data-repo-id="R_kgDOH_Z9yg" data-category="Blog" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">

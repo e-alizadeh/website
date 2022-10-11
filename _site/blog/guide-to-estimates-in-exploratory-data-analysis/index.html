@@ -194,7 +194,7 @@ ga('send', {
 <meta name="twitter:image-width" content="854">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -229,7 +229,7 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">A Guide to Metrics (Estimates) in Exploratory Data Analysis</h1>
@@ -266,6 +266,34 @@ ga('send', {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#estimates-of-location" id="toc-estimates-of-location" class="nav-link active" data-scroll-target="#estimates-of-location">Estimates of Location</a>
+  <ul>
+  <li><a href="#mean" id="toc-mean" class="nav-link" data-scroll-target="#mean">Mean</a>
+  <ul class="collapse">
+  <li><a href="#a-use-case-for-the-weighted-mean" id="toc-a-use-case-for-the-weighted-mean" class="nav-link" data-scroll-target="#a-use-case-for-the-weighted-mean">A Use Case for the Weighted Mean</a></li>
+  </ul></li>
+  <li><a href="#median" id="toc-median" class="nav-link" data-scroll-target="#median">Median</a></li>
+  <li><a href="#mode" id="toc-mode" class="nav-link" data-scroll-target="#mode">Mode</a></li>
+  <li><a href="#python-implementation" id="toc-python-implementation" class="nav-link" data-scroll-target="#python-implementation">Python Implementation</a></li>
+  </ul></li>
+  <li><a href="#estimates-of-variability" id="toc-estimates-of-variability" class="nav-link" data-scroll-target="#estimates-of-variability">Estimates of Variability</a>
+  <ul>
+  <li><a href="#mean-absolute-deviation" id="toc-mean-absolute-deviation" class="nav-link" data-scroll-target="#mean-absolute-deviation">Mean Absolute Deviation</a></li>
+  <li><a href="#variance-standard-deviation" id="toc-variance-standard-deviation" class="nav-link" data-scroll-target="#variance-standard-deviation">Variance &amp; Standard Deviation</a></li>
+  <li><a href="#median-absolute-deviation-mad" id="toc-median-absolute-deviation-mad" class="nav-link" data-scroll-target="#median-absolute-deviation-mad">Median Absolute Deviation (MAD)</a></li>
+  <li><a href="#percentiles" id="toc-percentiles" class="nav-link" data-scroll-target="#percentiles">Percentiles</a></li>
+  <li><a href="#python-implementation-1" id="toc-python-implementation-1" class="nav-link" data-scroll-target="#python-implementation-1">Python Implementation</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
 <!-- Main CSS style -->
@@ -563,7 +591,7 @@ ga('send', {
 <div id="mailchimp">
    <form action="https://ealizadeh.us10.list-manage.com/subscribe/post?u=912b9dacf23679bd0a6e46b22&amp;id=31485d9fc5" method="post" id="mc-embedded-subscribe-form" class="validate" style="max-width:450px;margin:auto" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
        <!-- <i class="fa fa-envelope icon"> </i> -->    
-       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Subscribe</h3>
+       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Mailing List</h3>
            <!-- <div class="input-icons">  -->
                        <!-- <div class="input-icons">  -->
            <div class="clear">
@@ -591,32 +619,6 @@ ga('send', {
 </div>
 <!--End of MailChimp Signup Form-->
 </div></div>
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#estimates-of-location" id="toc-estimates-of-location" class="nav-link active" data-scroll-target="#estimates-of-location">Estimates of Location</a>
-  <ul>
-  <li><a href="#mean" id="toc-mean" class="nav-link" data-scroll-target="#mean">Mean</a>
-  <ul class="collapse">
-  <li><a href="#a-use-case-for-the-weighted-mean" id="toc-a-use-case-for-the-weighted-mean" class="nav-link" data-scroll-target="#a-use-case-for-the-weighted-mean">A Use Case for the Weighted Mean</a></li>
-  </ul></li>
-  <li><a href="#median" id="toc-median" class="nav-link" data-scroll-target="#median">Median</a></li>
-  <li><a href="#mode" id="toc-mode" class="nav-link" data-scroll-target="#mode">Mode</a></li>
-  <li><a href="#python-implementation" id="toc-python-implementation" class="nav-link" data-scroll-target="#python-implementation">Python Implementation</a></li>
-  </ul></li>
-  <li><a href="#estimates-of-variability" id="toc-estimates-of-variability" class="nav-link" data-scroll-target="#estimates-of-variability">Estimates of Variability</a>
-  <ul>
-  <li><a href="#mean-absolute-deviation" id="toc-mean-absolute-deviation" class="nav-link" data-scroll-target="#mean-absolute-deviation">Mean Absolute Deviation</a></li>
-  <li><a href="#variance-standard-deviation" id="toc-variance-standard-deviation" class="nav-link" data-scroll-target="#variance-standard-deviation">Variance &amp; Standard Deviation</a></li>
-  <li><a href="#median-absolute-deviation-mad" id="toc-median-absolute-deviation-mad" class="nav-link" data-scroll-target="#median-absolute-deviation-mad">Median Absolute Deviation (MAD)</a></li>
-  <li><a href="#percentiles" id="toc-percentiles" class="nav-link" data-scroll-target="#percentiles">Percentiles</a></li>
-  <li><a href="#python-implementation-1" id="toc-python-implementation-1" class="nav-link" data-scroll-target="#python-implementation-1">Python Implementation</a></li>
-  </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a></li>
-  </ul>
-</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -1191,6 +1193,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="e-alizadeh/website" data-repo-id="R_kgDOH_Z9yg" data-category="Blog" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">

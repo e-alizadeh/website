@@ -159,7 +159,7 @@ ga('send', {
 <meta name="twitter:image-width" content="1264">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -194,7 +194,7 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">How to Publish Your Python Package with just 2 commands</h1>
@@ -230,6 +230,34 @@ ga('send', {
   
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#prerequisite" id="toc-prerequisite" class="nav-link active" data-scroll-target="#prerequisite">Prerequisite</a>
+  <ul>
+  <li><a href="#project-environment" id="toc-project-environment" class="nav-link" data-scroll-target="#project-environment">1. Project environment</a></li>
+  <li><a href="#package-repository" id="toc-package-repository" class="nav-link" data-scroll-target="#package-repository">2. Package repository</a></li>
+  </ul></li>
+  <li><a href="#packaging-instructions" id="toc-packaging-instructions" class="nav-link" data-scroll-target="#packaging-instructions">Packaging Instructions</a>
+  <ul>
+  <li><a href="#step-1-build-your-package" id="toc-step-1-build-your-package" class="nav-link" data-scroll-target="#step-1-build-your-package">Step 1: Build your package</a></li>
+  <li><a href="#step-2-publish-your-package" id="toc-step-2-publish-your-package" class="nav-link" data-scroll-target="#step-2-publish-your-package">Step 2: Publish your package</a>
+  <ul class="collapse">
+  <li><a href="#test-your-package-on-testpypi" id="toc-test-your-package-on-testpypi" class="nav-link" data-scroll-target="#test-your-package-on-testpypi">Test Your Package on TestPyPI</a></li>
+  <li><a href="#publish-package-on-pypi" id="toc-publish-package-on-pypi" class="nav-link" data-scroll-target="#publish-package-on-pypi">Publish Package on PyPI</a></li>
+  <li><a href="#a-point-on-using-api-token-instead-of-username-and-password" id="toc-a-point-on-using-api-token-instead-of-username-and-password" class="nav-link" data-scroll-target="#a-point-on-using-api-token-instead-of-username-and-password">A point on using API Token instead of username and password</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a>
+  <ul>
+  <li><a href="#related-posts" id="toc-related-posts" class="nav-link" data-scroll-target="#related-posts">Related posts</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
 <!-- Main CSS style -->
@@ -527,7 +555,7 @@ ga('send', {
 <div id="mailchimp">
    <form action="https://ealizadeh.us10.list-manage.com/subscribe/post?u=912b9dacf23679bd0a6e46b22&amp;id=31485d9fc5" method="post" id="mc-embedded-subscribe-form" class="validate" style="max-width:450px;margin:auto" name="mc-embedded-subscribe-form" target="_blank" novalidate="">
        <!-- <i class="fa fa-envelope icon"> </i> -->    
-       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Subscribe</h3>
+       <h3 aria-hidden="true" class="fas fa-paper-plane mailinglist">Mailing List</h3>
            <!-- <div class="input-icons">  -->
                        <!-- <div class="input-icons">  -->
            <div class="clear">
@@ -555,32 +583,6 @@ ga('send', {
 </div>
 <!--End of MailChimp Signup Form-->
 </div></div>
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#prerequisite" id="toc-prerequisite" class="nav-link active" data-scroll-target="#prerequisite">Prerequisite</a>
-  <ul>
-  <li><a href="#project-environment" id="toc-project-environment" class="nav-link" data-scroll-target="#project-environment">1. Project environment</a></li>
-  <li><a href="#package-repository" id="toc-package-repository" class="nav-link" data-scroll-target="#package-repository">2. Package repository</a></li>
-  </ul></li>
-  <li><a href="#packaging-instructions" id="toc-packaging-instructions" class="nav-link" data-scroll-target="#packaging-instructions">Packaging Instructions</a>
-  <ul>
-  <li><a href="#step-1-build-your-package" id="toc-step-1-build-your-package" class="nav-link" data-scroll-target="#step-1-build-your-package">Step 1: Build your package</a></li>
-  <li><a href="#step-2-publish-your-package" id="toc-step-2-publish-your-package" class="nav-link" data-scroll-target="#step-2-publish-your-package">Step 2: Publish your package</a>
-  <ul class="collapse">
-  <li><a href="#test-your-package-on-testpypi" id="toc-test-your-package-on-testpypi" class="nav-link" data-scroll-target="#test-your-package-on-testpypi">Test Your Package on TestPyPI</a></li>
-  <li><a href="#publish-package-on-pypi" id="toc-publish-package-on-pypi" class="nav-link" data-scroll-target="#publish-package-on-pypi">Publish Package on PyPI</a></li>
-  <li><a href="#a-point-on-using-api-token-instead-of-username-and-password" id="toc-a-point-on-using-api-token-instead-of-username-and-password" class="nav-link" data-scroll-target="#a-point-on-using-api-token-instead-of-username-and-password">A point on using API Token instead of username and password</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
-  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links">Useful Links</a>
-  <ul>
-  <li><a href="#related-posts" id="toc-related-posts" class="nav-link" data-scroll-target="#related-posts">Related posts</a></li>
-  </ul></li>
-  </ul>
-</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -861,6 +863,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="e-alizadeh/website" data-repo-id="R_kgDOH_Z9yg" data-category="Blog" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" data-loading="lazy" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">
