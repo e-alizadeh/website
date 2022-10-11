@@ -8,4 +8,5 @@ listing:
   fields: [image, date, title, subtitle, reading-time]
   # sort-ui: true
 #   feed: true
+margin-header: subscribe.html
 ---

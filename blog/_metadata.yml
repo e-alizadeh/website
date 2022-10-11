@@ -20,3 +20,15 @@ citation: true
 
 # Enable CC licence appendix
 # license: "CC BY"
+
+# Add subscription to right margin
+margin-header:
+  - ../subscribe.html
+
+# Format Table of Contents in blog posts
+format:
+  html:
+    toc: true
+    toc-title: "On this page"
+    toc-location: left
+    toc-depth: 4
