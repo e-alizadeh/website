@@ -11,25 +11,43 @@ website:
   site-url: https://new.ealizadeh.com
   repo-url: https://github.com/e-alizadeh/website   
   favicon: assets/favicon.png
+
   open-graph: true
   google-analytics: "UA-180647948-1"
   twitter-card: 
     creator: "@es_alizadeh"
     site: "@es_alizadeh"
     card-style: "summary_large_image"
+
   navbar:
     background: dark
     foreground: light
+
     left:
       - href: index.qmd
         text: Home
       - blog.qmd
       - contact_me.qmd
       # - subscribe.qmd
+    
+    right: 
+      - icon: github
+        href: https://github.com/e-alizadeh
+        aria-label: GitHub
+      - icon: twitter
+        href: https://twitter.com/es_alizadeh
+        aria-label: Twitter
+      - icon: linkedin
+        href: https://www.linkedin.com/in/alizadehesmaeil/
+        aria-label: LinkedIn
+      - icon: medium
+        href: https://medium.ealizadeh.com/
+        aria-label: Medium
+
   page-footer: 
     border: false
     # background: light
-    center: "©️ 2022 Esmaeil Alizadeh - All Rights Reserved" 
+    center: "©️ 2022 Esmaeil Alizadeh<br>All Rights Reserved" 
     right: 
       - icon: github
         href: https://github.com/e-alizadeh
@@ -47,11 +65,13 @@ format:
       light: [litera, assets/styles.scss]
       dark: [darkly, assets/styles-dark.scss]
     css: assets/custom_styles.css
+    highlight-style: a11y-dark
+    # highlight-style: tango
+    mainfont: Atkinson Hyperlegible
     code-copy: true
     code-overflow: wrap
     html-math-method: katex
     smooth-scroll: true
-    highlight-style: tango
     fig-align: center
     include-in-header:
       - assets/external_style.html
