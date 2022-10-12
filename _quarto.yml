@@ -44,9 +44,9 @@ bibliography:
 format:
   html:
     theme: 
-      light: cosmo
-      # dark: darkly
-    css: styles.css
+      light: [litera, assets/styles.scss]
+      dark: [darkly, assets/styles-dark.scss]
+    css: assets/custom_styles.css
     code-copy: true
     code-overflow: wrap
     html-math-method: katex
