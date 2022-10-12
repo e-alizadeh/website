@@ -1,5 +1,6 @@
 ---
 title: "Step-by-Step Deployment of a Free PostgreSQL Database And Data Ingestion"
+subtitle: "Deploy a PostgreSQL database in Heroku and Ingest Data using Pandas and SQLAlchemy"
 date: "2021-06-26"
 categories: [Database, Guide to, Python]
 image: "img/_featured_image.png"

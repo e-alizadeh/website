@@ -1,5 +1,6 @@
 ---
 title: "A Guide to Metrics (Estimates) in Exploratory Data Analysis"
+subtitle: "Get familiar with robust metrics/estimates such as truncated mean, median absolute deviation, and many more"
 date: "2020-12-14"
 categories: [Data Science, Exploratory Data Analysis, Guide to, Python, Statistics]
 image: "img/_featured_image.png"

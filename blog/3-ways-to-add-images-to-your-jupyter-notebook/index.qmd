@@ -1,5 +1,6 @@
 ---
 title: "3 Ways to Add Images to Your Jupyter Notebook"
+subtitle: "And learn a little bit about Base64 encoding"
 date: "2020-11-06"
 categories: [Python, Data Science, Visualization, Jupyter]
 image: "img/_featured_image.png"
