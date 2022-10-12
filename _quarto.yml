@@ -9,7 +9,6 @@ website:
   title: "Essi Alizadeh"
   description: "Personal website"
   site-url: https://new.ealizadeh.com
-  repo-url: https://github.com/e-alizadeh/website   
   favicon: assets/favicon.png
 
   open-graph: true
@@ -26,11 +25,17 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - blog.qmd
       - contact_me.qmd
+      - text: About
+        href: about.qmd
       # - subscribe.qmd
     
     right: 
+      - icon: rss-fill
+        href: index.xml
+      - icon: medium
+        href: https://medium.ealizadeh.com/
+        aria-label: Medium
       - icon: github
         href: https://github.com/e-alizadeh
         aria-label: GitHub
@@ -40,15 +45,18 @@ website:
       - icon: linkedin
         href: https://www.linkedin.com/in/alizadehesmaeil/
         aria-label: LinkedIn
-      - icon: medium
-        href: https://medium.ealizadeh.com/
-        aria-label: Medium
+
 
   page-footer: 
     border: false
     # background: light
     center: "©️ 2022 Esmaeil Alizadeh<br>All Rights Reserved" 
     right: 
+      - icon: rss-fill
+        href: index.xml
+      - icon: medium
+        href: https://medium.ealizadeh.com/
+        aria-label: Medium
       - icon: github
         href: https://github.com/e-alizadeh
         aria-label: GitHub
@@ -58,9 +66,7 @@ website:
       - icon: linkedin
         href: https://www.linkedin.com/in/alizadehesmaeil/
         aria-label: LinkedIn
-      - icon: medium
-        href: https://medium.ealizadeh.com/
-        aria-label: Medium
+
 
 bibliography: 
   - "bibliographies/references.bib"
