@@ -1,6 +1,6 @@
 ---
 title: "An Illustrative Introduction to Dynamic Time Warping"
-subtitle: "+ math behind it"
+subtitle: "including the math behind it"
 date: "2020-10-11"
 categories: [Getting Started, Pattern Recognition, Python, Time Series Analysis]
 image: "img/bp02_featured_image.png"

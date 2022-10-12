@@ -1,5 +1,6 @@
 ---
 title: "Visualize your Pandas Data Transformation using PandasTutor"
+subtitle: "Visualize you Python Pandas code in your browser and see how your data transforms step-by-step"
 date: "2021-12-08"
 categories: [Python, Data Science, Visualization, Pandas]
 image: "img/_featured_image.png"

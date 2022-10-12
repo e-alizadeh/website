@@ -1,0 +1,30 @@
+---
+title: "Essi (Esmaeil) Alizadeh"
+image: assets/caricature_headshot.png
+about:
+  template: jolla
+  links:
+    - icon: rss-fill
+      text: RSS
+      href: index.xml
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/es_alizadeh
+    - icon: medium
+      text: Medium
+      href: https://medium.ealizadeh.com/
+    - icon: github
+      text: GitHub
+      href: https://github.com/e-alizadeh
+    - icon: linkedin
+      text: Linkedin
+      href: https://www.linkedin.com/in/alizadehesmaeil/
+    - icon: google-scholar
+      text: Google Scholar
+      href: https://scholar.google.ca/citations?user=N-WO93UAAAAJ
+---
+
+I'm an engineer and a data scientist.
+
+\~ In Permanent Beta: Learning, Improving, Evolving \~
+

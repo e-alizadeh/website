@@ -25,6 +25,20 @@ citation: true
 margin-header:
   - ../subscribe.html
 
+# Add subscription after the body (particularly useful for mobile viewer when margin-header is hidden.)
+include-after-body:
+  - ../subscribe.html
+
+comments:
+  giscus: 
+      repo: e-alizadeh/website
+      category: Blog
+      theme: preferred_color_scheme
+      input-position: top
+      loading: lazy
+      mapping: pathname
+      reactions-enabled: true
+
 # Format Table of Contents in blog posts
 format:
   html:

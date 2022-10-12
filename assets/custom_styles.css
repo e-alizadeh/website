@@ -14,3 +14,7 @@ pre.quarto-appendix-bibtex {
 div.quarto-appendix-secondary-label:first-of-type {
     display: none;
 }
+
+.card-subtitle {
+  line-height: 1.25;
+}

@@ -1,7 +1,8 @@
 ---
 title: "Automate Your Workflow with GitHub Actions and Cron"
+subtitle: "Learn how to run a task/script on a time-based schedule for free using GitHub Actions"
 date: "2022-01-20"
-categories: [Automation, GitHub Actions, Cron]
+categories: [Automation, GitHub Actions, Tutorial]
 image: "img/feature_image.png"
 id: 16
 ---

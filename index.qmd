@@ -1,27 +1,12 @@
 ---
-title: "Essi Alizadeh"
-image: assets/caricature_headshot.png
-about:
-  template: jolla
-  links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/es_alizadeh
-    - icon: medium
-      text: Medium
-      href: https://medium.ealizadeh.com/
-    - icon: github
-      text: GitHub
-      href: https://github.com/e-alizadeh
-    - icon: linkedin
-      text: Linkedin
-      href: https://www.linkedin.com/in/alizadehesmaeil/
-    - icon: google-scholar
-      text: Google Scholar
-      href: https://scholar.google.ca/citations?user=N-WO93UAAAAJ
+listing:
+  contents: "blog/*/index.qmd"
+  sort: "date desc"
+  type: grid
+  categories: false
+  filter-ui: true
+  sort-ui: false
+  feed: true
+  fields: [image, date, title, subtitle, reading-time]
+margin-header: subscribe.html
 ---
-
-I'm an engineer and a data scientist.
-
-\~ In Permanent Beta: Learning, Improving, Evolving \~
-
