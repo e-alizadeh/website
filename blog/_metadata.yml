@@ -25,7 +25,7 @@ citation: true
 margin-header:
   - ../subscribe.html
 
-# Add subscription after the body
+# Add subscription after the body (particularly useful for mobile viewer when margin-header is hidden.)
 include-after-body:
   - ../subscribe.html
 
