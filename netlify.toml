@@ -1,2 +1,9 @@
 [[plugins]]
 package = "@quarto/netlify-plugin-quarto"
+
+[[redirects]]
+  from = "/blog"
+  to = "/"
+  status = 301
+  force = false
+  query = {path = ":path"}
