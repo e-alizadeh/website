@@ -51,8 +51,16 @@ website:
     right: 
       - icon: github
         href: https://github.com/e-alizadeh
-      - icon: twitter 
+        aria-label: GitHub
+      - icon: twitter
         href: https://twitter.com/es_alizadeh
+        aria-label: Twitter
+      - icon: linkedin
+        href: https://www.linkedin.com/in/alizadehesmaeil/
+        aria-label: LinkedIn
+      - icon: medium
+        href: https://medium.ealizadeh.com/
+        aria-label: Medium
 
 bibliography: 
   - "bibliographies/references.bib"
