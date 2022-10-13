@@ -15,6 +15,16 @@ div.quarto-appendix-secondary-label:first-of-type {
     display: none;
 }
 
+/* Update blog card subtitle style */
 .card-subtitle {
   line-height: 1.25;
+  margin-top: 5px;
+  font-size: large;
+  font-weight: 100;
+  color: gray;
+}
+
+/* Increase vertical space above reading time in blog cards */
+.quarto-grid-item.listing-reading-time {
+  padding-top: 7px;
 }
