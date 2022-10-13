@@ -28,3 +28,13 @@ div.quarto-appendix-secondary-label:first-of-type {
 .quarto-grid-item.listing-reading-time {
   padding-top: 7px;
 }
+
+/* Reduce vertical space between the Subscribe box after the body */
+#quarto-appendix.default {
+  margin-bottom: -75px;
+}
+
+/* Center align the subscribe box (the "Subscribe" header will not be aligned. -> need to be resolved!) */
+/* div#mailchimp {
+  text-align: center;
+} */
