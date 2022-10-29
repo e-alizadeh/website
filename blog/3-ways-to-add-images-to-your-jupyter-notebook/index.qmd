@@ -2,7 +2,11 @@
 title: "3 Ways to Add Images to Your Jupyter Notebook"
 subtitle: "And learn a little bit about Base64 encoding"
 date: "2020-11-06"
-categories: [Python, Data Science, Visualization, Jupyter]
+categories: 
+    - "{{< var kws.data_science >}}"
+    - "{{< var kws.jupyter >}}"
+    - "{{< var kws.python >}}"
+    - "{{< var kws.viz >}}"
 image: "img/_featured_image.png"
 id: 5
 ---
@@ -11,7 +15,7 @@ id: 5
 
 
 :::{.callout-note}
-👉 This article is also published on **[Better Programming blog](https://medium.com/better-programming/3-ways-to-add-images-to-your-jupyter-notebook-61ddfa27e565)**.
+👉 This article is also published on [**Better Programming blog**](https://medium.com/better-programming/3-ways-to-add-images-to-your-jupyter-notebook-61ddfa27e565).
 :::
 
 # Introduction 
