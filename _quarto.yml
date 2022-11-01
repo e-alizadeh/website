@@ -11,6 +11,7 @@ website:
   site-url: https://ealizadeh.com
   favicon: assets/favicon.png
 
+  reader-mode: true
   open-graph: true
   google-analytics: "UA-180647948-1"
   twitter-card: 
